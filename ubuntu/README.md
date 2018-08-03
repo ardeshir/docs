@@ -16,10 +16,12 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`18.04`, `bionic-20180724.1`, `bionic`, `latest`, `rolling` (*bionic/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/7a8f63add8a1003a6f77bbcf00e4d408ea96ca1b/bionic/Dockerfile)
--	[`18.10`, `cosmic-20180725`, `cosmic`, `devel` (*cosmic/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/7a8f63add8a1003a6f77bbcf00e4d408ea96ca1b/cosmic/Dockerfile)
--	[`14.04`, `trusty-20180712`, `trusty` (*trusty/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/7a8f63add8a1003a6f77bbcf00e4d408ea96ca1b/trusty/Dockerfile)
--	[`16.04`, `xenial-20180726`, `xenial` (*xenial/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/7a8f63add8a1003a6f77bbcf00e4d408ea96ca1b/xenial/Dockerfile)
+-	[`18.04`, `bionic-20180724.1`, `bionic`, `latest`, `rolling` (*bionic/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/d25876a2dd51a5e428278a25d3c37d367411999d/bionic/Dockerfile)
+-	[`18.10`, `cosmic-20180725`, `cosmic`, `devel` (*cosmic/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/d25876a2dd51a5e428278a25d3c37d367411999d/cosmic/Dockerfile)
+-	[`14.04`, `trusty-20180712`, `trusty` (*trusty/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/d25876a2dd51a5e428278a25d3c37d367411999d/trusty/Dockerfile)
+-	[`16.04`, `xenial-20180726`, `xenial` (*xenial/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/d25876a2dd51a5e428278a25d3c37d367411999d/xenial/Dockerfile)
+
+[![Build Status](https://doi-janky.infosiftr.net/job/multiarch/job/arm32v7/job/ubuntu/badge/icon) (`arm32v7/ubuntu` build job)](https://doi-janky.infosiftr.net/job/multiarch/job/arm32v7/job/ubuntu/)
 
 # Quick reference
 
@@ -63,9 +65,9 @@ Development of Ubuntu is led by UK-based Canonical Ltd., a company owned by Sout
 
 This image is built from official rootfs tarballs provided by Canonical (specifically, https://partner-images.canonical.com/core/).
 
-The `ubuntu:latest` tag points to the "latest LTS", since that's the version recommended for general use. The `ubuntu:rolling` tag points to the latest release (regardless of LTS status).
+The `arm32v7/ubuntu:latest` tag points to the "latest LTS", since that's the version recommended for general use. The `arm32v7/ubuntu:rolling` tag points to the latest release (regardless of LTS status).
 
-Along a similar vein, the `ubuntu:devel` tag is an alias for whichever release the "devel" suite on the mirrors currently points to, as determined by the following one-liner: `wget -qO- http://archive.ubuntu.com/ubuntu/dists/devel/Release | awk -F ': ' '$1 == "Codename" { print $2; exit }'`
+Along a similar vein, the `arm32v7/ubuntu:devel` tag is an alias for whichever release the "devel" suite on the mirrors currently points to, as determined by the following one-liner: `wget -qO- http://archive.ubuntu.com/ubuntu/dists/devel/Release | awk -F ': ' '$1 == "Codename" { print $2; exit }'`
 
 ## Locales
 
@@ -81,10 +83,10 @@ ENV LANG en_US.utf8
 
 ## `/etc/apt/sources.list`
 
-### `ubuntu:18.04`
+### `arm32v7/ubuntu:18.04`
 
 ```console
-$ docker run ubuntu:18.04 grep -v '^#' /etc/apt/sources.list
+$ docker run arm32v7/ubuntu:18.04 grep -v '^#' /etc/apt/sources.list
 
 deb http://archive.ubuntu.com/ubuntu/ bionic main restricted
 
@@ -107,10 +109,10 @@ deb-src http://security.ubuntu.com/ubuntu/ bionic-security universe
 deb http://security.ubuntu.com/ubuntu/ bionic-security multiverse
 ```
 
-### `ubuntu:16.04`
+### `arm32v7/ubuntu:16.04`
 
 ```console
-$ docker run ubuntu:16.04 grep -v '^#' /etc/apt/sources.list
+$ docker run arm32v7/ubuntu:16.04 grep -v '^#' /etc/apt/sources.list
 
 deb http://archive.ubuntu.com/ubuntu/ xenial main restricted
 deb-src http://archive.ubuntu.com/ubuntu/ xenial main restricted
@@ -130,10 +132,10 @@ deb http://archive.ubuntu.com/ubuntu/ xenial-security universe
 deb-src http://archive.ubuntu.com/ubuntu/ xenial-security universe
 ```
 
-### `ubuntu:14.04`
+### `arm32v7/ubuntu:14.04`
 
 ```console
-$ docker run ubuntu:14.04 grep -v '^#' /etc/apt/sources.list
+$ docker run arm32v7/ubuntu:14.04 grep -v '^#' /etc/apt/sources.list
 
 deb http://archive.ubuntu.com/ubuntu/ trusty main restricted
 deb-src http://archive.ubuntu.com/ubuntu/ trusty main restricted

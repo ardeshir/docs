@@ -17,14 +17,10 @@ WARNING:
 # Supported tags and respective `Dockerfile` links
 
 -	[`5.0-rc3`, `5.0-rc`, `5.0-rc3-stretch`, `5.0-rc-stretch` (*5.0-rc/Dockerfile*)](https://github.com/docker-library/redis/blob/403f00a0ba7556f33850a88e27e70509aa2814dd/5.0-rc/Dockerfile)
--	[`5.0-rc3-32bit`, `5.0-rc-32bit`, `5.0-rc3-32bit-stretch`, `5.0-rc-32bit-stretch` (*5.0-rc/32bit/Dockerfile*)](https://github.com/docker-library/redis/blob/403f00a0ba7556f33850a88e27e70509aa2814dd/5.0-rc/32bit/Dockerfile)
--	[`5.0-rc3-alpine`, `5.0-rc-alpine`, `5.0-rc3-alpine3.8`, `5.0-rc-alpine3.8` (*5.0-rc/alpine/Dockerfile*)](https://github.com/docker-library/redis/blob/7f5671ebdc563464f5570a1d081a78c26b5e6ad3/5.0-rc/alpine/Dockerfile)
 -	[`4.0.10`, `4.0`, `4`, `latest`, `4.0.10-stretch`, `4.0-stretch`, `4-stretch`, `stretch` (*4.0/Dockerfile*)](https://github.com/docker-library/redis/blob/53f86805506b103b503fd392e029929290fe5346/4.0/Dockerfile)
--	[`4.0.10-32bit`, `4.0-32bit`, `4-32bit`, `32bit`, `4.0.10-32bit-stretch`, `4.0-32bit-stretch`, `4-32bit-stretch`, `32bit-stretch` (*4.0/32bit/Dockerfile*)](https://github.com/docker-library/redis/blob/53f86805506b103b503fd392e029929290fe5346/4.0/32bit/Dockerfile)
--	[`4.0.10-alpine`, `4.0-alpine`, `4-alpine`, `alpine`, `4.0.10-alpine3.8`, `4.0-alpine3.8`, `4-alpine3.8`, `alpine3.8` (*4.0/alpine/Dockerfile*)](https://github.com/docker-library/redis/blob/cd19a816a89c3ec00586e6d02da28802af11a958/4.0/alpine/Dockerfile)
 -	[`3.2.12`, `3.2`, `3`, `3.2.12-stretch`, `3.2-stretch`, `3-stretch` (*3.2/Dockerfile*)](https://github.com/docker-library/redis/blob/53f86805506b103b503fd392e029929290fe5346/3.2/Dockerfile)
--	[`3.2.12-32bit`, `3.2-32bit`, `3-32bit`, `3.2.12-32bit-stretch`, `3.2-32bit-stretch`, `3-32bit-stretch` (*3.2/32bit/Dockerfile*)](https://github.com/docker-library/redis/blob/53f86805506b103b503fd392e029929290fe5346/3.2/32bit/Dockerfile)
--	[`3.2.12-alpine`, `3.2-alpine`, `3-alpine`, `3.2.12-alpine3.8`, `3.2-alpine3.8`, `3-alpine3.8` (*3.2/alpine/Dockerfile*)](https://github.com/docker-library/redis/blob/cd19a816a89c3ec00586e6d02da28802af11a958/3.2/alpine/Dockerfile)
+
+[![Build Status](https://doi-janky.infosiftr.net/job/multiarch/job/arm32v7/job/redis/badge/icon) (`arm32v7/redis` build job)](https://doi-janky.infosiftr.net/job/multiarch/job/arm32v7/job/redis/)
 
 # Quick reference
 
@@ -67,7 +63,7 @@ Redis is an open-source, networked, in-memory, key-value data store with optiona
 ## start a redis instance
 
 ```console
-$ docker run --name some-redis -d redis
+$ docker run --name some-redis -d arm32v7/redis
 ```
 
 This image includes `EXPOSE 6379` (the redis port), so standard container linking will make it automatically available to the linked containers (as the following examples illustrate).
@@ -75,7 +71,7 @@ This image includes `EXPOSE 6379` (the redis port), so standard container linkin
 ## start with persistent storage
 
 ```console
-$ docker run --name some-redis -d redis redis-server --appendonly yes
+$ docker run --name some-redis -d arm32v7/redis redis-server --appendonly yes
 ```
 
 If persistence is enabled, data is stored in the `VOLUME /data`, which can be used with `--volumes-from some-volume-container` or `-v /docker/host/dir:/data` (see [docs.docker volumes](https://docs.docker.com/engine/tutorials/dockervolumes/)).
@@ -91,7 +87,7 @@ $ docker run --name some-app --link some-redis:redis -d application-that-uses-re
 ## ... or via `redis-cli`
 
 ```console
-$ docker run -it --link some-redis:redis --rm redis redis-cli -h redis -p 6379
+$ docker run -it --link some-redis:redis --rm arm32v7/redis redis-cli -h redis -p 6379
 ```
 
 ## Additionally, If you want to use your own redis.conf ...
@@ -99,7 +95,7 @@ $ docker run -it --link some-redis:redis --rm redis redis-cli -h redis -p 6379
 You can create your own Dockerfile that adds a redis.conf from the context into /data/, like so.
 
 ```dockerfile
-FROM redis
+FROM arm32v7/redis
 COPY redis.conf /usr/local/etc/redis/redis.conf
 CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
 ```
@@ -107,7 +103,7 @@ CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
 Alternatively, you can specify something along the same lines with `docker run` options.
 
 ```console
-$ docker run -v /myredis/conf/redis.conf:/usr/local/etc/redis/redis.conf --name myredis redis redis-server /usr/local/etc/redis/redis.conf
+$ docker run -v /myredis/conf/redis.conf:/usr/local/etc/redis/redis.conf --name myredis arm32v7/redis redis-server /usr/local/etc/redis/redis.conf
 ```
 
 Where `/myredis/conf/` is a local directory containing your `redis.conf` file. Using this method means that there is no need for you to have a Dockerfile for your redis container.
@@ -123,22 +119,6 @@ You can find the list of modules for Redis on [redis.io](https://redis.io/module
 -	[RediSearch](https://hub.docker.com/r/redislabs/redisearch/): Search and Query with Indexing on Redis
 -	[ReJSON](https://hub.docker.com/r/redislabs/rejson/): Extended JSON processing for Redis
 -	[ReBloom](https://hub.docker.com/r/redislabs/rebloom/): Bloom Filters data type for membership/existence search on Redis
-
-# Image Variants
-
-The `redis` images come in many flavors, each designed for a specific use case.
-
-## `redis:<version>`
-
-This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
-
-## `redis:alpine`
-
-This image is based on the popular [Alpine Linux project](http://alpinelinux.org), available in [the `alpine` official image](https://hub.docker.com/_/alpine). Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
-
-This variant is highly recommended when final image size being as small as possible is desired. The main caveat to note is that it does use [musl libc](http://www.musl-libc.org) instead of [glibc and friends](http://www.etalabs.net/compare_libcs.html), so certain software might run into issues depending on the depth of their libc requirements. However, most software doesn't have an issue with this, so this variant is usually a very safe choice. See [this Hacker News comment thread](https://news.ycombinator.com/item?id=10782897) for more discussion of the issues that might arise and some pro/con comparisons of using Alpine-based images.
-
-To minimize image size, it's uncommon for additional related tools (such as `git` or `bash`) to be included in Alpine-based images. Using this image as a base, add the things you need in your own Dockerfile (see the [`alpine` image description](https://hub.docker.com/_/alpine/) for examples of how to install packages if you are unfamiliar).
 
 # License
 
