@@ -16,8 +16,10 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`p8`, `latest` (*x86_64//Dockerfile*)](https://github.com/alt-cloud/docker-brew-alt/blob/36544e8ff97be06ce37670634c0e662957b8b6ad/x86_64//Dockerfile)
--	[`sisyphus` (*x86_64//Dockerfile*)](https://github.com/alt-cloud/docker-brew-alt/blob/96c27a4d66c2ad88d908a87701df71eac2092e38/x86_64//Dockerfile)
+-	[`p8`, `latest` (*i586//Dockerfile*)](https://github.com/alt-cloud/docker-brew-alt/blob/36544e8ff97be06ce37670634c0e662957b8b6ad/i586//Dockerfile)
+-	[`sisyphus` (*i586//Dockerfile*)](https://github.com/alt-cloud/docker-brew-alt/blob/96c27a4d66c2ad88d908a87701df71eac2092e38/i586//Dockerfile)
+
+[![Build Status](https://doi-janky.infosiftr.net/job/multiarch/job/i386/job/alt/badge/icon) (`i386/alt` build job)](https://doi-janky.infosiftr.net/job/multiarch/job/i386/job/alt/)
 
 # Quick reference
 
@@ -71,7 +73,7 @@ As said above, Sisyphus is a frequently updated repository mainly designed for d
 
 # About this image
 
-The `alt:latest` tag will always point the latest stable release (which is, at the time of this writing, `alt:p8`).
+The `i386/alt:latest` tag will always point the latest stable release (which is, at the time of this writing, `i386/alt:p8`).
 
 ## How It's Made
 
