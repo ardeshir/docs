@@ -16,10 +16,9 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`2.0.20180622.1`, `2`, `latest` (*Dockerfile*)](https://github.com/aws/amazon-linux-docker-images/blob/d59369b8dc1f3a41231d550274a565a349fb326b/Dockerfile)
--	[`2.0.20180622.1-with-sources`, `2-with-sources`, `with-sources` (*Dockerfile*)](https://github.com/aws/amazon-linux-docker-images/blob/54ffc6812a9912808ead357a6cb757c4db671121/Dockerfile)
--	[`2018.03.0.20180622`, `2018.03`, `1` (*Dockerfile*)](https://github.com/aws/amazon-linux-docker-images/blob/790dac3b115c84613ae36e48491db746e4b7503d/Dockerfile)
--	[`2018.03.0.20180622-with-sources`, `2018.03-with-sources`, `1-with-sources` (*Dockerfile*)](https://github.com/aws/amazon-linux-docker-images/blob/299dd79dcf37b9354decee89bc243b95c7cddbaf/Dockerfile)
+**No supported tags found!**
+
+It is very likely that `amazonlinux` does not support the currently selected architecture (`ppc64le`).
 
 # Quick reference
 
