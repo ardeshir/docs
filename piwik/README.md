@@ -24,6 +24,8 @@ This image is officially deprecated in favor of [the `matomo` image](https://hub
 -	[`3.5.1-fpm`, `3.5-fpm`, `3-fpm`, `fpm` (*fpm/Dockerfile*)](https://github.com/matomo-org/docker/blob/89d38796efe1063e84d8dee3e7c74d04cb240abc/fpm/Dockerfile)
 -	[`3.5.1-fpm-alpine`, `3.5-fpm-alpine`, `3-fpm-alpine`, `fpm-alpine` (*fpm-alpine/Dockerfile*)](https://github.com/matomo-org/docker/blob/89d38796efe1063e84d8dee3e7c74d04cb240abc/fpm-alpine/Dockerfile)
 
+[![Build Status](https://doi-janky.infosiftr.net/job/multiarch/job/s390x/job/piwik/badge/icon) (`s390x/piwik` build job)](https://doi-janky.infosiftr.net/job/multiarch/job/s390x/job/piwik/)
+
 # Quick reference
 
 -	**Where to get help**:  
@@ -69,7 +71,7 @@ Piwik is the leading open-source analytics platform that gives you more than jus
 # How to use this image
 
 ```console
-$ docker run --name some-piwik --link some-mysql:db -d piwik
+$ docker run --name some-piwik --link some-mysql:db -d s390x/piwik
 ```
 
 Now you can get access to fpm running on port 9000 inside the container. If you want to access it from the Internets, we recommend using a reverse proxy in front. You can find more information on that on the [docker-compose](#docker-compose) section.
@@ -103,13 +105,13 @@ This product includes GeoLite data created by MaxMind, available from [http://ww
 
 # Image Variants
 
-The `piwik` images come in many flavors, each designed for a specific use case.
+The `s390x/piwik` images come in many flavors, each designed for a specific use case.
 
-## `piwik:<version>`
+## `s390x/piwik:<version>`
 
 This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
 
-## `piwik:alpine`
+## `s390x/piwik:alpine`
 
 This image is based on the popular [Alpine Linux project](http://alpinelinux.org), available in [the `alpine` official image](https://hub.docker.com/_/alpine). Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
 
