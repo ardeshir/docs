@@ -1,6 +1,6 @@
-#Q: how can I access and download the following header files for MLK? #include "mkl.h" #include "mkl_spblas.h"
+# Q: how can I access and download the following header files for MLK? #include "mkl.h" #include "mkl_spblas.h"
 
-#A: The header files you're asking for are part of Intel's Math Kernel Library (MKL), a library of optimized math routines for science, engineering, and financial applications. Intel MKL contains Linear Algebra PACKage (BLAS, LAPACK) routines, Fast Fourier Transforms (FFT), Vector Math, and more.
+## A: The header files you're asking for are part of Intel's Math Kernel Library (MKL), a library of optimized math routines for science, engineering, and financial applications. Intel MKL contains Linear Algebra PACKage (BLAS, LAPACK) routines, Fast Fourier Transforms (FFT), Vector Math, and more.
 
 Here's how you can get access to these files:
 You must download and install the Intel® oneAPI Math Kernel Library which is available for free. You can download it from the official Intel website: https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/onemkl.html
