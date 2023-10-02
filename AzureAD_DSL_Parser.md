@@ -38,6 +38,8 @@ const roleAssignment = await client.roleAssignments.create("<scope>", "<role-ass
 
 ```
 
-### Replace "<your-subscription-id>", "<scope>", "<role-name>", "<resource-group>", "<resource-provider-namespace>", "<parent-resource-path>", "<resource-type>", "<resource-name>", and "<api-version>" with your actual data.
-
+### Replace 
+```javascrtip
+"<your-subscription-id>", "<scope>", "<role-name>", "<resource-group>", "<resource-provider-namespace>", "<parent-resource-path>", "<resource-type>", "<resource-name>", and "<api-version>" with your actual data.
+```
 Remember that this is a high-level overview and may not cover every detail you'll encounter. The process of creating a DSL can be complex and requires a thorough understanding of language design, parsing techniques, and the Azure SDKs.
