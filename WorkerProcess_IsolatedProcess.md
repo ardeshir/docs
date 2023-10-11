@@ -9,3 +9,4 @@
 ###Suppose you have a function that needs to use a lot of memory, for example, to process large images. If you run this function in the Worker Process model, it could potentially exhaust the memory available to the host, causing other functions running in the same host to fail or run slowly. In contrast, if you run this function in the Isolated Process model, it would have its own separate memory allocation, and its resource usage would not affect other functions.
 
 - For more information, you can refer to the official Azure Functions developer guide: [https://docs.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide](Process Guide)
+- Differences and Table of LTS of Isolated Worker process [https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-in-process-differences](Diff & Support)
