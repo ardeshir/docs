@@ -1,6 +1,6 @@
-# Can you share resources for learning Elixir in a quick and easy way?
+######Q: Can you share resources for learning Elixir in a quick and easy way?
 
-## Sure, here are some resources that you might find useful for learning Elixir:
+A: ere are some resources that you might find useful for learning Elixir:
 
 1. Elixir's Official Website: The official site is a great resource for beginners. It provides a getting started guide and additional documentation. [Visit Official Website](https://elixir-lang.org/)
 

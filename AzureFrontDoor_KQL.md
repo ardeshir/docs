@@ -8,7 +8,7 @@ and httpStatusCode_d  >= 500
 ```
 
 
-#####A: To further refine your query and get more information about the client and path, you can use the clientIp_s field to get the IP address of the client, and the url or requestUri_s field to get the path.
+A: To further refine your query and get more information about the client and path, you can use the clientIp_s field to get the IP address of the client, and the url or requestUri_s field to get the path.
 
 ```Here's how you can modify your query:
 AzureDiagnostics  

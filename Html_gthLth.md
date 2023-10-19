@@ -1,7 +1,6 @@
-#Q: how can I print <html> tags on a web page such that less than & greater than signs show up on the web page correctly, when it's being send over from Ajax calls and shown on the page as a result inside the innerHTML function?
+#####Q: how can I print <html> tags on a web page such that less than & greater than signs show up on the web page correctly, when it's being send over from Ajax calls and shown on the page as a result inside the innerHTML function?
 
-## A1:
-When printing HTML tags on a web page using the `innerHTML` function in JavaScript, special characters like `<` and `>` will be interpreted as HTML entities and not as the actual less than and greater than signs. To display them correctly, you need to encode these characters before adding them to the `innerHTML` content.
+A: When printing HTML tags on a web page using the `innerHTML` function in JavaScript, special characters like `<` and `>` will be interpreted as HTML entities and not as the actual less than and greater than signs. To display them correctly, you need to encode these characters before adding them to the `innerHTML` content.
 
 You can use the `innerText` property instead of `innerHTML` to achieve this without encoding the characters. Here's an example:
 
@@ -36,7 +35,7 @@ outputDiv.innerHTML = encodedContent;
 
 In the example above, the special characters `<` and `>` are replaced with their respective HTML entities before setting the `innerHTML` property. As a result, the `<h1>` tags will be interpreted correctly and displayed as expected. 
 
-## A2: 
+A2: 
 To ensure that less than (<) and greater than (>) signs are displayed correctly when printing HTML tags on a web page using innerHTML, you need to escape these characters so that they are rendered as text and not interpreted as HTML markup.
 
 In JavaScript, you can use the `innerText` property instead of `innerHTML` to set the content within an HTML element. The `innerText` property automatically escapes special characters such as `<` and `>`.

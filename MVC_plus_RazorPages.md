@@ -1,4 +1,4 @@
-# Can you help me build a CSharp program that works both with MVC Controller based views, and Rage Pages views? I would like to be updated to use .net6 and abve with just Program.cs file, and not Startup.cs file.
+#####Q: Can you help me build a CSharp program that works both with MVC Controller based views, and Rage Pages views? I would like to be updated to use .net6 and abve with just Program.cs file, and not Startup.cs file.
 
 Sure, to build a C# program that works with both MVC Controller based views and Razor Pages views using .NET 6 and above (including just a Program.cs file without a Startup.cs file), you'll need to include the configuration and service setup that was traditionally in the Startup.cs file inside of your Program.cs.
 

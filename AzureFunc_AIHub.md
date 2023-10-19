@@ -1,6 +1,6 @@
 #####Q:  Write an Azure Function using CSharp C# 10 & .net6 that reads custom fields from Application Insights, and sends this to Azure Hub?
 
-#####A: Azure Functions are a great way to process data. You can use them to pull data from Application Insights and send it to Azure Event Hubs. The following is an example of how you can do this.
+A: Azure Functions are a great way to process data. You can use them to pull data from Application Insights and send it to Azure Event Hubs. The following is an example of how you can do this.
 
 First, you have to install the necessary packages:
 - dotnet package add Microsoft.Azure.WebJobs
@@ -51,7 +51,7 @@ Replace "your-instrumentation-key" with your Application Insights instrumentatio
 
 This function is triggered whenever a new message arrives at the specified Azure Event Hub. It reads the message, creates a new custom event telemetry with a custom field, and sends it to Application Insights.
 
-##### Please remember to replace "samples-workitems" with your Azure Event Hub name and "EventHubConnectionAppSetting" with the name of the app setting that contains your Event Hub connection string.
+Please remember to replace "samples-workitems" with your Azure Event Hub name and "EventHubConnectionAppSetting" with the name of the app setting that contains your Event Hub connection string.
 
 You can refer to these resources for more information:
 - Azure Functions C# developer reference: https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library

@@ -1,10 +1,10 @@
 #####Q: Can you explain with examples the C++ Template programming model, and how to compile and run a Template program which helps with metaprogramming?
 
-######A: Template programming in C++ is a powerful feature that allows you to define generic types and functions that can be used with different data types. This helps support metaprogramming, where you can perform compile-time computations and generate code based on template parameters.
+A: Template programming in C++ is a powerful feature that allows you to define generic types and functions that can be used with different data types. This helps support metaprogramming, where you can perform compile-time computations and generate code based on template parameters.
 
 Here's an example to explain the C++ Template programming model:
 
-```
+```C
 #include 
 
 // A simple template function that adds two values

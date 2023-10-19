@@ -1,5 +1,6 @@
 To update the Startup.cs and Program.cs files to handle the POST CSV file, save it in the database, and respond with a table of the data, you can follow these steps:
 In your Startup.cs, add the necessary dependencies for working with PostgreSQL and HttpClient by modifying the ConfigureServices method:
+```CSharp 
 public void ConfigureServices(IServiceCollection services)  
 {  
     // Add PostgreSQL connection  
@@ -12,9 +13,10 @@ public void ConfigureServices(IServiceCollection services)
   
     // Other service configurations...  
 }  
- 
-2. Create a new class called ApplicationDbContext.cs to represent your application's database context. This class will inherit from DbContext and define a DbSet for your API model:
+```
 
+2. Create a new class called ApplicationDbContext.cs to represent your application's database context. This class will inherit from DbContext and define a DbSet for your API model:
+```CSharp 
 using Microsoft.EntityFrameworkCore;  
   
 namespace CsvParserWeb.Models  
@@ -36,11 +38,13 @@ namespace CsvParserWeb.Models
             base.OnModelCreating(modelBuilder);  
         }  
    }  
-}  
+} 
+``` 
  
 3. Modify your existing code inside the POST request handler (HandleCsvUpload) to parse the uploaded CSV file, save it in PostgresDB using Entity Framework Core, and generate an HTML table response.
 
 Here's an example implementation based on your provided code snippets (make sure to import required namespaces):
+```CSharp 
 private async Task HandleCsvUpload(HttpContext context)  
 {  
      var formFile = context.Request.Form.Files.GetFile("file");  
@@ -91,9 +95,9 @@ private async Task HandleCsvUpload(HttpContext context)
   
       }  
 }  
-  
+```  
 // Helper method to generate HTML table response  
-  
+```CSharp  
 private async Task GenerateHtmlResponse(HttpContext context)  
 {  
     var htmlContent =  
@@ -115,7 +119,9 @@ private async Task GenerateHtmlResponse(HttpContext context)
   
       await context.Response.WriteAsync(htmlContent);  
 }  
+```
 Update your Program.cs file as follows:
+```CSharp 
 public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>  
 {  
 	webBuilder.UseStartup<Startup>();  
@@ -124,7 +130,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaul
 	logging.ClearProviders();  
 	logging.AddConsole();  
 });  
- 
+``` 
 Make sure that you have installed all necessary NuGet packages such as Npgsql.EntityFrameworkCore.PostgreSQL, Microsoft.Extensions.Hosting.Abstractions etc., before running or building this project.
 
 Note: The above implementation assumes you have defined appropriate models (ApiModel and CsvData) matching your requirements.

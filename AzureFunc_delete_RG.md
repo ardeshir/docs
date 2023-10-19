@@ -1,6 +1,6 @@
 #####Q: Azure Function that uses the armClient to iterate over all the subscription looking for Resource Groups and deleting the ones with zero resources in them! 
 
-#####A: 
+A: 
 
 ```csharp
 using System;  
@@ -39,9 +39,9 @@ public static class CleanEmptyResourceGroups
     }  
 }
 ```
-#####This function uses a timer trigger to run at a specified schedule. The Managed Identity of the Function App is used to authenticate with Azure. The function then lists all subscriptions, resource groups, and resources, and deletes any resource groups that contain no resources.
+This function uses a timer trigger to run at a specified schedule. The Managed Identity of the Function App is used to authenticate with Azure. The function then lists all subscriptions, resource groups, and resources, and deletes any resource groups that contain no resources.
 
-#####Note:
+***Note:***
 
 Make sure your Azure Function App has a system-assigned Managed Identity and it has enough permissions (contributor role on the subscription should be fine) to list and delete the resource groups.
 Install Microsoft.Azure.Management.Fluent and Microsoft.Azure.Services.AppAuthentication NuGet packages.
