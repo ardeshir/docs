@@ -1,4 +1,4 @@
-#####Q: "the beige books" done by each regional bank are and what valuable information they contain?
+##### Q: "the beige books" done by each regional bank are and what valuable information they contain?
 
 The Beige Book, officially known as the Summary of Commentary on Current Economic Conditions, is a report published by the Federal Reserve Board eight times a year. The book is released two weeks before the Federal Open Market Committee (FOMC) meets to decide on monetary policy.
 
