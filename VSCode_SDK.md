@@ -1,4 +1,4 @@
-######Q: What do VSCode Extentions use for SDK to build a new extention? 
+##### Q: What do VSCode Extentions use for SDK to build a new extention? 
 
 A: Building a new extension for Visual Studio Code (VSCode) doesn't necessarily require an SDK like some other platforms do. VSCode is built on top of Electron which is a framework for creating desktop applications with web technologies like JavaScript, HTML, and CSS.
 

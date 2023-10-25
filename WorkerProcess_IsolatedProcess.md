@@ -1,4 +1,4 @@
-######Q: What's the difference between isolate Azure function and worker process Azure function? And can you give an example of how they differe?
+##### Q: What's the difference between isolate Azure function and worker process Azure function? And can you give an example of how they differe?
 
 A: Azure Functions can run in two different models - the Worker Process model and the Isolated Process model. The difference between the two models mainly lies in the level of isolation provided and the resources available to the function.
 

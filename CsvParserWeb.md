@@ -1,4 +1,4 @@
-#### Q: What are the steps to remove Startup.cs 
+##### Q: What are the steps to remove Startup.cs 
 A: To update the Startup.cs and Program.cs files to handle the POST CSV file, save it in the database, and respond with a table of the data, you can follow these steps:
 In your Startup.cs, add the necessary dependencies for working with PostgreSQL and HttpClient by modifying the ConfigureServices method:
 ```CSharp 

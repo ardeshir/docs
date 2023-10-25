@@ -1,4 +1,4 @@
-#####Q: Are there parts of the spectrum bands, that are not allocate to different services, that can be used by new technologies that want to transform the telecommunication industry? .What prevents new uses of ranges of the spectrum, that could cause interference between different services and providers, to disrupt communication monopolies?   
+##### Q: Are there parts of the spectrum bands, that are not allocate to different services, that can be used by new technologies that want to transform the telecommunication industry? .What prevents new uses of ranges of the spectrum, that could cause interference between different services and providers, to disrupt communication monopolies?   
 
 A: There are parts of the spectrum bands that are not allocated to different services, but these are typically either reserved for future use or fall into what's known as the "unlicensed spectrum".
 
