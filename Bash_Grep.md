@@ -1,4 +1,4 @@
-######Q: What's the best way to search for a string like "FSDI" inside a json file using Bash?
+##### Q: What's the best way to search for a string like "FSDI" inside a json file using Bash?
 
 A:  To search for a specific string, such as "FSDI," inside a JSON file using Bash, you can use the `grep` command. Here's an example:
 

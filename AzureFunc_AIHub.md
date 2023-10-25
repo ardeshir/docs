@@ -1,4 +1,4 @@
-#####Q:  Write an Azure Function using CSharp C# 10 & .net6 that reads custom fields from Application Insights, and sends this to Azure Hub?
+##### Q:  Write an Azure Function using CSharp C# 10 & .net6 that reads custom fields from Application Insights, and sends this to Azure Hub?
 
 A: Azure Functions are a great way to process data. You can use them to pull data from Application Insights and send it to Azure Event Hubs. The following is an example of how you can do this.
 

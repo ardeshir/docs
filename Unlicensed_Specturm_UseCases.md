@@ -16,4 +16,4 @@ Here are some useful resources for further reading:
 - Spectrum Auctions - Federal Communications Commission [https://www.fcc.gov/auctions](Auctions)
 - Spread Spectrum - Techopedia [https://www.techopedia.com/definition/9509/spread-spectrum](Spread It)
 
-###However, it's important to note that while technology and regulation can help prevent interference, they can't entirely eliminate the risk, especially if a new technology or service doesn't comply with the regulations. That's why regulatory compliance and careful engineering are so important in the telecommunications industry.
+However, it's important to note that while technology and regulation can help prevent interference, they can't entirely eliminate the risk, especially if a new technology or service doesn't comply with the regulations. That's why regulatory compliance and careful engineering are so important in the telecommunications industry.

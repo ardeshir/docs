@@ -1,4 +1,4 @@
-#####Q: Build a Azure AD DSL Language that can parse and manage Azure resources permissions, for example this function resource is given Data Reader role to config :
+##### Q: Build a Azure AD DSL Language that can parse and manage Azure resources permissions, for example this function resource is given Data Reader role to config :
 [ app-fn-bin-migrations-fsdi-dev ] as  [ App Configuration Data Reader ]  on [ config-fsdi-unity-dev ]
 
 A: To build an Azure AD DSL (Domain Specific Language) that can parse and manage Azure resources permissions, you would need to use a combination of Azure SDKs and possibly a language parsing library depending on your language of choice.

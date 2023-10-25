@@ -1,4 +1,4 @@
-######Q: what's the best way to organize the CSharp Namespaces and folders in a project, without Visual Studio, but using dotnet cli?
+##### Q: what's the best way to organize the CSharp Namespaces and folders in a project, without Visual Studio, but using dotnet cli?
 
 A: Organizing Namespaces and folders in a C# project is opinionated and can be done in many ways depending on the size, nature, and complexity of the project. However, the commonly accepted way is to match your Namespaces to the folder structure, and using a logical and structured approach to group common and related classes together.
 

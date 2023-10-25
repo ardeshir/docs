@@ -1,4 +1,4 @@
-#####Q: Can you explain the science and technology that allowed for very long distance transmission of digital information, from satellites and telecommunication towers?  How are the frequencies for different providers kept separate across countries and companies?  
+##### Q: Can you explain the science and technology that allowed for very long distance transmission of digital information, from satellites and telecommunication towers?  How are the frequencies for different providers kept separate across countries and companies?  
 
 A:  Long-distance transmission of digital information involves several technologies and scientific concepts. At the root of this are electromagnetic waves, which can carry information over vast distances. These waves are used in everything from radio to TV broadcasts, mobile phone signals, and satellite communications.
 

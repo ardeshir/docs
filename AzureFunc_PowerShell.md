@@ -1,4 +1,4 @@
-####Q: Create a CSharp dotnet 6 Azure function that connects to a Virtual machine in subscription and kicks off a  powershell scripts ?
+##### Q: Create a CSharp dotnet 6 Azure function that connects to a Virtual machine in subscription and kicks off a  powershell scripts ?
 
 A: Creating an Azure Function that interacts with a VM to kick off a Packer build with PowerShell scripts involves several steps and different technologies. Here's a high-level overview:
 Create the Azure Function.

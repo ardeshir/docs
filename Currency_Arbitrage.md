@@ -1,4 +1,4 @@
-#####Q: What is Currency Arbitrage in the context of Financial Exhange Software development and algorithms?
+##### Q: What is Currency Arbitrage in the context of Financial Exhange Software development and algorithms?
 
 A: Currency arbitrage in the context of Financial Exchange software development and algorithms refers to the practice of taking advantage of differences in exchange rates between different currency markets.
 

@@ -1,4 +1,4 @@
-#####Q: What is the CSharp tool used to take a DLL or EXE and show the IL, the MISL file?
+##### Q: What is the CSharp tool used to take a DLL or EXE and show the IL, the MISL file?
 
 A: The tool you are looking for is called "ildasm.exe". It is a command-line tool that is included with the .NET Framework SDK. It lets you view the IL (Intermediate Language) code of a compiled .NET assembly, and also allows you to examine metadata, resources, and other information about the assembly. 
 

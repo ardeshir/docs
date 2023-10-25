@@ -1,4 +1,4 @@
-#####Q: Can you explain how the Bellman-Ford algorithm lies at the heart of this Arbitrage system, as it enables the discovery of paths between two nodes in the graph that meet two essential criteria
+##### Q: Can you explain how the Bellman-Ford algorithm lies at the heart of this Arbitrage system, as it enables the discovery of paths between two nodes in the graph that meet two essential criteria
 
 A: The Bellman-Ford algorithm is a graph search algorithm that finds the shortest path from a source vertex to all other vertices in the graph. It's especially useful for graphs that include negative weight edges, and in fact, it's one of the few algorithms that can handle such cases.
 

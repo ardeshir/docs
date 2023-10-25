@@ -1,4 +1,4 @@
-#####Q: Azure Function that uses the armClient to iterate over all the subscription looking for Resource Groups and deleting the ones with zero resources in them! 
+##### Q: Azure Function that uses the armClient to iterate over all the subscription looking for Resource Groups and deleting the ones with zero resources in them! 
 
 A: 
 

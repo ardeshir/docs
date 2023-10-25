@@ -1,4 +1,4 @@
-######Q: Can you share resources for learning Elixir in a quick and easy way?
+##### Q: Can you share resources for learning Elixir in a quick and easy way?
 
 A: ere are some resources that you might find useful for learning Elixir:
 

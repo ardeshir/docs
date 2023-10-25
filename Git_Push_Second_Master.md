@@ -1,4 +1,4 @@
-#####Q: How can I add a second Git remote repo to push, so that I can automatically push to two remote repos, but only pull from one?
+##### Q: How can I add a second Git remote repo to push, so that I can automatically push to two remote repos, but only pull from one?
 
 A: Navigate to your Git project in your command line.
 

@@ -1,4 +1,4 @@
-#####Q: how can I print <html> tags on a web page such that less than & greater than signs show up on the web page correctly, when it's being send over from Ajax calls and shown on the page as a result inside the innerHTML function?
+##### Q: how can I print <html> tags on a web page such that less than & greater than signs show up on the web page correctly, when it's being send over from Ajax calls and shown on the page as a result inside the innerHTML function?
 
 A: When printing HTML tags on a web page using the `innerHTML` function in JavaScript, special characters like `<` and `>` will be interpreted as HTML entities and not as the actual less than and greater than signs. To display them correctly, you need to encode these characters before adding them to the `innerHTML` content.
 

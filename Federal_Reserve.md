@@ -1,4 +1,4 @@
-#####Q: Overview of the history and structure of the Federal Reserve and the Federal Open Market Committee structure and it's 12 branches and their role:
+##### Q: Overview of the history and structure of the Federal Reserve and the Federal Open Market Committee structure and it's 12 branches and their role:
 
 A: The Federal Reserve, often referred to as the "Fed," is the central banking system of the United States, established on December 23, 1913, with the enactment of the Federal Reserve Act. The Federal Reserve's structure comprises the Board of Governors (or Federal Reserve Board), the Federal Open Market Committee (FOMC), twelve regional Federal Reserve Banks, numerous privately owned U.S. member banks, and various advisory councils.
 

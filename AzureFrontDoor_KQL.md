@@ -1,4 +1,4 @@
-#####Q: Help me get more information from Azure FrontDoor Premium query to find out what the path for and where it's coming from?  This is what i have to work with, but I need to know more about client and path ?  
+##### Q: Help me get more information from Azure FrontDoor Premium query to find out what the path for and where it's coming from?  This is what i have to work with, but I need to know more about client and path ?  
   
   
 ```AzureDiagnostics  
