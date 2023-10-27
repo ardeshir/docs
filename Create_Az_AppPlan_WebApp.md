@@ -43,16 +43,14 @@ az webapp create --name $AZURE_WEB_APP --resource-group $RESOURCE_GROUP --plan $
 az resource wait --name $AZURE_WEB_APP --resource-type "Microsoft.Web/sites" --resource-group $RESOURCE_GROUP --exists  
   
 # Other commands  
-az appservice plan list --output table  
-az webapp list --output table  
+az appservice plan list --output table  --resource-group $RESOURCE_GROUP
+az webapp list --output table  --resource-group $RESOURCE_GROUP
 site="http://$AZURE_WEB_APP.azurewebsites.net"  
 echo $site  
   
 curl $AZURE_WEB_APP.azurewebsites.net  
 az webapp deployment source config --name $AZURE_WEB_APP --resource-group $RESOURCE_GROUP --repo-url $GITREPOURL --branch master --manual-integration  
 ```
-
-
 
 
 ##Single Account A: 
