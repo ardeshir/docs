@@ -1,4 +1,6 @@
-##### Q: How do I find the Feed Alphabetic name and project form this ID Azure DevOps Feed ID vstsFeed: bb377ee2-33c8-4866-a55d-cbb0f72346e2/30ed9892-ac99-4342-9647-3afea3dc4ef5 ?
+##### Q: How do I find the Feed Alphabetic name and project form this ID Azure DevOps Feed ID 
+vstsFeed: bb377ee2-33c8-4866-a55d-cbb0f72346e2/30ed9892-ac99-4342-9647-3afea3dc4ef5 ?
+
 
 A: The Azure DevOps Feed ID you have provided appears to be in the format of vstsFeed: {projectId}/{feedId}. This ID is commonly used when you are dealing with Azure Artifacts feeds.
 
@@ -19,7 +21,7 @@ The response will contain the project name.
 2. Get the Feed name from the Feed ID:
 
 You can use the following API to get the feed name:
-GET https://feeds.dev.azure.com/{organization}/_apis/packaging/feeds/{feedId}?api-version=6.0-preview.1  
+GET https://feeds.dev.azure.com/fsdi/_apis/packaging/feeds/30ed9892-ac99-4342-9647-3afea3dc4ef5?api-version=7.1-preview.1  
  
 Replace {organization} and {feedId} with your actual organization name and feed ID.
 
@@ -70,4 +72,10 @@ This will print out the feed name and fully qualified name (which includes the p
 
 Please replace the placeholders with your actual values.
 
+Example : 
+curl -u username:pat_token https://feeds.dev.azure.com/fsdi/bb377ee2-33c8-4866-a55d-cbb0f72346e2/_apis/packaging/feeds/30ed9892-ac99-4342-9647-3afea3dc4ef5?api-version=6.1-preview.1  | jq -r '.name, .fullyQualifiedName' 
+
+GET https://feeds.dev.azure.com/fsdi/bb377ee2-33c8-4866-a55d-cbb0f72346e2/_apis/packaging/feeds?api-version=7.2-preview.1
+
+curl -u ardeshir_sepahsalar:4l5pgaiybqwbk3x5lxweicsubormifxnuefad5riot4csjo6bkqq https://feeds.dev.azure.com/fsdi/Unity/_apis/packaging/feeds?api-version=7.2-preview.1 | jq -r '.name, .fullyQualifiedName' 
 
