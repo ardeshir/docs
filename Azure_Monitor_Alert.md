@@ -138,4 +138,17 @@ For more information about Azure SDK and Azure.Identity you can visit these link
 You may need to configure Azure security permissions for your application to properly interact with Azure Monitor Alert Logs and/or Metrics Advisor.
 
 Remember to always test your components separately and secure your application key when running on production.
+Microsoft Azure provides a few resources on how to use the `Azure.AI.MetricsAdvisor` to query alerts. Below are a couple of useful links for your reference:
+
+1. Microsoft Documentation page, provides a detailed overview about Azure AI Metrics Advisor client library for .NET: https://docs.microsoft.com/en-us/azure/cognitive-services/metrics-advisor/how-tos/how-to-use-client-libraries
+
+2. Azure SDK Github Repository: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/metricsadvisor/Azure.AI.MetricsAdvisor
+
+   Here you can find various examples demonstrating the usage of the Azure.AI.MetricsAdvisor, as well as the Alerts' functionalities.
+
+3. The official Microsoft Documentation explains how to manage alerts with Azure Metrics Advisor: https://docs.microsoft.com/en-us/azure/cognitive-services/metrics-advisor/how-tos/manage-alerts-hooks
+
+Also, I need to mention that the `serviceProvider.GetRequiredService<MetricsAdvisorClient>()` is a default method of the .NET dependency injection system. This method retrieves a service of the type specified (in this case, `MetricsAdvisorClient`). You need to add all the necessary services in the ConfigureServices method of the Startup class. You can find more information about this on Microsoft's Documentation page: https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-usage
+
+Remember to also validate and manage your Azure API Key and endpoint correctly.
 
