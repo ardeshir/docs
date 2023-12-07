@@ -1,4 +1,4 @@
-##### Q: How do I use the Azure az cli to download from AzureDevOps Universal Artifacts a zip packake to my local machine?
+##### Q: How do I use the Azure az cli to download from AzureDevOps Universal Artifacts a zip package to my local machine?
 
 A: To download a zip package from Azure DevOps Universal Artifacts using the Azure CLI, you can use the following command:
 
