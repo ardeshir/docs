@@ -1,4 +1,5 @@
-#### Create a C++ script that will walk all the files inside a /data directory and replace all blank spaces in filenames with under scores "_" ? 
+#### Create a C++ Script 
+...that will walk all the files inside a /data directory and replace all blank spaces in filenames with under scores "_" ? 
 
 In order to walk through all the files in a directory and rename the files in C++, you can use the "filesystem" library which is introduced in C++17. Here is a C++ snippet that will walk through all the files in a given directory, and rename all files with blank spaces in their names to have underscores instead. 
 

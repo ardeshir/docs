@@ -1,4 +1,5 @@
-#### Create a CSharp script that will walk all the files inside a /data directory and replace all blank spaces in filenames with under scores "_" ? 
+#### Create a CSharp Script
+... that will walk all the files inside a /data directory and replace all blank spaces in filenames with under scores "_" ? 
 
 Here's a C# script that will recursively walk through all files in the "/data" directory and replace any spaces in their filenames with underscores. 
 
