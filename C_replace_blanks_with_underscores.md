@@ -1,4 +1,4 @@
-##### Create a ANSI C Dcript 
+##### ANSI C Script 
 ...that will walk all the files inside a /data directory and replace all blank spaces in filenames with under scores "_" ? 
 
 Sure, here is an example of a C program that uses the dirent.h and sys/stat.h libraries for accessing directories and files, and the string.h and stdlib.h libraries for manipulating strings. This program recursively walks all files in the "/data" directory and renames files, replacing blank spaces with underscores.
