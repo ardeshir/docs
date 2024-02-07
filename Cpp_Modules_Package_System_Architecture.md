@@ -21,5 +21,5 @@ Unfortunately, as of this writing, not all compiler vendors fully support C++20 
 For more detailed information and examples on C++20 Modules, you could refer to the following resources:
 
 - C++ documentation: (https://en.cppreference.com/w/cpp/language/modules)
-- "A Tour of C++ Modules" by Nate Orr and Steve Downey: (https://devblogs.microsoft.com/cppblog/a-tour-of-c-modules-in-visual-studio/)
+- "A Tour of C++ Modules in Visual Studio" by Will Buik: (https://devblogs.microsoft.com/cppblog/a-tour-of-cpp-modules-in-visual-studio/)
 - "Modules in C++20" by Bartłomiej Filipek: (https://www.modernescpp.com/index.php/c-20-modules)
