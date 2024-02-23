@@ -1,4 +1,4 @@
-#### Create a Golang script that will walk all the files inside a /data directory and replace all blank spaces in filenames with under scores "_" ? 
+#####Create a Golang script that will walk all the files inside a /data directory and replace all blank spaces in filenames with under scores "_" ? 
 
 Sure, here's a simple script in Go which does that. This script uses the `filepath.Walk` function from the `path/filepath` package, to traverse through every file in the `/data` directory. For each file, it renames the file if it contains any space in its name by replacing all blank spaces with underscores using the `strings.Replace` function.
 
