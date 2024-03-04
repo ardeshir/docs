@@ -11,4 +11,5 @@ Resources:
 1. Computers and Thought, Edward A. Feigenbaum, Julian Feldman
 2. Artificial Intelligence — The Revolution Hasn’t Happened Yet, Michael Jordan
 3. “AI: The Tumultuous History of the Search for Artificial Intelligence,” Daniel Crevier
-4. A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence, J. McCarthy, M. L. Minsky, N. Rochester, and C. E. Shannon.
+4. A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence, J. McCarthy, M. L. Minsky, N. Rochester, and C. E. Shannon. [https://ojs.aaai.org/aimagazine/index.php/aimagazine/article/view/1904] 
+5. - [https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html] Stanford.edu 
