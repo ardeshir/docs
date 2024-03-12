@@ -1,10 +1,22 @@
 ##### Q: How do I use the Azure CLI to find the name of Service Principle from the Object ID: 3f5e05c6-ae66-4965-98df-3d19eb6fbb17 ?  I need to give Azure DevOps Service Principle permissions to a resource Group, but I only have the Object ID, and need the name? 
 
-A: To find the name of a Service Principal from the Object ID using Azure CLI, you can use the command az ad sp show --id. Here is an example:
+A: To find the name of an App Client ID and Service Principal from the Object ID using Azure CLI, you can use the command az ad sp show --id. Here is an example:
+
+#### How to grab name from ClientApp ID
+  
+```shell
+az login --tenant <GUID_TENANT>
+az ad app list --query "[?appId=='292d418e-d27e-4eed-bd5f-94ea27b4a7f3'].{Name:displayName}" --output table
+Name
+-------------
+APIM-TOKEN-SP
+```
+
+### How to grab Service Principle Name from ID
 
 ```shell
 az ad sp show --id 3f5e05c6-ae66-4965-98df-3d19eb6fbb17
-```  
+```
  
 This command will return a JSON object that contains the details of the Service Principal. You can find the name of the Service Principal under the displayName property.
 
