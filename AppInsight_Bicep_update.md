@@ -1,14 +1,12 @@
 #### Bicep IaC for an Azure Container App to use a pre-existing Application Insight instance, such that all the logging for Azure Container app is sent to an already created with the following id information:
-Instrumentation Key= 7a2fe918-54f4-4536-8fd6-e68eb7eac73c
-Connection String= "InstrumentationKey=7a2fe918-54f4-4536-8fd6-e68eb7eac73c;IngestionEndpoint=https://eastus-5.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/"
 Workspace= la-fsdi-shared
  
 
 #### A: First, you need to update the Bicep file for your Azure Container App to reference the pre-existing Application Insights instance. The updated Bicep code can look like this:
 
 ```bicep
-var instrumentationKey = '7a2fe918-54f4-4536-8fd6-e68eb7eac73c'
-var connectionString = 'InstrumentationKey=7a2fe918-54f4-4536-8fd6-e68eb7eac73c;IngestionEndpoint=https://eastus-5.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/'
+var instrumentationKey = '<KEY>'
+var connectionString = 'InstrumentationKey=<KEY>IngestionEndpoint=https://eastus-5.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/'
 
 var workspace = 'la-fsdi-shared'
 
