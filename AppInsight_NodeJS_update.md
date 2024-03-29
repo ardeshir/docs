@@ -11,10 +11,10 @@ To update Azure Container App to use a pre-existing Application Insight instance
 
    ```javascript
     const appInsights = require("applicationinsights");
-    appInsights.setup("7a2fe918-54f4-4536-8fd6-e68eb7eac73c");
+    appInsights.setup("<KEY>");
     appInsights.start();
    ```
-   Replace `"7a2fe918-54f4-4536-8fd6-e68eb7eac73c"` with your actual Application Insights Instrumentation key.
+   Replace `"<KEY>"` with your actual Application Insights Instrumentation key.
 
 3. To update the Azure Container app configuration to tie it directly with the Application Insights instance, you need to set the APPINSIGHTS_INSTRUMENTATIONKEY environment variable to your Insights Instrumentation Key in the configuration settings of your Container App. Here's how you can achieve this using Azure CLI:
 
