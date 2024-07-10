@@ -73,10 +73,7 @@ async def process_data(request: GlobalmixRequest):
 ```
 
 #### Explanation:
- 
 
-Solver Functions: Replace solve_task with your actual solve logic. This function represents the task that needs to be performed concurrently.
-Extract Sub-tasks: Modify the run_parallel_solves function to extract the sub-tasks from the data. Here, 
-it's assumed that data['tasks'] contains the sub-tasks. Adjust this according to your actual data structure.
-Concurrent Execution: Use ThreadPoolExecutor to run the
-
+Extract Sub-tasks data: Modify the run_parallel_solves function to extract the sub-tasks from the data.  
+Here, it's assumed that data['tasks'] contains the sub-tasks. Adjust this according to your actual data structure.  
+Concurrent Execution of sub tasks, from data['tasks']
