@@ -1,6 +1,5 @@
-### Python Function to write to file
-
-A simple Python function that does exactly that. This function will open the file in 'write' mode, which will overwrite any existing content in the file. If you would like to append to an existing file instead, you can use 'append' mode by replacing 'w' with 'a' in the open() function.
+## Helper Function 
+Sure, here is a simple Python function that does exactly that. This function will open the file in 'write' mode, which will overwrite any existing content in the file. If you would like to append to an existing file instead, you can use 'append' mode by replacing 'w' with 'a' in the open() function.
 
 ```python
 def write_to_file(content):

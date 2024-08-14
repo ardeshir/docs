@@ -1,4 +1,6 @@
-#### 
+Response: 
+Sure, here is a simple Rust application and a Dockerfile to run it.
+
 Let's start by creating a simple Rust application. We will create a new project named "hello_world" with the command `cargo new hello_world`. 
 
 Here is the main.rs file:
