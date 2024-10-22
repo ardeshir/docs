@@ -5,7 +5,11 @@ between azure subscriptions, for instance, enable VNET connectivity between a "c
 
 Yes, it is possible to do cross Azure tenant VNet peering. You can peer virtual networks across different Azure subscriptions and even across different Azure Active Directory (Azure AD) tenants. This can be done using Azure's virtual network peering feature.
 
-Here is a high-level overview of the process:
+Here is a high-level overview of the process & prerequisites:
+
+**Permissions:**  
+- You need to have the Network Contributor role in both subscriptions.
+- Subscription ID and VNet Information: You need the subscription ID and VNet details (name, resource group, and address space) for both VNets.
 
 1. **Prepare Network Details**: Collect details about the peering VNets, such as their Resource IDs and subscription information.
 
