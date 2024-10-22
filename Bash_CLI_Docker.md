@@ -1,3 +1,5 @@
+# Bash Docker Utility Script
+ 
 #### Create a bash cli for common docker cli use case: 
 
 - To improve the script and use the GNU command line parameters options library, we can make use of the getopt command. Here's an updated version of the script that incorporates this:
