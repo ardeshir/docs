@@ -1,4 +1,4 @@
-# Peering Across Azure Tenant
+# VNet Peering Across Azure Tenants
 
 ### Is there is a way to do cross Azure tenant vnet peering?
 between azure subscriptions, for instance, enable VNET connectivity between a "cantina sub" vnet and a "fsdi sub" vnet? 
