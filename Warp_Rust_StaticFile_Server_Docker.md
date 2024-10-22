@@ -1,3 +1,5 @@
+# Rust Static File Server with Warp & Docker
+
 ### Write a simple Rust Server that can server MarkDown files from wwwroot directory, and a Dockerfile to run this program? 
 
 Sure! Below is an example of a simple Rust server using the `warp` library to serve Markdown files from a `wwwroot` directory. We'll also include a `Dockerfile` to build and run the server inside a Docker container.
