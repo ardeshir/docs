@@ -1,6 +1,6 @@
 # Connecting to Azure PostgreSQL with Azure Functions
 
-- I want to create a DB role for fsdi-Unity-Developer group to be able to query database. I'm not a PostgreSQL expert, so testing this out, I do have a server pgsql-fsdi-unity-dev with database cnc-cns-data, what are the steps needed to connect a CSharp client application ?  show all the requirements to building Azure PostgreSQL db, table and connecting with RBACP with a AAD Group fsdi-Unity-Develper? 
+I want to create a DB role for fsdi-Unity-Developer group to be able to query database. I'm not a PostgreSQL expert, so testing this out, I do have a server pgsql-fsdi-unity-dev with database cnc-cns-data, what are the steps needed to connect a CSharp client application ?  show all the requirements to building Azure PostgreSQL db, table and connecting with RBACP with a AAD Group fsdi-Unity-Develper? 
 
 To create an Azure PostgreSQL database, set up a table, and connect a C# client application using RBAC with an AAD group, follow these steps:
 
@@ -8,33 +8,33 @@ To create an Azure PostgreSQL database, set up a table, and connect a C# client 
  
 
 1. Log in to Azure Portal:
-- Go to the Azure portal: https://portal.azure.com
+    - Go to the Azure portal: https://portal.azure.com
 2. Create a PostgreSQL server:
-- Search for "Azure Database for PostgreSQL".
-- Click "Add" to create a new PostgreSQL server.
-- Fill in the necessary details like Subscription, Resource Group, Server Name, Data Source, Location, Version, etc.
-- Set the administrator username and password.
-- Configure the networking settings as necessary.
-- Review and create the server.
+    - Search for "Azure Database for PostgreSQL".
+    - Click "Add" to create a new PostgreSQL server.
+    - Fill in the necessary details like Subscription, Resource Group, Server Name, Data Source, Location, Version, etc.
+    - Set the administrator username and password.
+    - Configure the networking settings as necessary.
+    - Review and create the server.
 3. Create a database:
-- Go to your PostgreSQL server in the Azure portal.
-- Under "Settings", click on "Databases".
-- Click "Add Database".
-- Fill in the database name (cnc-cns-data), and other details as required.
-- Click "OK" to create the database.
+    - Go to your PostgreSQL server in the Azure portal.
+    - Under "Settings", click on "Databases".
+    - Click "Add Database".
+    - Fill in the database name (cnc-cns-data), and other details as required.
+    - Click "OK" to create the database.
 
 #### Step 2: Configure Azure AD Authentication
  
 
 1. Enable Azure AD authentication:
-- Go to your PostgreSQL server in the Azure portal.
-- Under "Settings", click on "Active Directory admin".
-- Click "Set admin" and select an Azure AD group or user to be the admin.
-- Click "Save".
+    - Go to your PostgreSQL server in the Azure portal.
+    - Under "Settings", click on "Active Directory admin".
+    - Click "Set admin" and select an Azure AD group or user to be the admin.
+    - Click "Save".
 2. Assign the AAD group to the database:
-- Go to the Azure Active Directory service in the Azure portal.
-- Search for and select the fsdi-Unity-Developer group.
-- Note the Object ID of the group, as you will need it later.
+    - Go to the Azure Active Directory service in the Azure portal.
+    - Search for and select the fsdi-Unity-Developer group.
+    - Note the Object ID of the group, as you will need it later.
 
 
 #### Step 3: Connect and Configure PostgreSQL
@@ -52,14 +52,14 @@ psql "host=<your_server_name>.postgres.database.azure.com port=5432 dbname=postg
  
 3. Create a role for the Azure AD group:
 
-- Once connected, create a role for the Azure AD group:
+    - Once connected, create a role for the Azure AD group:
 
 ```sql 
 CREATE ROLE fsdi_unity_developer;  
 ``` 
 4. Grant privileges to the role:
 
-- Grant the necessary privileges to the role:
+    - Grant the necessary privileges to the role:
 
 ```sql 
 GRANT CONNECT ON DATABASE "cnc-cns-data" TO fsdi_unity_developer;  
@@ -84,7 +84,8 @@ psql "host=<your_server_name>.postgres.database.azure.com port=5432 dbname=cnc-c
  
 2. Create a table:
 
-- Create a sample table:
+    - Create a sample table:
+
 ```sql 
 CREATE TABLE sample_table (  
     id SERIAL PRIMARY KEY,  
@@ -102,24 +103,25 @@ Below are the steps to develop a C# Azure Function that connects to the PostgreS
  
 
 1. Create an Azure Function App in the Azure Portal:
-- Go to the Azure portal: https://portal.azure.com
-- Click "Create a resource" and search for "Function App".
-- Click "Create" and fill in the necessary details (Subscription, Resource Group, Function App name, Runtime stack as .NET, etc.)
+    - Go to the Azure portal: https://portal.azure.com
+    -  Click "Create a resource" and search for "Function App".
+    - Click "Create" and fill in the necessary details (Subscription, Resource Group, Function App name, Runtime stack as .NET, etc.)
+
 Review and create the Function App.
 
 #### Step 2: Set up the Development Environment
  
 
 1. Install .NET SDK:
-- Ensure you have the .NET SDK installed. You can download it from: https://dotnet.microsoft.com/download
+    - Ensure you have the .NET SDK installed. You can download it from: https://dotnet.microsoft.com/download
 2. Install Azure Functions Core Tools:
-- Install Azure Functions Core Tools to develop and test functions locally:
+    - Install Azure Functions Core Tools to develop and test functions locally:
 
 `npm install -g azure-functions-core-tools@3`  
  
 3. Create a new Azure Functions project:
 
-- Open a terminal or command prompt and create a new Functions project:
+    - Open a terminal or command prompt and create a new Functions project:
 
 ```bash
 func init MyFunctionApp --dotnet  
@@ -138,11 +140,11 @@ Npgsql is an open-source .NET data provider for PostgreSQL:
 2. Install Microsoft.Extensions.Configuration and other necessary packages:
 
 These packages help manage configuration and secrets:
-
-- dotnet add package Microsoft.Extensions.Configuration  
-- dotnet add package Microsoft.Extensions.Configuration.Json  
-- dotnet add package Microsoft.Extensions.Configuration.EnvironmentVariables  
- 
+```bash 
+dotnet add package Microsoft.Extensions.Configuration  
+dotnet add package Microsoft.Extensions.Configuration.Json  
+dotnet add package Microsoft.Extensions.Configuration.EnvironmentVariables  
+``` 
 
 #### Step 4: Implement the Azure Function
  
@@ -211,7 +213,7 @@ public static class QueryPostgreSqlFunction
 2. Update local.settings.json:
 
 Add the connection string to local.settings.json for local development:
-
+```json
 {  
   "IsEncrypted": false,  
   "Values": {  
@@ -220,45 +222,47 @@ Add the connection string to local.settings.json for local development:
     "PostgreSqlConnectionString": "Host=<your_server_name>.postgres.database.azure.com;Username=<aad_user>@<your_server_name>;Password=<aad_user_password>;Database=cnc-cns-data;SslMode=Require;Trust Server Certificate=true"  
   }  
 }  
+```
 Make sure to replace placeholders (<your_server_name>, <aad_user>, and <aad_user_password>) with actual values.
-Step 5: Deploy the Azure Function App
+#### Step 5: Deploy the Azure Function App
  
 
-Login to Azure:
-Use the Azure CLI to log in to your Azure account:
+1. Login to Azure:
+    - Use the Azure CLI to log in to your Azure account:
 
-az login  
+`az login`  
  
 2. Deploy the Function App:
 
-Navigate to the project directory and deploy the function app to Azure:
+    - Navigate to the project directory and deploy the function app to Azure:
 
-func azure functionapp publish <your_function_app_name>  
+` func azure functionapp publish <your_function_app_name> ` 
  
 3. Configure the Connection String in Azure:
 
-- Go to your Function App in the Azure portal.
-- Under "Settings", click on "Configuration".
-- Click "New application setting" and add the connection string as follows:
-- - Name: PostgreSqlConnectionString
-- - Value: Host=<your_server_name>.postgres.database.azure.com;Username=<aad_user>@<your_server_name>;Password=<aad_user_password>;Database=cnc-cns-data;SslMode=Require;Trust Server Certificate=true
-Click "OK" and then "Save" to apply the settings.
+    - Go to your Function App in the Azure portal.
+    - Under "Settings", click on "Configuration".
+    - Click "New application setting" and add the connection string as follows:
+        - Name: PostgreSqlConnectionString
+        - Value: Host=<your_server_name>.postgres.database.azure.com;Username=<aad_user>@<your_server_name>;Password=<aad_user_password>;Database=cnc-cns-data;SslMode=Require;Trust Server Certificate=true
+    - Click "OK" and then "Save" to apply the settings.
 
 
 ####  Step 6: Test the Azure Function
  
 
 1. Invoke the Function:
-- You can test the function using an HTTP client like curl, Postman, or directly from a browser.
-- The URL format will be: https://<your_function_app_name>.azurewebsites.net/api/QueryPostgreSqlFunction
-- Example using curl:
+    - You can test the function using an HTTP client like curl, Postman, or directly from a browser.
+    - The URL format will be: https://<your_function_app_name>.azurewebsites.net/api/QueryPostgreSqlFunction
+    - Example using curl:
 ```bash
 curl -X GET "https://<your_function_app_name>.azurewebsites.net/api/QueryPostgreSqlFunction"  
 ```
  
 2. Check the Logs:
 
-- You can monitor the logs in the Azure portal under "Monitor" for the function app to see the execution details and any errors.
+    - You can monitor the logs in the Azure portal under "Monitor" for the function app to see the execution details and any errors.
+
 #### Step 7: Secure the Function
  
 
@@ -273,9 +277,9 @@ public static async Task<IActionResult> Run(
 ``` 
 2. Generate Function Key:
 
-- Go to the Azure portal, navigate to your Function App, and under "Functions", select your function.
-- Click on "Manage" and generate a new function key.
-- Use this key when making HTTP requests to the function by adding it as a query parameter:
+    - Go to the Azure portal, navigate to your Function App, and under "Functions", select your function.
+    - Click on "Manage" and generate a new function key.
+    - Use this key when making HTTP requests to the function by adding it as a query parameter:
 ```bash 
 curl -X GET "https://<your_function_app_name>.azurewebsites.net/api/QueryPostgreSqlFunction?code=<your_function_key>"  
 ``` 
