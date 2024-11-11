@@ -9,7 +9,9 @@ While there is no official Azure SDK for the Julia programming language, it is p
 - Note down your Instrumentation Key (also known as Connection String).
 
 2. **Install Required Julia Packages**:
+
 - You need to use HTTP and JSON packages to make HTTP requests and handle JSON data in Julia.
+
 ```julia
 using Pkg
 Pkg.add("HTTP")
@@ -17,6 +19,7 @@ Pkg.add("JSON")
 ```
 
 3. **Constructing the URL and Authentication**:
+
 - Application Insights metrics can be sent using a POST request to the following endpoint:
 ```plaintext
 https://dc.services.visualstudio.com/v2/track
@@ -26,6 +29,7 @@ https://dc.services.visualstudio.com/v2/track
 4. **Creating the Payload**:
 - Construct a JSON payload with the required metric data.
 - Here is an example of how to set up a custom metric payload:
+
 ```julia
 using HTTP
 using JSON
@@ -38,16 +42,16 @@ payload = Dict(
     "time" => "2021-11-23T14:55:00.000Z",
     "iKey" => instrumentation_key,
     "data" => Dict(
-            "baseType" => "MetricData",
-            "baseData" => Dict(
-                        "metrics" => [
-                                Dict(
-                                     "name" => "sample_metric",
-                                     "value" => 100,
-                                    "count" => 1 
-                                )] 
-                        )
-            )
+        "baseType" => "MetricData",
+        "baseData" => Dict(
+                "metrics" => [
+                        Dict(
+                        "name" => "sample_metric",
+                        "value" => 100,
+                        "count" => 1 
+                        )] 
+                )
+         )
 )
 
 headers = Dict("Content-Type" => "application/json")
@@ -67,6 +71,7 @@ println(String(response.body))
 - Logging the response status and body can help in debugging any issues.
 
 #### Example: Julia Function to Send Metrics
+Below is a more structured way to encapsulate the send metric functionality within a Julia function:
 
 -  metrics.jl
 
@@ -109,6 +114,7 @@ function send_metric(instrumentation_key, metric_name, metric_value)
     end
 end
 ```
+
 #### Example usage:
 
 ` send_metric("your_instrumentation_key_here", "example_metric", 123)`
