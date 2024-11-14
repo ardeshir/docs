@@ -1,15 +1,15 @@
 # AWS Step Functions Workflow for Redshift Data API triggered from CloudWatch
 
-Using AWS Step Functions to run the UNLOAD command on RedShift using the RedShift Data API is an efficient approach. This way, you avoid using Lambda for long-running queries and directly manage the workflow with Step Functions triggered by CloudWatch Events.
+Using AWS Step Functions to run the UNLOAD command on Redshift using the Redshift Data API is an efficient approach. This way, you avoid using Lambda for long-running queries and directly manage the workflow with Step Functions triggered by CloudWatch Events.
 
-#### Step 1: Configure AWS RedShift Data API
+#### Step 1: Configure AWS Redshift Data API
  
 
-1. Enable the RedShift Data API:
-	- Ensure that your RedShift cluster is using an IAM role that has the necessary permissions to use the Data API.
+1. Enable the Redshift Data API:
+	- Ensure that your Redshift cluster is using an IAM role that has the necessary permissions to use the Data API.
 	- Create an IAM Role for Step Functions:
-2. This role will need permissions to execute the RedShift Data API commands.
-	- Example IAM Policy for RedShift Data API:
+2. This role will need permissions to execute the Redshift Data API commands.
+	- Example IAM Policy for Redshift Data API:
 ```json
 {  
   "Version": "2012-10-17",  
@@ -217,7 +217,7 @@ app.synth()
 
 #### Summary
  
-This solution uses AWS CDK to create a Step Functions workflow that runs the UNLOAD command on RedShift using the RedShift Data API. The workflow is triggered by a CloudWatch Event on a scheduled basis (e.g., every hour). The Step Functions state machine handles the execution and monitoring of the UNLOAD command, ensuring it completes successfully or fails gracefully.
+This solution uses AWS CDK to create a Step Functions workflow that runs the UNLOAD command on Redshift using the Redshift Data API. The workflow is triggered by a CloudWatch Event on a scheduled basis (e.g., every hour). The Step Functions state machine handles the execution and monitoring of the UNLOAD command, ensuring it completes successfully or fails gracefully.
 
 ##### Additional Resources
  
