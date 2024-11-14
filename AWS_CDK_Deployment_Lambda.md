@@ -1,4 +1,4 @@
-# AWS CDK Deployment of RedShift Lambda Sync 
+# AWS CDK Deployment of Redshift Lambda Sync 
 
 To set up the AWS infrastructure using AWS CDK (Cloud Development Kit) for deploying the Lambda function that transfers data from S3 to Azure Blob Storage, follow the steps below. This includes creating the IAM role, the Lambda function, and the necessary permissions.
 

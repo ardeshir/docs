@@ -1,6 +1,6 @@
-# AWS RedShift UNLOAD to Azure Storage Blob 
+# AWS Redshift UNLOAD to Azure Storage Blob 
 
-Unloading data from AWS RedShift to Azure Blob Storage without using VPC peering, you can follow these steps. We'll use AWS services such as AWS Lambda and AWS Glue to automate the process and ensure the data remains in sync.
+Unloading data from AWS Redshift to Azure Blob Storage without using VPC peering, you can follow these steps. We'll use AWS services such as AWS Lambda and AWS Glue to automate the process and ensure the data remains in sync.
 
 #### Step 1: Configure Azure Storage Account
  
@@ -12,7 +12,7 @@ Unloading data from AWS RedShift to Azure Blob Storage without using VPC peering
     - Navigate to your storage account.
     - Under "Data storage", click "Containers".
     - Click "+ Container" to create a new container where you will store your data.
-#### Step 2: Set Up AWS RedShift
+#### Step 2: Set Up AWS Redshift
  
 
 1. Create an AWS RedShift Cluster:
@@ -22,7 +22,7 @@ Unloading data from AWS RedShift to Azure Blob Storage without using VPC peering
 2. Configure Security Groups:
     - Ensure that the RedShift cluster is within a security group that allows outbound traffic to the internet.
 
-#### Step 3: Unload Data from RedShift to S3
+#### Step 3: Unload Data from Redshift to S3
 
 1. Create an S3 Bucket:
     - Navigate to the S3 service in the AWS Management Console.
