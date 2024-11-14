@@ -10,7 +10,7 @@ Using AWS Step Functions to run the UNLOAD command on RedShift using the RedShif
 	- Create an IAM Role for Step Functions:
 2. This role will need permissions to execute the RedShift Data API commands.
 	- Example IAM Policy for RedShift Data API:
-
+```json
 {  
   "Version": "2012-10-17",  
   "Statement": [  
@@ -93,7 +93,7 @@ Using AWS Step Functions to run the UNLOAD command on RedShift using the RedShif
 
 #### Step 2: Create a Step Functions Workflow (continued)
  
-2. Deploy the State Machine Using CDK:
+1. Deploy the State Machine Using CDK:
 
 	- Create a new file redshift_unload_step_function_stack.py in your CDK project and add the following code:
 
@@ -219,9 +219,9 @@ app.synth()
  
 This solution uses AWS CDK to create a Step Functions workflow that runs the UNLOAD command on RedShift using the RedShift Data API. The workflow is triggered by a CloudWatch Event on a scheduled basis (e.g., every hour). The Step Functions state machine handles the execution and monitoring of the UNLOAD command, ensuring it completes successfully or fails gracefully.
 
-- Additional Resources
+##### Additional Resources
  
 
-[https://docs.aws.amazon.com/cdk/v2/guide/home.html](AWS CDK v2)
-[https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html](AWS Step Functions)
-[https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html](AWS Redshift Data API)
+- [AWS CDK v2](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
+- [AWS Step Functions](https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html)
+- [AWS Redshift Data API](https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html)

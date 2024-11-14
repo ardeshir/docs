@@ -162,9 +162,9 @@ Upload a test file to the S3 bucket and check if it is transferred to the Azure 
  
 This solution uses AWS CDK to create the necessary infrastructure to automate the process of unloading data from AWS RedShift to an S3 bucket and then transferring that data to Azure Blob Storage using a Lambda function. The Lambda function is triggered by S3 ObjectCreated events and uses the Azure Blob Storage SDK to upload the files to Azure Blob Storage.
 
-#### Additional Resources
+##### Additional Resources
  
-[https://docs.aws.amazon.com/cdk/v2/guide/home.html](AWS CDK Documentation)
-[https://docs.aws.amazon.com/lambda/latest/dg/welcome.html](AWS Lambda Documentation)
-[https://learn.microsoft.com/en-us/python/api/overview/azure/storage-blob-readme?view=azure-python](Azure Storage Blob SDK for Python)
+- [AWS CDK Documentation](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
+- [AWS Lambda Documentation](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
+- [Azure Storage Blob SDK for Python](https://learn.microsoft.com/en-us/python/api/overview/azure/storage-blob-readme?view=azure-python)
 

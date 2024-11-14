@@ -82,4 +82,7 @@ def lambda_handler(event, context):
 2. AWS Lambda Trigger:
     - Ensure the Lambda function is configured to trigger on the S3 ObjectCreated event.
 
+- [AWS CDK Documentation](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
+- [AWS Lambda Documentation](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
+- [Azure Storage Blob SDK for Python](https://learn.microsoft.com/en-us/python/api/overview/azure/storage-blob-readme?view=azure-python)
 

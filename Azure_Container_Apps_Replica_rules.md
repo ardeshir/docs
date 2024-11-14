@@ -40,5 +40,5 @@ az containerapp show \
 Look for the `template.scale.minReplicas` field in the output to confirm it’s set to 2.
 
 ### References
-- Azure CLI documentation for `az containerapp update`: [Azure CLI Documentation](https://learn.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest)
-- Container App scaling concepts: [Azure Container Apps Scaling](https://learn.microsoft.com/en-us/azure/container-apps/scale)
+- [Azure CLI documentation for `az containerapp update`: Azure CLI Documentation](https://learn.microsoft.com/en-us/cli/azure/containerapp?view=azure-cli-latest)
+- [Container App scaling concepts: Azure Container Apps Scaling](https://learn.microsoft.com/en-us/azure/container-apps/scale)
