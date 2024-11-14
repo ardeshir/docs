@@ -164,7 +164,7 @@ This solution uses AWS CDK to create the necessary infrastructure to automate th
 
 #### Additional Resources
  
-- (AWS CDK Documentation)[https://docs.aws.amazon.com/cdk/v2/guide/home.html]
-- (AWS Lambda Documentation)[https://docs.aws.amazon.com/lambda/latest/dg/welcome.html]
-- (Azure Storage Blob SDK for Python)[https://learn.microsoft.com/en-us/python/api/overview/azure/storage-blob-readme?view=azure-python]
+[https://docs.aws.amazon.com/cdk/v2/guide/home.html](AWS CDK Documentation)
+[https://docs.aws.amazon.com/lambda/latest/dg/welcome.html](AWS Lambda Documentation)
+[https://learn.microsoft.com/en-us/python/api/overview/azure/storage-blob-readme?view=azure-python](Azure Storage Blob SDK for Python)
 
