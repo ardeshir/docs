@@ -15,7 +15,7 @@ Unloading data from AWS Redshift to Azure Blob Storage without using VPC peering
 #### Step 2: Set Up AWS Redshift
  
 
-1. Create an AWS RedShift Cluster:
+1. Create an AWS Redshift Cluster:
     - Sign in to the AWS Management Console.
     - Navigate to the RedShift service.
     - Click "Create cluster" and follow the prompts to configure your cluster.
@@ -78,7 +78,7 @@ def lambda_handler(event, context):
 #### Step 5: Automate the Process
  
 1. AWS CloudWatch Events:
-    - Set up a CloudWatch Event that triggers the UNLOAD command in RedShift on a schedule (e.g., every hour).
+    - Set up a CloudWatch Event that triggers the UNLOAD command in Redshift on a schedule (e.g., every hour).
 2. AWS Lambda Trigger:
     - Ensure the Lambda function is configured to trigger on the S3 ObjectCreated event.
 
