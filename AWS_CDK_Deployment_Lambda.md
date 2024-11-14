@@ -4,7 +4,7 @@ To set up the AWS infrastructure using AWS CDK (Cloud Development Kit) for deplo
 
 #### Step 1: Set Up AWS CDK
 
-*** Install AWS CDK ***
+1. Install AWS CDK
 
 `npm install -g aws-cdk`  
  
