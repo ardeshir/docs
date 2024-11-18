@@ -1,4 +1,6 @@
-# C++ client application fetch.cpp that interacts with a PostgreSQL database, you will need to follow several steps. Below is a detailed guide, including database setup, C++ code, and build configuration with CMake.
+# C++ client application fetch.cpp that interacts with a PostgreSQL database.
+
+Below is a detailed guide, including database setup, C++ code, and build configuration with CMake.
 
 ##### Step 1: Install PostgreSQL and Development Libraries on Ubuntu
  
