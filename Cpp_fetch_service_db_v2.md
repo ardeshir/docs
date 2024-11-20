@@ -16,22 +16,26 @@ sudo apt install libpqxx-dev
 ```
 3. Install other necessary tools:
 ```bash
-sudo apt install cmake g++ libcurl4-openssl-dev
+sudo apt install cmake g++ libcurl4-openssl-dev 
+```
+4.  To check that libpqxx is isntalled correctly 
+```bash
+Home:/usr/include$ pkg-config --modversion libpqxx  
+7.8.1
 ```
 #### Step 2: Setup PostgreSQL Database and Tables
- 
 
-- Switch to the PostgreSQL user:
+1. Switch to the PostgreSQL user:
 ```bash
 sudo -i -u postgres  
 ``` 
 - Connect to your PostgreSQL instance
-    ```sh
-    psql -U your_username -d your_dbname
+```sh
+psql mydatabase 
 ```
 2. Create a new database and user:
 ```bash
-CREATE database mydatabase ; 
+CREATE database mydatabase; 
 
 CREATE USER myuser WITH ENCRYPTED PASSWORD 'mypassword';" 
  
@@ -60,9 +64,9 @@ CREATE TABLE content (
 ### create correct permissions for the tables
 
 ```sql
-searchdb=#  GRANT ALL PRIVILEGES ON TABLE urls TO myuser;
+mydatabase=#  GRANT ALL PRIVILEGES ON TABLE urls TO myuser;
 
-searchdb=#  GRANT ALL PRIVILEGES ON TABLE content TO myuser;
+mydatbase=#  GRANT ALL PRIVILEGES ON TABLE content TO myuser;
 ``` 
 
 #### Step 3: Write the C++ Code (fetch.cpp) - Continued
@@ -193,17 +197,17 @@ This command will generate the necessary build files using the `CMakeLists.txt` 
 3. Compile the project:
 ```bash 
 make
+
 ```
 
 This will compile the `fetch.cpp` file and link it against the PostgreSQL and CURL libraries, producing an executable named `fetch`.  
  
-
 #### Step 6: Run the Application
  
 - Run the executable:
 ```bash 
 
-./fetch
+build/fetch
 ```  
 
 This will start the service which will continuously check the urls table for URLs that need to be fetched and processed. If none are found, it will sleep for 1 minute before checking again.
