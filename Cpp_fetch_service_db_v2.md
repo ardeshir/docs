@@ -49,7 +49,13 @@ CREATE TABLE content (
 );  
 \q  
 ```  
- 
+### create correct permissions for the tables
+
+```sql
+searchdb=#  GRANT ALL PRIVILEGES ON TABLE urls TO myuser;
+
+searchdb=#  GRANT ALL PRIVILEGES ON TABLE content TO myuser;
+``` 
 
 #### Step 3: Write the C++ Code (fetch.cpp) - Continued
  
