@@ -221,7 +221,8 @@ You have now created a complete C++ application that interacts with a PostgreSQL
 #### Useful Links
  
 
-- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/) 
+- [PostgreSQL: Insert](https://neon.tech/postgresql/postgresql-tutorial/postgresql-insert)
 - [libpqxx Documentation](https://libpqxx.readthedocs.io/stable/)
 - [libcurl Documentation](https://curl.se/libcurl/)
 - [CMake Documentation](https://cmake.org/documentation/)
