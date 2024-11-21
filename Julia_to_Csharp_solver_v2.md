@@ -50,7 +50,36 @@ create_library("LinearOptimizer", ["linear_optimizer.jl"]; lib_name="linear_opti
 ```julia 
 include("compile.jl")  
 ``` 
-This will create a shared library file named linear_optimizer.dll (or .so/.dylib depending on your operating system).
+This will create a shared library file named linear_optimizer.dll (or .so/.dylib depending on your operating system). 
+
+## OPTIONAL =  Write the Memory Management Functions in Julia
+To properly manage memory when passing data between Julia and C#, you need to write a function in 
+Julia to free the memory allocated for the result. Update your Julia script as follows:
+
+```julia 
+using JuMP  
+using GLPK  
+  
+function solve_linear_problem(c::Vector{Float64}, A::Matrix{Float64}, b::Vector{Float64})::Ptr{Cdouble}  
+    model = Model(GLPK.Optimizer)  
+    @variable(model, x[1:length(c)] >= 0)  
+    @objective(model, Min, dot(c, x))  
+    @constraint(model, A * x .<= b)  
+    optimize!(model)  
+      
+    if termination_status(model) == MOI.OPTIMAL  
+        result = value.(x)  
+        return Base.unsafe_convert(Ptr{Cdouble}, pointer(result))  
+    else  
+        return C_NULL  
+    end  
+end  
+  
+function free_result(ptr::Ptr{Cdouble})  
+    unsafe_free!(ptr)  
+end  
+``` 
+- Recompile the shared library using PackageCompiler as described earlier.
 
 #### Step 4: Use the Shared Library in C#
 Now, create a C# application that calls the Julia shared library.
