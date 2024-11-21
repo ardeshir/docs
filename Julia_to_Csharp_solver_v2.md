@@ -1,5 +1,4 @@
 # Building a linear optimizer function with Julia
-
 Calling Julia optimizer() from a C# application :
 
 #### Step 1: Set Up Julia Environment
@@ -176,24 +175,21 @@ class Program
 #### Step 5: Build the Project
 Run the following command to build your project:
 
-
 ` dotnet build `  
  
 - This will compile your C# code and generate the necessary binaries.
-
 - Run the following command to execute your application:
-
 
 ` dotnet run  `
  
 You should see the output of the linear optimization process printed to the console.
 
 #### Additional Notes
+
 1. Path Adjustments: Ensure the path to linear_optimizer.dll in the [DllImport] attribute is correct. If you placed the DLL in a different directory, adjust the path accordingly.
 2. Platform-Specific Libraries
 
 
-### References
-
+### References: 
 - [Julia documentation on calling C from Julia](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/)
 - [P/Invoke documentation](https://docs.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke)
