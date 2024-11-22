@@ -185,17 +185,6 @@ exports.handler = async (event) => {
 ` cdk deploy  `
 During the deployment process, CDK will create the S3 bucket, the Lambda@Edge function, and the CloudFront distribution as defined in your stack. It will also apply the necessary bucket policy to ensure that the S3 bucket can only be accessed via the CloudFront distribution.
 
-#### Step 4: Verify the Deployment
- 
-
-Check the CloudFront Distribution
-After the stack is deployed, go to the AWS Management Console and navigate to the CloudFront service.
-Ensure that your CloudFront distribution is listed and active.
-Test the Authentication
-Use a web browser or a tool like curl to test accessing the S3 content through the CloudFront distribution.
-You should be prompted for a username and password. Use the credentials you specified in the Lambda function.
-
-` curl -u username:password https://<your-cloudfront-domain>/<your-s3-object>  `
 
 #### Full Project Structure
  
@@ -279,3 +268,13 @@ class CdkLambdaEdgeStack(core.Stack):
             )]  
         ))  
 ```
+#### Verify the Deployment
+
+Check the CloudFront Distribution
+After the stack is deployed, go to the AWS Management Console and navigate to the CloudFront service.
+Ensure that your CloudFront distribution is listed and active.
+Test the Authentication
+Use a web browser or a tool like curl to test accessing the S3 content through the CloudFront distribution.
+You should be prompted for a username and password. Use the credentials you specified in the Lambda function.
+
+` curl -u username:password https://<your-cloudfront-domain>/<your-s3-object>  `
