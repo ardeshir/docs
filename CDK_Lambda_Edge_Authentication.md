@@ -96,52 +96,57 @@ cdk init app --language python
 
 ```python 
 from aws_cdk import (  
+    Stack,  
     aws_s3 as s3,  
     aws_lambda as _lambda,  
     aws_cloudfront as cloudfront,  
     aws_cloudfront_origins as origins,  
     aws_iam as iam,  
-    core  
 )  
-import base64  
+from constructs import Construct  
   
-class CdkLambdaEdgeStack(core.Stack):  
+class CdkLambdaEdgeStack(Stack):  
   
-    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:  
-        super().__init__(scope, id, **kwargs)  
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:  
+        super().__init__(scope, construct_id, **kwargs)  
   
         # Create the S3 bucket  
-        bucket = s3.Bucket(self, "MyBucket",  
-                           versioned=True,  
-                           removal_policy=core.RemovalPolicy.DESTROY,  
-                           auto_delete_objects=True)  
+        bucket = s3.Bucket(self, "LambdaEdgeAuth", versioned=True)  
   
         # Define the Lambda function  
-        lambda_function = _lambda.Function(self, "MyLambdaEdgeFunction",  
-                                           runtime=_lambda.Runtime.NODEJS_14_X,  
-                                           handler="index.handler",  
-                                           code=_lambda.Code.from_asset("lambda"))  
+        lambda_function = _lambda.Function(  
+            self, "AuthLambdaEdgeFunction",  
+            runtime=_lambda.Runtime.NODEJS_18_X,  
+            handler="index.handler",  
+            code=_lambda.Code.from_asset("lambda")  
+        )  
+  
+        # Create an Origin Access Identity (OAI)  
+        oai = cloudfront.OriginAccessIdentity(self, "MyOAI")  
   
         # Create a CloudFront distribution  
-        distribution = cloudfront.Distribution(self, "MyDistribution",  
-                                               default_behavior={  
-                                                   "origin": origins.S3Origin(bucket),  
-                                                   "edge_lambdas": [  
-                                                       {  
-                                                           "function_version": lambda_function.current_version,  
-                                                           "event_type": cloudfront.LambdaEdgeEventType.VIEWER_REQUEST  
-                                                       }  
-                                                   ]  
-                                               })  
+        distribution = cloudfront.Distribution(  
+            self, "AuthLambdaDistribution",  
+            default_behavior=cloudfront.BehaviorOptions(  
+                origin=origins.S3Origin(bucket, origin_access_identity=oai),  
+                edge_lambdas=[  
+                    cloudfront.EdgeLambda(  
+                        function_version=lambda_function.current_version,  
+                        event_type=cloudfront.LambdaEdgeEventType.VIEWER_REQUEST  
+                    )  
+                ]  
+            )  
+        )  
   
         # Add bucket policy to restrict access to CloudFront  
         bucket.add_to_resource_policy(iam.PolicyStatement(  
             actions=["s3:GetObject"],  
             resources=[bucket.arn_for_objects("*")],  
             principals=[iam.ArnPrincipal(  
-                f"arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity {distribution.origin_access_identity.origin_access_identity_id}"  
+                f"arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity {oai.origin_access_identity_id}"  
             )]  
         ))  
+  
 ```  
  
 2. Create the Lambda Function Code
@@ -222,51 +227,57 @@ app.synth()
 
 ```python 
 from aws_cdk import (  
+    Stack,  
     aws_s3 as s3,  
     aws_lambda as _lambda,  
     aws_cloudfront as cloudfront,  
     aws_cloudfront_origins as origins,  
     aws_iam as iam,  
-    core  
 )  
+from constructs import Construct  
   
-class CdkLambdaEdgeStack(core.Stack):  
+class CdkLambdaEdgeStack(Stack):  
   
-    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:  
-        super().__init__(scope, id, **kwargs)  
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:  
+        super().__init__(scope, construct_id, **kwargs)  
   
         # Create the S3 bucket  
-        bucket = s3.Bucket(self, "MyBucket",  
-                           versioned=True,  
-                           removal_policy=core.RemovalPolicy.DESTROY,  
-                           auto_delete_objects=True)  
+        bucket = s3.Bucket(self, "LambdaEdgeAuth", versioned=True)  
   
         # Define the Lambda function  
-        lambda_function = _lambda.Function(self, "MyLambdaEdgeFunction",  
-                                           runtime=_lambda.Runtime.NODEJS_14_X,  
-                                           handler="index.handler",  
-                                           code=_lambda.Code.from_asset("lambda"))  
+        lambda_function = _lambda.Function(  
+            self, "AuthLambdaEdgeFunction",  
+            runtime=_lambda.Runtime.NODEJS_18_X,  
+            handler="index.handler",  
+            code=_lambda.Code.from_asset("lambda")  
+        )  
+  
+        # Create an Origin Access Identity (OAI)  
+        oai = cloudfront.OriginAccessIdentity(self, "MyOAI")  
   
         # Create a CloudFront distribution  
-        distribution = cloudfront.Distribution(self, "MyDistribution",  
-                                               default_behavior={  
-                                                   "origin": origins.S3Origin(bucket),  
-                                                   "edge_lambdas": [  
-                                                       {  
-                                                           "function_version": lambda_function.current_version,  
-                                                           "event_type": cloudfront.LambdaEdgeEventType.VIEWER_REQUEST  
-                                                       }  
-                                                   ]  
-                                               })  
+        distribution = cloudfront.Distribution(  
+            self, "AuthLambdaDistribution",  
+            default_behavior=cloudfront.BehaviorOptions(  
+                origin=origins.S3Origin(bucket, origin_access_identity=oai),  
+                edge_lambdas=[  
+                    cloudfront.EdgeLambda(  
+                        function_version=lambda_function.current_version,  
+                        event_type=cloudfront.LambdaEdgeEventType.VIEWER_REQUEST  
+                    )  
+                ]  
+            )  
+        )  
   
         # Add bucket policy to restrict access to CloudFront  
         bucket.add_to_resource_policy(iam.PolicyStatement(  
             actions=["s3:GetObject"],  
             resources=[bucket.arn_for_objects("*")],  
             principals=[iam.ArnPrincipal(  
-                f"arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity {distribution.origin_access_identity.origin_access_identity_id}"  
+                f"arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity {oai.origin_access_identity_id}"  
             )]  
         ))  
+   
 ```
 #### Verify the Deployment
 
@@ -276,5 +287,6 @@ Ensure that your CloudFront distribution is listed and active.
 Test the Authentication
 Use a web browser or a tool like curl to test accessing the S3 content through the CloudFront distribution.
 You should be prompted for a username and password. Use the credentials you specified in the Lambda function.
-
+- Check with 
 ` curl -u username:password https://<your-cloudfront-domain>/<your-s3-object>  `
+
