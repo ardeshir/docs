@@ -311,3 +311,7 @@ public static class ReindexFunction
 	- Go to Indexes and select the index you specified (IndexName).
 	- Use the Search explorer to query the index and verify that the documents were indexed correctly.
 
+### References
+
+- **Azure Cognitive Search Documentation**: Provides comprehensive details on setting up, configuring, and using various features of Azure Cognitive Search.
+  [Azure Cognitive Search Documentation](https://learn.microsoft.com/azure/search/search-what-is-azure-search)
