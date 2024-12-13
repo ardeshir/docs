@@ -161,105 +161,44 @@ public static class ReindexFunction
 }  
 ``` 
 
-Step 5: Configure Environment Variables
+#### Step 5: Configure Environment Variables
  
 Ensure that you have set the required environment variables in your Azure Function App settings:
-
-**SearchService
-Continue your solution from "Step 5: Configure Environment Variables" and complete your example!
-
-Certainly! Let's continue from where we left off.
-
-Step 5: Configure Environment Variables
  
 To configure the environment variables for your Azure Function App, follow these steps:
 
-Navigate to your Function App in the Azure Portal:
-Go to the Azure portal.
-Navigate to your Function App.
-Add Application Settings:
-In the left menu, under Settings, select Configuration.
-Click on the + New application setting button and add the following settings:
-SearchServiceName: The name of your Azure Cognitive Search service.
-SearchApiKey: The admin key for your Azure Cognitive Search service.
-IndexName: The name of the index you want to create or update.
-AzureWebJobsStorage: The connection string for your Azure Storage account.
-Step 6: Deploy and Test Your Function
+1. Navigate to your Function App in the Azure Portal:
+    - Go to the Azure portal.
+    - Navigate to your Function App.
+2. Add Application Settings:
+    - In the left menu, under Settings, select Configuration.
+    - Click on the + New application setting button and add the following settings:
+        - SearchServiceName: The name of your Azure Cognitive Search service.
+        - SearchApiKey: The admin key for your Azure Cognitive Search service.
+        - IndexName: The name of the index you want to create or update.
+        - AzureWebJobsStorage: The connection string for your Azure Storage account.
+
+#### Step 6: Deploy and Test Your Function
  
 
-Deploy the Function App:
-You can deploy your Function App using various methods such as Visual Studio, Azure CLI, or through continuous integration/continuous deployment (CI/CD) pipelines.
-For example, if using Visual Studio:
-Right-click on the Function App project and select Publish.
-Follow the prompts to publish your Function App to Azure.
-Add a Message to the Queue:
-Navigate to your Azure Storage Account in the Azure Portal.
-Select Queues and then select your queue (e.g., reindex-queue).
-Add a new message to the queue to trigger the function.
-Monitor the Function Execution:
-Go to the Monitor tab of your Function App in the Azure Portal.
-Check the logs to ensure that the function executed successfully and that the reindexing process completed without errors.
-Complete Code Example for Reindex Function
+1. Deploy the Function App:
+    - You can deploy your Function App using various methods such as Visual Studio, Azure CLI, or through continuous integration/continuous deployment (CI/CD) pipelines.
+    - For example, if using Visual Studio:
+        - Right-click on the Function App project and select Publish.
+        - Follow the prompts to publish your Function App to Azure.
+2. Add a Message to the Queue:
+    - Navigate to your Azure Storage Account in the Azure Portal.
+    - Select Queues and then select your queue (e.g., reindex-queue).
+    - Add a new message to the queue to trigger the function.
+3. Monitor the Function Execution:
+    - Go to the Monitor tab of your Function App in the Azure Portal.
+    - Check the logs to ensure that the function executed successfully and that the reindexing process completed without errors.
+
+### Complete Code Example for Reindex Function
  
 Here is the complete code example for the Azure Function that reindexes data using a queue trigger:
 
-
-using System;  
-using System.Threading.Tasks;  
-using Azure;  
-using Azure.Search.Documents;  
-using Azure.Search.Documents.Indexes;  
-using Azure.Search.Documents.Indexes.Models;  
-using Microsoft.Azure.WebJobs;  
-using Microsoft.Extensions.Logging;  
-  
-public static class ReindexFunction  
-{  
-    private static readonly string searchServiceName = Environment.GetEnvironmentVariable("SearchServiceName");  
-    private static readonly string apiKey = Environment.GetEnvironmentVariable("SearchApiKey");  
-    private static readonly string indexName = Environment.GetEnvironmentVariable("IndexName");  
-  
-    [FunctionName("ReindexFunction")]  
-    public static async Task Run(  
-        [QueueTrigger("reindex-queue", Connection = "AzureWebJobsStorage")] string queueItem,  
-        ILogger log)  
-    {  
-        log.LogInformation($"C# Queue trigger function processed: {queueItem}");  
-  
-        try  
-        {  
-            // Create a SearchIndexClient to manage the index  
-            Uri serviceEndpoint = new Uri($"https://{searchServiceName}.search.windows.net");  
-            AzureKeyCredential credential = new AzureKeyCredential(apiKey);  
-            SearchIndexClient indexClient = new SearchIndexClient(serviceEndpoint, credential);  
-  
-            // Optionally, you can recreate the index schema if needed  
-            // await CreateOrUpdateIndexAsync(indexClient, log);  
-  
-            // Create a SearchClient to upload documents to the index  
-            SearchClient searchClient = indexClient.GetSearchClient(indexName);  
-  
-            // Here you can fetch data from your data source and convert it to the required format  
-            var documents = FetchDocumentsForIndexing(queueItem, log);  
-  
-            // Upload the documents to the search index  
-            await searchClient.UploadDocumentsAsync(documents);  
-  
-            log.LogInformation("Reindexing completed successfully.");  
-        }  
-        catch (Exception ex)  
-        {  
-            log.LogError($"Exception occurred while reindexing: {ex.Message}");  
-        }  
-    }  
-  
-    // Example method to fetch and prepare documents for indexing  
-    private static object[] FetchDocumentsForIndexing
-Please show a Complete Code Example for Reindex Function, it's not finished code. 
-
-Certainly! Here is the complete code example for the Azure Function that reindexes data using a queue trigger.
-
-
+```csharp 
 using System;  
 using System.Threading.Tasks;  
 using Azure;  
@@ -352,7 +291,7 @@ public static class ReindexFunction
         public string Description { get; set; }  
     }  
 }  
- 
+``` 
 
 #### Step 7: Verify and Test the Solution
  
