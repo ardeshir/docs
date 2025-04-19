@@ -95,8 +95,103 @@ println("Response Body: ", String(response.body))
 - Replace `your_primary_key_here` with your actual Log Analytics workspace primary key.
 - The custom log type (e.g., `YourCustomLogType`) should follow the naming conventions: only alphanumeric characters and underscore ('_').
 
+The error you're encountering, `InvalidAuthorization` with the message `An invalid date format used in the x-ms-date header` usually points to an issue with the date format being used in the `x-ms-date` header during the authorization process of your request to Azure Log Analytics.
+
+### RFC1123 Date Format Correction
+
+To ensure the date is formatted correctly to RFC1123 standard, you should use the correct formatting string. In Julia, you should use:
+
+```julia
+rfc1123date = Dates.format(now(UTC), "e, d u y HH:MM:SS") * " GMT"
+```
+
+This format has fields as per the correct specification:
+
+- `e` for the day-of-week short name.
+- `d` for the day-of-month as a zero-padded decimal number.
+- `u` is not necessary for this since there's no specific directive for year-fullyear, just `y`.
+- `y` for the year with century as a decimal number.
+- `HH` for hour (00-23).
+- `MM` for minute (00-59).
+- `SS` for second.
+
+```julia v2
+using HTTP  
+using JSON  
+using Dates  
+using Base64  
+using SHA  
+  
+#export send_log  
+  
+function build_authorization_header(workspace_id, shared_key, date, content_length)  
+    method = "POST"  
+    content_type = "application/json"  
+    resource = "/api/logs"  
+  
+    x_headers = "x-ms-date:" * date  
+    string_to_hash = method * "\n" * string(content_length) * "\n" * content_type * "\n" * x_headers * "\n" * resource  
+    decoded_key = base64decode(shared_key)  
+    encoded_hash = base64encode(hmac_sha256(decoded_key, string_to_hash))  
+    authorization = "SharedKey $workspace_id:$encoded_hash"  
+    return authorization  
+end  
+  
+function send_log(workspace_id, shared_key, log_type, log_message)  
+    url = "https://$workspace_id.ods.opinsights.azure.com/api/logs?api-version=2016-04-01"  
+    timestamp = Dates.format(Dates.now(UTC), Dates.RFC1123Format) * " GMT"  
+    payload = Dict(  
+        "time" => Dates.format(Dates.now(UTC), "yyyy-mm-ddTHH:MM:SS.sssZ"),  
+        "logMessage" => log_message  
+    )  
+    json_payload = JSON.json(payload)  
+    content_length = length(json_payload)  
+  
+    headers = Dict(  
+        "Content-Type" => "application/json",  
+        "Log-Type" => log_type,  
+        "x-ms-date" => timestamp,  
+        "Authorization" => build_authorization_header(workspace_id, shared_key, timestamp, content_length)  
+    )  
+  
+    try  
+        response = HTTP.post(url, headers, json_payload)  
+        if response.status == 200  
+            println("Log sent successfully.")  
+        else  
+            println("Failed to send log. Status: ", response.status)  
+            println("Response body: ", String(response.body))  
+        end  
+    catch e  
+        println("Exception occurred: ", e)  
+    end  
+end 
+# Example usage:  
+# send_log("098bf664-2fc6-4205-be31-90280410c423", "pZBEa2xRsTJM+EjKhenKIa234E6Z2JG5zzG5T+w1ciYbSmw8RLubIV7FH3PuTYONYiSabH1TTbGiLB+vfFKbUw==", "JuliaTestLogType", "This is a test log message.")  
+ 
+
+function main()
+    # Replace with your actual workspace ID and key
+    workspace_id = "098bf664-2fc6-4205-be31-90280410c423"
+    shared_key = "pZBEa2xRsTJM+EjKhenKIa234E6Z2JG5zzG5T+w1ciYbSmw8RLubIV7FH3PuTYONYiSabH1TTbGiLB+vfFKbUw=="
+    log_type = "JuliaTestLogType"
+    
+    # Example log data
+    log_data = Dict(
+        "TimeGenerated" => Dates.format(now(UTC), "yyyy-MM-ddTHH:MM:ss.fffZ"),
+        "Computer" => "Ardeshir Testing LogAnalytics",
+        "Level" => "Information",
+        "Message" => "This is a JLogs test log message from Julia"
+    )
+    
+    send_log(workspace_id, shared_key, log_type, log_data)  
+ 
+    #println("Log response status: ", response.status)
+    #println("Log response body: ", String(response.body))
+end
+
+main()
+```
 ### References:
 For more details on posting data to the Azure Log Analytics HTTP Data Collector API, you can refer to the official documentation:
 [Azure Monitor HTTP Data Collector API](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/data-collector-api)
-
-This should get you started with sending logs directly from a Julia application running in an Azure App Service to Azure Log Analytics.
