@@ -1,4 +1,6 @@
-Okay, let's break down the architecture of a Retrieval Augmented Generation (RAG) system deployed on Azure, using Azure Foundry as the application platform, Azure OpenAI for the Large Language Model (LLM) capabilities, and Azure Cosmos DB for vector storage and retrieval.
+### The architecture of a Retrieval Augmented Generation (RAG) 
+
+This system deployed on Azure, using Azure Foundry as the application platform, Azure OpenAI for the Large Language Model (LLM) capabilities, and Azure Cosmos DB for vector storage and retrieval.
 
 **Core Concept: Why RAG?**
 
@@ -37,8 +39,7 @@ Here's a breakdown of the typical components involved in such a system:
 |  Uses Azure OpenAI Embedding Model) |     +-------------------------+
 +------------------------------------+
 ```
-
-Let's detail each component:
+Components:
 
 1.  **User Interface (UI) / Client Application:**
     *   **Role:** The entry point for user interaction. This could be a web application, a chatbot interface, an API endpoint for other services, etc.
