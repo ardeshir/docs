@@ -1,6 +1,4 @@
-Okay, let's round out this comparison with C and modern C++. We'll follow the same structure and example scenarios.
-
----
+#### C vs C++ 
 
 **C Programming Overview**
 
