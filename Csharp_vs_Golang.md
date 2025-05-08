@@ -428,6 +428,13 @@ Microsoft provides official scripts and package feeds for installing .NET SDKs o
             T result = a + b; // This works due to the constraint
             Console.WriteLine($"{a} + {b} = {result}");
         }
+
+            // Specific overload for string concatenation
+        public static void AddAndPrint(string a, string b)
+        {
+            string result = a + b; // Standard string concatenation
+            Console.WriteLine($"\"{a}\" + \"{b}\" = \"{result}\""); // Quoted for clarity
+        }
     }
 
     class Program
