@@ -715,10 +715,45 @@ Both Go and C# are garbage-collected languages.
     *   **Go:** `go generate` is a command-line convention for invoking tools that produce Go code. Struct tags are a simple, effective way to add metadata. Reflection is available but often discouraged for performance-critical paths.
     *   **C#:** Attributes are a core language feature integrated with reflection. Source Generators are a powerful compile-time mechanism for generating code, reducing boilerplate, and improving performance over runtime reflection in many cases.
 
-**6. C Interoperability**
+**6. C Interoperability** 
 
 Using the same C library (`my_c_lib.h`, `my_c_lib.c`) as in the Rust/Zig example.
 First, compile the C code into a shared library:
+C Interoperability**
+
+This is harder to show with a tiny, identical example, but we can illustrate the general approach. Let's imagine a simple C library `my_c_lib.h` and `my_c_lib.c`.
+
+*   **C Code (`my_c_lib.h`):**
+    ```c
+    #ifndef MY_C_LIB_H
+    #define MY_C_LIB_H
+
+    int add_integers(int a, int b);
+    void print_message(const char* message);
+
+    #endif
+    ```
+
+*   **C Code (`my_c_lib.c`):**
+    ```c
+    #include "my_c_lib.h"
+    #include <stdio.h>
+
+    int add_integers(int a, int b) {
+        return a + b;
+    }
+
+    void print_message(const char* message) {
+        printf("C says: %s\n", message);
+    }
+    ```
+    *Compile C library (e.g., into a shared object or static library):*
+    ```bash
+    gcc -c -fPIC my_c_lib.c -o my_c_lib.o
+    gcc -shared -o libmy_c_lib.so my_c_lib.o
+    # For static: ar rcs libmy_c_lib.a my_c_lib.o
+    # For Zig, we often just need the .c file or .o file.
+    ```
 ```bash
 # In a directory with my_c_lib.c and my_c_lib.h
 gcc -shared -fPIC -o libmy_c_lib.so my_c_lib.c
