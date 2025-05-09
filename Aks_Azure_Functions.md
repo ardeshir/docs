@@ -2,10 +2,7 @@
 
 Targeting the Azure Functions V4 isolated worker model. We'll also create an Azure DevOps YAML pipeline for CI/CD.
 
-**Important Note on .NET 9.0:**
-As of mid-2024, .NET 9 is in preview. Azure Functions runtime support for .NET 9 (isolated worker) might also be in preview or require specific configurations in Azure. For production workloads, it's generally recommended to use an LTS (Long-Term Support) version of .NET (like .NET 8) once it's fully supported by Azure Functions. However, I will proceed with your request for .NET 9 and C# 12. You may need to adjust runtime settings in Azure or wait for official GA support for .NET 9 in Azure Functions.
 
----
 
 **Step 1: Prerequisites (Development Environment)**
 
