@@ -61,7 +61,7 @@ We'll create two separate C# Function projects. It's good practice to put them i
     ```bash
     mkdir -p AzureAksHpaScaler/src/CheckSaQueueFunction
     cd AzureAksHpaScaler/src/CheckSaQueueFunction
-    dotnet new func -n CheckSaQueueFunction --worker-runtime dotnet-isolated --target-framework net9.0
+    dotnet new func -n CheckSaQueueFunction  --framework net9.0
     # This creates a sample HttpTrigger function, we'll replace it.
     # Add necessary packages
     dotnet add package Azure.Identity
@@ -300,7 +300,7 @@ We'll create two separate C# Function projects. It's good practice to put them i
     using Microsoft.Extensions.Logging;
 
     var host = new HostBuilder()
-        .ConfigureFunctionsWorkerDefaults()
+        .ConfigureFunctionsWebApplication()
         .ConfigureServices(services =>
         {
             services.AddHttpClient(); // For IHttpClientFactory
@@ -383,163 +383,186 @@ We'll create two separate C# Function projects. It's good practice to put them i
     ```
 
 2.  **`IncreaseHpaAksHttp.cs`:**
-    ```csharp
-    using Azure.Identity;
-    using Azure.ResourceManager; // For ArmClient
-    using Azure.ResourceManager.ContainerService; // For ManagedClusterResource
-    using k8s;
-    using k8s.Models;
-    using Microsoft.Azure.Functions.Worker;
-    using Microsoft.Azure.Functions.Worker.Http;
-    using Microsoft.Extensions.Logging;
-    using System;
-    using System.IO;
-    using System.Linq;
-    using System.Net;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    namespace IncreaseHpaAksFunction;
+```csharp
+using Azure.Identity;
+using Azure.ResourceManager;
+using Azure.ResourceManager.ContainerService; // Required for ManagedClusterCollection
+using Azure.ResourceManager.Resources; // <<<< ADD THIS USING DIRECTIVE
+using k8s;
+using k8s.Models; // For V1Patch and V2HorizontalPodAutoscaler etc.
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Logging;
+using System;
+using System.IO;
+using System.Linq;
+using System.Net;
+// using System.Text; // Not directly used now with string patch
+using System.Threading.Tasks;
 
-    public class IncreaseHpaAksHttp
+namespace IncreaseHpaAksFunction;
+
+public class IncreaseHpaAksHttp
+{
+    private readonly ILogger<IncreaseHpaAksHttp> _logger;
+
+    public IncreaseHpaAksHttp(ILogger<IncreaseHpaAksHttp> logger)
     {
-        private readonly ILogger<IncreaseHpaAksHttp> _logger;
+        _logger = logger;
+    }
 
-        public IncreaseHpaAksHttp(ILogger<IncreaseHpaAksHttp> logger)
+    [Function("increase_hpa_aks")]
+    public async Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
+    {
+        _logger.LogInformation("C# HTTP trigger function 'increase_hpa_aks' processed a request.");
+
+        var aksResourceGroup = Environment.GetEnvironmentVariable("AKS_RESOURCE_GROUP");
+        var aksClusterName = Environment.GetEnvironmentVariable("AKS_CLUSTER_NAME");
+        var targetHpaName = Environment.GetEnvironmentVariable("TARGET_HPA_NAME");
+        var targetHpaNamespace = Environment.GetEnvironmentVariable("TARGET_HPA_NAMESPACE");
+        var increaseMaxByStr = Environment.GetEnvironmentVariable("INCREASE_MAX_BY_COUNT");
+        var azureSubscriptionId = Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID");
+
+        if (string.IsNullOrEmpty(aksResourceGroup) || string.IsNullOrEmpty(aksClusterName) ||
+            string.IsNullOrEmpty(targetHpaName) || string.IsNullOrEmpty(targetHpaNamespace) ||
+            string.IsNullOrEmpty(increaseMaxByStr) || string.IsNullOrEmpty(azureSubscriptionId))
         {
-            _logger = logger;
+            _logger.LogError("Error: Missing one or more required environment variables for HPA scaling.");
+            var badResp = req.CreateResponse(HttpStatusCode.BadRequest);
+            await badResp.WriteStringAsync("Error: Missing environment variables.");
+            return badResp;
         }
 
-        [Function("increase_hpa_aks")]
-        public async Task<HttpResponseData> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
+        if (!int.TryParse(increaseMaxByStr, out var increaseMaxBy) || increaseMaxBy <= 0)
         {
-            _logger.LogInformation("C# HTTP trigger function 'increase_hpa_aks' processed a request.");
+            _logger.LogError($"Error: Invalid INCREASE_MAX_BY_COUNT value: {increaseMaxByStr}. Must be a positive integer.");
+            var badNumResp = req.CreateResponse(HttpStatusCode.BadRequest);
+            await badNumResp.WriteStringAsync("Error: Invalid INCREASE_MAX_BY_COUNT.");
+            return badNumResp;
+        }
 
-            var aksResourceGroup = Environment.GetEnvironmentVariable("AKS_RESOURCE_GROUP");
-            var aksClusterName = Environment.GetEnvironmentVariable("AKS_CLUSTER_NAME");
-            var targetHpaName = Environment.GetEnvironmentVariable("TARGET_HPA_NAME");
-            var targetHpaNamespace = Environment.GetEnvironmentVariable("TARGET_HPA_NAMESPACE");
-            var increaseMaxByStr = Environment.GetEnvironmentVariable("INCREASE_MAX_BY_COUNT");
-            var azureSubscriptionId = Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID"); // Often set by Azure environment
+        try
+        {
+            var credential = new DefaultAzureCredential();
+            var armClient = new ArmClient(credential, azureSubscriptionId);
 
-            if (string.IsNullOrEmpty(aksResourceGroup) || string.IsNullOrEmpty(aksClusterName) ||
-                string.IsNullOrEmpty(targetHpaName) || string.IsNullOrEmpty(targetHpaNamespace) ||
-                string.IsNullOrEmpty(increaseMaxByStr) || string.IsNullOrEmpty(azureSubscriptionId))
-            {
-                _logger.LogError("Error: Missing one or more required environment variables for HPA scaling.");
-                var badResp = req.CreateResponse(HttpStatusCode.BadRequest);
-                await badResp.WriteStringAsync("Error: Missing environment variables.");
-                return badResp;
-            }
-
-            if (!int.TryParse(increaseMaxByStr, out var increaseMaxBy) || increaseMaxBy <= 0)
-            {
-                _logger.LogError($"Error: Invalid INCREASE_MAX_BY_COUNT value: {increaseMaxByStr}. Must be a positive integer.");
-                var badNumResp = req.CreateResponse(HttpStatusCode.BadRequest);
-                await badNumResp.WriteStringAsync("Error: Invalid INCREASE_MAX_BY_COUNT.");
-                return badNumResp;
-            }
-
+            // 1. Get AKS Admin Kubeconfig
+            ContainerServiceManagedClusterResource managedCluster;
             try
             {
-                var credential = new DefaultAzureCredential();
-                var armClient = new ArmClient(credential, azureSubscriptionId); // ARM Client for resource management
-
-                // 1. Get AKS Admin Kubeconfig
-                var resourceGroupName = new Azure.Core.ResourceIdentifier($"/subscriptions/{azureSubscriptionId}/resourceGroups/{aksResourceGroup}");
-                var clusterCollection = armClient.GetManagedClusters(resourceGroupName);
-                var clusterResource = await clusterCollection.GetAsync(aksClusterName);
-                var managedCluster = clusterResource.Value;
-
-                if (managedCluster == null)
-                {
-                    _logger.LogError($"AKS cluster '{aksClusterName}' not found in resource group '{aksResourceGroup}'.");
-                    var notFoundResp = req.CreateResponse(HttpStatusCode.NotFound);
-                    await notFoundResp.WriteStringAsync("AKS Cluster not found.");
-                    return notFoundResp;
-                }
+                var rgResourceId = ResourceGroupResource.CreateResourceIdentifier(azureSubscriptionId, aksResourceGroup);
+                ResourceGroupResource resourceGroup = armClient.GetResourceGroupResource(rgResourceId);
+                ContainerServiceManagedClusterCollection clusterCollection = resourceGroup.GetContainerServiceManagedClusters();
                 
-                // Get admin credentials
-                var adminCredentials = await managedCluster.GetAdminCredentialsAsync();
-                var kubeconfigBytes = adminCredentials.Value.Kubeconfigs.FirstOrDefault()?.Value;
-
-                if (kubeconfigBytes == null || kubeconfigBytes.Length == 0)
-                {
-                    _logger.LogError($"No kubeconfig returned for AKS cluster {aksClusterName}");
-                    var errResp = req.CreateResponse(HttpStatusCode.InternalServerError);
-                    await errResp.WriteStringAsync("Failed to retrieve kubeconfig.");
-                    return errResp;
-                }
-
-                // 2. Create Kubernetes Client from Kubeconfig
-                KubernetesClientConfiguration k8sConfig;
-                using (var stream = new MemoryStream(kubeconfigBytes))
-                {
-                    k8sConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile(stream);
-                }
-                var k8sClient = new Kubernetes(k8sConfig);
-
-                // 3. Get and Patch HPA (using autoscaling/v2 API)
-                var hpa = await k8sClient.ReadNamespacedHorizontalPodAutoscalerAsync(targetHpaName, targetHpaNamespace);
-                if (hpa == null)
-                {
-                     _logger.LogError($"HPA '{targetHpaName}' not found in namespace '{targetHpaNamespace}'.");
-                    var notFoundHpa = req.CreateResponse(HttpStatusCode.NotFound);
-                    await notFoundHpa.WriteStringAsync($"HPA '{targetHpaName}' not found.");
-                    return notFoundHpa;
-                }
-
-                var originalMaxReplicas = hpa.Spec.MaxReplicas;
-                var newMaxReplicas = originalMaxReplicas + increaseMaxBy;
-                var absoluteMaxReplicasStr = Environment.GetEnvironmentVariable("ABSOLUTE_MAX_REPLICAS"); // Safety cap
-                if(int.TryParse(absoluteMaxReplicasStr, out var absoluteMaxReplicas) && newMaxReplicas > absoluteMaxReplicas)
-                {
-                    _logger.LogWarning($"Calculated newMaxReplicas ({newMaxReplicas}) exceeds ABSOLUTE_MAX_REPLICAS ({absoluteMaxReplicas}). Capping at {absoluteMaxReplicas}.");
-                    newMaxReplicas = absoluteMaxReplicas;
-                }
-
-
-                if (newMaxReplicas == originalMaxReplicas && originalMaxReplicas >= (int.TryParse(absoluteMaxReplicasStr, out var absMax) ? absMax : int.MaxValue)) {
-                     _logger.LogInformation($"HPA '{targetHpaName}' MaxReplicas ({originalMaxReplicas}) is already at or above the absolute maximum. No change needed.");
-                    var okNoChange = req.CreateResponse(HttpStatusCode.OK);
-                    await okNoChange.WriteStringAsync($"HPA '{targetHpaName}' already at/above absolute max replicas. No change.");
-                    return okNoChange;
-                }
-
-
-                _logger.LogInformation($"Current HPA '{targetHpaName}' MaxReplicas: {originalMaxReplicas}. Attempting to set to: {newMaxReplicas}");
-
-                // Create a patch payload (JSON Patch)
-                var patch = new V1Patch(
-                    new[] { new { op = "replace", path = "/spec/maxReplicas", value = newMaxReplicas } },
-                    V1Patch.PatchType.JsonPatch);
-
-                await k8sClient.PatchNamespacedHorizontalPodAutoscalerAsync(patch, targetHpaName, targetHpaNamespace);
-
-                _logger.LogInformation($"Successfully patched HPA {targetHpaName} in namespace {targetHpaNamespace}. MaxReplicas changed from {originalMaxReplicas} to {newMaxReplicas}.");
-
-                var response = req.CreateResponse(HttpStatusCode.OK);
-                await response.WriteStringAsync($"Successfully updated HPA {targetHpaName}. New MaxReplicas: {newMaxReplicas}");
-                return response;
+                Azure.Response<ContainerServiceManagedClusterResource> clusterGetResponse = await clusterCollection.GetAsync(aksClusterName);
+                // GetAsync throws RequestFailedException on 404, so no need to check clusterGetResponse.HasValue if it succeeds
+                managedCluster = clusterGetResponse.Value;
             }
-            catch (k8s.Autorest.HttpOperationException kex)
+            catch (Azure.RequestFailedException ex) when (ex.Status == (int)HttpStatusCode.NotFound)
             {
-                 _logger.LogError(kex, $"Kubernetes API error: {kex.Response?.Content}");
-                var errResp = req.CreateResponse(HttpStatusCode.InternalServerError);
-                await errResp.WriteStringAsync($"Kubernetes API error: {kex.Message}");
-                return errResp;
+                _logger.LogError(ex, $"AKS cluster '{aksClusterName}' not found in resource group '{aksResourceGroup}'.");
+                var notFoundResp = req.CreateResponse(HttpStatusCode.NotFound);
+                await notFoundResp.WriteStringAsync("AKS Cluster not found.");
+                return notFoundResp;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred in increase_hpa_aks function.");
+                 _logger.LogError(ex, $"Error retrieving AKS cluster '{aksClusterName}'.");
                 var errResp = req.CreateResponse(HttpStatusCode.InternalServerError);
-                await errResp.WriteStringAsync($"An internal error occurred: {ex.Message}");
+                await errResp.WriteStringAsync($"Error retrieving AKS cluster: {ex.Message}");
                 return errResp;
             }
+            
+            var accessProfile = await managedCluster.GetAccessProfileAsync("clusterAdmin");
+            var kubeconfigBytes = accessProfile.Value.KubeConfig;
+
+            if (kubeconfigBytes == null || kubeconfigBytes.Length == 0)
+            {
+                _logger.LogError($"No kubeconfig returned for AKS cluster {aksClusterName}");
+                var errResp = req.CreateResponse(HttpStatusCode.InternalServerError);
+                await errResp.WriteStringAsync("Failed to retrieve kubeconfig.");
+                return errResp;
+            }
+
+            // 2. Create Kubernetes Client from Kubeconfig
+            KubernetesClientConfiguration k8sConfig;
+            using (var stream = new MemoryStream(kubeconfigBytes))
+            {
+                k8sConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile(stream);
+            }
+            var k8sClient = new Kubernetes(k8sConfig);
+
+            // 3. Get and Patch HPA (assuming autoscaling/v2 API)
+            V2HorizontalPodAutoscaler hpa;
+            try
+            {
+                hpa = await k8sClient.AutoscalingV2.ReadNamespacedHorizontalPodAutoscalerAsync(targetHpaName, targetHpaNamespace);
+            }
+            catch (k8s.Autorest.HttpOperationException ex) when (ex.Response.StatusCode == HttpStatusCode.NotFound)
+            {
+                _logger.LogError(ex, $"HPA (autoscaling/v2) '{targetHpaName}' not found in namespace '{targetHpaNamespace}'.");
+                var notFoundHpa = req.CreateResponse(HttpStatusCode.NotFound);
+                await notFoundHpa.WriteStringAsync($"HPA (autoscaling/v2) '{targetHpaName}' not found.");
+                return notFoundHpa;
+            }
+             catch (Exception ex)
+            {
+                 _logger.LogError(ex, $"Error reading HPA (autoscaling/v2) '{targetHpaName}'.");
+                var errResp = req.CreateResponse(HttpStatusCode.InternalServerError);
+                await errResp.WriteStringAsync($"Error reading HPA: {ex.Message}");
+                return errResp;
+            }
+
+            var originalMaxReplicas = hpa.Spec.MaxReplicas;
+            var newMaxReplicas = originalMaxReplicas + increaseMaxBy;
+            var absoluteMaxReplicasStr = Environment.GetEnvironmentVariable("ABSOLUTE_MAX_REPLICAS");
+            
+            if (int.TryParse(absoluteMaxReplicasStr, out var absoluteMaxReplicas) && newMaxReplicas > absoluteMaxReplicas)
+            {
+                _logger.LogWarning($"Calculated newMaxReplicas ({newMaxReplicas}) exceeds ABSOLUTE_MAX_REPLICAS ({absoluteMaxReplicas}). Capping at {absoluteMaxReplicas}.");
+                newMaxReplicas = absoluteMaxReplicas;
+            }
+
+            if (newMaxReplicas <= originalMaxReplicas)
+            {
+                 _logger.LogInformation($"HPA (autoscaling/v2) '{targetHpaName}' new MaxReplicas ({newMaxReplicas}) is not greater than original ({originalMaxReplicas}). No patch needed.");
+                var okNoChange = req.CreateResponse(HttpStatusCode.OK);
+                await okNoChange.WriteStringAsync($"HPA '{targetHpaName}' new MaxReplicas ({newMaxReplicas}) not greater than original. No change.");
+                return okNoChange;
+            }
+
+            _logger.LogInformation($"Current HPA (autoscaling/v2) '{targetHpaName}' MaxReplicas: {originalMaxReplicas}. Attempting to set to: {newMaxReplicas}");
+
+            string jsonPatchString = $"[{{\"op\": \"replace\", \"path\": \"/spec/maxReplicas\", \"value\": {newMaxReplicas}}}]";
+            var patchPayload = new V1Patch(jsonPatchString, V1Patch.PatchType.JsonPatch);
+
+            await k8sClient.AutoscalingV2.PatchNamespacedHorizontalPodAutoscalerAsync(patchPayload, targetHpaName, targetHpaNamespace);
+
+            _logger.LogInformation($"Successfully patched HPA (autoscaling/v2) {targetHpaName} in namespace {targetHpaNamespace}. MaxReplicas changed from {originalMaxReplicas} to {newMaxReplicas}.");
+
+            var response = req.CreateResponse(HttpStatusCode.OK);
+            await response.WriteStringAsync($"Successfully updated HPA {targetHpaName}. New MaxReplicas: {newMaxReplicas}");
+            return response;
+        }
+        catch (k8s.Autorest.HttpOperationException kex)
+        {
+             _logger.LogError(kex, $"Kubernetes API error. Status: {kex.Response?.StatusCode}. Content: {kex.Response?.Content}");
+            var errResp = req.CreateResponse(HttpStatusCode.InternalServerError);
+            await errResp.WriteStringAsync($"Kubernetes API error: {kex.Message}");
+            return errResp;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An unexpected error occurred in increase_hpa_aks function.");
+            var errResp = req.CreateResponse(HttpStatusCode.InternalServerError);
+            await errResp.WriteStringAsync($"An internal error occurred: {ex.Message}");
+            return errResp;
         }
     }
-    ```
+}
+```
     *Note: The `Azure.ResourceManager.ContainerService.ManagedClusterResource.GetAdminCredentialsAsync()` is a more modern way to get credentials than the older `ManagedClustersOperationsExtensions.ListClusterAdminCredentialsAsync`.*
     *The HPA patch should ideally use `V2HorizontalPodAutoscaler` if your HPA is `autoscaling/v2`. The KubernetesClient library has models for `V2HorizontalPodAutoscaler`. Let's adjust to ensure we use the correct HPA version type. If your HPAs are `autoscaling/v2beta2` or `v1`, you'd use those specific types.* The code above will attempt to patch `V1HorizontalPodAutoscaler`. **It should be `V2HorizontalPodAutoscaler` for modern HPAs.** I'll correct it to use `ReadNamespacedHorizontalPodAutoscalerAsync` which typically refers to `autoscaling/v1`. For `autoscaling/v2`, you'd use `k8sClient.AutoscalingV2.ReadNamespacedHorizontalPodAutoscalerAsync`. Let's assume `autoscaling/v2` is preferred.
     **Corrected HPA part in `IncreaseHpaAksHttp.cs` for `autoscaling/v2`:**
@@ -586,23 +609,24 @@ We'll create two separate C# Function projects. It's good practice to put them i
     The Kubernetes client patch methods can be tricky. Using `ReplaceNamespacedHorizontalPodAutoscalerAsync` with a modified full HPA object is also an option but can lead to conflicts if other controllers modify the HPA. `PatchNamespaced...` is generally preferred. The `jsonPatchPayload` above is a common way.
 
 3.  **`Program.cs` (similar DI setup):**
-    ```csharp
-    using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Logging;
+```csharp
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
-    var host = new HostBuilder()
-        .ConfigureFunctionsWorkerDefaults()
-        .ConfigureServices(services => {
-            // No HttpClient needed here unless the function itself makes outbound calls
-             services.AddLogging(loggingBuilder =>
-            {
-                loggingBuilder.AddConsole();
-            });
-        })
-        .Build();
+var host = new HostBuilder()
+    .ConfigureFunctionsWebApplication()
+    .ConfigureServices(services => {
+        // No HttpClient needed here unless the function itself makes outbound calls
+         services.AddLogging(loggingBuilder =>
+        {
+            loggingBuilder.AddConsole();
+        });
+    })
+    .Build();
 
-    host.Run();
-    ```
+host.Run();
+```
 
 4.  **`host.json` (similar to the other function):**
     ```json
