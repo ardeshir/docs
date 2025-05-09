@@ -563,11 +563,10 @@ public class IncreaseHpaAksHttp
     }
 }
 ```
-    *Note: The `Azure.ResourceManager.ContainerService.ManagedClusterResource.GetAdminCredentialsAsync()` is a more modern way to get credentials than the older `ManagedClustersOperationsExtensions.ListClusterAdminCredentialsAsync`.*
-    *The HPA patch should ideally use `V2HorizontalPodAutoscaler` if your HPA is `autoscaling/v2`. The KubernetesClient library has models for `V2HorizontalPodAutoscaler`. Let's adjust to ensure we use the correct HPA version type. If your HPAs are `autoscaling/v2beta2` or `v1`, you'd use those specific types.* The code above will attempt to patch `V1HorizontalPodAutoscaler`. **It should be `V2HorizontalPodAutoscaler` for modern HPAs.** I'll correct it to use `ReadNamespacedHorizontalPodAutoscalerAsync` which typically refers to `autoscaling/v1`. For `autoscaling/v2`, you'd use `k8sClient.AutoscalingV2.ReadNamespacedHorizontalPodAutoscalerAsync`. Let's assume `autoscaling/v2` is preferred.
+*Note: The `Azure.ResourceManager.ContainerService.ManagedClusterResource.GetAdminCredentialsAsync()` is a more modern way to get credentials than the older `ManagedClustersOperationsExtensions.ListClusterAdminCredentialsAsync`.**The HPA patch should ideally use `V2HorizontalPodAutoscaler` if your HPA is `autoscaling/v2`. The KubernetesClient library has models for `V2HorizontalPodAutoscaler`. Let's adjust to ensure we use the correct HPA version type. If your HPAs are `autoscaling/v2beta2` or `v1`, you'd use those specific types.* The code above will attempt to patch `V1HorizontalPodAutoscaler`. **It should be `V2HorizontalPodAutoscaler` for modern HPAs.** I'll correct it to use `ReadNamespacedHorizontalPodAutoscalerAsync` which typically refers to `autoscaling/v1`. For `autoscaling/v2`, you'd use `k8sClient.AutoscalingV2.ReadNamespacedHorizontalPodAutoscalerAsync`. Let's assume `autoscaling/v2` is preferred.
     **Corrected HPA part in `IncreaseHpaAksHttp.cs` for `autoscaling/v2`:**
 
-    ```csharp
+```csharp
     // ... inside IncreaseHpaAksHttp.Run method ...
     // 3. Get and Patch HPA (using autoscaling/v2 API)
     var hpa = await k8sClient.AutoscalingV2.ReadNamespacedHorizontalPodAutoscalerAsync(targetHpaName, targetHpaNamespace); // For autoscaling/v2
@@ -609,6 +608,7 @@ public class IncreaseHpaAksHttp
     The Kubernetes client patch methods can be tricky. Using `ReplaceNamespacedHorizontalPodAutoscalerAsync` with a modified full HPA object is also an option but can lead to conflicts if other controllers modify the HPA. `PatchNamespaced...` is generally preferred. The `jsonPatchPayload` above is a common way.
 
 3.  **`Program.cs` (similar DI setup):**
+
 ```csharp
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
