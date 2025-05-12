@@ -1,4 +1,4 @@
-### Product Engineering" Discipline 
+### Product Engineering Discipline 
 
 It's a crucial evolution from traditional software engineering, focusing not just on *building the thing right*, but on *building the right thing* and ensuring its success over its entire lifecycle.
 
