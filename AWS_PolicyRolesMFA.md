@@ -23,61 +23,68 @@ This policy is the most critical part. It needs to:
 2.  Go to **Policies** and click **Create policy**.
 3.  Select the **JSON** tab and paste the following policy. Replace `<YOUR_ACCOUNT_ID>` with your actual AWS Account ID.
 
-    ```json
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "AllowUserToManageTheirOwnCredentialsAndMFA",
-                "Effect": "Allow",
-                "Action": [
-                    "iam:ChangePassword",
-                    "iam:CreateVirtualMFADevice",
-                    "iam:DeleteVirtualMFADevice",
-                    "iam:EnableMFADevice",
-                    "iam:DeactivateMFADevice",
-                    "iam:GetUser",
-                    "iam:ListMFADevices",
-                    "iam:ResyncMFADevice",
-                    "iam:GetAccountPasswordPolicy"
-                ],
-                "Resource": [
-                    "arn:aws:iam::*:user/${aws:username}",
-                    "arn:aws:iam::*:mfa/${aws:username}/*",
-                    "arn:aws:iam::*:sms-mfa/${aws:username}"
-                ]
-            },
-            {
-                "Sid": "AllowListUsersForConsoleExperience",
-                "Effect": "Allow",
-                "Action": "iam:ListUsers",
-                "Resource": "*"
-            },
-            {
-                "Sid": "DenyAllOtherActionsIfNoMFA",
-                "Effect": "Deny",
-                "NotAction": [
-                    "iam:ChangePassword",
-                    "iam:CreateVirtualMFADevice",
-                    "iam:DeleteVirtualMFADevice",
-                    "iam:EnableMFADevice",
-                    "iam:DeactivateMFADevice",
-                    "iam:GetUser",
-                    "iam:ListMFADevices",
-                    "iam:ResyncMFADevice",
-                    "iam:GetAccountPasswordPolicy",
-                    "iam:ListUsers",
-                    "sts:AssumeRole" 
-                ],
-                "Resource": "*",
-                "Condition": {
-                    "BoolIfExists": {
-                        "aws:MultiFactorAuthPresent": "false"
-                    }
-                }
-            }
-        ]
-    }
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "AllowUserToManageTheirOwnCredentialsAndMFA",
+			"Effect": "Allow",
+			"Action": [
+				"iam:GetAccountEmailAddress",
+				"iam:ListAccessKeys",
+				"iam:ListSigningCertificates",
+				"iam:GetLoginProfile",
+				"iam:UpdateAccountEmailAddress",
+				"iam:ChangePassword",
+				"iam:CreateVirtualMFADevice",
+				"iam:DeleteVirtualMFADevice",
+				"iam:EnableMFADevice",
+				"iam:DeactivateMFADevice",
+				"iam:GetUser",
+				"iam:ListMFADevices",
+				"iam:ListVirtualMFADevices",
+				"iam:CreateVirtualMFADevice",
+				"iam:ResyncMFADevice",
+				"iam:GetAccountPasswordPolicy"
+			],
+			"Resource": [
+				"arn:aws-cn:iam::*:user/${aws:username}",
+				"arn:aws-cn:iam::*:mfa/*",
+				"arn:aws-cn:iam::*:sms-mfa/*"
+			]
+		},
+		{
+			"Sid": "AllowListUsersForConsoleExperience",
+			"Effect": "Allow",
+			"Action": "iam:ListUsers",
+			"Resource": "*"
+		},
+		{
+			"Sid": "DenyAllOtherActionsIfNoMFA",
+			"Effect": "Deny",
+			"NotAction": [
+				"iam:ChangePassword",
+				"iam:CreateVirtualMFADevice",
+				"iam:DeleteVirtualMFADevice",
+				"iam:EnableMFADevice",
+				"iam:DeactivateMFADevice",
+				"iam:GetUser",
+				"iam:ListMFADevices",
+				"iam:ResyncMFADevice",
+				"iam:GetAccountPasswordPolicy",
+				"iam:ListUsers",
+				"sts:AssumeRole"
+			],
+			"Resource": "*",
+			"Condition": {
+				"BoolIfExists": {
+					"aws:MultiFactorAuthPresent": "false"
+				}
+			}
+		}
+	]
+}
     ```
 
     **Explanation of the `ForceMFA` policy:**
