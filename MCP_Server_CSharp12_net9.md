@@ -48,7 +48,7 @@ This "MCP Server" will act as an API layer that LLM clients can call to manage A
     ```
 3.  Create a new Azure Function project (using the isolated worker model, which is best for .NET 8+):
     ```bash
-    func init . --worker-runtime dotnet-isolated --target-framework net8.0
+    func init .  --framework net9.0
     # For .NET 9 when officially supported by Functions:
     # func init . --worker-runtime dotnet-isolated --target-framework net9.0
     git init # Optional: Initialize a git repository
@@ -56,6 +56,9 @@ This "MCP Server" will act as an API layer that LLM clients can call to manage A
 4.  Create an HTTP-triggered function:
     ```bash
     func new --name AksManagerFunction --template "Http trigger" --authlevel "function"
+    ```
+    ```
+    dotnet new func -n AksManagerFunction  --framework net9.0
     ```
     This creates a function that requires a function key for access.
 
@@ -839,4 +842,4 @@ The LLM client needs to be configured to:
     *   The Managed Identity of the Function App needs RBAC access to *all* subscriptions it's intended to manage.
     *   If you want the MCP server to *discover* subscriptions the LLM client doesn't know about, the Managed Identity would need `Reader` access at a Management Group level, and the function could list subscriptions. This adds complexity.
 
-This comprehensive guide should give you a solid foundation for your C# 12 MCP Server on Azure Functions for managing Azure resources. Remember that .NET 9 features will become more relevant as its support in Azure Functions matures.
+This comprehensive guide should give you a solid foundation for your C# 12 MCP Server on Azure Functions for managing Azure resources. 
