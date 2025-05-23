@@ -1,6 +1,6 @@
 ## C and Rust JSON Parsing 
 
-### Explanation of the Quote
+### Explanation
 
 Fundamental concepts of **privilege separation**, in operating systems like Linux:
 
