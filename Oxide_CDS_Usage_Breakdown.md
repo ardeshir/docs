@@ -116,3 +116,13 @@ Sources
 [9] Oxide Computer Company https://oxide.computer
 [10] Specifications - Oxide Computer https://oxide.computer/product/specifications
 [11] Oxide reimagines the DC rack as... a 3000 lb blade server? - Reddit https://www.reddit.com/r/hardware/comments/1au7ckp/oxide_reimagines_the_dc_rack_as_a_3000_lb_blade/
+
+#### Other resources & links
+- [Oxide CDS Usage Breakdown](https://book.univrs.io/markd/oxide_cds_usage_breakdown)
+- [oxide CDS Usage v2](https://book.univrs.io/markd/oxide_cds_v2)
+- [Oxide Innovation](https://book.univrs.io/markd/oxide_innovations)
+- [Oxide OS+Hardware ](https://book.univrs.io/markd/oxide_os-hardware)
+- [Oxide Rack Customers](https://book.univrs.io/markd/oxide_rack_customers)
+- [Oxide Single AMD EPYC 7713P](https://book.univrs.io/markd/oxide_single_amd_epyc_7713p_sled)
+- [Oxide Smallest Bang$ ](https://book.univrs.io/markd/oxide_smallest_possible_sled)
+- [Oxide Syndrom ](https://book.univrs.io/markd/oxide_syndrome)

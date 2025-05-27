@@ -47,3 +47,13 @@ This configuration provides a robust platform for growth:
  * Hardware Foundation: Each compute sled is powered by an AMD EPYC 7713P processor with 64 cores, ensuring strong underlying compute capabilities. The system also features robust power delivery with up to two power shelves, each supporting redundant power supplies (5+1 or 3+3).
 
 By adopting this top-tier rack configuration and strategic resource allocation, each product (CNC, NA, Max) will be well-equipped with the necessary compute, memory, storage, and network resources to configure its environments effectively and support a growing global customer base.
+
+#### Other resources & links
+- [Oxide CDS Usage Breakdown](https://book.univrs.io/markd/oxide_cds_usage_breakdown)
+- [oxide CDS Usage v2](https://book.univrs.io/markd/oxide_cds_v2)
+- [Oxide Innovation](https://book.univrs.io/markd/oxide_innovations)
+- [Oxide OS+Hardware ](https://book.univrs.io/markd/oxide_os-hardware)
+- [Oxide Rack Customers](https://book.univrs.io/markd/oxide_rack_customers)
+- [Oxide Single AMD EPYC 7713P](https://book.univrs.io/markd/oxide_single_amd_epyc_7713p_sled)
+- [Oxide Smallest Bang$ ](https://book.univrs.io/markd/oxide_smallest_possible_sled)
+- [Oxide Syndrom ](https://book.univrs.io/markd/oxide_syndrome)

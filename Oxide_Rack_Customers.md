@@ -64,3 +64,13 @@ Sources
 [18] Oxide Cloud Computer. No Cables. No Assembly. Just Cloud https://news.ycombinator.com/item?id=39804052
 [19] Row-Scale On-Premises Cloud Infrastructure from Oxide Computer https://futurumgroup.com/insights/row-scale-on-premises-cloud-infrastructure-from-oxide-computer/
 [20] Oxide on-prem cloud computer reinvents the server rack https://blocksandfiles.com/2023/10/31/oxide-on-prem-cloud-computer/
+
+#### Other resources & links
+- [Oxide CDS Usage Breakdown](https://book.univrs.io/markd/oxide_cds_usage_breakdown)
+- [oxide CDS Usage v2](https://book.univrs.io/markd/oxide_cds_v2)
+- [Oxide Innovation](https://book.univrs.io/markd/oxide_innovations)
+- [Oxide OS+Hardware ](https://book.univrs.io/markd/oxide_os-hardware)
+- [Oxide Rack Customers](https://book.univrs.io/markd/oxide_rack_customers)
+- [Oxide Single AMD EPYC 7713P](https://book.univrs.io/markd/oxide_single_amd_epyc_7713p_sled)
+- [Oxide Smallest Bang$ ](https://book.univrs.io/markd/oxide_smallest_possible_sled)
+- [Oxide Syndrom ](https://book.univrs.io/markd/oxide_syndrome)

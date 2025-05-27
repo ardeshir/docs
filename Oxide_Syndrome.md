@@ -107,3 +107,12 @@ However, these measures may not fully offset the challenges of relying on a fadi
 
 ### **Conclusion: A High-Risk, High-Reward Bet**
 Oxide’s Illumos-based architecture offers unparalleled integration and efficiency for on-premises cloud infrastructure, but its success hinges on overcoming ecosystem limitations and fostering a sustainable developer community. While Linux’s broad support and corporate backing make it a safer choice for most enterprises, Oxide’s vertical integration could redefine hyperscale economics for niche markets—provided it navigates the risks of expertise scarcity and market skepticism.
+#### Other resources & links
+- [Oxide CDS Usage Breakdown](https://book.univrs.io/markd/oxide_cds_usage_breakdown)
+- [oxide CDS Usage v2](https://book.univrs.io/markd/oxide_cds_v2)
+- [Oxide Innovation](https://book.univrs.io/markd/oxide_innovations)
+- [Oxide OS+Hardware ](https://book.univrs.io/markd/oxide_os-hardware)
+- [Oxide Rack Customers](https://book.univrs.io/markd/oxide_rack_customers)
+- [Oxide Single AMD EPYC 7713P](https://book.univrs.io/markd/oxide_single_amd_epyc_7713p_sled)
+- [Oxide Smallest Bang$ ](https://book.univrs.io/markd/oxide_smallest_possible_sled)
+- [Oxide Syndrom ](https://book.univrs.io/markd/oxide_syndrome)
