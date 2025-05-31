@@ -1,5 +1,57 @@
 # Azure Function in Rust - Complete Setup Guide
 
+## What's Included:
+
+1. **Rust Azure Function** (`main.rs`) - A fully functional HTTP-triggered function that:
+   - Handles both GET and POST requests
+   - Includes query parameter and JSON body support
+   - Has a health check endpoint
+   - Provides detailed request information and error handling
+
+2. **Docker Configuration** (`Dockerfile`) - Multi-stage build that:
+   - Builds the Rust binary efficiently
+   - Uses the official Azure Functions runtime
+   - Optimizes for production deployment
+
+3. **Function Configuration Files**:
+   - `host.json` - Azure Functions host configuration
+   - `function.json` files for each endpoint
+   - `Cargo.toml` with all necessary dependencies
+
+4. **Deployment Scripts**:
+   - `deploy.sh` - Complete automated deployment to Azure
+   - `local-run.sh` - Local development and testing
+
+5. **Complete Documentation** - Step-by-step setup and deployment guide
+
+## Key Features:
+
+- **Production Ready**: Includes logging, error handling, and health checks
+- **Fully Automated**: One-command deployment to Azure
+- **Local Development**: Easy local testing environment
+- **Containerized**: Uses Docker for consistent deployments
+- **RESTful API**: Proper HTTP methods and status codes
+
+## Quick Start:
+
+1. **Local Testing**:
+   ```bash
+   chmod +x local-run.sh
+   ./local-run.sh
+   ```
+
+2. **Deploy to Azure**:
+   ```bash
+   chmod +x deploy.sh
+   ./deploy.sh
+   ```
+
+The deployment script handles everything automatically - creating resource groups, storage accounts, container registries, building Docker images, and deploying your function to Azure.
+
+Your function will be available at endpoints like:
+- `https://your-function-app.azurewebsites.net/api/hello_world`
+- `https://your-function-app.azurewebsites.net/api/health`
+
 ## Project Structure
 
 Your project should be organized as follows:
@@ -747,79 +799,6 @@ if [ "${BASH_SOURCE[0]}" == "${0}" ]; then
     main "$@"
 fi
 ```
-I'll help you create an Azure Function in Rust with a Dockerfile and deployment script. This will be a complete solution for building and deploying a Rust-based Azure Function.​​​​​​​​​​​​​​​​
-
-​​​​​​​​​​​​​​​​
-
-​​​​​​​​​​​​​​​​
-
-​​​​​​​​​​​​​​​​
-
-​​​​​​​​​​​​​​​​
-
-​​​​​​​​​​​​​​​​
-
-​​​​​​​​​​​​​​​​
-
-​​​​​​​​​​​​​​​​
-
-​​​​​​​​​​​​​​​​
-
-​​​​​​​​​​​​​​​​
-
-I've created a complete Azure Function in Rust with Docker support and automated deployment scripts. Here's what I've provided:
-
-## What's Included:
-
-1. **Rust Azure Function** (`main.rs`) - A fully functional HTTP-triggered function that:
-   - Handles both GET and POST requests
-   - Includes query parameter and JSON body support
-   - Has a health check endpoint
-   - Provides detailed request information and error handling
-
-2. **Docker Configuration** (`Dockerfile`) - Multi-stage build that:
-   - Builds the Rust binary efficiently
-   - Uses the official Azure Functions runtime
-   - Optimizes for production deployment
-
-3. **Function Configuration Files**:
-   - `host.json` - Azure Functions host configuration
-   - `function.json` files for each endpoint
-   - `Cargo.toml` with all necessary dependencies
-
-4. **Deployment Scripts**:
-   - `deploy.sh` - Complete automated deployment to Azure
-   - `local-run.sh` - Local development and testing
-
-5. **Complete Documentation** - Step-by-step setup and deployment guide
-
-## Key Features:
-
-- **Production Ready**: Includes logging, error handling, and health checks
-- **Fully Automated**: One-command deployment to Azure
-- **Local Development**: Easy local testing environment
-- **Containerized**: Uses Docker for consistent deployments
-- **RESTful API**: Proper HTTP methods and status codes
-
-## Quick Start:
-
-1. **Local Testing**:
-   ```bash
-   chmod +x local-run.sh
-   ./local-run.sh
-   ```
-
-2. **Deploy to Azure**:
-   ```bash
-   chmod +x deploy.sh
-   ./deploy.sh
-   ```
-
-The deployment script handles everything automatically - creating resource groups, storage accounts, container registries, building Docker images, and deploying your function to Azure.
-
-Your function will be available at endpoints like:
-- `https://your-function-app.azurewebsites.net/api/hello_world`
-- `https://your-function-app.azurewebsites.net/api/health`
 
 The solution is complete and ready for production use!​​​​​​​​​​​​​​​​
 
