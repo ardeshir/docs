@@ -1,6 +1,6 @@
 # The Heart Of Modern Systems Engineering 
 
-The trade-offs between integrated and component-based architectures, at Oxide Computes is a deliberate departure from the prevailing model of commodity hardware running a generic OS (usually Linux) and a standard hypervisor (like KVM).
+The trade-offs between integrated and component-based architectures, at Oxide Computers is a deliberate departure from the prevailing model of commodity hardware running a generic OS (usually Linux) and a standard hypervisor (like KVM).
 
 Let's break down each component of the Oxide stack, analyze its role, and then discuss the risks and advantages of their deep integration.
 
@@ -12,7 +12,7 @@ Oxide's goal is to build a true "cloud computer" for on-premises data centers. I
 
 ### 1. Hardware: The Foundation
 
-While you didn't explicitly ask for hardware, it's the bedrock upon which everything else is built. Oxide designs its own motherboards, chassis, network fabric, and, crucially, a custom Service Processor (SP) that acts as the hardware root of trust.
+While developers don't explicitly ask for hardware, it's the bedrock upon which everything else is built. Oxide designs its own motherboards, chassis, network fabric, and, crucially, a custom Service Processor (SP) that acts as the hardware root of trust.
 
 *   **What it is:** Bespoke, rack-scale hardware designed from first principles. This includes custom sleds with AMD CPUs, a 100GbE backplane network fabric, and a control plane run by their custom Rust-based Service Processor.
 *   **Role in Integration:** The hardware is not a generic platform; it's the specific target for all the software above it. The drivers in illumos are written for this exact hardware. The firmware is designed to initialize this exact hardware. The hypervisor is aware of the specific I/O and CPU capabilities.
