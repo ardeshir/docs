@@ -1,6 +1,6 @@
 # The Heart Of Modern Systems Engineering 
 
-The trade-offs between integrated and component-based architectures, at Oxide Computes is a deliberate departure from the prevailing model of commodity hardware running a generic OS (usually Linux) and a standard hypervisor (like KVM).
+The trade-offs between integrated and component-based architectures, at Oxide Computers is a deliberate departure from the prevailing model of commodity hardware running a generic OS (usually Linux) and a standard hypervisor (like KVM).
 
 Let's break down each component of the Oxide stack, analyze its role, and then discuss the risks and advantages of their deep integration.
 
