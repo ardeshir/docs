@@ -1,4 +1,4 @@
-# The Imaginearium 
+# The Imaginarium 
 
 The intersection of degrowth economics, distributed autonomous systems (DAS), and planetary-scale computational consciousness presents a radical reimagining of technology’s role in sustainability and human evolution. Here’s a synthesis of these ideas, grounded in current discourse and technological trajectories:
 
