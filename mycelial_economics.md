@@ -1,5 +1,3 @@
-https://claude.ai/public/artifacts/2c014fcd-2655-4038-816f-80f796c3bce5
-
 # Mycelial Economics: Technologies for Distributed Economic Systems
 
 Relational tribes seeking alternatives to capitalism’s debt-based monetary system have access to a rapidly maturing ecosystem of technologies that mirror the distributive intelligence of mycelial networks. **Research reveals that successful mycelium-like economic systems combine decentralized peer-to-peer technologies, abundance-based currencies, bioregional integration platforms, and collective governance tools** - creating networks that automatically redistribute resources based on community health while maintaining democratic control.
