@@ -1,4 +1,5 @@
-# Alternative Solutions for MySQL to PostgreSQL Migration: Updated to show Alternative Approach to Migrate MySQL to Postgres
+# Alternative Solutions for MySQL to PostgreSQL Migration: Updated to show Alternative Approach to Migrate MySQL to Postgres 
+
 **What Azure DMS Actually Supports:**
 
 - MySQL → Azure Database for MySQL
