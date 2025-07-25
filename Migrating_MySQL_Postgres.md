@@ -16,7 +16,7 @@
 
 Since Azure DMS won’t work for your use case, here are the best alternatives for zero-downtime migration:
 
-### 1. **AWS Database Migration Service (DMS)**
+### 1. **AWS Database Migration Service (DMS)** For a comprehensive zero-downtime migration using [AWS DMS, see our detailed guide](https://book.univrs.io/markd/zero_downtime_mysql_postgres_migration).
 
 AWS DMS actually DOES support MySQL to PostgreSQL migrations with 
 continuous replication:
