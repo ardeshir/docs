@@ -1,4 +1,119 @@
-# Migrating from MySQL to PostgreSQL 
+# Alternative Solutions for MySQL to PostgreSQL Migration: Updated to show Alternative Approach to Migrate MySQL to Postgres
+**What Azure DMS Actually Supports:**
+
+- MySQL → Azure Database for MySQL
+- PostgreSQL → Azure Database for PostgreSQL
+- SQL Server → Azure SQL Database/MI
+- MongoDB → Azure Cosmos DB
+
+**What it DOESN’T Support:**
+
+- MySQL → PostgreSQL ❌
+- Oracle → PostgreSQL ❌
+- Any cross-engine migrations ❌
+
+## Alternative Solutions for MySQL to PostgreSQL Migration
+
+Since Azure DMS won’t work for your use case, here are the best alternatives for zero-downtime migration:
+
+### 1. **AWS Database Migration Service (DMS)**
+
+AWS DMS actually DOES support MySQL to PostgreSQL migrations with 
+continuous replication:
+
+```bash
+# AWS DMS supports this migration path
+Source: MySQL (on Azure) → Target: PostgreSQL (on Azure)
+```
+
+Use AWS DMS even when both databases are on Azure - it’s just a migration tool.
+
+### 2. **Third-Party Tools**
+
+**pgloader** - Excellent for MySQL to PostgreSQL:
+
+```bash
+# One-time migration
+pgloader mysql://user:pass@mysql-host/db postgresql://user:pass@pg-host/db
+
+# With transformation rules
+pgloader --verbose --debug mysql://source postgresql://target
+```
+
+**Debezium + Kafka** for real-time replication:
+
+```yaml
+# Debezium MySQL Source Connector
+{
+  "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+  "database.hostname": "your-mysql-host",
+  "transforms": "unwrap",
+  "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState"
+}
+```
+
+### 3. **Manual Logical Replication Setup**
+
+**Phase 1: Schema Migration**
+
+```bash
+# Export MySQL schema and convert to PostgreSQL
+mysqldump --no-data --routines --triggers source_db > mysql_schema.sql
+# Use conversion tools or manual conversion
+```
+
+**Phase 2: Initial Data Load**
+
+```bash
+# Use pgloader or custom ETL
+pgloader --with "prefetch rows = 10000" \
+         --with "batch size = 25MB" \
+         mysql://source postgresql://target
+```
+
+**Phase 3: Change Data Capture**
+
+- Set up binlog reading from MySQL
+- Stream changes to PostgreSQL via custom application
+- Use tools like Maxwell’s daemon or Debezium
+
+### 4. **Application-Level Dual Write**
+
+During migration period:
+
+```python
+def write_data(data):
+    # Write to both databases during transition
+    mysql_connection.execute(mysql_query, data)
+    postgresql_connection.execute(pg_query, converted_data)
+    
+    # Validate consistency
+    if validate_enabled:
+        validate_data_consistency(data)
+```
+
+## Recommended Approach for Zero Downtime
+
+**Option 1: AWS DMS (Easiest)**
+
+1. Set up AWS DMS instance
+1. Configure MySQL (Azure) as source
+1. Configure PostgreSQL (Azure) as target
+1. Run continuous replication
+1. Perform cutover when synchronized
+
+**Option 2: Debezium + Custom Pipeline**
+
+1. Deploy Kafka cluster
+1. Set up Debezium MySQL connector
+1. Create transformation logic for MySQL→PostgreSQL data types
+1. Stream to PostgreSQL via Kafka Connect PostgreSQL sink
+1. Monitor lag and perform cutover
+
+Would you like me to provide detailed implementation steps for either of these approaches? AWS DMS would be the quickest solution since it handles the cross-engine conversion automatically.
+
+
+# UDATE: Migrating from MySQL to PostgreSQL (not supported)?
 
 On Azure without downtime requires a carefully planned approach using logical replication and synchronized cutover strategies:
 
