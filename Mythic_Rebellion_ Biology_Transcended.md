@@ -150,24 +150,24 @@ In an age grappling with rapid technological acceleration, pervasive societal co
 1. [The concept of Winged lion in Christianity](https://www.wisdomlib.org/christianity/concept/winged-lion) 
 2. [The Symbolism of the Winged Lion: Power, Courage, and Divine Protection](https://www.milystatue.com/the-symbolism-of-the-winged-lion-power-courage-and-divine-protection/)
 3. [www.palosverdespulse.com] (https://www.palosverdespulse.com/blog/swans) 
-4\. The Grace of Swans: How Their Symbolism Shaped History and Culture, https://www.palosverdespulse.com/blog/swans 
-5\. What is the symbolism of the winged lion in ancient Persia (Iran)? \- Quora, https://www.quora.com/What-is-the-symbolism-of-the-winged-lion-in-ancient-Persia-Iran 
-6\. Persian Lion: Art, Symbolism & Middle Eastern Legacy \- Craftestan, https://www.craftestan.co.uk/legacy-of-the-persian-lion-history-art-symbolism/ 
-7\. The Mythical Lamassu: Impressive Symbols for Mesopotamian Protection \- Ancient Origins, https://www.ancient-origins.net/history/mythical-lamassu-impressive-symbols-mesopotamian-protection-005358 
-8\. LAMASSU \- The Mythological Creature \- Hive.blog, https://hive.blog/history/@crazysailor/lamassu-the-mythological-creature 
-9\. Lion of St. Mark Jetton | Historic Jamestowne, https://historicjamestowne.org/collections/artifacts/lion-st-mark/ 
-10\. The Lion of Saint Mark: symbol of Venice and the Serenissima, https://caffeflorian.com/en/the-lion-of-saint-mark-symbol-of-venice-and-the-serenissima/ 
-11\. Winged Lions, https://cdn.preterhuman.net/texts/other/crystalinks/wingedlions.html 
-12\. The Lion of Saint Mark in Venice: symbol of magnificence and power \- Arte 2000, https://arte2000.it/en/blog-en/the-lion-of-saint-mark-in-venice-symbol-of-magnificence-and-power/ 
-13\. Swan: Significance and symbolism, https://www.wisdomlib.org/concept/swan 
-14\. Swan Symbolism \- Pure Spirit, http://www.pure-spirit.com/more-animal-symbolism/252-pure-spirit-minneapolis-st-paul-dog-training-and-international-all-species-animal-communication-swan 
-15\. Swan maiden \- Wikipedia, https://en.wikipedia.org/wiki/Swan\_maiden 
-16\. Swan Folklore: Hope Is the Thing with Feathers – \#FolkloreThursday, https://folklorethursday.com/folk-music/swan-folklore-hope-is-the-thing-with-feathers/ 
-17\. “The Swan Maiden.” Scandinavian folk & fairy tales: tales from Norway, Sweden, Denmark, Finland, Iceland, edited by Claire Booss, New York: Avenel Books, 1984, pp. 248-250. \- University of Colorado Boulder, https://www.colorado.edu/projects/fairy-tales/scandinavian-folk-fairy-tales/the-swan-maiden 
-18\. The Children of Lir: Ireland's Sweethearts | LiBlog \- University of Cincinnati, https://libapps.libraries.uc.edu/liblog/2017/03/the-children-of-lir-irelands-sweethearts/ 
-19\. subarcticangling.com, https://subarcticangling.com/blog/2020/5/11/wild-mythology-swan-song\#:\~:text=In%20Celtic%20myth%2C%20the%20Swan,in%20the%20story%20of%20Phaeton. 
-20\. Leda and the Swan \- Wikipedia, https://en.wikipedia.org/wiki/Leda\_and\_the\_Swan 
-21\. Secularist Deities: The Rebel Gods | Megan Manson \- Patheos, https://www.patheos.com/blogs/pagantama/2018/04/05/secularist-deities-the-rebel-gods/ 
+4. [The Grace of Swans: How Their Symbolism Shaped History and Culture](https://www.palosverdespulse.com/blog/swans) 
+5. [What is the symbolism of the winged lion in ancient Persia (Iran) - Quora](https://www.quora.com/What-is-the-symbolism-of-the-winged-lion-in-ancient-Persia-Iran) 
+6. [Persian Lion: Art, Symbolism & Middle Eastern Legacy - Craftestan](https://www.craftestan.co.uk/legacy-of-the-persian-lion-history-art-symbolism/) 
+7. [The Mythical Lamassu: Impressive Symbols for Mesopotamian Protection - Ancient Origins](https://www.ancient-origins.net/history/mythical-lamassu-impressive-symbols-mesopotamian-protection-005358)
+8. [LAMASSU - The Mythological Creature - Hive.blog](https://hive.blog/history/@crazysailor/lamassu-the-mythological-creature) 
+9. [Lion of St. Mark Jetton | Historic Jamestowne](https://historicjamestowne.org/collections/artifacts/lion-st-mark/)_ 
+10. [The Lion of Saint Mark: symbol of Venice and the Serenissima](https://caffeflorian.com/en/the-lion-of-saint-mark-symbol-of-venice-and-the-serenissima/) 
+11. [Winged Lions](https://cdn.preterhuman.net/texts/other/crystalinks/wingedlions.html)
+12. [The Lion of Saint Mark in Venice: symbol of magnificence and power - Arte 2000](https://arte2000.it/en/blog-en/the-lion-of-saint-mark-in-venice-symbol-of-magnificence-and-power/) 
+13. [Swan: Significance and symbolism](https://www.wisdomlib.org/concept/swan)  
+14. [Swan Symbolism - Pure Spirit](http://www.pure-spirit.com/more-animal-symbolism/252-pure-spirit-minneapolis-st-paul-dog-training-and-international-all-species-animal-communication-swan) 
+15. [Swan maiden - Wikipedia](https://en.wikipedia.org/wiki/Swan\_maiden) 
+16. [Swan Folklore: Hope Is the Thing with Feathers – FolkloreThursday](https://folklorethursday.com/folk-music/swan-folklore-hope-is-the-thing-with-feathers/) 
+17. [“The Swan Maiden.” Scandinavian folk & fairy tales: tales from Norway, Sweden, Denmark, Finland, Iceland, edited by Claire Booss, New York: Avenel Books, 1984, pp. 248-250. - University of Colorado Boulder](https://www.colorado.edu/projects/fairy-tales/scandinavian-folk-fairy-tales/the-swan-maiden)
+18. [The Children of Lir: Ireland's Sweethearts | LiBlog - University of Cincinnati](https://libapps.libraries.uc.edu/liblog/2017/03/the-children-of-lir-irelands-sweethearts/) 
+19. [Subarcticangling.com](https://subarcticangling.com/blog/2020/5/11/wild-mythology-swan-song\#:\~:text=In%20Celtic%20myth%2C%20the%20Swan,in%20the%20story%20of%20Phaeton) 
+20. [Leda and the Swan - Wikipedia](https://en.wikipedia.org/wiki/Leda\_and\_the\_Swan) 
+21. [Secularist Deities: The Rebel Gods | Megan Manson - Patheos](https://www.patheos.com/blogs/pagantama/2018/04/05/secularist-deities-the-rebel-gods/) 
 22. [The Myth of Prometheus: A Rebel with a Cause | ALLRIOT Blog](https://allriot.com/blog/the-myth-of-prometheus-a-rebel-with-a-cause) 23. [Do We Have a Choice or Not? Fate in Mythology](https://eportfolios.roehampton.ac.uk/hsa020c132h/2017/06/30/)do-we-have-a-choice-or-not-fate-in-mythology/) 
 24. [How Gnosticism Shaped Early Christian Beliefs - Josh Spurlock, MA, LPC, CST](https://joshspurlock.com/how-gnosticism-shaped-early-christian-beliefs/) 
 25. [What is Gnosticism? | Llewellyn Worldwide, Ltd.](https://www.llewellyn.com/journal/print.php?id=2080)
