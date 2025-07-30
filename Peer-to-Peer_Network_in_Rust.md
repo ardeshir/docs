@@ -1,4 +1,4 @@
-# **Designing a Peer-to-Peer Network System and Application in Rust**
+# Designing a Peer-to-Peer Network System and Application in Rust
 
 ## **1. Introduction: Understanding Peer-to-Peer Networks**
 
