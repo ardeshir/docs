@@ -1,4 +1,4 @@
-#Sola Scriptura’s Shadow: How Protestant Cognitive Authority Enabled Corporate Attention Capitalism
+# Sola Scriptura’s Shadow: How Protestant Cognitive Authority Enabled Corporate Attention Capitalism
 
 The Protestant Reformation’s principle of Sola Scriptura unleashed a profound epistemological revolution that granted ordinary believers unprecedented authority to interpret divine truth independently of institutional hierarchy. This “cognitive authenticity” created new foundations for individual agency that would ultimately enable both modern corporate capitalism and today’s attention economy, while also generating persistent alternatives that challenge this trajectory.
 
