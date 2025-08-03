@@ -295,7 +295,7 @@ In effect, **UTCP is the right tool for maximum efficiency and â€œit-just-worksâ
 20. [universal-tool-calling-protocol/python-utcp - GitHub ](https://github.com/universal-tool-calling-protocol/python-utcp)
 -----
 ### Connect: 
-- [Join Discord: Univrs.io](https://discord.gg/2Q3Hd9PW)
+
 - [Univrs Patreon](https://wwww.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)

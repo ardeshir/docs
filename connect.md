@@ -1,5 +1,4 @@
 ### Connect: 
-- [Join Discord: Univrs.io](https://discord.gg/2Q3Hd9PW)
 - [Univrs Patreon](https://wwww.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
