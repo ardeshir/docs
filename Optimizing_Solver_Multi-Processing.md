@@ -259,7 +259,7 @@ def solve_api(data: Dict[str, Any]):
 
 ### Connect: Join Univrs.io
 - [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
-- [Univrs Patreon](https://wwww.patreon.com/univrs)
+- [Univrs Patreon](https://www.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
 - [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)

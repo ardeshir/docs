@@ -87,7 +87,7 @@ https://www.perplexity.ai/search/9bb0a0e4-0954-4978-915f-02d3c37e5fb0
 
 ### Connect: Join Univrs.io
 - [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
-- [Univrs Patreon](https://wwww.patreon.com/univrs)
+- [Univrs Patreon](https://www.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
 - [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
