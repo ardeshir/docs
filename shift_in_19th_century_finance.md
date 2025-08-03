@@ -53,3 +53,16 @@ This content appears on personal platforms (Substack, social media) rather than 
 This paper demonstrates the dangers of ideologically motivated research presented as academic analysis. While showing impressive historical knowledge and accurate contemporary assessment, **the work’s selective presentation, factual errors, and complete absence of scholarly credentials render it unsuitable as an academic source**. 
 
 The paper’s insights about London’s resilience and US-UK financial complementarity offer value, but readers should treat this as informed commentary rather than rigorous scholarship.  **The “neocolonial” framing and cherry-picked examples serve predetermined conclusions rather than evidence-based analysis**. For serious academic work on international finance, readers should consult peer-reviewed sources from credentialed researchers at established institutions who engage honestly with complex, mixed evidence rather than reducing nuanced policy outcomes to simple ideological narratives. 
+
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://wwww.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://univrs.metalabel.com)

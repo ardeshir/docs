@@ -469,7 +469,8 @@ Rust's testing framework is great. We'll write an integration test.
 
 This comprehensive solution provides a robust Rust CLI tool with good practices and testing. Remember to adjust the regex pattern in `--pattern` to precisely match your "Oxide*" requirement (e.g., `^Oxide.*` for files starting with "Oxide", or `^Oxide[^/]*$` if you don't want it to match directory names that might coincidentally start with Oxide if the pattern was too loose, though `path.is_file()` already handles this).
 
-### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
 - [Univrs Patreon](https://wwww.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
@@ -479,4 +480,4 @@ This comprehensive solution provides a robust Rust CLI tool with good practices 
 - [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
 - [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
 - [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://unvirs.metalabel.com)
+- [Univrs MetaLabel](https://univrs.metalabel.com)

@@ -113,7 +113,8 @@ This tight coupling creates an experience that is more like a cloud service (e.g
 *   **openSIL Project:** For details on the open-source firmware initiative. [openSIL on GitHub](https://github.com/openSIL)
 *   **illumos Project:** The official website for the illumos operating system. [illumos.org](https://illumos.org/)
 
-### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
 - [Univrs Patreon](https://wwww.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
@@ -123,4 +124,4 @@ This tight coupling creates an experience that is more like a cloud service (e.g
 - [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
 - [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
 - [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://unvirs.metalabel.com)
+- [Univrs MetaLabel](https://univrs.metalabel.com)

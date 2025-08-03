@@ -58,7 +58,8 @@ By adopting this top-tier rack configuration and strategic resource allocation, 
 - [Oxide Smallest Bang$ ](https://book.univrs.io/markd/oxide_smallest_possible_sled)
 - [Oxide Syndrom ](https://book.univrs.io/markd/oxide_syndrome) 
 
-### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
 - [Univrs Patreon](https://wwww.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
@@ -68,4 +69,4 @@ By adopting this top-tier rack configuration and strategic resource allocation, 
 - [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
 - [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
 - [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://unvirs.metalabel.com)
+- [Univrs MetaLabel](https://univrs.metalabel.com)

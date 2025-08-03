@@ -112,7 +112,8 @@ Your Rust server should now be running and serving Markdown files from the `wwwr
 
 Feel free to adjust the configuration as per your requirements!
 
-### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
 - [Univrs Patreon](https://wwww.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
@@ -122,4 +123,4 @@ Feel free to adjust the configuration as per your requirements!
 - [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
 - [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
 - [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://unvirs.metalabel.com)
+- [Univrs MetaLabel](https://univrs.metalabel.com)

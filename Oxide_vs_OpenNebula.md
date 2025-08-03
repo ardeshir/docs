@@ -178,7 +178,8 @@ Sources
 [29] Using the OGF OCCI Interface on OpenNebula-RESERVOIR https://archives.opennebula.org/*media/documentation:constantino_vazquez*-_using_the_ogf_occi_interface_on_opennebula-reservoir.pdf
 
 
-### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
 - [Univrs Patreon](https://wwww.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
@@ -188,4 +189,4 @@ Sources
 - [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
 - [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
 - [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://unvirs.metalabel.com)
+- [Univrs MetaLabel](https://univrs.metalabel.com)

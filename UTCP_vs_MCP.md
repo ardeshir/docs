@@ -294,7 +294,9 @@ In effect, **UTCP is the right tool for maximum efficiency and â€œit-just-worksâ
 19. [AI Engineer - Building Agents with Model Context Protocol - YouTube ](https://www.youtube.com/watch?v=kQmXtrmQ5Zg)
 20. [universal-tool-calling-protocol/python-utcp - GitHub ](https://github.com/universal-tool-calling-protocol/python-utcp)
 -----
-### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
 - [Univrs Patreon](https://wwww.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
@@ -304,4 +306,4 @@ In effect, **UTCP is the right tool for maximum efficiency and â€œit-just-worksâ
 - [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
 - [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
 - [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://unvirs.metalabel.com)
+- [Univrs MetaLabel](https://univrs.metalabel.com)

@@ -168,7 +168,8 @@ The narrative would unfold through a series of escalating plot points and themat
 This new myth, anchored by the potent symbols of the Winged Lion and Biblia as a Swan, offers a deeply resonant exploration of rebellion against a destructive State. It transcends simple political conflict, delving into spiritual liberation, philosophical revaluation, and the radical potential of human evolution.
 In an age grappling with rapid technological acceleration, pervasive societal control, and profound existential anxieties, this narrative provides a compelling lens through which to examine the nature of authority, the ethics of enhancement, and the enduring human drive to define its own destiny. It serves as a powerful reminder that true freedom may lie not just in overthrowing external oppressors, but in the radical transformation of the self, pushing beyond perceived limits to forge a new, transcendent existence.
 
-### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
 - [Univrs Patreon](https://wwww.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
@@ -178,4 +179,4 @@ In an age grappling with rapid technological acceleration, pervasive societal co
 - [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
 - [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
 - [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://unvirs.metalabel.com)
+- [Univrs MetaLabel](https://univrs.metalabel.com)

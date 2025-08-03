@@ -69,3 +69,17 @@ Yet the alternative trajectory—visible in historical precedents from Hutterite
 Understanding contemporary digital exploitation requires examining not just technological and economic factors, but the deeper cognitive and spiritual frameworks that make such exploitation possible and seemingly natural.  The Protestant legacy of individual interpretive authority provides both the foundation for attention capitalism’s extraction mechanisms and the conceptual resources for building alternatives based on genuine cognitive autonomy, democratic cooperation, and shared prosperity.  
 
 The path forward involves neither rejecting Protestant cognitive authority nor accepting its capitalist capture, but rather reclaiming its radical democratic potential for creating economic relationships that honor both individual agency and collective flourishing. 
+
+
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://wwww.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://univrs.metalabel.com)

@@ -93,7 +93,8 @@ Launch cooperative enterprises using collaborative planning tools. Implement loc
 
 The convergence of these technologies creates unprecedented opportunities for communities to develop economic systems that truly mirror mycelial networks - distributing resources based on collective health, adapting to changing conditions, and growing through cooperative rather than competitive relationships. The critical window for implementation is now, as these technologies mature and regulatory frameworks adapt to recognize alternative economic models. Success requires combining technical innovation with time-tested principles of democratic cooperation and ecological integration, creating resilient economic systems that heal and regenerate rather than extract and accumulate.
 
-### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
 - [Univrs Patreon](https://wwww.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
 - [https://ardeshir.io](https://ardeshir.io)
@@ -103,4 +104,4 @@ The convergence of these technologies creates unprecedented opportunities for co
 - [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
 - [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
 - [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://unvirs.metalabel.com)
+- [Univrs MetaLabel](https://univrs.metalabel.com)
