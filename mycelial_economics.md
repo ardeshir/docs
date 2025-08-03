@@ -92,3 +92,15 @@ Launch cooperative enterprises using collaborative planning tools. Implement loc
 **Build gradually toward federation** by connecting with other mutual credit networks through Credit Commons Protocol, participating in bioregional economic networks through platforms like LocalScale, and documenting successful models for replication by other communities.
 
 The convergence of these technologies creates unprecedented opportunities for communities to develop economic systems that truly mirror mycelial networks - distributing resources based on collective health, adapting to changing conditions, and growing through cooperative rather than competitive relationships. The critical window for implementation is now, as these technologies mature and regulatory frameworks adapt to recognize alternative economic models. Success requires combining technical innovation with time-tested principles of democratic cooperation and ecological integration, creating resilient economic systems that heal and regenerate rather than extract and accumulate.
+
+### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://wwww.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://unvirs.metalabel.com)

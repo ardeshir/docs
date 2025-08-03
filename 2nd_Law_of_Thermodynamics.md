@@ -18,4 +18,16 @@ Note, an electrical system in practice is not an isolated system. However, the g
 For more deep details, refer to the resources below:
 - For the thermodynamics portion: "Fundamentals of Classical Thermodynamics" by Van Wylen and Sonntag (link: https://archive.org/details/FundamentalsOfClassicalThermodynamics)
 - For the electronics portion: "The Art of Electronics" by Horowitz and Hill (link: https://artofelectronics.net/)
-- For the impact on battery performance: "Cold weather and Battery performance" – Battery University (link: https://batteryuniversity.com/learn/article/discharging_at_high_and_low_temperatures)
+- For the impact on battery performance: "Cold weather and Battery performance" – Battery University (link: https://batteryuniversity.com/learn/article/discharging_at_high_and_low_temperatures) 
+
+### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://wwww.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://unvirs.metalabel.com)

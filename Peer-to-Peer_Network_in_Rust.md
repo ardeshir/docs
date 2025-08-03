@@ -515,3 +515,16 @@ Following this foundation, the next logical steps based on your design document 
 4.  **Containerize for Deployment:** Create a `Dockerfile` to package the application, simplifying deployment on Unix/Linux servers as outlined in Section 8.
 
 This step-by-step guide has established the fundamental components of your P2P network, creating a solid, expandable base upon which we can build the full file, chat, and video sharing application.
+
+------
+### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://wwww.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://unvirs.metalabel.com)

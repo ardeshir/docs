@@ -800,7 +800,19 @@ if [ "${BASH_SOURCE[0]}" == "${0}" ]; then
 fi
 ```
 
-The solution is complete and ready for production use!​​​​​​​​​​​​​​​​
+The solution is complete and ready for production use!​​​​​​​​​​​​​​​​ 
+
+### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://wwww.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://unvirs.metalabel.com)
 
 
 

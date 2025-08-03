@@ -1100,3 +1100,15 @@ And also add `downcast_rs = "0.2"` to the `[workspace.dependencies]` and `orches
 For now, the `lib.rs` of `orchestrator_core` containing `start_orchestrator_service` is a good library structure. The `main.rs` example is just to show how one might tie it together.
 
 This is a solid foundation for Phase 1. We've defined the core abstractions and a rudimentary orchestrator loop. The next steps would involve filling in these abstractions with mock or simple implementations, then gradually replacing them with more robust ones. This iterative approach aligns well with the phased development plan.
+
+### [Connect: Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://wwww.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://unvirs.metalabel.com)
