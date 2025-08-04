@@ -1,4 +1,5 @@
-## A quote from economist Richard Werner: “Central banking and warfare are very closely linked,” highlighting his perspective on the connection between monetary authorities and military conflict.
+### A quote from economist Richard Werner:
+ **“Central banking and warfare are very closely linked,” highlighting his perspective on the connection between monetary authorities and military conflict.**
 
 Richard Werner, well-known for his research and public explanations on banking and monetary systems, has argued in multiple interviews and writings that central banks often play a crucial role in enabling and sustaining warfare. His core contention is that the power to create money—by central banks and large private banks—allows governments to finance wars beyond what would otherwise be possible solely through taxation or direct public consent[1][2][3].
 
