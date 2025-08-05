@@ -42,3 +42,4 @@ Richard Werner consistently argues, both in interviews and academic contexts, th
 19. [Richard Werner Exposes the Evils of the Fed & the Link Between](https://www.rova.nz/podcasts/the-tucker-carlson-show/episodes/richard-werner-exposes-the-evils-of-the-fed-the-link-between-banking-war-and-the-cia)
 20. [Richard Werner | Speaker - IAI TV ](https://iai.tv/home/speakers-and-authors/richard-werner)
 21. [A lost century in economics: Three theories of banking](https://www.sciencedirect.com/science/article/pii/S1057521915001477)
+22. [ Richard Werner - 2 hour video](https://rumble.com/v6wstig-richard-werner-exposes-the-evils-of-the-fed-and-the-link-between-banking-wa.html)
