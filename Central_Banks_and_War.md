@@ -17,9 +17,10 @@ Richard Werner, well-known for his research and public explanations on banking a
 - Broader research also explains the operational details: in wartime, central banks help governments borrow at lower costs, step in to buy government debt, and manage domestic and foreign reserves tied directly to military needs[9][10].
 
 **Summary:** 
+
 Richard Werner consistently argues, both in interviews and academic contexts, that central banking is intertwined with warfare by providing governments the means to finance large-scale conflicts—often without public scrutiny. This view is substantiated by academic research and historical precedent, illustrating how the power to create money translates into geopolitical and military power[1][6][4].
 
-### Sources:
+##### Sources:
 1. [Richard Werner Exposes Central Banks & the SORA Alternative ](https://www.soranauts.com/richard-werner-exposes-central-banks-and-the-sora-alternative)
 2. [The Secrets of the Financial System | Richard Werner - YouTube ](https://www.youtube.com/watch?v=sClLrobRNXg)
 3. [Richard Werner and the threat from central banking - Labour Affairs ](https://labouraffairs.com/2025/02/01/conversation-with-an-economist-richard-werner-and-the-threat-from-central-banking/)
@@ -43,3 +44,16 @@ Richard Werner consistently argues, both in interviews and academic contexts, th
 20. [Richard Werner | Speaker - IAI TV ](https://iai.tv/home/speakers-and-authors/richard-werner)
 21. [A lost century in economics: Three theories of banking](https://www.sciencedirect.com/science/article/pii/S1057521915001477)
 22. [ Richard Werner - 2 hour video](https://rumble.com/v6wstig-richard-werner-exposes-the-evils-of-the-fed-and-the-link-between-banking-wa.html)
+
+### Connect with Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://www.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://univrs.metalabel.com)
