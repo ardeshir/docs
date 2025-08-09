@@ -1,6 +1,8 @@
 # Syzygy
 
-Syzygy is primarily found as a symbolic concept—from Jungian psychology to Gnostic religion and literary analysis—rather than as a named character in major literary sources. In fiction, “Syzygy” is most visibly used as the title and theme in the X-Files episode, not as a distinct character but as a motif representing duality and opposites within characters like Mulder and Scully[1]. The cultural meaning of Syzygy consistently centers on the union of complementary opposites—often masculine and feminine—yoked together in creative tension rather than opposition[5].
+Syzygy is primarily found as a symbolic concept—from Jungian psychology to Gnostic religion and literary analysis—rather than as a named character in major literary sources. In fiction, “Syzygy” is most visibly used as the title and theme in the X-Files episode, not as a distinct character but as a motif representing duality and opposites within characters like Mulder and Scully [1]. 
+
+The cultural meaning of Syzygy consistently centers on the union of complementary opposites—often masculine and feminine—yoked together in creative tension rather than opposition [5].
 
 ### Key Contexts and Meanings:
 
