@@ -162,7 +162,7 @@ AWS Lambda and similar platforms support JVM applications but face **cold start 
 
 ### Phase 1: Infrastructure preparation
 
-1. **Domain Setup**: Configure gov.cryptosaint.io subdomain in Cloudflare DNS with proxied status
+1. **Domain Setup**: Configure file.univrs.io subdomain in Cloudflare DNS with proxied status
 1. **SSL Configuration**: Obtain Extended Validation certificate (required for tax software)  
 1. **Security Setup**: Configure WAF rules, rate limiting, and bot protection 
 1. **Cloud Infrastructure**: Provision Kubernetes cluster or container service
@@ -220,12 +220,13 @@ Tax software faces extensive compliance requirements:
 
 **Annual cost projections** for 10 million tax filings:
 
-**Hybrid Architecture**: $2,800 annually ($0.28 per filing)
+**Hybrid Architecture**: $2,800  Annually  ($0.28 per filing)
 
 - Off-season: $77/month (Cloudflare + minimal VPS)
 - Peak season: $300-800/month (auto-scaled cluster)
 
-**Pure Cloud Solutions**: $4,500-6,000 annually
+**Pure Cloud Solutions**: $4,500-6,000 annually 
+
 **On-premises Equivalent**: $15,000+ annually
 
 ### Traffic pattern optimization
@@ -260,3 +261,16 @@ For the Direct File application, implement a **phased hybrid deployment**:
 This approach provides **immediate deployment capability** while positioning for future Cloudflare-native hosting. The combination delivers global performance, government-grade security, and cost efficiency essential for public tax filing services.  
 
 The hybrid architecture handles the application’s complexity while leveraging Cloudflare’s strengths in edge delivery, security, and cost optimization   - creating a robust, compliant, and scalable platform for this critical government service. 
+
+### Connect with Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://www.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://univrs.metalabel.com)
