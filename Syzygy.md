@@ -27,12 +27,12 @@ Culturally, “Syzygy” remains a motif for exploring identity, relationship, a
 1. [The X-Files – Syzygy (Review) - the m0vie blog ](https://them0vieblog.com/2014/11/24/the-x-files-syzygy-review/)
 2. [PDF An Owl, a Syzygy and Three Syntheses ](https://studenttheses.universiteitleiden.nl/access/item:2604118/view)
 3. [Rethinking the Syzygy : r/Jung - Reddit ](https://www.reddit.com/r/Jung/comments/17rkt2h/rethinking_the_syzygy/)
-4. [PDF The Archetypes of the Collective Unconscious ](https://www.jungiananalysts.org.uk/wp-content/uploads/2018/07/C.-G.)-Jung-Collected-Works-Volume-9i_-The-Archetypes-of-the-Collective-Unconscious.pdf
+4. [PDF The Archetypes of the Collective Unconscious ](https://www.jungiananalysts.org.uk/wp-content/uploads/2018/07/C.-G.-Jung-Collected-Works-Volume-9i_-The-Archetypes-of-the-Collective-Unconscious.pdf)
 5. [Source: Jung's Syzygy (Mythic Journeys.org) | Healing Within the Blur ](https://healingintheblur.com/source-jungs-syzygy-mythic-journeys-org/)
 6. [Syzygies - The 1901 Jewish Encyclopedia - StudyLight.org ](https://www.studylight.org/encyclopedias/tje/e/syzygies.html)
 7. [Syzygy - Mute Magazine ](https://www.metamute.org/editorial/articles/syzygy)
-8. [THE SYZYGY: ANIMA AND ANIMUS - Full chapter. : r/Jung - Reddit ](https://www.reddit.com/r/Jung/comments/14oh11k/the_syzygy_anima_and_animus_full_chapter/
-9. [A Midsummer Night's Dream: Shakespeare's Syzygy of Meaning](https://jungpage.org/learn/articles/literature/)896-a-midsummer-nights-dream-shakespeares-syzygy-of-meaning-prologue
+8. [THE SYZYGY: ANIMA AND ANIMUS - Full chapter. : r/Jung - Reddit ](https://www.reddit.com/r/Jung/comments/14oh11k/the_syzygy_anima_and_animus_full_chapter/)
+9. [A Midsummer Night's Dream: Shakespeare's Syzygy of Meaning](https://jungpage.org/learn/articles/literature/896-a-midsummer-nights-dream-shakespeares-syzygy-of-meaning-prologue)
 10. [(PDF) Syzygy: Love Made Strange - Academia.edu ](https://www.academia.edu/35784214/Syzygy_Love_Made_Strange)
 
 ### Connect with Univrs.io
