@@ -80,3 +80,17 @@ Sources
 [6] [The Rustonomicon - The Edition Guide ](https://doc.bccnsoft.com/docs/rust-1.36.0-docs-html/edition-guide/rust-2018/documentation/the-rustonomicon.html)
 [7] [The Rustonomicon | Hacker News ](https://news.ycombinator.com/item?id=27066836)
 [8] [PDF, The Rustonomicon ](https://killercup.github.io/trpl-ebook/nomicon-2015-09-12.a4.pdf)
+
+
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://www.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://univrs.metalabel.com)

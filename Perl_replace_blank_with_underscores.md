@@ -32,3 +32,16 @@ Also, note that this Perl script has to be run as a user with appropriate permis
 Reference (File::Find documentation): https://perldoc.perl.org/File/Find
 
 Before running the code, don't forget to check the file permissions.
+
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://www.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://univrs.metalabel.com)

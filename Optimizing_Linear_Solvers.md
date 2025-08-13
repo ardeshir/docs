@@ -145,3 +145,16 @@ Profile the code to identify bottlenecks using tools like cProfile or line_profi
 ### Summary
  
 By applying these optimizations, you should see an improvement in the performance of your solve function. Each step focuses on reducing redundancy, leveraging efficient data structures, and using batch operations where possible. After making these changes, run performance tests to measure improvements and further refine the code as needed.
+
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://www.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://univrs.metalabel.com)

@@ -51,4 +51,15 @@ Sources
 [9] Oxide Computer: Revolutionizing Cloud Computing for the Modern ... https://www.insightsfromanalytics.com/post/oxide-computer-revolutionizing-cloud-computing-for-the-modern-data-center
 
 
-https://www.perplexity.ai/search/bbdf4870-930a-4713-b6ef-1a16cd2742b7
+### Connect: Join Univrs.io
+- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://www.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://univrs.metalabel.com)
