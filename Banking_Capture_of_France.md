@@ -1,6 +1,6 @@
 # The Banking Capture of France: Primary Evidence of Elite Financial Extraction (1789-1800)
 
-# *How Swiss-Genevan banking dynasties engineered a revolution, sabotaged its currency, and captured its financial system*
+# [*How Swiss-Genevan banking dynasties engineered a revolution, sabotaged its currency, and captured its financial system*](https://www.patreon.com/posts/137639987)
 
 ---
 
@@ -26,11 +26,11 @@ The real drain wasn't palace luxuryâ€”it was the system of tax farming and 
 
 **Tax Farming: Legalized Extraction**
 
-The *fermiers gÃ©nÃ©raux* (tax farmers) operated the most sophisticated extraction racket in European history. These private financiers advanced money to the crown, then collected taxes with massive profit margins.
+The *fermiers generaux* (tax farmers) operated the most sophisticated extraction racket in European history. These private financiers advanced money to the crown, then collected taxes with massive profit margins.
 
 Primary source evidence from the *bail David* (1774-1780) contract reveals the scale:
 
-> "For the bail David, one contemporary estimate put a fermier's average earning from profits during these six years at 156,000 livres. Combined with the fermiers other income, each would have earned 291,000, a healthy recovery from the previous lease. Another contemporary, FranÃ§ois-Nicholas Mollien, estimated that the total income from all sources for a fermier of the bail David was 300,000 livres per year. These similar estimates suggest a return of 20 percent."[80]
+> "For the bail David, one contemporary estimate put a fermier's average earning from profits during these six years at 156,000 livres. Combined with the fermiers other income, each would have earned 291,000, a healthy recovery from the previous lease. Another contemporary, Francois-Nicholas Mollien, estimated that the total income from all sources for a fermier of the bail David was 300,000 livres per year. These similar estimates suggest a return of 20 percent."[80]
 > 
 
 The *bail Salzard* (1780-1786) records show even higher extraction rates:
@@ -87,7 +87,7 @@ Born in Geneva (1744), Perregaux became "the most prominent figure in Parisian b
 
 The evidence of his role in Napoleon's coup is extensive:
 
-> "Mathiez (1919) concluded that PerrÃ©gaux 'was one of the sponsors of the coup d'Ã©tat of 19 Brumaire.' After Napoleon's coup, PerrÃ©gaux became fully devoted to the Consular regime; a police report of November 26, 1800 indicates that a PerrÃ©gaux was in a secret meeting with BarbÃ©-Marbois and other bankers to ensure Napoleon's power in his absence"[71].
+> "Mathiez (1919) concluded that Perregaux 'was one of the sponsors of the coup d'Ã©tat of 19 Brumaire.' After Napoleon's coup, Perregaux became fully devoted to the Consular regime; a police report of November 26, 1800 indicates that a Perregaux was in a secret meeting with Barbe-Marbois and other bankers to ensure Napoleon's power in his absence"[71].
 > 
 
 **The Coup Financing Network**
@@ -135,7 +135,7 @@ The London Museum holds primary evidence of this collaboration:
 
 This wasn't coincidental. Napoleon's nephew, heir to the "revolutionary" legend, literally helped the British establishment suppress peaceful petitioners for democratic rights. Nine months later, he returned to France to become Emperor Napoleon III.
 
-The symbolic importance cannot be overstated: a Bonaparteâ€”representing the French Revolution's supposed legacyâ€”stood with British aristocrats against British workers. This reveals the true nature of elite solidarity that transcends national boundaries.
+The symbolic importance cannot be overstated: a Bonaparteâ€”representing the French Revolution's supposed legacy stood with British aristocrats against British workers. This reveals the true nature of elite solidarity that transcends national boundaries.
 
 ---
 
@@ -145,7 +145,7 @@ The symbolic importance cannot be overstated: a Bonaparteâ€”representing th
 
 The private banking structure established in 1800 survived every subsequent regime change. As economic historian Louis Rouanet documents:
 
-> "The bank outlasted every regime change because it was the real power. Napoleon's Empire, Bourbon Restoration, July Monarchy, Second Republic, Second Empireâ€”governments changed, but the banking structure endured"[71].
+> "The bank outlasted every regime change because it was the real power. Napoleon's Empire, Bourbon Restoration, July Monarchy, Second Republic, Second Empire governments changed, but the banking structure endured"[71].
 > 
 
 **Direct Institutional Lineage**
@@ -190,7 +190,20 @@ Until we understand that the real conflict isn't between nations but between fin
 
 - Jean-Baptiste Say, economist and critic of banking privilege
 - Jacques Necker, Finance Minister accounts
-- FranÃ§ois-Nicholas Mollien, banking profits estimates
+- Francois-Nicholas Mollien, banking profits estimates
 - Mathiez historical analysis of coup financing
 
 The evidence is overwhelming: the French Revolution's financial legacy was not accidental chaos, but systematic capture by transnational banking elites who continue to rule through debt and extraction to this day.
+
+# Connect to Univrs.io   
+- [Join Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
+- [Univrs Patreon](https://www.patreon.com/univrs)
+- [Univrs.io](https://univrs.io)
+- [https://ardeshir.io](https://ardeshir.io)
+- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
+- [https://github.com/ardeshir](https://github.com/ardeshir)
+- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
+- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
+- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
+- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
+- [Univrs MetaLabel](https://univrs.metalabel.com)
