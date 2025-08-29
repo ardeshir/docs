@@ -29,8 +29,8 @@ aws elbv2 modify-load-balancer-attributes \
 
 ## ELB Service Account IDs for China Regions
 
-- **Beijing (cn-north-1)**: 638102146993
-- **Ningxia (cn-northwest-1)**: 037604701340
+- **Beijing (cn-north-1)**: 
+- **Ningxia (cn-northwest-1)**: 
 
 ## Complete Example for Beijing (cn-north-1)
 
@@ -57,7 +57,7 @@ aws elbv2 modify-load-balancer-attributes \
     {
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws-cn:iam::638102146993:root"
+        "AWS": "arn:aws-cn:iam::<638102146993>:root"
       },
       "Action": "s3:PutObject",
       "Resource": "arn:aws-cn:s3:::my-alb-logs-bucket/eks-alb-logs/*"
@@ -75,7 +75,7 @@ aws elbv2 modify-load-balancer-attributes \
     {
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws-cn:iam::037604701340:root"
+        "AWS": "arn:aws-cn:iam::<037604701340>:root"
       },
       "Action": "s3:PutObject",
       "Resource": "arn:aws-cn:s3:::my-alb-logs-bucket/eks-alb-logs/*"
