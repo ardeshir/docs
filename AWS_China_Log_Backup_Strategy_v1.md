@@ -260,7 +260,7 @@ aws logs create-export-task \
 ```bash
 aws rds modify-db-instance \
   --db-instance-identifier mydb-instance \
-  --cloudwatch-logs-export-configuration LogTypesToEnable=error,general,slow-query \
+  --cloudwatch-logs-export-configuration EnableLogTypes=error,general,slow-query \
   --region cn-north-1 \
   --endpoint-url https://rds.cn-north-1.amazonaws.com.cn
 ```
@@ -270,7 +270,7 @@ aws rds modify-db-instance \
 ```bash
 aws rds modify-db-instance \
   --db-instance-identifier mydb-instance \
-  --cloudwatch-logs-export-configuration LogTypesToEnable=postgresql \
+  --cloudwatch-logs-export-configuration EnableLogTypes=postgresql \
   --region cn-north-1
 ```
 
