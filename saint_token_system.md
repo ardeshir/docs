@@ -213,4 +213,4 @@ This system will revolutionize how we fund public goods development while provin
 1. Secure initial funding for 6-month runway
 1. Build partnerships with 2-3 aligned organizations
 
-This framework provides the foundation for bootstrapping your regenerative economy while maintaining focus on practical implementation steps that can begin immediately.
+This framework provides the foundation for bootstrapping our regenerative economy while maintaining focus on practical implementation steps that can begin immediately.

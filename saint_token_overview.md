@@ -2,9 +2,9 @@
 
 **Performance & Security**: Rust’s memory safety without garbage collection makes it ideal for handling financial transactions and cryptographic operations at scale.
 
-**Rich Cryptography Ecosystem**: The search results show excellent libraries like `curve25519-dalek`, `bulletproofs`, `ed25519-dalek`, and `anonymous-credit-tokens` that directly support your privacy-preserving requirements.
+**Rich Cryptography Ecosystem**: The search results show excellent libraries like `curve25519-dalek`, `bulletproofs`, `ed25519-dalek`, and `anonymous-credit-tokens` that directly support our privacy-preserving requirements.
 
-**Blockchain Integration**: Rust is the language of choice for Substrate/Polkadot, Solana, and many other modern blockchain platforms, giving you maximum interoperability options.
+**Blockchain Integration**: Rust is the language of choice for Substrate/Polkadot, Solana, and many other modern blockchain platforms, giving us maximum interoperability options.
 
 ## Critical Technical Questions
 
