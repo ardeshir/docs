@@ -29,7 +29,7 @@ resource origin_dev_cnc_ui 'Microsoft.Cdn/profiles/origingroups/origins@2022-11-
     enforceCertificateNameCheck: true 
     sharedPrivateLinkResource: {
       privateLink:{
-        id: storageAccount.id  // Use constructed resource ID
+        id: storageAccount.id  // Use storage account resource ID
         }
       groupId: 'web'
       privateLinkLocation: 'East US' // Match your region
