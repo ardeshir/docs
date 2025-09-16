@@ -8,32 +8,13 @@ Strategies to resolve this:
 
 ```bicep
 // Reference the existing Private Endpoint created by the portal
-resource existingPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' existing = {
-  name: '2d2eb87d-45c9-440f-9438-c9cd94befe1d'
-  scope: resourceGroup('eafd-Prod-eastus')
+// NEW PE for dev-cnc-ui
+// Reference the existing Private Endpoint created by the portal
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' existing = {
+  name: 'stfsdiunitydevui001'
+  scope: resourceGroup('a3cfee58-9860-4304-8f70-04e60a850479', 'rg-fsdi-unity-dev')
 }
 
-// Your existing origin group (unchanged)
-resource originGroup_dev_cnc_ui 'Microsoft.Cdn/profiles/origingroups@2022-11-01-preview' = {
-  parent: profile
-  name: 'og-dev-cnc-ui'
-  properties: {
-    loadBalancingSettings: {
-      sampleSize: 4
-      successfulSamplesRequired: 3
-      additionalLatencyInMilliseconds: 50
-    }
-    healthProbeSettings: {
-      probePath: '/'
-      probeRequestType: 'HEAD'
-      probeProtocol: 'Http'
-      probeIntervalInSeconds: 100
-    }
-    sessionAffinityState: 'Disabled'
-  }
-}
-
-// Modified origin with private link configuration
 resource origin_dev_cnc_ui 'Microsoft.Cdn/profiles/origingroups/origins@2022-11-01-preview' = {
   parent: originGroup_dev_cnc_ui
   name: 'dev-cnc-ui'
@@ -43,18 +24,22 @@ resource origin_dev_cnc_ui 'Microsoft.Cdn/profiles/origingroups/origins@2022-11-
     httpsPort: 443
     priority: 1
     weight: 50
-    originHostHeader: 'stfsdiunitydevui001.z13.web.core.windows.net'
+    originHostHeader:'stfsdiunitydevui001.z13.web.core.windows.net'
     enabledState: 'Enabled'
-    enforceCertificateNameCheck: true
-    // Add private link configuration
-    privateLinkResource: {
-      id: existingPrivateEndpoint.id
-      // You may also need to specify the private link service connection
+    enforceCertificateNameCheck: true 
+    sharedPrivateLinkResource: {
+      privateLink:{
+        id: storageAccount.id  // Use constructed resource ID
+        }
+      groupId: 'web'
       privateLinkLocation: 'East US' // Match your region
       requestMessage: 'Front Door private link connection'
+      status: 'Approved'
     }
-  }
+  } 
+  dependsOn: []
 }
+
 ```
 
 ## Strategy 2: Conditional Deployment with Resource Existence Check
