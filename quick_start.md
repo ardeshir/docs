@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Mycelia Network - Quick Start Script
-
 # This gets you running in 5 minutes!
 
 set -e
