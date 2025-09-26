@@ -122,12 +122,11 @@ Cargill operates as perhaps the world’s most influential company that most peo
 
 The company embodies the complexity of globalization - simultaneously enabling food security for millions while contributing to environmental and social problems that threaten long-term human development. Understanding Cargill is essential to understanding how corporate power shapes the modern world, often invisibly but with profound consequences for human welfare and planetary health.
 
-
-# Overall Assessment
+## Overall Assessment
 This is a strong, graduate-level analysis that successfully frames Cargill as a "Hidden Colossus." Its primary strength lies in identifying and articulating the "Cargill Paradox"—the tension between its essential role in global food security and the significant negative externalities of its operations. The use of specific data points and sourced quotes adds significant credibility. The narrative flows logically from historical context to modern-glocal impact.
 The main areas for improvement involve adding more nuance to its competitive landscape, deepening the analysis of its private-company structure, and more robustly incorporating the counter-arguments that Cargill itself would likely deploy.
 
-## Critique of the Findings & Analysis
+### Critique of the Findings & Analysis
 
 Strengths:
 
