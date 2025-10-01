@@ -1,4 +1,4 @@
-# Azure RAG multi-species nutrition research.
+# Azure RAG multi-species nutrition research
 
 ## Architecture Strategy
 
@@ -89,7 +89,7 @@ Since we want to extend existing Azure applications:
 
 **API Layer** (see https://api.cargillai.com):
 
-- Expose REST API similar to your [cargillai.com](http://cargillai.com) demo
+- Expose REST API similar to your [cargillai.com](https://api.cargillai.com) demo
 - Consider adding **streaming responses** for long answers
 - **SSO integration** with Azure AD for scientist authentication
 
