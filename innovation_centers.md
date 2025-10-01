@@ -57,7 +57,7 @@ This is where we can really add value beyond basic RAG
 
 - **Azure AI Search** (my recommendation - native Azure integration, hybrid search built-in)
 - Azure Cosmos DB with vector search
-- Your existing setup probably uses one of these already
+- Our existing setup probably uses one of these already
 
 ### 5. **Query Understanding & Routing**
 
@@ -89,7 +89,7 @@ Since we want to extend existing Azure applications:
 
 **API Layer** (see https://api.cargillai.com):
 
-- Expose REST API similar to your [cargillai.com](https://api.cargillai.com) demo
+- Expose REST API similar to our [cargillai.com](https://api.cargillai.com) demo
 - Consider adding **streaming responses** for long answers
 - **SSO integration** with Azure AD for scientist authentication
 
@@ -111,7 +111,7 @@ Since we want to extend existing Azure applications:
 
 **Phase 2: Domain Optimization (Weeks 4-6)**
 
-- Gather stakeholder queries (you mentioned this is coming)
+- Gather stakeholder queries 
 - Refine chunking and metadata based on actual use cases
 - Add species-specific and center-specific filtering
 - Citation and source tracking
@@ -123,7 +123,7 @@ Since we want to extend existing Azure applications:
 - Implement feedback loop for improving results
 - Testing with 10 scientists
 
-## Key Considerations for Your Domain
+## Key Considerations for Our Domain
 
 **1. Data Quality & Versioning:**
 
@@ -149,7 +149,7 @@ For initial build with 10 scientists:
 
 1. Index all SharePoint documents with basic metadata
 1. Hybrid search with Azure AI Search
-1. Simple web interface (extend your Rust WASM client?)
+1. Simple web interface (extend Our Rust WASM client?)
 1. Focus on 2-3 most common query types from stakeholders
 1. Always cite sources with document links
 
@@ -157,16 +157,16 @@ For initial build with 10 scientists:
 
 **Next Steps for You:**
 
-1. **Gather those stakeholder queries** - this will heavily influence your chunking strategy and metadata schema
-1. **Map out your SharePoint structure** - how many sites, how documents are organized by species/center
-1. **Choose your initial interface** - Teams bot? Web app? Both?
+1. **Gather those stakeholder queries** - this will heavily influence Our chunking strategy and metadata schema
+1. **Map out our SharePoint structure** - how many sites, how documents are organized by species/center
+1. **Choose our initial interface** - Teams bot? Web app? Both?
 
 **Questions for you:**
 
 - Use Azure AI Search set up, or are we using a different vector store?
-- What’s your LLM preference - Azure OpenAI GPT-4? Something else?
+- What’s our LLM preference - Azure OpenAI GPT-4? Something else?
 - Are there any existing taxonomy or tagging systems in SharePoint you can leverage?
-- Timeline expectations from your Project Owner?
+- Timeline expectations from our Project Owner?
 
 # Technical Overview 
 
@@ -1055,7 +1055,7 @@ public class ScheduledIndexing
 1. **Test with one small SharePoint site first**
 1. **Validate chunking quality** - manually review a few documents
 1. **Test search relevance** with real scientist queries
-1. **Add metadata enrichment** based on your domain taxonomy
+1. **Add metadata enrichment** based on our domain taxonomy
 
 ### Next Todos:
 
