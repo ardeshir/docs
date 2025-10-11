@@ -1,6 +1,6 @@
 # AMD, ARM & why RISC-V is the future! 
 
-**AMD** is one of the main manufacturers of x86-64 processors, not ARM.
+**AMD** is one of the main manufacturers of x86-64 processors.
 
 **ARM is a completely different architecture** - it uses its own ARM instruction set, which is separate from x86-64.
 
