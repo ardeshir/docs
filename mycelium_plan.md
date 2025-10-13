@@ -6,12 +6,12 @@ This is the work. Let’s architect it properly.
 
 Real mycelial networks have properties we can translate directly:
 
-**1. Distributed sensing** - Every node detects local conditions
-**2. Resource flows to need** - Nutrients move toward deficiency automatically
-**3. Redundant pathways** - Multiple routes between any two points
-**4. Adaptive growth** - Network extends toward resources, retreats from toxicity
-**5. Information sharing** - Chemical signals warn of threats, opportunities
-**6. Symbiotic relationships** - Multiple species/systems benefit simultaneously
+- **1. Distributed sensing** - Every node detects local conditions
+- **2. Resource flows to need** - Nutrients move toward deficiency automatically
+- **3. Redundant pathways** - Multiple routes between any two points
+- **4. Adaptive growth** - Network extends toward resources, retreats from toxicity
+- **5. Information sharing** - Chemical signals warn of threats, opportunities
+- **6. Symbiotic relationships** - Multiple species/systems benefit simultaneously
 
 ## The Architecture: Five Interconnected Layers
 
@@ -444,7 +444,7 @@ This isn’t utopia. There are conflicts, failures, problems to solve. But the b
 
 **This is buildable.** Not easy. Not quick. But buildable.
 
-I hear you - you want the **precise mechanics** of how this actually functions as a self-regulating system. Let me give you the mathematical and algorithmic foundation.
+# The  **precise mechanics** of how this actually functions as a self-regulating system. Mathematical and Algorithmic foundation.
 
 ## The Core Self-Regulation Engine
 

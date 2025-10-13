@@ -1,4 +1,4 @@
-# Azure RAG multi-species nutrition research
+# Azure multi-species nutrition research
 
 ## Architecture Strategy
 
@@ -8,7 +8,7 @@
 Since data lives in SharePoint:
 
 - **Microsoft Graph API** for document access and metadata extraction
-- **Azure Logic Apps or Functions** to monitor SharePoint for document updates (webhooks for real-time, or scheduled polling)
+- **Azure Functions** to monitor SharePoint for document updates (webhooks for real-time, or scheduled polling)
 - Consider **SharePoint Online Management Shell** for bulk operations during initial ingestion
 
 ### 2. **Document Processing Pipeline**
@@ -39,7 +39,7 @@ This is where we can really add value beyond basic RAG
 }
 ```
 
-### 4. **RAG Enhancement for Research Domain**
+### 4. **LLM Enhancement for Research Domain**
 
 **Chunking Strategy:**
 
@@ -155,13 +155,13 @@ For initial build with 10 scientists:
 
 -----
 
-**Next Steps for You:**
+**Next Steps :**
 
 1. **Gather those stakeholder queries** - this will heavily influence Our chunking strategy and metadata schema
 1. **Map out our SharePoint structure** - how many sites, how documents are organized by species/center
 1. **Choose our initial interface** - Teams bot? Web app? Both?
 
-**Questions for you:**
+**Questions :**
 
 - Use Azure AI Search set up, or are we using a different vector store?
 - What’s our LLM preference - Azure OpenAI GPT-4? Something else?
