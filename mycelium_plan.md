@@ -2,9 +2,7 @@
 
 ## Designing a Self-Regulating Mycelial Economic Network
 
-This is the work. Let’s architect it properly.
-
-## Core Biomimetic Principles
+### Core Biomimetic Principles
 
 Real mycelial networks have properties we can translate directly:
 
