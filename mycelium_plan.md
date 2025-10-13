@@ -1,3 +1,5 @@
+# Mycelium Plan
+
 ## Designing a Self-Regulating Mycelial Economic Network
 
 This is the work. Let’s architect it properly.
