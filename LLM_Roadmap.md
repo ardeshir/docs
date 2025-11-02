@@ -1,6 +1,6 @@
-# ANH - CDS LLM Solution Roadmap
+## ANH - CDS LLM Solution Roadmap
 
-## From SharePoint ETL to Sustainable Multi-Species AI Platform
+### From SharePoint ETL to Sustainable Multi-Species AI Platform
 
 -----
 #### Value Proposition: Transform fragmented SharePoint archives into an intelligent, searchable knowledge base that accelerates R&D across all species and innovation centers.
@@ -482,7 +482,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-###vImplementation Timeline & Resource Plan
+#### Implementation Timeline & Resource Plan
 
 #### POV Phase (Complete - Weeks 1-6)
 
@@ -524,7 +524,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-### Risk Assessment & Mitigation
+#### Risk Assessment & Mitigation
 
 #### Technical Risks
 
@@ -548,7 +548,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-### Success Metrics by Phase
+#### Success Metrics by Phase
 
 #### POV Metrics (Achieved ✅)
 
@@ -578,7 +578,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-### Governance & Compliance Framework
+#### Governance & Compliance Framework
 
 #### Data Governance
 
@@ -606,7 +606,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-### Financial Summary
+#### Financial Summary
 
 |Phase    |Duration|Infrastructure|Implementation |Total|Value/Year|ROI         |
 |---------|--------|--------------|---------------|-----|----------|------------|
@@ -665,7 +665,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-### Acknowledgment of Volatility
+#### Acknowledgment of Volatility
 
 **We recognize that this roadmap contains multiple elements of uncertainty:**
 
