@@ -12,7 +12,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-## Diagram 1: POV Architecture (What We Built to Prove Value)
+#### Diagram 1: POV Architecture (What We Built to Prove Value)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -102,7 +102,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-## Diagram 2: MVP Architecture (Sustainable Foundation)
+#### Diagram 2: MVP Architecture (Sustainable Foundation)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -267,7 +267,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-## Diagram 3: Final Product Vision (Enterprise Scale)
+#### Diagram 3: Final Product Vision (Enterprise Scale)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -482,15 +482,15 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-## Implementation Timeline & Resource Plan
+###vImplementation Timeline & Resource Plan
 
-### POV Phase (Complete - Weeks 1-6)
+#### POV Phase (Complete - Weeks 1-6)
 
 - **Budget**: $360 (3 months)
 - **Team**: 2 FTE (1 engineer, 1 product owner)
 - **Status**: ✅ Completed - Value proven
 
-### MVP Phase (Months 4-9)
+#### MVP Phase (Months 4-9)
 
 - **Budget**: $14,400 annually + $120K implementation
 - **Team**: 4-5 FTE
@@ -505,7 +505,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
   - Month 8: Integration testing + security hardening
   - Month 9: Phased rollout to 200 users
 
-### Final Product Phase (Months 10-18)
+#### Final Product Phase (Months 10-18)
 
 - **Budget**: $96K-144K annually + $300K implementation
 - **Team**: 8-10 FTE
@@ -524,9 +524,9 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-## Risk Assessment & Mitigation
+### Risk Assessment & Mitigation
 
-### Technical Risks
+#### Technical Risks
 
 |Risk                                |Impact|Probability|Mitigation                                                            |
 |------------------------------------|------|-----------|----------------------------------------------------------------------|
@@ -536,7 +536,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 |**Knowledge graph complexity**      |MEDIUM|MEDIUM     |Start with simple relationships; expand based on user needs           |
 |**Multi-region latency**            |MEDIUM|LOW        |CDN for static content; regional caching strategies                   |
 
-### Organizational Risks
+#### Organizational Risks
 
 |Risk                            |Impact|Probability|Mitigation                                                         |
 |--------------------------------|------|-----------|-------------------------------------------------------------------|
@@ -548,16 +548,16 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-## Success Metrics by Phase
+### Success Metrics by Phase
 
-### POV Metrics (Achieved ✅)
+#### POV Metrics (Achieved ✅)
 
 - Search success rate: **72%** (target: 60%)
 - Time to information reduction: **60%** (target: 40%)
 - User satisfaction: **8.3/10** (target: 7/10)
 - ROI: **5,436%** (target: 500%)
 
-### MVP Metrics (Targets)
+#### MVP Metrics (Targets)
 
 - **Adoption**: 80% of target users (200) active monthly
 - **Coverage**: 3 species with 150K+ documents indexed
@@ -566,7 +566,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 - **Time Savings**: 7,500 hours/year ($562K value)
 - **User Satisfaction**: 8.5/10 across all species
 
-### Final Product Metrics (Targets)
+#### Final Product Metrics (Targets)
 
 - **Global Adoption**: 85% of target users (1,000) active monthly
 - **Coverage**: 5 species, 1M+ documents, 8 innovation centers
@@ -578,9 +578,9 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-## Governance & Compliance Framework
+### Governance & Compliance Framework
 
-### Data Governance
+#### Data Governance
 
 - **Classification**: Proprietary research data (Confidential)
 - **Retention**: 7-year minimum per regulatory requirements
@@ -588,7 +588,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 - **Audit Logging**: All queries, API calls, admin actions
 - **Data Quality**: Automated validation, human review queue
 
-### Security Controls
+#### Security Controls
 
 - **Authentication**: Azure AD SSO with MFA required
 - **Authorization**: Least-privilege model with regular access reviews
@@ -596,7 +596,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 - **Network**: Private endpoints, no public internet exposure
 - **Monitoring**: 24/7 SOC integration, automated threat detection
 
-### Compliance Requirements
+#### Compliance Requirements
 
 - **GDPR**: Data residency in EU for European data
 - **SOX**: Financial data handling procedures
@@ -606,7 +606,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-## Financial Summary
+### Financial Summary
 
 |Phase    |Duration|Infrastructure|Implementation |Total|Value/Year|ROI         |
 |---------|--------|--------------|---------------|-----|----------|------------|
@@ -614,29 +614,29 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 |**MVP**  |6 months|$14K          |$120K          |$134K|$2.0M     |1,400%      |
 |**Final**|9 months|$96-144K      |$300K          |$400K|$4-6M     |1,000-1,400%|
 
-### 3-Year Total Cost of Ownership
+#### 3-Year Total Cost of Ownership
 
 - **Capital**: $450K (implementation)
 - **Operating**: $400K (infrastructure, years 1-3)
 - **Personnel**: $1.2M (dedicated team, years 1-3)
 - **Total 3-Year TCO**: $2.05M
 
-### 3-Year Value Realization
+#### 3-Year Value Realization
 
 - **Time Savings**: $15M (conservative estimate)
 - **Quality Improvements**: $3M (reduced duplicate work)
 - **Innovation Acceleration**: $2M (faster time-to-market)
 - **Total 3-Year Value**: $20M
 
-### **Net Present Value (NPV)**: $17.95M
+#### **Net Present Value (NPV)**: $17.95M
 
-### **3-Year ROI**: 876%
+#### **3-Year ROI**: 876%
 
 -----
 
-## Executive Decision Framework
+#### Executive Decision Framework
 
-### Recommendation: PROCEED WITH MVP
+#### Recommendation: PROCEED WITH MVP
 
 **Rationale**:
 
@@ -665,7 +665,7 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-## Acknowledgment of Volatility
+### Acknowledgment of Volatility
 
 **We recognize that this roadmap contains multiple elements of uncertainty:**
 
@@ -680,9 +680,9 @@ This roadmap outlines the evolution from proof-of-value demonstration to enterpr
 
 -----
 
-## Appendix: Technology Decision Log
+#### Appendix: Technology Decision Log
 
-### Key Architectural Decisions
+##### Key Architectural Decisions
 
 **AD-001: Azure AI Search vs Alternatives**
 
