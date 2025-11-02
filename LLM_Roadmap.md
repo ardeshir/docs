@@ -3,10 +3,10 @@
 ## From SharePoint ETL to Sustainable Multi-Species AI Platform
 
 -----
-
 #### Value Proposition: Transform fragmented SharePoint archives into an intelligent, searchable knowledge base that accelerates R&D across all species and innovation centers.
-
-#### Compute & Storage = Programs | AI + Data = Value**
+-----
+#####  Compute & Storage = Programs 
+#####  AI + Data = Value
 
 This roadmap outlines the evolution from proof-of-value demonstration to enterprise-scale sustainable solution, acknowledging architectural volatility while prioritizing rapid value realization.
 
