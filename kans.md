@@ -700,5 +700,613 @@ The field’s rapid evolution—792+ citations and 50+ follow-up papers within 9
 
 Practical recommendations for practitioners: Use current KAN implementations for problems where 1-5% accuracy improvement or interpretability justifies 2-10x training cost. Monitor the efficient-KAN and FastKAN repositories for performance improvements. For production systems, prototype with PyKAN for full features, then deploy with efficient-KAN for speed. Avoid KANs for real-time learning, very high-dimensional data, or tasks where MLPs already work well. Leverage KAN’s unique strengths—symbolic regression, PDE solving, scientific discovery—rather than treating them as universal MLP replacements.
 
+-----
+
+Excellent choice! Visualization is where KANs really shine compared to MLPs. Let me show you how to extract and visualize what the network learned, then we can interpret it together.
+
+## Visualizing Learned Spline Functions
+
+Here’s a complete example that trains a KAN on a simple function and then visualizes what it learned:
+
+```python
+import torch
+import numpy as np
+import matplotlib.pyplot as plt
+from kan import KAN
+
+# Create a simple compositional function: f(x,y) = sin(x) * exp(-y)
+def target_function(x, y):
+    return torch.sin(x) * torch.exp(-y)
+
+# Generate training data
+n_samples = 1000
+x = torch.rand(n_samples, 1) * 2 * np.pi - np.pi  # [-π, π]
+y = torch.rand(n_samples, 1) * 2 - 1              # [-1, 1]
+X_train = torch.cat([x, y], dim=1)
+y_train = target_function(x, y)
+
+# Create dataset for PyKAN
+dataset = {
+    'train_input': X_train,
+    'train_label': y_train
+}
+
+# Initialize KAN: 2 inputs -> 3 hidden -> 1 output
+model = KAN([2, 3, 1], grid=5, k=3, seed=0)
+model.speed()  # Critical for performance
+
+# Train with progressive grid refinement
+print("Training KAN...")
+for grid_size in [5, 10, 20]:
+    print(f"\nGrid size: {grid_size}")
+    model.fit(dataset, opt="LBFGS", steps=100, lamb=0.01)
+    if grid_size < 20:
+        model.refine(grid_factor=2)
+
+# === THE KEY VISUALIZATION COMMAND ===
+model.plot(beta=10)  # Beta controls transparency (higher = more transparent for weak connections)
+plt.savefig('kan_visualization.png', dpi=150, bbox_inches='tight')
+```
+
+## What You’re Looking At
+
+When you run `model.plot()`, you’ll see a network diagram where:
+
+1. **Nodes** (circles) represent neurons in each layer
+1. **Edges** (curved lines) show connections with their activation functions plotted inline
+1. **Transparency** indicates connection strength - opaque lines are important, transparent are weak
+1. **Mini-plots on edges** show the actual learned spline function for that connection
+
+## Deeper Visualization: Individual Activation Functions
+
+To see the learned functions more clearly:
+
+```python
+# Visualize specific activation functions
+fig, axes = plt.subplots(2, 3, figsize=(15, 8))
+axes = axes.flatten()
+
+# Get the model's activations
+# Layer 0->1 (input to hidden)
+for i in range(min(6, len(model.act_fun[0].submodules))):
+    ax = axes[i]
+    
+    # Sample points to evaluate the learned function
+    x_range = torch.linspace(-1, 1, 200).unsqueeze(1)
+    
+    # Get the activation function for this edge
+    # model.act_fun[layer_idx] contains the activation functions
+    with torch.no_grad():
+        # Evaluate the learned spline
+        y_vals = model.act_fun[0][i // model.width[1]][i % model.width[1]](x_range)
+    
+    ax.plot(x_range.numpy(), y_vals.numpy(), linewidth=2)
+    ax.set_title(f'Input {i//3} → Hidden {i%3}')
+    ax.set_xlabel('Input value')
+    ax.set_ylabel('Activation output')
+    ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.savefig('individual_activations.png', dpi=150)
+plt.show()
+```
+
+## Symbolic Analysis: What Did It Learn?
+
+The most powerful feature - automatic symbolic discovery:
+
+```python
+# Suggest symbolic forms for the learned functions
+print("\nSuggesting symbolic forms...")
+model.suggest_symbolic(
+    lib=['x', 'x^2', 'x^3', 'x^4', 
+         '1/x', '1/x^2', 
+         'sqrt', 'x^0.5',
+         'sin', 'cos', 'tan',
+         'exp', 'log',
+         'abs', 'sgn',
+         'arcsin', 'arccos', 'arctan']
+)
+
+# The output will show something like:
+# "Layer 0->1, neuron 0: best match is 'sin' with R²=0.98"
+# "Layer 0->1, neuron 1: best match is 'exp' with R²=0.95"
+
+# Actually replace splines with discovered symbolic functions
+model.auto_symbolic(lib=['x', 'x^2', 'sin', 'cos', 'exp', 'log'])
+
+# Fine-tune after symbolic substitution
+model.fit(dataset, opt="LBFGS", steps=50, lamb=0.0)
+
+# Visualize again to see clean symbolic forms
+model.plot(beta=10)
+```
+
+## Practical Interpretation Example
+
+Let me show you what you’d discover with our sin(x) * exp(-y) function:
+
+```python
+# After training, you might see:
+# - Input x (index 0) → Hidden neuron 0: learns sin(x)
+# - Input y (index 1) → Hidden neuron 1: learns exp(-y) or exp(y)
+# - Hidden neurons → Output: learns multiplication
+
+# Compare original vs learned
+x_test = torch.linspace(-np.pi, np.pi, 100).unsqueeze(1)
+y_test = torch.linspace(-1, 1, 100).unsqueeze(1)
+X, Y = torch.meshgrid(x_test.squeeze(), y_test.squeeze(), indexing='ij')
+X_flat = X.flatten().unsqueeze(1)
+Y_flat = Y.flatten().unsqueeze(1)
+XY_test = torch.cat([X_flat, Y_flat], dim=1)
+
+with torch.no_grad():
+    Z_true = target_function(X_flat, Y_flat).reshape(100, 100)
+    Z_pred = model(XY_test).reshape(100, 100)
+
+fig, axes = plt.subplots(1, 3, figsize=(15, 4))
+
+im1 = axes[0].contourf(X.numpy(), Y.numpy(), Z_true.numpy(), levels=20, cmap='viridis')
+axes[0].set_title('True Function: sin(x) * exp(-y)')
+axes[0].set_xlabel('x')
+axes[0].set_ylabel('y')
+plt.colorbar(im1, ax=axes[0])
+
+im2 = axes[1].contourf(X.numpy(), Y.numpy(), Z_pred.numpy(), levels=20, cmap='viridis')
+axes[1].set_title('KAN Learned Function')
+axes[1].set_xlabel('x')
+axes[1].set_ylabel('y')
+plt.colorbar(im2, ax=axes[1])
+
+error = (Z_true - Z_pred).abs()
+im3 = axes[2].contourf(X.numpy(), Y.numpy(), error.numpy(), levels=20, cmap='Reds')
+axes[2].set_title('Absolute Error')
+axes[2].set_xlabel('x')
+axes[2].set_ylabel('y')
+plt.colorbar(im3, ax=axes[2])
+
+plt.tight_layout()
+plt.savefig('function_comparison.png', dpi=150)
+```
 
 -----
+### Visulizarion 
+
+A comprehensive Python script that demonstrates KAN visualization and interpretability. 
+This will be a complete, runnable example.​​​​​​​​​​​​​​​​
+
+A visualization script: 
+
+
+**5 visualizations showing different aspects of interpretability:**
+
+1. **`kan_structure_grid*.png`** - Network diagrams at each training stage showing:
+
+- Activation functions plotted on each edge
+- Connection strength via transparency
+- How the network evolves during grid refinement
+
+1. **`kan_symbolic_final.png`** - The final network after automatic symbolic discovery (sin, exp, etc.)
+1. **`individual_activations_layer*.png`** - Detailed plots of each learned spline function
+1. **`function_comparison.png`** - Side-by-side: true function vs learned vs error
+1. **`1d_slices.png`** - How each input variable affects the output independently
+
+## Quick Start
+
+```bash
+# Install PyKAN first
+pip install pykan
+
+# Run the demo
+python kan_visualization_demo.py
+```
+
+## What to Look For
+
+The script learns **f(x,y) = sin(x) × exp(-y²)**, which has clear compositional structure. After running, check:
+
+- **Do you see sin-like curves** in the activations from input x?
+- **Do you see exponential curves** in the activations from input y?
+- **Which neurons are active** (opaque connections) vs pruned (transparent)?
+- **Does `suggest_symbolic()` correctly identify** sin and exp functions?
+
+The key insight: Unlike MLPs where you’d see inscrutable weight matrices, here you can literally *see* that the network learned “take sine of x, take exponential of y-squared, multiply them.”
+
+Try it out and let me know what patterns you discover in the learned functions!​​​​​​​​​​​​​​​​
+
+> python kan_visualization_demo.py
+
+```
+“””
+KAN Visualization and Interpretability Demo
+
+This script demonstrates how to visualize learned spline functions in
+Kolmogorov-Arnold Networks (KANs) and extract interpretable symbolic forms.
+
+Key concepts demonstrated:
+
+1. Training a KAN on a compositional function
+1. Visualizing the network structure and learned activations
+1. Extracting symbolic representations of learned functions
+1. Comparing learned vs true functions
+   “””
+
+import torch
+import numpy as np
+import matplotlib.pyplot as plt
+from kan import KAN
+
+# Set random seed for reproducibility
+
+torch.manual_seed(42)
+np.random.seed(42)
+
+def create_target_function():
+“””
+Define a compositional target function that KAN should decompose well.
+f(x, y) = sin(x) * exp(-y^2)
+
+
+This has clear compositional structure:
+- sin(x) depends only on x
+- exp(-y^2) depends only on y
+- Final output is their product
+"""
+def f(x, y):
+    return torch.sin(x) * torch.exp(-y**2)
+return f
+
+
+
+def generate_training_data(n_samples=1000):
+“”“Generate training data from the target function.”””
+# Sample inputs uniformly
+x = torch.rand(n_samples, 1) * 2 * np.pi - np.pi  # [-π, π]
+y = torch.rand(n_samples, 1) * 2 - 1              # [-1, 1]
+
+X = torch.cat([x, y], dim=1)
+
+# Compute target values
+target_fn = create_target_function()
+y_target = target_fn(x, y)
+
+return X, y_target, x, y
+
+
+def train_kan_with_visualization(X_train, y_train):
+“””
+Train a KAN with progressive grid refinement and visualize at each stage.
+“””
+# Create dataset in PyKAN format
+dataset = {
+‘train_input’: X_train,
+‘train_label’: y_train
+}
+
+
+# Initialize KAN: 2 inputs -> 5 hidden neurons -> 1 output
+# Keeping it small for interpretability
+print("Initializing KAN [2, 5, 1]...")
+model = KAN([2, 5, 1], grid=3, k=3, seed=0)
+model.speed()  # CRITICAL: Enables fast mode (10-30x speedup)
+
+# Progressive training with grid refinement
+grid_sizes = [3, 5, 10, 20]
+
+for i, grid_size in enumerate(grid_sizes):
+    print(f"\n{'='*60}")
+    print(f"Training with grid size: {grid_size}")
+    print(f"{'='*60}")
+    
+    # Train for this grid size
+    results = model.fit(
+        dataset, 
+        opt="LBFGS",  # LBFGS works well for small datasets
+        steps=100, 
+        lamb=0.01,    # Regularization to encourage sparsity
+        lamb_entropy=2.0  # Encourage uniform neuron usage
+    )
+    
+    print(f"Final loss: {results['train_loss'][-1]:.6f}")
+    
+    # Visualize at this stage
+    print(f"Generating visualization for grid size {grid_size}...")
+    fig, ax = plt.subplots(figsize=(12, 8))
+    model.plot(
+        beta=10,  # Controls transparency (higher = more transparent for weak connections)
+        folder=f'./kan_plots',
+        in_vars=['x', 'y'],
+        out_vars=['f(x,y)'],
+        title=f'KAN Structure (Grid={grid_size})'
+    )
+    plt.savefig(f'kan_structure_grid{grid_size}.png', dpi=150, bbox_inches='tight')
+    plt.close()
+    
+    # Refine grid for next iteration (except on last iteration)
+    if i < len(grid_sizes) - 1:
+        print("Refining grid...")
+        model.refine(grid_factor=2)
+
+return model
+
+
+def suggest_symbolic_forms(model):
+“””
+Analyze learned activation functions and suggest symbolic forms.
+“””
+print(”\n” + “=”*60)
+print(“SYMBOLIC ANALYSIS”)
+print(”=”*60)
+
+
+# Library of symbolic functions to try
+symbolic_lib = [
+    'x', 'x^2', 'x^3', 'x^4',
+    '1/x', '1/x^2',
+    'sqrt', 'x^0.5',
+    'sin', 'cos', 'tan',
+    'exp', 'log',
+    'abs', 'sgn',
+    'arcsin', 'arccos', 'arctan',
+    '1/(1+exp(-x))'  # sigmoid
+]
+
+print("\nSuggesting symbolic forms for learned activations...")
+model.suggest_symbolic(lib=symbolic_lib)
+
+# Automatically convert suitable activations to symbolic form
+print("\nAttempting automatic symbolic conversion...")
+model.auto_symbolic(lib=symbolic_lib)
+
+# Fine-tune after symbolic substitution
+print("\nFine-tuning with symbolic forms...")
+dataset = {
+    'train_input': model.cache_data,
+    'train_label': model.cache_target
+}
+model.fit(dataset, opt="LBFGS", steps=50, lamb=0.0)
+
+# Visualize final symbolic form
+print("\nGenerating final symbolic visualization...")
+model.plot(
+    beta=10,
+    folder='./kan_plots',
+    in_vars=['x', 'y'],
+    out_vars=['f(x,y)'],
+    title='KAN with Symbolic Forms'
+)
+plt.savefig('kan_symbolic_final.png', dpi=150, bbox_inches='tight')
+plt.close()
+
+
+def visualize_individual_activations(model, layer_idx=0):
+“””
+Visualize individual learned activation functions in detail.
+“””
+print(”\n” + “=”*60)
+print(f”INDIVIDUAL ACTIVATION FUNCTIONS (Layer {layer_idx})”)
+print(”=”*60)
+
+
+n_in = model.width[layer_idx]
+n_out = model.width[layer_idx + 1]
+
+fig, axes = plt.subplots(n_out, n_in, figsize=(4*n_in, 3*n_out))
+if n_out == 1:
+    axes = axes.reshape(1, -1)
+if n_in == 1:
+    axes = axes.reshape(-1, 1)
+
+# Sample points for evaluation
+x_range = torch.linspace(-1, 1, 200).unsqueeze(1)
+
+for i in range(n_in):
+    for j in range(n_out):
+        ax = axes[j, i]
+        
+        # Extract the activation function for this edge
+        with torch.no_grad():
+            # Get the learned spline function
+            activation_fn = model.act_fun[layer_idx][j]
+            y_vals = activation_fn[:, i:i+1](x_range)
+        
+        # Plot
+        ax.plot(x_range.numpy(), y_vals.numpy(), 'b-', linewidth=2)
+        ax.set_title(f'Input {i} → Hidden {j}', fontsize=10)
+        ax.set_xlabel('Input value', fontsize=8)
+        ax.set_ylabel('Activation output', fontsize=8)
+        ax.grid(True, alpha=0.3)
+        ax.axhline(y=0, color='k', linewidth=0.5, alpha=0.3)
+        ax.axvline(x=0, color='k', linewidth=0.5, alpha=0.3)
+
+plt.tight_layout()
+plt.savefig(f'individual_activations_layer{layer_idx}.png', dpi=150)
+plt.close()
+print(f"Saved: individual_activations_layer{layer_idx}.png")
+
+
+def compare_learned_vs_true(model, target_fn, resolution=100):
+“””
+Compare the learned function against the true function.
+“””
+print(”\n” + “=”*60)
+print(“COMPARING LEARNED VS TRUE FUNCTION”)
+print(”=”*60)
+
+
+# Create test grid
+x_test = torch.linspace(-np.pi, np.pi, resolution)
+y_test = torch.linspace(-1, 1, resolution)
+X, Y = torch.meshgrid(x_test, y_test, indexing='ij')
+
+# Flatten for model evaluation
+X_flat = X.flatten().unsqueeze(1)
+Y_flat = Y.flatten().unsqueeze(1)
+XY_test = torch.cat([X_flat, Y_flat], dim=1)
+
+# Compute true and predicted values
+with torch.no_grad():
+    Z_true = target_fn(X_flat, Y_flat).reshape(resolution, resolution)
+    Z_pred = model(XY_test).reshape(resolution, resolution)
+
+# Calculate error
+error = (Z_true - Z_pred).abs()
+mse = torch.mean(error**2).item()
+mae = torch.mean(error).item()
+max_error = torch.max(error).item()
+
+print(f"Mean Squared Error: {mse:.6f}")
+print(f"Mean Absolute Error: {mae:.6f}")
+print(f"Max Error: {max_error:.6f}")
+
+# Create comparison plot
+fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+
+# True function
+im1 = axes[0].contourf(X.numpy(), Y.numpy(), Z_true.numpy(), 
+                       levels=20, cmap='viridis')
+axes[0].set_title('True Function: sin(x) * exp(-y²)', fontsize=14)
+axes[0].set_xlabel('x', fontsize=12)
+axes[0].set_ylabel('y', fontsize=12)
+plt.colorbar(im1, ax=axes[0])
+
+# Learned function
+im2 = axes[1].contourf(X.numpy(), Y.numpy(), Z_pred.numpy(), 
+                       levels=20, cmap='viridis')
+axes[1].set_title('KAN Learned Function', fontsize=14)
+axes[1].set_xlabel('x', fontsize=12)
+axes[1].set_ylabel('y', fontsize=12)
+plt.colorbar(im2, ax=axes[1])
+
+# Error
+im3 = axes[2].contourf(X.numpy(), Y.numpy(), error.numpy(), 
+                       levels=20, cmap='Reds')
+axes[2].set_title(f'Absolute Error (MAE={mae:.4f})', fontsize=14)
+axes[2].set_xlabel('x', fontsize=12)
+axes[2].set_ylabel('y', fontsize=12)
+plt.colorbar(im3, ax=axes[2])
+
+plt.tight_layout()
+plt.savefig('function_comparison.png', dpi=150)
+plt.close()
+print("Saved: function_comparison.png")
+
+
+def visualize_1d_slices(model, target_fn):
+“””
+Visualize 1D slices of the function to see how each input is processed.
+“””
+print(”\n” + “=”*60)
+print(“1D SLICES - Understanding Input Processing”)
+print(”=”*60)
+
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+# Fix y=0, vary x
+x_range = torch.linspace(-np.pi, np.pi, 200).unsqueeze(1)
+y_fixed = torch.zeros_like(x_range)
+XY = torch.cat([x_range, y_fixed], dim=1)
+
+with torch.no_grad():
+    y_true = target_fn(x_range, y_fixed)
+    y_pred = model(XY)
+
+axes[0].plot(x_range.numpy(), y_true.numpy(), 'b-', linewidth=2, label='True: sin(x)')
+axes[0].plot(x_range.numpy(), y_pred.numpy(), 'r--', linewidth=2, label='KAN Learned')
+axes[0].set_xlabel('x (with y=0)', fontsize=12)
+axes[0].set_ylabel('f(x, 0)', fontsize=12)
+axes[0].set_title('Effect of x on output', fontsize=14)
+axes[0].legend()
+axes[0].grid(True, alpha=0.3)
+
+# Fix x=0, vary y
+y_range = torch.linspace(-1, 1, 200).unsqueeze(1)
+x_fixed = torch.zeros_like(y_range)
+XY = torch.cat([x_fixed, y_range], dim=1)
+
+with torch.no_grad():
+    y_true = target_fn(x_fixed, y_range)
+    y_pred = model(XY)
+
+axes[1].plot(y_range.numpy(), y_true.numpy(), 'b-', linewidth=2, label='True: exp(-y²)')
+axes[1].plot(y_range.numpy(), y_pred.numpy(), 'r--', linewidth=2, label='KAN Learned')
+axes[1].set_xlabel('y (with x=0)', fontsize=12)
+axes[1].set_ylabel('f(0, y)', fontsize=12)
+axes[1].set_title('Effect of y on output', fontsize=14)
+axes[1].legend()
+axes[1].grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.savefig('1d_slices.png', dpi=150)
+plt.close()
+print("Saved: 1d_slices.png")
+
+
+def main():
+“””
+Main execution pipeline demonstrating KAN visualization and interpretability.
+“””
+print(”\n” + “=”*60)
+print(“KAN VISUALIZATION AND INTERPRETABILITY DEMO”)
+print(”=”*60)
+
+
+# 1. Generate data
+print("\n1. Generating training data...")
+X_train, y_train, x, y = generate_training_data(n_samples=1000)
+target_fn = create_target_function()
+print(f"   Generated {len(X_train)} training samples")
+print(f"   Target function: f(x,y) = sin(x) * exp(-y²)")
+
+# 2. Train KAN with visualization
+print("\n2. Training KAN with progressive grid refinement...")
+model = train_kan_with_visualization(X_train, y_train)
+
+# 3. Suggest symbolic forms
+print("\n3. Analyzing learned functions for symbolic patterns...")
+suggest_symbolic_forms(model)
+
+# 4. Visualize individual activations
+print("\n4. Visualizing individual activation functions...")
+visualize_individual_activations(model, layer_idx=0)
+
+# 5. Compare learned vs true
+print("\n5. Comparing learned function to true function...")
+compare_learned_vs_true(model, target_fn, resolution=100)
+
+# 6. Visualize 1D slices
+print("\n6. Analyzing 1D slices to understand input processing...")
+visualize_1d_slices(model, target_fn)
+
+print("\n" + "="*60)
+print("VISUALIZATION COMPLETE!")
+print("="*60)
+print("\nGenerated files:")
+print("  - kan_structure_grid*.png : Network structure at each grid size")
+print("  - kan_symbolic_final.png : Final network with symbolic forms")
+print("  - individual_activations_layer*.png : Detailed activation functions")
+print("  - function_comparison.png : True vs learned function comparison")
+print("  - 1d_slices.png : Input-output relationships for each variable")
+print("\nKey insights to look for:")
+print("  1. Do the learned activations resemble sin(x) and exp(-y²)?")
+print("  2. Which connections are strongest (least transparent)?")
+print("  3. How does the network decompose the compositional structure?")
+print("  4. Can symbolic forms be extracted from the learned splines?")
+
+
+if __name__== “__main__”:
+# Check if PyKAN is installed
+try:
+import kan
+print(“PyKAN found! Starting demo…”)
+except ImportError:
+print(“ERROR: PyKAN not installed!”)
+print(“Please install with: pip install pykan”)
+exit(1)
+
+
+main()
+
+```
+
