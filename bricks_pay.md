@@ -141,7 +141,7 @@ Given the work on [Univrs.io](http://Univrs.io) and mycelial economics, a **dece
 
 The key technical challenge is **asynchronous finality** - US systems expect instant settlement while blockchain systems have varying finality guarantees. This requires sophisticated escrow mechanisms and possibly optimistic rollup-style constructions where disputes can be challenged within a time window.
 
-I’ll fetch your [CryptoSaint.io](http://CryptoSaint.io) site to understand your credit system architecture.​​​​​​​​​​​​​​​
+- [Visit CryptoSaint.io](http://CryptoSaint.io) site to understand the credit system architecture.​​​​​​​​​​​​​​​
 
 # Mycelial Credit system architecture. 
 
