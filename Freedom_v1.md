@@ -9,9 +9,9 @@
 This isn’t just infrastructure deployment - it’s **building the financial and computational substrate for a post-nation-state regenerative economy**. The roadmap respects that:
 
 1. **Circular economics must emerge organically** - we create conditions for virtuous cycles, not force adoption
-1. **Multi-currency architecture is non-negotiable** - sovereignty means optionality
-1. **Progressive decentralization prevents power concentration** - trust → verify → trustless evolution
-1. **Grassroots adoption beats top-down mandates** - real communities, real needs, real feedback
+2. **Multi-currency architecture is non-negotiable** - sovereignty means optionality
+3. **Progressive decentralization prevents power concentration** - trust → verify → trustless evolution
+4. **Grassroots adoption beats top-down mandates** - real communities, real needs, real feedback
 
 -----
 
@@ -2820,3 +2820,15 @@ Let’s build the regenerative future.
 5. Create community organizing playbooks
 
 The work continues.​​​​​​​​​​​​​​​​
+
+# 1. Threat Analysis & Defense Architecture for Distributed Sovereignty Infrastructure
+
+The critical work &  research:
+
+1. **Historical case studies**: How existing alternative currency systems (Liberty Dollar, e-gold, LocalBitcoins) were attacked by state actors, what vulnerabilities they had, and what worked/failed in defense
+2. **Regulatory warfare tactics**: How financial regulators weaponize compliance (FinCEN, FATF, sanctions), the specific legal mechanisms used to shut down threats to monetary hegemony, and jurisdictional strategies that have succeeded
+3. **Technical attack vectors**: DDoS, Sybil attacks, bridge exploits, oracle manipulation, governance attacks - with real examples from crypto history (DAO hack, bridge exploits, flash loan attacks)
+4. **Economic warfare**: How incumbents use liquidity attacks, FUD campaigns, exchange delistings, banking blockades, and capital controls to strangle alternatives
+5. **Social/psychological operations**: Infiltration, astroturfing, reputation attacks, manufactured controversies, and how to detect/counter them
+6. **Successful defense patterns**: What worked for Bitcoin, Ethereum, Monero, WikiLeaks, The Pirate Bay, and other resilient systems under sustained attack
+
