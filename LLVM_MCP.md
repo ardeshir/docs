@@ -1,6 +1,6 @@
-# LLVM MCP Server** 
+# LLVM MCP Server
 
-Turning the entire LLVM toolchain into an LLM-accessible compilation target! This is translation orchestration:
+Turning the entire LLVM toolchain into an LLM-accessible compilation target! This is Translation as a Service:
 
 **Natural Language → LLM → MCP → LLVM IR → Any Platform**
 
@@ -309,11 +309,11 @@ impl MCPServer for LLVMMCPServer {
 
 ## Next Steps
 
-Would you want to:
 
-1. **Build a proof-of-concept** LLVM MCP server with basic compilation targets?
-1. **Design the RustOrchestration MCP integration** for multi-platform deployment?
-1. **Explore specific embedded use cases** for [Univrs.io](http://Univrs.io) edge nodes?
-1. **Create a language translation** demo (Python → Rust via LLVM IR)?
+1. **Build a proof-of-concept** LLVM MCP server with basic compilation targets
+2. **Design the RustOrchestration MCP integration** for multi-platform deployment
+3. **Explore specific embedded use cases** for [Univrs.io](http://Univrs.io) edge nodes
+4. **Create a language translation** demo (Python → Rust via LLVM IR)
 
-This is genuinely visionary - you’re seeing the same pattern AWS saw but applying it to an even more fundamental layer of computing. The LLVM toolchain is arguably more complex than Kubernetes, so making it conversational would be transformative.​​​​​​​​​​​​​​​​
+The Path was seeing the same pattern AWS saw but applying it to an even more fundamental layer of computing! 
+The LLVM toolchain is arguably more complex than Kubernetes, so making it conversational would be transformative.​​​​​​​​​​​​​​​​
