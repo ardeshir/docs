@@ -39,7 +39,7 @@ Explore the [Freedom Infrastructure](univrs.io/illumos.md) section covering:
 - Virtualization with virtio
 
 ### For Strategists
-Review our [Vision & Strategy](docs/univrs_argument.md) documents:
+Review our [Vision & Strategy](univrs_argument.md) documents:
 - Univrs.io core thesis
 - UTCP vs MCP protocol comparison
 - Market positioning
@@ -48,17 +48,17 @@ Review our [Vision & Strategy](docs/univrs_argument.md) documents:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Univrs.io Platform                        │
+│                    Univrs.io Platform                       │
 ├─────────────────────────────────────────────────────────────┤
 │  Applications   │  MCP Server  │  Cloud APIs  │  CLI Tools  │
 ├─────────────────────────────────────────────────────────────┤
-│            Rust Orchestrator Core (orchestrator_core)        │
+│            Rust Orchestrator Core (orchestrator_core)       │
 ├─────────────────────────────────────────────────────────────┤
 │  Container     │  Cluster      │  Scheduler   │   Shared    │
 │  Runtime       │  Manager      │  Interface   │   Types     │
 │  Interface     │  Interface    │              │             │
 ├─────────────────────────────────────────────────────────────┤
-│        Youki Runtime   │   memberlist-rs   │   TiKV/etcd   │
+│        Youki Runtime   │   memberlist-rs   │   TiKV/etcd    │
 ├─────────────────────────────────────────────────────────────┤
 │         illumos  /  Oxide Hardware  /  Linux (Talos)        │
 └─────────────────────────────────────────────────────────────┘
