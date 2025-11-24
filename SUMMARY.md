@@ -6,7 +6,6 @@
 * [Connect with Univrs.io](welcome/connect-with-univrs.io.md)
 
 ## 🎯 Univrs.io Vision & Strategy
-<<<<<<< HEAD
 * [Univrs.io Argument](docs/univrs_argument.md)
 * [Univrs.io Roadmap](docs/univrs_roadmap.md)
 * [Go-to-Market Strategy](docs/univrs_gtm.md)
@@ -180,7 +179,6 @@
 
 * [File Operations](utilities-and-how-tos/file-operations/README.md)
   * [How to Zip Folders](utilities-and-how-tos/file-operations/how-to-zip-folders.md)
->>>>>>> e46c49e20d43587789658e004889ea6bd873fa67
 
 ## Unix Heritage
 
