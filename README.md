@@ -17,8 +17,8 @@ Univrs.io is building the next generation of infrastructure tools focused on:
 
 | Section | Description |
 |---------|-------------|
-| [**Univrs.io Vision**](markD/univrs_argument.md) | Our thesis, roadmap, and go-to-market strategy |
-| [**Rust Orchestration**](markD/rust_orchestration.md) | Core orchestration primitives, interfaces, and implementation |
+| [**Univrs.io Vision**](docs/univrs_argument.md) | Our thesis, roadmap, and go-to-market strategy |
+| [**Rust Orchestration**](docs/rust_orchestration.md) | Core orchestration primitives, interfaces, and implementation |
 | [**Freedom Infrastructure**](univrs.io/illumos.md) | illumos, Oxide, and sovereign hardware |
 | [**Azure & Cloud DevOps**](azure/functions/README.md) | Cloud deployment guides and DevOps patterns |
 | [**Global Economics**](economics/monetary/README.md) | Analysis of monetary systems and economic models |
@@ -26,7 +26,7 @@ Univrs.io is building the next generation of infrastructure tools focused on:
 ## Getting Started
 
 ### For Developers
-Start with the [Rust Orchestration](markD/rust_orchestration.md) section to understand the core architecture, including:
+Start with the [Rust Orchestration](docs/rust_orchestration.md) section to understand the core architecture, including:
 - Cargo workspace setup
 - Shared type definitions
 - Container runtime interfaces
@@ -39,7 +39,7 @@ Explore the [Freedom Infrastructure](univrs.io/illumos.md) section covering:
 - Virtualization with virtio
 
 ### For Strategists
-Review our [Vision & Strategy](markD/univrs_argument.md) documents:
+Review our [Vision & Strategy](docs/univrs_argument.md) documents:
 - Univrs.io core thesis
 - UTCP vs MCP protocol comparison
 - Market positioning
