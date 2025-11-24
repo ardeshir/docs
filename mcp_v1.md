@@ -2,7 +2,7 @@
 
 **UI/CLI → LLM → MCP → Cloud Resources**
 
-The parallels to LLVM code generation are spot-on too. Just as LLVM provides an abstraction layer that takes high-level code and generates optimized machine instructions, the MCP server takes natural language intent and “compiles” it into complex orchestrated cloud operations. Both democratize access to complex systems by abstracting away the low-level details.
+Just as LLVM provides an abstraction layer that takes high-level code and generates optimized machine instructions, the MCP server takes natural language intent and “compiles” it into complex orchestrated cloud operations. Both democratize access to complex systems by abstracting away the low-level details.
 
 What AWS has shipped is impressive:
 
