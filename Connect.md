@@ -1,4 +1,4 @@
-# Connect to Univrs.io   
+# Connect with Univrs.io   
 - [Join Univrs.io Discord](https://discord.gg/yF9PzuWcNx)
 - [Univrs Patreon](https://www.patreon.com/univrs)
 - [Univrs.io](https://univrs.io)
