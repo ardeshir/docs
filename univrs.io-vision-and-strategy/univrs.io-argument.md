@@ -1,6 +1,6 @@
 # Univrs.io Argument 
 
-### Univrs.io vision statement and roadmap align with Mariana Mazzucato's concepts of mission-oriented innovation and rethinking the public sector's role in shaping markets and innovation. 
+## Univrs.io vision statement and roadmap align with Mariana Mazzucato's concepts of mission-oriented innovation and rethinking the public sector's role in shaping markets and innovation. 
 
 #### Here are key points to consider based on her work:
 
