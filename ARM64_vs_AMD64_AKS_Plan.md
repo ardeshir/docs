@@ -1,6 +1,7 @@
 # Azure AKS ARM64 Migration Analysis & Implementation Plan
 
-Based on the [official Microsoft documentation](https://learn.microsoft.com/en-us/azure/aks/use-arm64-vms), here's a comprehensive analysis for your QSM-Julia optimization workload.
+Based on the [official Microsoft documentation](https://learn.microsoft.com/en-us/azure/aks/use-arm64-vms)
+A comprehensive analysis for our QSM-Julia optimization workload:
 
 ## ✅ Latest News: ARM64 is GA and Well-Supported
 
@@ -9,7 +10,7 @@ Azure ARM64 support in AKS is generally available and provides better price-perf
 ## 📋 Prerequisites Check
 
 ### Required Components
-- ✅ Existing AKS cluster (you have this)
+- ✅ Existing AKS cluster 
 - ✅ ARM64 VM SKUs: Dpsv5, Dplsv5, or Epsv5 series available
 - ❓ Container images that support ARM64 architecture (needs verification)
 
@@ -375,8 +376,8 @@ kubectl label nodes -l kubernetes.io/arch=arm64 monitoring=arm64
 ## 🚨 Decision Checkpoint
 
 **Before proceeding, answer these questions:**
-1. Do your Julia optimization packages work identically on ARM64?
-2. Are you seeing 20%+ cost savings that justify the migration effort?
-3. Is your TaskFailedException actually related to architecture?
-4. Does your team have bandwidth for this migration alongside fixing current issues?
+1. Do our Julia optimization packages work identically on ARM64?
+2. Are we seeing 20%+ cost savings that justify the migration effort?
+3. Is our TaskFailedException actually related to architecture?
+4. Does our team have bandwidth for this migration alongside fixing current issues?
 

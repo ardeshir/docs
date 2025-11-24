@@ -1,1 +1,10 @@
 root: ./
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md
+
+# Redirects for any renamed pages
+redirects:
+  utcp_vs_mcp: markD/utcp_vs_mcp.md
+  rust_orchestration: markD/rust_orchestration.md
