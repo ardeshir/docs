@@ -1,7 +1,6 @@
 # Table of contents
 
 ## Welcome
-
 * [Introduction](README.md)
 * [Connect with Univrs.io](welcome/connect-with-univrs.io.md)
 
@@ -18,8 +17,8 @@
   * [Container Runtime Interface](rust-orchestration/rust_orchestration.md#a-container_runtime_interface)
   * [Cluster Manager Interface](rust-orchestration/rust_orchestration.md#b-cluster_manager_interface)
   * [Scheduler Interface](rust-orchestration/rust_orchestration.md#c-scheduler_interface)
-* [Rust Deep Dives](rust-orchestration/rust-deep-dives/README.md)
-  * [Rust Derive Explained](rust-orchestration/rust_derive_explained.md)
+* [Rust Deep Dives](rust-orchestration/rust-deep-dives)
+  * [Rust Derive Explained](rust-orchestration/rust-derive-explained.md)
   * [The Rustonomicon](rust-orchestration/rustnomicon.md)
   * [Rust Static File Server with Warp & Docker](rust-orchestration/rust_static_file_server.md)
 
