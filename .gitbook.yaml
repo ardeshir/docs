@@ -5,6 +5,6 @@ structure:
   summary: SUMMARY.md
 
 # Redirects for any renamed pages
-redirects:
+#redirects:
 #  utcp_vs_mcp: docs/utcp_vs_mcp.md
 #  rust_orchestration: docs/rust_orchestration.md
