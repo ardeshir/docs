@@ -1,94 +1,102 @@
-# Table of Contents
+# Table of contents
 
 ## Welcome
+
 * [Introduction](README.md)
-* [Connect with Univrs.io](connect.md)
+* [Connect with Univrs.io](welcome/connect-with-univrs.io.md)
 
 ## 🎯 Univrs.io Vision & Strategy
-* [Univrs.io Argument](markD/univrs_argument.md)
-* [Univrs.io Roadmap](markD/univrs_roadmap.md)
-* [Go-to-Market Strategy](markD/univrs_gtm.md)
-* [UTCP vs MCP Analysis](markD/utcp_vs_mcp.md)
+
+* [Univrs.io Argument](univrs.io-vision-and-strategy/univrs.io-argument.md)
+* [Univrs.io Roadmap](univrs.io-vision-and-strategy/univrs.io-roadmap.md)
+* [Go-to-Market Strategy](univrs.io-vision-and-strategy/go-to-market-strategy.md)
+* [UTCP vs MCP Analysis](univrs.io-vision-and-strategy/utcp-vs-mcp-analysis.md)
 
 ## 🦀 Rust Orchestration
-* [Rust Orchestration Overview](markD/rust_orchestration.md)
-* [Core Rust Primitives](markD/rust_orchestration.md#step-1-setting-up-the-cargo-workspace)
-  * [Shared Types](markD/rust_orchestration.md#step-3-defining-shared-types)
-  * [Container Runtime Interface](markD/rust_orchestration.md#a-container_runtime_interface)
-  * [Cluster Manager Interface](markD/rust_orchestration.md#b-cluster_manager_interface)
-  * [Scheduler Interface](markD/rust_orchestration.md#c-scheduler_interface)
-* [Rust Deep Dives](rust-deep-dives/README.md)
-  * [Rust Derive Explained](markD/rust_derive_explained.md)
-  * [The Rustonomicon](markD/rustnomicon.md)
-  * [Rust Static File Server with Warp & Docker](markD/rust_static_file_server.md)
+
+* [Rust Orchestration Overview](rust-orchestration/rust-orchestration-overview.md)
+* [Core Rust Primitives](rust-orchestration/rust-orchestration-overview.md#step-1-setting-up-the-cargo-workspace)
+* [Rust Deep Dives](rust-orchestration/rust-deep-dives/README.md)
+  * [Rust Derive Explained](rust-orchestration/rust-deep-dives/rust-derive-explained.md)
+  * [The Rustonomicon](rust-orchestration/rust-deep-dives/the-rustonomicon.md)
+  * [Rust Static File Server with Warp & Docker](rust-orchestration/rust-deep-dives/rust-static-file-server-with-warp-and-docker.md)
 
 ## 🖥️ Freedom Infrastructure
-* [illumos Operating System](univrs.io/illumos.md)
-  * [DTrace Guide](univrs.io/illumos.md#dtrace)
-  * [MDB Debugger](univrs.io/illumos.md#mdb)
-  * [Device Drivers](univrs.io/illumos.md#device-drivers)
-  * [Connect](univrs.io/connect.md)
-  * [Discussions](univrs.io/discussions.md)
-* [Oxide Computer Hardware](oxide/README.md)
-  * [Oxide Rack with Talos Linux](markD/talos_linux_lab.md)
-  * [Benchmark Electronics & Oxide](markD/oxide_benchmark.md)
-* [Virtualization](virtualization/README.md)
-  * [virtio Interface Standard](markD/virtio_vm.md)
-  * [VM CPU Architecture](markD/vm_cpu1_meme.md)
+
+* [illumos Operating System](freedom-infrastructure/illumos-operating-system/README.md)
+  * [DTrace Guide](freedom-infrastructure/illumos-operating-system/README.md#dtrace)
+  * [MDB Debugger](freedom-infrastructure/illumos-operating-system/README.md#mdb)
+  * [Device Drivers](freedom-infrastructure/illumos-operating-system/README.md#device-drivers)
+  * [Connect](freedom-infrastructure/illumos-operating-system/connect.md)
+  * [Discussions](freedom-infrastructure/illumos-operating-system/discussions.md)
+* [Oxide Computer Hardware](freedom-infrastructure/oxide-computer-hardware/README.md)
+  * [Oxide Rack with Talos Linux](freedom-infrastructure/oxide-computer-hardware/oxide-rack-with-talos-linux.md)
+  * [Benchmark Electronics & Oxide](freedom-infrastructure/oxide-computer-hardware/benchmark-electronics-and-oxide.md)
+* [Virtualization](freedom-infrastructure/virtualization/README.md)
+  * [virtio Interface Standard](freedom-infrastructure/virtualization/virtio-interface-standard.md)
+  * [VM CPU Architecture](freedom-infrastructure/virtualization/vm-cpu-architecture.md)
 
 ## ☁️ Azure & Cloud DevOps
-* [Azure Functions](azure/functions/README.md)
-  * [Isolated vs Worker Process](markD/azure_functions_isolated.md)
-  * [Docker Deployment](markD/azure_function_app_docker_deployment.md)
-  * [Search Function Trigger](markD/azure_search_function.md)
-* [Azure DevOps](azure/devops/README.md)
-  * [Universal Artifacts Download](markD/ado_artifacts.md)
-  * [ADO Feed Tokens Security](markD/ado_feed_token.md)
-  * [SSH Key Setup](markD/ssh_key_ado.md)
-* [Azure SDK & Identity](azure/sdk/README.md)
-  * [Azure.Identity Integration](markD/azure_identity_sdk.md)
-  * [Application Insights - Node.js](markD/appinsight_nodejs_update.md)
-  * [Azure Monitor API](markD/azure_monitor_api.md)
+
+* [Azure Functions](azure-and-cloud-devops/azure-functions/README.md)
+  * [Isolated vs Worker Process](azure-and-cloud-devops/azure-functions/isolated-vs-worker-process.md)
+  * [Docker Deployment](azure-and-cloud-devops/azure-functions/docker-deployment.md)
+  * [Search Function Trigger](azure-and-cloud-devops/azure-functions/search-function-trigger.md)
+* [Azure DevOps](azure-and-cloud-devops/azure-devops/README.md)
+  * [Universal Artifacts Download](azure-and-cloud-devops/azure-devops/universal-artifacts-download.md)
+  * [ADO Feed Tokens Security](azure-and-cloud-devops/azure-devops/ado-feed-tokens-security.md)
+  * [SSH Key Setup](azure-and-cloud-devops/azure-devops/ssh-key-setup.md)
+* [Azure SDK & Identity](azure-and-cloud-devops/azure-sdk-and-identity/README.md)
+  * [Azure.Identity Integration](azure-and-cloud-devops/azure-sdk-and-identity/azure.identity-integration.md)
+  * [Application Insights - Node.js](azure-and-cloud-devops/azure-sdk-and-identity/application-insights-node.js.md)
+  * [Azure Monitor API](azure-and-cloud-devops/azure-sdk-and-identity/azure-monitor-api.md)
 
 ## ⚙️ Kubernetes & Containers
-* [Kubernetes Guides](kubernetes/README.md)
-  * [Sidecar Monitoring & Debugging](markD/qsm_test.md)
-  * [Talos Linux on Oxide](markD/talos_linux_lab.md)
+
+* [Kubernetes Guides](kubernetes-and-containers/kubernetes-guides/README.md)
+  * [Sidecar Monitoring & Debugging](kubernetes-and-containers/kubernetes-guides/sidecar-monitoring-and-debugging.md)
+  * [Talos Linux on Oxide](freedom-infrastructure/oxide-computer-hardware/oxide-rack-with-talos-linux.md)
 
 ## 💻 Languages & Frameworks
-* [Julia](languages/julia/README.md)
-  * [Julia SHA Reference](markD/julia_sha_query.md)
-* [Python](languages/python/README.md)
-  * [FastAPI ThreadPool Executor](markD/fastapi_threadpoolexecutor.md)
-* [Development Tools](dev-tools/README.md)
-  * [VSCode Extensions SDK](markD/vscode_extensions_sdk.md)
+
+* [Julia](languages-and-frameworks/julia/README.md)
+  * [Julia SHA Reference](languages-and-frameworks/julia/julia-sha-reference.md)
+* [Python](languages-and-frameworks/python/README.md)
+  * [FastAPI ThreadPool Executor](languages-and-frameworks/python/fastapi-threadpool-executor.md)
+* [Development Tools](languages-and-frameworks/development-tools/README.md)
+  * [VSCode Extensions SDK](languages-and-frameworks/development-tools/vscode-extensions-sdk.md)
 
 ## 📡 Telecommunications
-* [Spectrum Bands Allocation](markD/spectrum_bands.md)
+
+* [Spectrum Bands Allocation](telecommunications/spectrum-bands-allocation.md)
 
 ## 💰 Global Economics & Geopolitics
-* [Monetary Systems](economics/monetary/README.md)
-  * [BRICS & Bretton Woods](markD/brics_bretton_woods.md)
-  * [Foreign Treasury Holdings & USD](markD/foreign_treasury_holdings.md)
-* [Corporate Analysis](economics/corporate/README.md)
-  * [Cargill: The Hidden Colossus](markD/cargill_analysis.md)
-  * [Constellation Software Inc.](markD/constellation_software.md)
-* [Alternative Economic Models](economics/alternative/README.md)
-  * [Mycelial Economics](markD/mycelial_economics.md)
-* [Historical Analysis](economics/historical/README.md)
-  * [Mohammad Mossadegh Analysis](markD/mossadegh_analysis.md)
+
+* [Monetary Systems](global-economics-and-geopolitics/monetary-systems/README.md)
+  * [BRICS & Bretton Woods](global-economics-and-geopolitics/monetary-systems/brics-and-bretton-woods.md)
+  * [Foreign Treasury Holdings & USD](global-economics-and-geopolitics/monetary-systems/foreign-treasury-holdings-and-usd.md)
+* [Corporate Analysis](global-economics-and-geopolitics/corporate-analysis/README.md)
+  * [Cargill: The Hidden Colossus](global-economics-and-geopolitics/corporate-analysis/cargill-the-hidden-colossus.md)
+  * [Constellation Software Inc.](global-economics-and-geopolitics/corporate-analysis/constellation-software-inc..md)
+* [Alternative Economic Models](global-economics-and-geopolitics/alternative-economic-models/README.md)
+  * [Mycelial Economics](global-economics-and-geopolitics/alternative-economic-models/mycelial-economics.md)
+* [Historical Analysis](global-economics-and-geopolitics/historical-analysis/README.md)
+  * [Mohammad Mossadegh Analysis](global-economics-and-geopolitics/historical-analysis/mohammad-mossadegh-analysis.md)
 
 ## 🔬 Science & Philosophy
-* [Physics](science/physics/README.md)
-  * [Thermodynamics by Enrico Fermi](markD/thermodynamics_fermi.md)
-  * [Second Law & Electrical Systems](markD/second_law_thermodynamics.md)
-* [Philosophy & Mathematics](science/philosophy/README.md)
-  * [Zero and Emptiness: Ancient Void to Metamathematics](markD/zero_emptiness.md)
+
+* [Physics](science-and-philosophy/physics/README.md)
+  * [Thermodynamics by Enrico Fermi](science-and-philosophy/physics/thermodynamics-by-enrico-fermi.md)
+  * [Second Law & Electrical Systems](science-and-philosophy/physics/second-law-and-electrical-systems.md)
+* [Philosophy & Mathematics](science-and-philosophy/philosophy-and-mathematics/README.md)
+  * [Zero and Emptiness: Ancient Void to Metamathematics](science-and-philosophy/philosophy-and-mathematics/zero-and-emptiness-ancient-void-to-metamathematics.md)
 
 ## 🛠️ Utilities & How-Tos
-* [File Operations](utilities/README.md)
-  * [How to Zip Folders](markD/zip_folders.md)
+
+* [File Operations](utilities-and-how-tos/file-operations/README.md)
+  * [How to Zip Folders](utilities-and-how-tos/file-operations/how-to-zip-folders.md)
 
 ## Unix Heritage
-* [Unix & BSD](univrs.io/unix-bsd.md)
-* [Unix History](univrs.io/unix.md)
+
+* [Unix & BSD](unix-heritage/unix-and-bsd.md)
+* [Unix History](unix-heritage/unix-history.md)
