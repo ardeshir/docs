@@ -29,10 +29,11 @@
   * [Device Drivers](https://book.univrs.io/os/)
   * [Connect](https://book.univrs.io/os/)
   * [Discussions](https://book.univrs.io/os)
-* [Oxide Computer Hardware](oxide/README.md)
+* [Oxide Computer Hardware](oxide/hardware.md)
+  *[ Oxide Philosophy ](oxide/philosophy.md)
   * [Oxide Rack with Talos Linux](oxide/talos_linux_lab.md)
   * [Benchmark Electronics & Oxide](oxide/oxide_benchmark.md)
-* [Virtualization](oxide/virtualization/README.md)
+* [Virtualization](oxide/oxide_syndrome.md)
   * [virtio Interface Standard](oxide/virtio_vm.md)
   * [VM CPU Architecture](oxide/vm_cpu1_meme.md)
 
