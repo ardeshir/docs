@@ -23,12 +23,12 @@
   * [Rust Static File Server with Warp & Docker](rust-orchestration/rust_static_file_server.md)
 
 ## 🖥️ Freedom Infrastructure
-* [illumos Operating System](https://book.univrs.io/univrs.io/illumos.md)
-  * [DTrace Guide](https://book.univrs.io/univrs.io/illumos.md#dtrace)
-  * [MDB Debugger](https://book.univrs.io/univrs.io/illumos.md#mdb)
-  * [Device Drivers](https://book.univrs.io/univrs.io/illumos.md#device-drivers)
-  * [Connect](https://book.univrs.io/univrs.io/connect.md)
-  * [Discussions](https://book.univrs.io/univrs.io/discussions.md)
+* [illumos Operating System](https://book.univrs.io/os/)
+  * [DTrace Guide](https://book.univrs.io/os/)
+  * [MDB Debugger](https://book.univrs.io/os/)
+  * [Device Drivers](https://book.univrs.io/os/)
+  * [Connect](https://book.univrs.io/os/)
+  * [Discussions](https://book.univrs.io/os)
 * [Oxide Computer Hardware](oxide/README.md)
   * [Oxide Rack with Talos Linux](oxide/talos_linux_lab.md)
   * [Benchmark Electronics & Oxide](oxide/oxide_benchmark.md)
