@@ -87,43 +87,29 @@ Enables blind-mate connections for both power and networking, allowing for tool-
 ### Summary
 
 
-
 The Oxide Rack is a fully integrated, rack-scale computer system with innovations in power distribution, networking, serviceability, and management. It brings the efficiency and operational model of hyperscale cloud providers to on-premises deployments, offering a unique alternative to traditional piecemeal server racks[2][3][5][6].
 
 For actual photographs and a detailed visual walkthrough, the [YouTube tour][6] is highly recommended, as it provides a close-up look at the rack, sleds, and internal components.
 
 Sources
-[1] Oxide-Rack-Specifications-20250217.pdf https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/49592179/fd7a330c-ee66-413b-86fe-343bbf4f1714/Oxide-Rack-Specifications-20250217.pdf
-[2] Oxide reimagines the DC rack as... a 2500-lb blade server? https://www.theregister.com/2024/02/16/oxide_3000lb_blade_server/
-[3] Oxide deploys racks at CoreSite's SV2 data center in Silicon Valley ... https://www.datacenterdynamics.com/en/news/oxide-deploys-racks-at-coresites-sv2-data-center-in-silicon-valley-california/
-[4] Introduction / Guides / Oxide https://docs.oxide.computer/guides/introduction
-[5] Row-Scale On-Premises Cloud Infrastructure from Oxide Computer https://futurumgroup.com/insights/row-scale-on-premises-cloud-infrastructure-from-oxide-computer/
-[6] Oxide Cloud Computer Tour - Front - YouTube https://www.youtube.com/watch?v=dHbgjB0RQ1s
-[7] Startups on hard mode: Oxide. Part 1: Hardware https://newsletter.pragmaticengineer.com/p/oxide
-[8] Oxide Computer Company https://oxide.computer
-[9] Specifications - Oxide Computer https://oxide.computer/product/specifications
-[10] A New Standard in National Security and Innovation - Oxide Computer https://oxide.computer/blog/oxide-computer-company-and-lawrence-livermore-national-laboratory
-[11] Initial Rack Setup / Guides / Oxide https://docs.oxide.computer/guides/system/initial-rack-setup
+1. [Oxide-Rack-Specifications-2025/02/17 ](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/49592179/fd7a330c-ee66-413b-86fe-343bbf4f1714/Oxide-Rack-Specifications-20250217.pdf)
+2. [Oxide reimagines the DC rack as a 2500-lb blade server? ](https://www.theregister.com/2024/02/16/oxide_3000lb_blade_server/)
+3. [Oxide deploys racks at CoreSite's SV2 data center in Silicon Valley ... ](https://www.datacenterdynamics.com/en/news/oxide-deploys-racks-at-coresites-sv2-data-center-in-silicon-valley-california/)
+4. [Introduction / Guides / Oxide ](https://docs.oxide.computer/guides/introduction)
+5. [Row-Scale On-Premises Cloud Infrastructure from Oxide Computer](https://futurumgroup.com/insights/)row-scale-on-premises-cloud-infrastructure-from-oxide-computer/
+6. [Oxide Cloud Computer Tour - Front - YouTube ](https://www.youtube.com/watch?v=dHbgjB0RQ1s)
+7. [Startups on hard mode: Oxide. Part 1: Hardware ](https://newsletter.pragmaticengineer.com/p/oxide)
+8. [Oxide Computer Company ](https://oxide.computer)
+9. [Specifications - Oxide Computer ](ttps://oxide.computer/product/specifications)
+10. [A New Standard in National Security and Innovation - Oxide Computer](https://oxide.computer/blog/)oxide-computer-company-and-lawrence-livermore-national-laboratory
+11. [Initial Rack Setup / Guides / Oxide ](https://docs.oxide.computer/guides/system/initial-rack-setup)
 
 #### Other resources & links
-- [Oxide CDS Usage Breakdown](https://book.univrs.io/markd/oxide_cds_usage_breakdown)
-- [oxide CDS Usage v2](https://book.univrs.io/markd/oxide_cds_v2)
-- [Oxide Innovation](https://book.univrs.io/markd/oxide_innovations)
-- [Oxide OS+Hardware ](https://book.univrs.io/markd/oxide_os-hardware)
-- [Oxide Rack Customers](https://book.univrs.io/markd/oxide_rack_customers)
-- [Oxide Single AMD EPYC 7713P](https://book.univrs.io/markd/oxide_single_amd_epyc_7713p_sled)
-- [Oxide Smallest Bang$ ](https://book.univrs.io/markd/oxide_smallest_possible_sled)
-- [Oxide Syndrom ](https://book.univrs.io/markd/oxide_syndrome) 
+- [Oxide CDS Usage Breakdown](oxide/oxide_cds_usage_breakdown)
+- [oxide CDS Usage v2](oxide/oxide_cds_v2)
+- [Oxide OS+Hardware ](oxide/hardware)
+- [Oxide Rack Customers](oxice/customers)
+- [Oxide Single AMD EPYC 7713P](oxide/single_amd_epyc_7713p_sled)
+- [Oxide Smallest Bang$ ](oxide/smallest_possible_sled)
+- [Oxide Syndrom ](oxide/oxide_syndrome) 
 
-### Connect: Join Univrs.io
-- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
-- [Univrs Patreon](https://www.patreon.com/univrs)
-- [Univrs.io](https://univrs.io)
-- [https://ardeshir.io](https://ardeshir.io)
-- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
-- [https://github.com/ardeshir](https://github.com/ardeshir)
-- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
-- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
-- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
-- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://univrs.metalabel.com)

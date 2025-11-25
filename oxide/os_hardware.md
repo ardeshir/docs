@@ -59,37 +59,24 @@ This represents a fundamental shift from the traditional approach of assembling 
 
 
 Sources: 
-[1] Control Plane / Guides / Oxide https://docs.oxide.computer/guides/architecture/control-plane
-[2] Oxide Computer Company https://oxide.computer
-[3] Host Operating System & Hypervisor / RFD ... - Oxide Computer https://26.rfd.oxide.computer
-[4] On-Demand Virtual Machines - Oxide Computer https://oxide.computer/product/compute
-[5] How Oxide Created a Cloud Server by Stripping Components, Wires ... https://www.hpcwire.com/2023/11/01/how-oxide-created-a-cloud-server-by-stripping-components-wires-cables-and-chips/
-[6] [PDF] Understanding Operating Systems - Yonkers Public Schools https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/912/Operating%20Systems.pdf
-[7] RFD 53 Control plane data storage requirements - Oxide RFD https://rfd.shared.oxide.computer/rfd/53
-[8] CEIS101-C Module 4 Flashcards - Quizlet https://quizlet.com/746628495/ceis101-c-module-4-flash-cards/
-[9] Omicron: Oxide control plane - GitHub https://github.com/oxidecomputer/omicron
+1. [Control Plane / Guides / Oxide ](https://docs.oxide.computer/guides/architecture/control-plane)
+2. [Oxide Computer Company ](https://oxide.computer)
+3. [Host Operating System & Hypervisor / RFD - Oxide Computer ](https://26.rfd.oxide.computer)
+4. [On-Demand Virtual Machines - Oxide Computer ](https://oxide.computer/product/compute)
+5. [How Oxide Created a Cloud Server by Stripping Components, Wires](https://www.hpcwire.com/2023/11/01/how-oxide-created-a-cloud-server-by-stripping-components-wires-cables-and-chips/)
+6. [PDF Understanding Operating Systems - Yonkers Public Schools ](https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/912/Operating%20Systems.pdf)
+7. [RFD 53 Control plane data storage requirements - Oxide RFD ](https://rfd.shared.oxide.computer/rfd/53)
+8. [CEIS101-C Module 4 Flashcards - Quizlet ](https://quizlet.com/746628495/ceis101-c-module-4-flash-cards/)
+9. [Omicron: Oxide control plane - GitHub ](https://github.com/oxidecomputer/omicron)
+10. [docs](https://www.perplexity.ai/search/8faf40bd-2c7e-4cb3-b47a-39a7ef82eef9)
 
-
-[docs](https://www.perplexity.ai/search/8faf40bd-2c7e-4cb3-b47a-39a7ef82eef9)
 #### Other resources & links
-- [Oxide CDS Usage Breakdown](https://book.univrs.io/markd/oxide_cds_usage_breakdown)
-- [oxide CDS Usage v2](https://book.univrs.io/markd/oxide_cds_v2)
-- [Oxide Innovation](https://book.univrs.io/markd/oxide_innovations)
-- [Oxide OS+Hardware ](https://book.univrs.io/markd/oxide_os-hardware)
-- [Oxide Rack Customers](https://book.univrs.io/markd/oxide_rack_customers)
-- [Oxide Single AMD EPYC 7713P](https://book.univrs.io/markd/oxide_single_amd_epyc_7713p_sled)
-- [Oxide Smallest Bang$ ](https://book.univrs.io/markd/oxide_smallest_possible_sled)
-- [Oxide Syndrom ](https://book.univrs.io/markd/oxide_syndrome) 
+- [Oxide CDS Usage Breakdown](oxide/cds_usage_breakdown)
+- [oxide CDS Usage v2](oxide/cds_v2)
+- [Oxide Innovation](oxide/innovations)
+- [Oxide OS+Hardware ](os/os_hardware)
+- [Oxide Rack Customers](oxide/customers)
+- [Oxide Single AMD EPYC 7713P](oxide/single_amd_epyc_7713p_sled)
+- [Oxide Smallest Bang$ ](oxide/oxide_smallest_possible_sled)
+- [Oxide Syndrom ](oxide/oxide_syndrome) 
 
-### Connect: Join Univrs.io
-- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
-- [Univrs Patreon](https://www.patreon.com/univrs)
-- [Univrs.io](https://univrs.io)
-- [https://ardeshir.io](https://ardeshir.io)
-- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
-- [https://github.com/ardeshir](https://github.com/ardeshir)
-- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
-- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
-- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
-- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://univrs.metalabel.com)
