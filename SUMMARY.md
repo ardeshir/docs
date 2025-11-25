@@ -43,18 +43,18 @@
   * [Docker Deployment](azure-and-cloud-devlops/azure_function_app_docker_deployment.md)
   * [Search Function Trigger](azure-and-cloud-devlops/azure_search_function.md)
 * [Azure DevOps](azure-and-cloud-devlops/azure-devops/README.md)
-  * [Universal Artifacts Download](docs/ado_artifacts.md)
-  * [ADO Feed Tokens Security](docs/ado_feed_token.md)
-  * [SSH Key Setup](docs/ssh_key_ado.md)
-* [Azure SDK & Identity](azure/sdk/README.md)
-  * [Azure.Identity Integration](docs/azure_identity_sdk.md)
-  * [Application Insights - Node.js](docs/appinsight_nodejs_update.md)
-  * [Azure Monitor API](docs/azure_monitor_api.md)
+  * [Universal Artifacts Download](azure/ado_artifacts.md)
+  * [ADO Feed Tokens Security](azure/ado_feed_token.md)
+  * [SSH Key Setup](azure/ssh_key_ado.md)
+* [Azure SDK & Identity](azure/README.md)
+  * [Azure.Identity Integration](azure/azure_identity_sdk.md)
+  * [Application Insights - Node.js](azure/appinsight_nodejs_update.md)
+  * [Azure Monitor API](azure/azure_monitor_api.md)
 
 ## ⚙️ Kubernetes & Containers
 * [Kubernetes Guides](kubernetes/README.md)
   * [Sidecar Monitoring & Debugging](docs/qsm_test.md)
-  * [Talos Linux on Oxide](docs/talos_linux_lab.md)
+  * [Talos Linux on Oxide](linux/Talos.md)
 
 ## 💻 Languages & Frameworks
 * [Julia](languages/julia/README.md)
