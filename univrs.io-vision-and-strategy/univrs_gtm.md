@@ -51,6 +51,6 @@ Sources
 5. [Best Strategies to Market Your Growth-Stage Tech Startup (In 2025) ](https://www.o8.agency/blog/best-ways-market-your-growth-stage-tech-startup)
 6. [The Ultimate Guide to Raising Venture Capital: Startup Funding Process Step by Step ](https://www.youtube.com/watch?v=Ym4bCmbQrFk)
 7. [24 Unique Startup Marketing Strategies - Neil Patel]( https://neilpatel.com/blog/startup-marketing-strategies/)
-8. [How to Approach Venture Capital Firms? - Slashdot] (https://slashdot.org/story/99/10/16/1535210/how-to-approach-venture-capital-firms)
+8. [How to Approach Venture Capital Firms? - Slashdot](https://slashdot.org/story/99/10/16/1535210/how-to-approach-venture-capital-firms)
 9. [How to Develop Your Fundraising Strategy ](https://bothsidesofthetable.com/how-to-develop-your-fundraising-strategy-58c2f0b22d6d?gi=cb5144b9e53f)
 

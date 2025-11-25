@@ -415,7 +415,7 @@ Focus on building the best AI development experience in your domain. The protoco
 6. [MCP vs A2A: Comparing AI Agent Protocols for Modern Enterprise ](https://guptadeepak.com/a-comparative-analysis-of-anthropics-model-context-protocol-and-googles-agent-to-agent-protocol/)
 7. [How Model Context Protocol (MCP) works: connect AI agents to tools ](https://codingscape.com/blog/how-model-context-protocol-mcp-works-connect-ai-agents-to-tools)
 8. [Introducing the Model Context Protocol - Anthropic ](https://www.anthropic.com/news/model-context-protocol)
-9. [Model Context Protocol (MCP) - Anthropic API ][https://docs.anthropic.com/en/docs/agents-and-tools/mcp)
+9. [Model Context Protocol (MCP) - Anthropic API ](https://docs.anthropic.com/en/docs/agents-and-tools/mcp)
 10. [Introduction | Universal Tool Calling Protocol (UTCP) ](https://utcp.io/docs)
 11. [OpenAI Function Calling vs Anthropic Model Context Protocol - MCP](https://www.linkedin.com/pulse/openai-function-calling-vs-anthropic-model-context-protocol-liu-pdj3e)
 12. [MCP vs. API Explained - Hacker News ](https://news.ycombinator.com/item?id=43302297)
