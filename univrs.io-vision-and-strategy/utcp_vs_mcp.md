@@ -427,17 +427,3 @@ Focus on building the best AI development experience in your domain. The protoco
 18. [Model Context Protocol (MCP) an overview - Philschmid ](https://www.philschmid.de/mcp-introduction)
 19. [AI Engineer - Building Agents with Model Context Protocol - YouTube ](https://www.youtube.com/watch?v=kQmXtrmQ5Zg)
 20. [universal-tool-calling-protocol/python-utcp - GitHub ](https://github.com/universal-tool-calling-protocol/python-utcp)
------
-
-### Connect: Join Univrs.io
-- [Univrs.io Discord](https://discord.gg/pXwH6rQcsS)
-- [Univrs Patreon](https://www.patreon.com/univrs)
-- [Univrs.io](https://univrs.io)
-- [https://ardeshir.io](https://ardeshir.io)
-- [https://hachyderm.io/@sepahsalar](https://hachyderm.io/@sepahsalar)
-- [https://github.com/ardeshir](https://github.com/ardeshir)
-- [https://medium.com/@sepahsalar](https://medium.com/@sepahsalar)
-- [https://www.linkedin.com/in/ardeshir](https://www.linkedin.com/in/ardeshir)
-- [https://sepahsalar.substack.com/](https://sepahsalar.substack.com/)
-- [LinkTree @Sepahsalar](https://linktr.ee/Sepahsalar) 
-- [Univrs MetaLabel](https://univrs.metalabel.com)
