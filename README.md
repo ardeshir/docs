@@ -17,9 +17,9 @@ Univrs.io is building the next generation of infrastructure tools focused on:
 
 | Section | Description |
 |---------|-------------|
-| [**Univrs.io Vision**](https://book.univrs.io/docs/univrs_argument.md) | Our thesis, roadmap, and go-to-market strategy |
-| [**Rust Orchestration**](https://book.univrs.io/docs/rust_orchestration.md) | Core orchestration primitives, interfaces, and implementation |
-| [**Freedom Infrastructure**](https://book.univrs.io/univrs.io/) | illumos, Oxide, and sovereign hardware |
+| [**Univrs.io Vision**](https://univrs.io/vision.html) | Our thesis, roadmap, and go-to-market strategy |
+| [**Rust Orchestration**](https://github.com/univrs/RustOrchestration) | Core orchestration primitives, interfaces, and implementation |
+| [**Freedom Infrastructure**](https://book.univrs.io/os/) | illumos, Oxide, and sovereign hardware |
 | [**Azure & Cloud DevOps**](https://book.univrs.io/docs/azure-and-cloud-devops-1/azure-functions/) | Cloud deployment guides and DevOps patterns |
 | [**Global Economics**](economics/monetary/README.md) | Analysis of monetary systems and economic models |
 
