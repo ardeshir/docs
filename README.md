@@ -26,20 +26,20 @@ Univrs.io is building the next generation of infrastructure tools focused on:
 ## Getting Started
 
 ### For Developers
-Start with the [Rust Orchestration](docs/rust_orchestration.md) section to understand the core architecture, including:
+Start with the [Rust Orchestration](https://github.com/univrs/RustOrchestration) section to understand the core architecture, including:
 - Cargo workspace setup
 - Shared type definitions
 - Container runtime interfaces
 - Scheduler implementations
 
 ### For Infrastructure Engineers
-Explore the [Freedom Infrastructure](univrs.io/illumos.md) section covering:
+Explore the [Freedom Infrastructure](https://book.univrs.io/os/) section covering:
 - illumos DTrace and MDB debugging
 - Oxide rack deployment with Talos Linux
 - Virtualization with virtio
 
 ### For Strategists
-Review our [Vision & Strategy](univrs_argument.md) documents:
+Review our [Vision & Strategy](univrs.io-vision-and-strategy/univrs_argument.md) documents:
 - Univrs.io core thesis
 - UTCP vs MCP protocol comparison
 - Market positioning
