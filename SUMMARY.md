@@ -59,15 +59,15 @@
   * [Talos Linux on Oxide](linux/Talos.md)
 
 ## 💻 Languages & Frameworks
-* [Julia](languages/julia/README.md)
-  * [Julia SHA Reference](docs/julia_sha_query.md)
-* [Python](languages/python/README.md)
-  * [FastAPI ThreadPool Executor](docs/fastapi_threadpoolexecutor.md)
+* [Julia](julia/README.md)
+  * [Julia SHA Reference](julia/julia_sha_query.md)
+* [Python](python/README.md)
+  * [FastAPI ThreadPool Executor](python/fastapi_threadpoolexecutor.md)
 * [Development Tools](dev-tools/README.md)
-  * [VSCode Extensions SDK](docs/vscode_extensions_sdk.md)
+  * [VSCode Extensions SDK](dotnet/vscode_extensions_sdk.md)
 
 ## 📡 Telecommunications
-* [Spectrum Bands Allocation](docs/spectrum_bands.md)
+* [Spectrum Bands Allocation](science/spectrum_bands.md)
 
 ## 💰 Global Economics & Geopolitics
 * [Monetary Systems](economics/monetary/README.md)
@@ -83,10 +83,10 @@
 
 ## 🔬 Science & Philosophy
 * [Physics](science/physics/README.md)
-  * [Thermodynamics by Enrico Fermi](docs/thermodynamics_fermi.md)
-  * [Second Law & Electrical Systems](docs/second_law_thermodynamics.md)
+  * [Thermodynamics by Enrico Fermi](science/thermodynamics_fermi.md)
+  * [Second Law & Electrical Systems](science/second_law_thermodynamics.md)
 * [Philosophy & Mathematics](science/philosophy/README.md)
-  * [Zero and Emptiness: Ancient Void to Metamathematics](docs/zero_emptiness.md)
+  * [Zero and Emptiness: Ancient Void to Metamathematics](science/zero_emptiness.md)
 
 ## 🛠️ Utilities & How-Tos
 * [File Operations](utilities/README.md)
