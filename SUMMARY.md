@@ -36,7 +36,7 @@
   * [Oxide Rack with Talos Linux](linux/talos.md)
   * [Benchmark Electronics & Oxide](oxide/oxide_benchmark.md)
 * [Virtualization](oxide/oxide_syndrome.md)
-  * [virtio Interface Standard](oxide/harware-software_interface_challenges.md)
+  * [virtio Interface Standard](oxide/harware.md)
   * [VM CPU Architecture](oxide/innovation.md)
 
 ## ☁️  Azure & Cloud DevOps
