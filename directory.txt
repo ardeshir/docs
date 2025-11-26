@@ -1,0 +1,531 @@
+.
+├── README.md
+├── SUMMARY.md
+├── archives
+│   ├── 2nd_Law_of_Thermodynamics.md
+│   ├── 9_11_1973.md
+│   ├── ADO_API_WorkItems_Storage.md
+│   ├── ADO_Artifacts.md
+│   ├── ADO_Feed_Token.md
+│   ├── AFD_Module_PE.md
+│   ├── AFD_PrivateEndpoint.md
+│   ├── AMD_ARM_RISC-V.md
+│   ├── AP_Biology.md
+│   ├── ARM64_vs_AMD64_AKS_Plan.md
+│   ├── ARM64_vs_AMD64_Kubernetes_Strategy_Guide.md
+│   ├── AWS_CDK_Deployment_Lambda.md
+│   ├── AWS_China_ALBv2_Logs.md
+│   ├── AWS_China_EKS_Backup.md
+│   ├── AWS_China_Log_Backup_Strategy_v1.md
+│   ├── AWS_China_Log_Backup_Strategy_v2.md
+│   ├── AWS_China_S3_Backup.md
+│   ├── AWS_DirectConnect_overview.md
+│   ├── AWS_DirectConnect_overview_v2.md
+│   ├── AWS_IAM_Login_Lockout.md
+│   ├── AWS_Org_Policy_Exception.md
+│   ├── AWS_PolicyRolesMFA.md
+│   ├── AWS_RedShift_Azure_Storage_Blob.md
+│   ├── AWS_Step_Functions_Redshift_Data_API_CloudWatch.md
+│   ├── Active-x_Rust_StaticFiles_Server_Docker.md
+│   ├── Add_JSON_IP_to_SG.md
+│   ├── Affiliate_Marketing_Model.md
+│   ├── Ai_Azure_Foundary.md
+│   ├── Aks_Azure_Functions.md
+│   ├── American_Anti-Monopoly_Movement_Past_50_Years.md
+│   ├── AppInsight_Bicep_update.md
+│   ├── AppInsight_NodeJS_update.md
+│   ├── ApplicationInsight_Assessment.md
+│   ├── Astro_contact_form.md
+│   ├── AutoCalc_Modernization.md
+│   ├── AutoCalc_v1.md
+│   ├── AzureAD_DSL_Parser.md
+│   ├── AzureFeedID.md
+│   ├── AzureFrontDoor_KQL.md
+│   ├── AzureFunc_AIHub.md
+│   ├── AzureFunc_PowerShell.md
+│   ├── AzureFunc_delete_RG.md
+│   ├── Azure_ACR_CLI_FuncApp.md
+│   ├── Azure_Active_Directory_EntraID.md
+│   ├── Azure_Container_Apps_Replica_rules.md
+│   ├── Azure_Function_App_Docker_Deployment.md
+│   ├── Azure_Function_JSON_Appender.md
+│   ├── Azure_Function_KEDA_K8S.md
+│   ├── Azure_Function_SA-JSON.md
+│   ├── Azure_Functions_Configs.md
+│   ├── Azure_ObjID_to_Name.md
+│   ├── Azure_PostgreSQL_Function.md
+│   ├── Azure_Search_Function.md
+│   ├── Azure_Search_engine.md
+│   ├── Azure_Storage_Connection.md
+│   ├── Azure_Sub_Peering.md
+│   ├── Azure_dotnet_Func_Copy_Cosmosdb.md
+│   ├── Banking_Capture_of_France.md
+│   ├── Bash_CLI_Docker.md
+│   ├── Bash_Grep.md
+│   ├── Bash_JSON_Parse.md
+│   ├── Bash_replace_space_with_underscores.md
+│   ├── Bellman-Ford_algorithm.md
+│   ├── Biblia.md
+│   ├── Bluesky.md
+│   ├── Building_Freedom.md
+│   ├── CDK_Lambda_Edge_Authentication.md
+│   ├── CPP_API_Server_JSON_Request.md
+│   ├── CPP_Program_Dockerfile.md
+│   ├── CPP_Program_DockerfileV2.md
+│   ├── CPP_Program_v2_Dockerfile.md
+│   ├── CPP_Programs_and_Dockerfile.md
+│   ├── CPP_Template.md
+│   ├── CPP_replace_blanks_with_underscores.md
+│   ├── CSharp_ASP.NET_AKS_ARC.md
+│   ├── CSharp_Create_HTML_to_PDFs.md
+│   ├── CSharp_Create_PDF_from_HTML_PuppeteerSharp.md
+│   ├── CSharp_Interface.md
+│   ├── CSharp_Interface_vs_POCO.md
+│   ├── CSharp_Microservices.md
+│   ├── CSharp_Namespaces.md
+│   ├── CSharp_OO_Inhiratence.md
+│   ├── CSharp_ProjectLayout.md
+│   ├── CSharp_Project_ParsingAppending.md
+│   ├── CSharp_Queue_Function_Trigger.md
+│   ├── CSharp_Queue_Monitor_Function.md
+│   ├── CSharp_Queue_State_Machine.md
+│   ├── CSharp_SQ_Client.md
+│   ├── CSharp_Service_Bus_Migration.md
+│   ├── CSharp_WalkDir_Azure_Storage_Connection.md
+│   ├── CSharp_create_links_PDFs.md
+│   ├── CSharp_replace_blanks_with_underscores.md
+│   ├── C_ANSI_create_links_PDFs.md
+│   ├── C_Appender.md
+│   ├── C_Program_Dockerfile.md
+│   ├── C_Program_and_Dockerfile.md
+│   ├── C_replace_blanks_with_underscores.md
+│   ├── C_vs_Cpp.md
+│   ├── Carlota_Perez.md
+│   ├── Central_Banks_and_War.md
+│   ├── Charp_Features_Append-Replace.md
+│   ├── Collect_TelemetryData_from_VM.md
+│   ├── Computational_Biology.md
+│   ├── Connect.md
+│   ├── CosmosDB-RAG.md
+│   ├── Cpp_Modules_Package_System_Architecture.md
+│   ├── Cpp_create_links_PDFs.md
+│   ├── Cpp_fetch_service_db.md
+│   ├── Cpp_fetch_service_db_v2.md
+│   ├── Create_Az_AppPlan_WebApp.md
+│   ├── Csharp_vs_Golang.md
+│   ├── CsvParserWeb.md
+│   ├── Curl_example.md
+│   ├── Currency_Arbitrage.md
+│   ├── Decentralized_Rust_Credit_Code.md
+│   ├── Decentralized_Rust_Credit_System.md
+│   ├── Delphi_AzureDevOps.md
+│   ├── Direct_file.md
+│   ├── Django_PostgreSQL_AWS.md
+│   ├── DockerCmd.md
+│   ├── Dockerfile_Cpp_API_Json_Service.md
+│   ├── Durable_Functions.md
+│   ├── Elixir.md
+│   ├── FastAPI_AzureContainer_Process.md
+│   ├── FastAPI_ThreadPoolExecutor.md
+│   ├── Fed_Beige_Books.md
+│   ├── Federal_Reserve.md
+│   ├── Foucaults_Core_Project.md
+│   ├── Foundry_Agent.md
+│   ├── Freedom_v1.md
+│   ├── Freedom_v1_Defence.md
+│   ├── French_Activists_Labor_Reforms.md
+│   ├── Func_install.md
+│   ├── Gamer_PC_Builder.md
+│   ├── Git_Push_Second_Master.md
+│   ├── Git_Standard_gitignore_file.md
+│   ├── Golang_Azure_Function.md
+│   ├── Golang_repalce_blank_with_underscores.md
+│   ├── Grey_Box_Engineering.md
+│   ├── HTML_TO_PDF.md
+│   ├── HTML_to_PDS.md
+│   ├── How_Telecom_Frequency_Worls.md
+│   ├── How_to_build_LLM_for_Scientific_Papers.md
+│   ├── How_to_start_greatplains.mis_with_silent.md
+│   ├── Html_gthLth.md
+│   ├── Illumos_OpenIndiana_Oxide.md
+│   ├── Impl_P2P_v1.md
+│   ├── Interfaces_CSharp.md
+│   ├── InvalidTemplateDeployment.md
+│   ├── Israel.md
+│   ├── Israel_Moral_Degeneration.md
+│   ├── JavaScript_Parser_Libs.md
+│   ├── Julia_CPU_Target.md
+│   ├── Julia_HTTP_Async.md
+│   ├── Julia_HTTP_POST.md
+│   ├── Julia_Modules.md
+│   ├── Julia_Params.md
+│   ├── Julia_SHA_Query.md
+│   ├── Julia_to_AzureFunc_solver_v1.md
+│   ├── Julia_to_Csharp_solver_v1.md
+│   ├── Julia_to_Csharp_solver_v2.md
+│   ├── KQL_Example.md
+│   ├── Kubernetes_Deployment_CPU-Mem.md
+│   ├── LLM_Roadmap.md
+│   ├── LLM_for_Scientific_Research_Papers.md
+│   ├── LLVM_MCP.md
+│   ├── Lambard_Street.md
+│   ├── Lion_and_swan.md
+│   ├── List_Questions.md
+│   ├── LogAnalystics_Julia_API.md
+│   ├── MCP_Server_CSharp12_net9.md
+│   ├── MCP_rust.md
+│   ├── MLK.md
+│   ├── MVC_plus_RazorPages.md
+│   ├── Manifest.md
+│   ├── Metrics_Julia.md
+│   ├── Migrating_MySQL_Postgres.md
+│   ├── Modern_Cpp_patterns.md
+│   ├── Monitor_Query.md
+│   ├── Mycelial_credit_creation.md
+│   ├── Mythic_Rebellion_ Biology_Transcended.md
+│   ├── Nassim_Taleb.md
+│   ├── NoHomeNoCountryNoCommunity.md
+│   ├── OO_Bash.md
+│   ├── OSI_7_Layers.md
+│   ├── Optimizing_Linear_Solvers.md
+│   ├── Optimizing_Solver_Multi-Processing.md
+│   ├── Oxide_CDS_Usage_Breakdown.md
+│   ├── Oxide_CDS_v2.md
+│   ├── Oxide_Hardware-Software_Interface_Challenges.md
+│   ├── Oxide_Innovations.md
+│   ├── Oxide_Minnesota.md
+│   ├── Oxide_OS-Hardware.md
+│   ├── Oxide_Philosophy.md
+│   ├── Oxide_Rack_Customers.md
+│   ├── Oxide_Single_AMD_EPYC_7713P_Sled.md
+│   ├── Oxide_Smallest_Possible_Sled.md
+│   ├── Oxide_Syndrome.md
+│   ├── Oxide_vs_OpenNebula.md
+│   ├── Packer_Host_Encryption_at_host.md
+│   ├── Peer-to-Peer_Network_in_Rust.md
+│   ├── Perl_replace_blank_with_underscores.md
+│   ├── Pip_Module_Creation.md
+│   ├── Preface.md
+│   ├── Product_Engineering.md
+│   ├── Python311_create_links_PDFs.md
+│   ├── Python_Function_AppendToFile.md
+│   ├── Python_Function_WriteToFile.md
+│   ├── Python_IF_File_Exists_Check.md
+│   ├── Python_if_file_exists.md
+│   ├── QSM_Analysis.md
+│   ├── QSM_TEST.md
+│   ├── React_Docker_Compose.md
+│   ├── Reality_of_Abstraction.md
+│   ├── Redshift_vs_Postgres.md
+│   ├── Rust_Azure_Function.md
+│   ├── Rust_C_JSON_Parsing.md
+│   ├── Rust_Credit_System_v1.md
+│   ├── Rust_Credit_System_v2.md
+│   ├── Rust_Derive_Explained.md
+│   ├── Rust_Dockerfile.md
+│   ├── Rust_Dockerfile2.md
+│   ├── Rust_Dockerfile2_smaller.md
+│   ├── Rust_File_Appender.md
+│   ├── Rust_Orchestration.md
+│   ├── Rust_Peer-to_Peer_plan.md
+│   ├── Rust_StaticFiles_Server_Docker.md
+│   ├── Rust_create_links_PDFs.md
+│   ├── Rust_replace_blanks_with_underscores.md
+│   ├── Rust_vs_Zig.md
+│   ├── Rustnomicon.md
+│   ├── SQLModel_Pydantic_FastAPI.md
+│   ├── Squadcast_Maintenance.md
+│   ├── SubTask_solve_run_parallel.md
+│   ├── Summer_Research_Project_on_AI.md
+│   ├── SunOS_Solaris_Illumos.md
+│   ├── Syzygy.md
+│   ├── Tailwindcss.md
+│   ├── Talos.md
+│   ├── Talos_Linux_Lab.md
+│   ├── The_Grumbling_Hive.md
+│   ├── The_Imaginarium.md
+│   ├── The_Problem_with_Growth.md
+│   ├── The_Year_1971.md
+│   ├── Thermodynamics.md
+│   ├── US_10_Treasury_Bonds.md
+│   ├── UTCP_vs_MCP.md
+│   ├── Univrs_Arguments.md
+│   ├── Univrs_GTM.md
+│   ├── Univrs_Roadmap.md
+│   ├── Unlicensed_Specturm_UseCases.md
+│   ├── VM_CPU1_Meme1.5.md
+│   ├── VSCode_SDK.md
+│   ├── VirtIO.md
+│   ├── Warp_Rust_StaticFile_Server_Docker.md
+│   ├── WorkerProcess_IsolatedProcess.md
+│   ├── Zero_empty_set.md
+│   ├── Zip.md
+│   ├── __Azure_Metrics_Advisor_retired.md
+│   ├── bricks_woods.md
+│   ├── brics.md
+│   ├── brics_path.md
+│   ├── brics_univrs.md
+│   ├── cargill_hidden_colossus.md
+│   ├── cargill_vs_constellation.md
+│   ├── constellation_software.md
+│   ├── create_ssh_keys.md
+│   ├── critique_july_essay.md
+│   ├── data.md
+│   ├── decline_of_western_civilization.md
+│   ├── eks_admin_policy.md
+│   ├── homage_catalonia.md
+│   ├── html
+│   │   ├── Univrs_Arguments.html
+│   │   ├── index.html
+│   │   ├── mazzucato.html
+│   │   ├── p2c.html
+│   │   ├── perl_to_c.html
+│   │   ├── tasks.html
+│   │   └── vision.html
+│   ├── hunger_a_modern_novel.md
+│   ├── innovation_centers.md
+│   ├── ionq.md
+│   ├── k8s_ingress_loadbalancer_cert.md
+│   ├── kans.md
+│   ├── lix_packaging.md
+│   ├── m1_vs_amd64.md
+│   ├── mcp_v1.md
+│   ├── meilisearch.md
+│   ├── modern_healing.md
+│   ├── mossadegh.md
+│   ├── mycelial_economics.md
+│   ├── mycelium_plan.md
+│   ├── myclial_credit.md
+│   ├── nixos.md
+│   ├── no_silver_bullet.md
+│   ├── oxide_benchmark.md
+│   ├── pdfs
+│   │   └── Zero-Downtime-MySQL-to-PostgreSQL-Migration-Guide.pdf
+│   ├── plan_150.md
+│   ├── pulse_of_transgression.md
+│   ├── quick_start.md
+│   ├── rREA.md
+│   ├── saint_token_overview.md
+│   ├── saint_token_system.md
+│   ├── seL4_Rust_RISC-V.md
+│   ├── secure_vpn.md
+│   ├── self-hosted_VPN.md
+│   ├── shift_in_19th_century_finance.md
+│   ├── sola_scriptura.md
+│   ├── somacosf_design.md
+│   ├── sp2ai.md
+│   ├── sudan_post_independence.md
+│   ├── univrsio_tasks.md
+│   ├── vLLM.md
+│   ├── void_pointer.md
+│   ├── why_rust_won.md
+│   └── zero_downtime_mysql_postgres_migration.md
+├── aws
+│   ├── AWS_CDK_Deployment_Lambda.md
+│   ├── AWS_China_ALBv2_Logs.md
+│   ├── AWS_China_EKS_Backup.md
+│   ├── AWS_China_Log_Backup_Strategy_v1.md
+│   ├── AWS_China_Log_Backup_Strategy_v2.md
+│   ├── AWS_China_S3_Backup.md
+│   ├── AWS_DirectConnect_overview.md
+│   ├── AWS_DirectConnect_overview_v2.md
+│   ├── AWS_IAM_Login_Lockout.md
+│   ├── AWS_Org_Policy_Exception.md
+│   ├── AWS_PolicyRolesMFA.md
+│   ├── AWS_RedShift_Azure_Storage_Blob.md
+│   └── AWS_Step_Functions_Redshift_Data_API_CloudWatch.md
+├── azure
+│   ├── AzureAD_DSL_Parser.md
+│   ├── AzureFeedID.md
+│   ├── AzureFrontDoor_KQL.md
+│   ├── AzureFunc_AIHub.md
+│   ├── AzureFunc_PowerShell.md
+│   ├── AzureFunc_delete_RG.md
+│   ├── Azure_ACR_CLI_FuncApp.md
+│   ├── Azure_Active_Directory_EntraID.md
+│   ├── Azure_Container_Apps_Replica_rules.md
+│   ├── Azure_Function_App_Docker_Deployment.md
+│   ├── Azure_Function_JSON_Appender.md
+│   ├── Azure_Function_KEDA_K8S.md
+│   ├── Azure_Function_SA-JSON.md
+│   ├── Azure_Functions_Configs.md
+│   ├── Azure_ObjID_to_Name.md
+│   ├── Azure_PostgreSQL_Function.md
+│   ├── Azure_Search_Function.md
+│   ├── Azure_Search_engine.md
+│   ├── Azure_Storage_Connection.md
+│   ├── Azure_Sub_Peering.md
+│   └── Azure_dotnet_Func_Copy_Cosmosdb.md
+├── azure-and-cloud-devops
+│   ├── azure-devops
+│   │   ├── README.md
+│   │   ├── ado-feed-tokens-security.md
+│   │   ├── ssh-key-setup.md
+│   │   └── universal-artifacts-download.md
+│   ├── azure-functions
+│   │   ├── README.md
+│   │   ├── docker-deployment.md
+│   │   ├── isolated-vs-worker-process.md
+│   │   └── search-function-trigger.md
+│   └── azure-sdk-and-identity
+│       ├── README.md
+│       ├── application-insights-node.js.md
+│       ├── azure-monitor-api.md
+│       └── azure.identity-integration.md
+├── c
+│   ├── C_ANSI_create_links_PDFs.md
+│   ├── C_Appender.md
+│   ├── C_Program_Dockerfile.md
+│   ├── C_Program_and_Dockerfile.md
+│   ├── C_replace_blanks_with_underscores.md
+│   └── C_vs_Cpp.md
+├── cpp
+│   ├── CPP_API_Server_JSON_Request.md
+│   ├── CPP_Program_Dockerfile.md
+│   ├── CPP_Program_DockerfileV2.md
+│   ├── CPP_Program_v2_Dockerfile.md
+│   ├── CPP_Programs_and_Dockerfile.md
+│   ├── CPP_Template.md
+│   ├── CPP_replace_blanks_with_underscores.md
+│   ├── Cpp_Modules_Package_System_Architecture.md
+│   ├── Cpp_create_links_PDFs.md
+│   ├── Cpp_fetch_service_db.md
+│   └── Cpp_fetch_service_db_v2.md
+├── csharp
+│   ├── CSharp_ASP.NET_AKS_ARC.md
+│   ├── CSharp_Create_HTML_to_PDFs.md
+│   ├── CSharp_Create_PDF_from_HTML_PuppeteerSharp.md
+│   ├── CSharp_Interface.md
+│   ├── CSharp_Interface_vs_POCO.md
+│   ├── CSharp_Microservices.md
+│   ├── CSharp_Namespaces.md
+│   ├── CSharp_OO_Inhiratence.md
+│   ├── CSharp_ProjectLayout.md
+│   ├── CSharp_Project_ParsingAppending.md
+│   ├── CSharp_Queue_Function_Trigger.md
+│   ├── CSharp_Queue_Monitor_Function.md
+│   ├── CSharp_Queue_State_Machine.md
+│   ├── CSharp_SQ_Client.md
+│   ├── CSharp_Service_Bus_Migration.md
+│   ├── CSharp_WalkDir_Azure_Storage_Connection.md
+│   ├── CSharp_create_links_PDFs.md
+│   └── CSharp_replace_blanks_with_underscores.md
+├── directory.txt
+├── docker
+│   ├── DockerCmd.md
+│   └── Dockerfile_Cpp_API_Json_Service.md
+├── freedom-infrastructure
+│   ├── illumos-operating-system
+│   │   ├── README.md
+│   │   ├── connect.md
+│   │   └── discussions.md
+│   ├── oxide-computer-hardware
+│   │   ├── README.md
+│   │   ├── benchmark-electronics-and-oxide.md
+│   │   └── oxide-rack-with-talos-linux.md
+│   └── virtualization
+│       ├── README.md
+│       ├── virtio-interface-standard.md
+│       └── vm-cpu-architecture.md
+├── global-economics-and-geopolitics
+│   ├── alternative-economic-models
+│   │   ├── README.md
+│   │   └── mycelial-economics.md
+│   ├── corporate-analysis
+│   │   ├── README.md
+│   │   ├── cargill-the-hidden-colossus.md
+│   │   └── constellation-software-inc..md
+│   ├── historical-analysis
+│   │   ├── README.md
+│   │   └── mohammad-mossadegh-analysis.md
+│   └── monetary-systems
+│       ├── README.md
+│       ├── brics-and-bretton-woods.md
+│       └── foreign-treasury-holdings-and-usd.md
+├── katex.mini.css
+├── kubernetes-and-containers
+│   └── kubernetes-guides
+│       ├── README.md
+│       └── sidecar-monitoring-and-debugging.md
+├── languages-and-frameworks
+│   ├── development-tools
+│   │   ├── README.md
+│   │   └── vscode-extensions-sdk.md
+│   ├── julia
+│   │   ├── README.md
+│   │   └── julia-sha-reference.md
+│   └── python
+│       ├── README.md
+│       └── fastapi-threadpool-executor.md
+├── linux
+│   ├── Talos.md
+│   └── Talos_Linux_Lab.md
+├── oxide
+│   ├── README.md
+│   ├── cds_usage_breakdown.md
+│   ├── cds_v2.md
+│   ├── customers.md
+│   ├── hardware_software.md
+│   ├── innovations.md
+│   ├── minnesota.md
+│   ├── os_hardware.md
+│   ├── oxide_benchmark.md
+│   ├── oxide_smallest_possible_sled.md
+│   ├── oxide_syndrome.md
+│   ├── oxide_vs_OpenNebula.md
+│   ├── philosophy.md
+│   └── single_AMD_EPYC_7713P_sled.md
+├── packages.microsoft.gpg
+├── rust
+│   ├── Rust_Azure_Function.md
+│   ├── Rust_C_JSON_Parsing.md
+│   ├── Rust_Credit_System_v1.md
+│   ├── Rust_Credit_System_v2.md
+│   ├── Rust_Derive_Explained.md
+│   ├── Rust_Dockerfile.md
+│   ├── Rust_Dockerfile2.md
+│   ├── Rust_Dockerfile2_smaller.md
+│   ├── Rust_File_Appender.md
+│   ├── Rust_Orchestration.md
+│   ├── Rust_Peer-to_Peer_plan.md
+│   ├── Rust_StaticFiles_Server_Docker.md
+│   ├── Rust_create_links_PDFs.md
+│   ├── Rust_replace_blanks_with_underscores.md
+│   ├── Rust_vs_Zig.md
+│   └── rustnomicon.md
+├── rust-orchestration
+│   ├── README.md
+│   ├── primitives.md
+│   └── rust-deep-dives
+│       ├── rust-derive-explained.md
+│       ├── rust-static-file-server-with-warp-and-docker.md
+│       └── the-rustonomicon.md
+├── science-and-philosophy
+│   ├── philosophy-and-mathematics
+│   │   ├── README.md
+│   │   └── zero-and-emptiness-ancient-void-to-metamathematics.md
+│   └── physics
+│       ├── README.md
+│       ├── second-law-and-electrical-systems.md
+│       └── thermodynamics-by-enrico-fermi.md
+├── scripts
+│   ├── check.sh
+│   └── check_id.sh
+├── telecommunications
+│   └── spectrum-bands-allocation.md
+├── univrs.io-vision-and-strategy
+│   ├── univrs_argument.md
+│   ├── univrs_gtm.md
+│   ├── univrs_roadmap.md
+│   └── utcp_vs_mcp.md
+├── unix-heritage
+│   ├── unix-and-bsd.md
+│   └── unix-history.md
+├── utilities
+│   └── file-operations
+│       ├── README.md
+│       └── how-to-zip-folders.md
+└── welcome
+    └── connect-with-univrs.io.md
+
+44 directories, 485 files

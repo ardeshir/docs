@@ -1,45 +1,46 @@
-# Univrs.io Freedom Infrastructure
+# Univrs Infrastructure
 
 > **Building the future of Rust-native orchestration and sovereign computing infrastructure**
 
-Welcome to the Univrs.io documentation — your comprehensive guide to freedom infrastructure, Rust orchestration, and the technologies powering decentralized compute sovereignty.
+Welcome to the Univrs.io documentation — your comprehensive guide to Univrs infrastructure, Rust orchestration, and the technologies powering decentralized compute sovereignty.
 
-## What is Univrs.io?
+## What is Univrs?
 
 Univrs.io is building the next generation of infrastructure tools focused on:
 
 - **🦀 Rust-Native Orchestration** — High-performance container orchestration built entirely in Rust, leveraging traits and async patterns for maximum efficiency
-- **🖥️ Freedom Infrastructure** — illumos-based operating systems, Oxide hardware, and sovereign compute platforms
+- **🖥️ Univrs Infrastructure** — illumos-based operating systems, Oxide hardware, and sovereign compute platforms
 - **🌐 Protocol Innovation** — Universal Tool Calling Protocol (UTCP) vs Model Context Protocol (MCP) analysis and implementation
-- **☁️ Cloud-Agnostic DevOps** — Azure, Kubernetes, and multi-cloud deployment strategies
+- **☁️ Cloud-Agnostic DevOps** — Azure, AWS, Kubernetes, and multi-cloud deployment strategies
 
 ## Quick Navigation
 
 | Section | Description |
 |---------|-------------|
-| [**Univrs.io Vision**](https://univrs.io/vision.html) | Our thesis, roadmap, and go-to-market strategy |
-| [**Rust Orchestration**](https://github.com/univrs/RustOrchestration) | Core orchestration primitives, interfaces, and implementation |
-| [**Freedom Infrastructure**](https://book.univrs.io/os/) | illumos, Oxide, and sovereign hardware |
-| [**Azure & Cloud DevOps**](https://book.univrs.io/docs/azure-and-cloud-devops-1/azure-functions/) | Cloud deployment guides and DevOps patterns |
-| [**Global Economics**](economics/monetary/README.md) | Analysis of monetary systems and economic models |
+| [**Univrs.io Vision**](univrs.io-vision-and-strategy/univrs_argument.md) | Our thesis, roadmap, and go-to-market strategy |
+| [**Rust Orchestration**](rust-orchestration/README.md) | Core orchestration primitives, interfaces, and implementation |
+| [**Univrs Infrastructure**](infrastructure/illumos-operating-system/README.md) | illumos, Oxide, and sovereign hardware |
+| [**Oxide Computer**](oxide/README.md) | Deep dive into Oxide hardware and philosophy |
+| [**Azure & Cloud DevOps**](azure-and-cloud-devops/azure-functions/README.md) | Cloud deployment guides and DevOps patterns |
+| [**Global Economics**](global-economics-and-geopolitics/monetary-systems/README.md) | Analysis of monetary systems and economic models |
 
 ## Getting Started
 
 ### For Developers
-Start with the [Rust Orchestration](https://github.com/univrs/RustOrchestration) section to understand the core architecture, including:
+Start with the [Rust Orchestration](rust-orchestration/README.md) section to understand the core architecture, including:
 - Cargo workspace setup
 - Shared type definitions
 - Container runtime interfaces
 - Scheduler implementations
 
 ### For Infrastructure Engineers
-Explore the [Freedom Infrastructure](https://book.univrs.io/os/) section covering:
+Explore the [Univrs Infrastructure](infrastructure/illumos-operating-system/README.md) section covering:
 - illumos DTrace and MDB debugging
 - Oxide rack deployment with Talos Linux
 - Virtualization with virtio
 
 ### For Strategists
-Review our [Vision & Strategy](univrs.io-vision-and-strategy/univrs_argument.md) documents:
+Review our [Vision & Strategy](vision-and-strategy/univrs_argument.md) documents:
 - Univrs.io core thesis
 - UTCP vs MCP protocol comparison
 - Market positioning
@@ -66,7 +67,7 @@ Review our [Vision & Strategy](univrs.io-vision-and-strategy/univrs_argument.md)
 
 ## Connect
 
-- **Discord**: [Join Univrs.io Community](https://discord.gg/uYbZ2Qj3Wm)
+- **Discord**: [Join Univrs.io Community](https://discord.gg/pXwH6rQcsS)
 - **Documentation**: You're here! 📖
 
 ---
