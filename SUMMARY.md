@@ -54,7 +54,6 @@
 
 ## ☁️ Azure & Cloud DevOps
 * [Azure AD DSL Parser](azure/AzureAD_DSL_Parser.md)
-* [Azure Feed ID](azure/AzureFeedID.md)
 * [Azure Front Door KQL](azure/AzureFrontDoor_KQL.md)
 * [Azure Func AI Hub](azure/AzureFunc_AIHub.md)
 * [Azure Func PowerShell](azure/AzureFunc_PowerShell.md)
@@ -179,7 +178,7 @@
 
 ## Unix Heritage
 * [Unix & BSD](https://freebsd.edsonbrandi.com/)
-* [Unix History](https://book.univrs.io/os/)
+* [Unix History](https://book.univrs.io/os/unix-bsd/unix)
 
 ## 📦 Archives
 * [2nd Law of Thermodynamics](archives/2nd_Law_of_Thermodynamics.md)

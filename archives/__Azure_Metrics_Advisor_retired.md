@@ -1,4 +1,4 @@
-##### How to create a fully defined example that uses Azure.Identity and Azure SDK API to review Azure monitoring alert logs?
+# Azure.Identity and Azure SDK API to review Azure monitoring alert logs
 
 .NET 6 has introduced top-level statements, making it convenient to register dependencies in the Program.cs. Here is a simplified example that sets up a .NET 6 console application using Azure.Identity and Azure SDK API to review Azure monitor alert logs and register them in the built-in dependency injection.
 
@@ -150,5 +150,4 @@ Microsoft Azure provides a few resources on how to use the `Azure.AI.MetricsAdvi
 
 Also, I need to mention that the `serviceProvider.GetRequiredService<MetricsAdvisorClient>()` is a default method of the .NET dependency injection system. This method retrieves a service of the type specified (in this case, `MetricsAdvisorClient`). You need to add all the necessary services in the ConfigureServices method of the Startup class. You can find more information about this on Microsoft's Documentation page: https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-usage
 
-Remember to also validate and manage your Azure API Key and endpoint correctly.
 
