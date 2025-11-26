@@ -17,9 +17,9 @@ Univrs.io is building the next generation of infrastructure tools focused on:
 
 | Section | Description |
 |---------|-------------|
-| [**Univrs.io Vision**](univrs.io-vision-and-strategy/univrs_argument.md) | Our thesis, roadmap, and go-to-market strategy |
+| [**Univrs.io Vision**](vision-and-strategy/univrs_argument.md) | Our thesis, roadmap, and go-to-market strategy |
 | [**Rust Orchestration**](rust-orchestration/README.md) | Core orchestration primitives, interfaces, and implementation |
-| [**Univrs Infrastructure**](infrastructure/illumos-operating-system/README.md) | illumos, Oxide, and sovereign hardware |
+| [**Univrs Infrastructure**](https://book.univrs.io/os/) | illumos, Oxide, and sovereign hardware |
 | [**Oxide Computer**](oxide/README.md) | Deep dive into Oxide hardware and philosophy |
 | [**Azure & Cloud DevOps**](azure-and-cloud-devops/azure-functions/README.md) | Cloud deployment guides and DevOps patterns |
 | [**Global Economics**](global-economics-and-geopolitics/monetary-systems/README.md) | Analysis of monetary systems and economic models |
@@ -34,7 +34,7 @@ Start with the [Rust Orchestration](rust-orchestration/README.md) section to und
 - Scheduler implementations
 
 ### For Infrastructure Engineers
-Explore the [Univrs Infrastructure](infrastructure/illumos-operating-system/README.md) section covering:
+Explore the [Univrs Infrastructure](oxide/README.md) section covering:
 - illumos DTrace and MDB debugging
 - Oxide rack deployment with Talos Linux
 - Virtualization with virtio
