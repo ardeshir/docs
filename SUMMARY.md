@@ -178,8 +178,8 @@
   * [How to Zip Folders](utilities/file-operations/how-to-zip-folders.md)
 
 ## Unix Heritage
-* [Unix & BSD](unix-heritage/unix-and-bsd.md)
-* [Unix History](unix-heritage/unix-history.md)
+* [Unix & BSD](https://freebsd.edsonbrandi.com/)
+* [Unix History](https://book.univrs.io/os/)
 
 ## 📦 Archives
 * [2nd Law of Thermodynamics](archives/2nd_Law_of_Thermodynamics.md)
