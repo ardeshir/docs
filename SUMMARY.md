@@ -36,17 +36,6 @@
 * [Rust vs Zig](rust/Rust_vs_Zig.md)
 * [Rustnomicon](rust/rustnomicon.md)
 
-## 🖥️ Univrs Infrastructure
-* [illumos Operating System](infrastructure/illumos-operating-system/README.md)
-  * [Connect](infrastructure/illumos-operating-system/connect.md)
-  * [Discussions](infrastructure/illumos-operating-system/discussions.md)
-* [Oxide Computer Hardware](infrastructure/oxide-computer-hardware/README.md)
-  * [Benchmark Electronics & Oxide](infrastructure/oxide-computer-hardware/benchmark-electronics-and-oxide.md)
-  * [Oxide Rack with Talos Linux](infrastructure/oxide-computer-hardware/oxide-rack-with-talos-linux.md)
-* [Virtualization](infrastructure/virtualization/README.md)
-  * [virtio Interface Standard](infrastructure/virtualization/virtio-interface-standard.md)
-  * [VM CPU Architecture](infrastructure/virtualization/vm-cpu-architecture.md)
-
 ## 🔧 Oxide Computer
 * [Overview](oxide/README.md)
 * [CDS Usage Breakdown](oxide/cds_usage_breakdown.md)
@@ -64,20 +53,6 @@
 * [Single AMD EPYC 7713P Sled](oxide/single_AMD_EPYC_7713P_sled.md)
 
 ## ☁️ Azure & Cloud DevOps
-* [Azure Functions](azure-and-cloud-devops/azure-functions/README.md)
-  * [Docker Deployment](azure-and-cloud-devops/azure-functions/docker-deployment.md)
-  * [Isolated vs Worker Process](azure-and-cloud-devops/azure-functions/isolated-vs-worker-process.md)
-  * [Search Function Trigger](azure-and-cloud-devops/azure-functions/search-function-trigger.md)
-* [Azure DevOps](azure-and-cloud-devops/azure-devops/README.md)
-  * [ADO Feed Tokens Security](azure-and-cloud-devops/azure-devops/ado-feed-tokens-security.md)
-  * [SSH Key Setup](azure-and-cloud-devops/azure-devops/ssh-key-setup.md)
-  * [Universal Artifacts Download](azure-and-cloud-devops/azure-devops/universal-artifacts-download.md)
-* [Azure SDK & Identity](azure-and-cloud-devops/azure-sdk-and-identity/README.md)
-  * [Application Insights Node.js](azure-and-cloud-devops/azure-sdk-and-identity/application-insights-node.js.md)
-  * [Azure Monitor API](azure-and-cloud-devops/azure-sdk-and-identity/azure-monitor-api.md)
-  * [Azure.Identity Integration](azure-and-cloud-devops/azure-sdk-and-identity/azure.identity-integration.md)
-
-## ☁️ Azure Reference
 * [Azure AD DSL Parser](azure/AzureAD_DSL_Parser.md)
 * [Azure Feed ID](azure/AzureFeedID.md)
 * [Azure Front Door KQL](azure/AzureFrontDoor_KQL.md)
