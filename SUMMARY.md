@@ -11,7 +11,7 @@
 * [UTCP vs MCP Analysis](univrs.io-vision-and-strategy/utcp_vs_mcp.md)
 
 ## 🦀 Rust Orchestration
-* [Rust Orchestration Overview](rust-orchestration/rust_orchestration.md)
+* [Rust Orchestration Overview](rust-orchestration/README.md)
 * [Core Rust Primitives](rust-orchestration/rust_orchestration.md#step-1-setting-up-the-cargo-workspace)
   * [Shared Types](rust-orchestration/rust_orchestration.md#step-3-defining-shared-types)
   * [Container Runtime Interface](rust-orchestration/rust_orchestration.md#a-container_runtime_interface)
