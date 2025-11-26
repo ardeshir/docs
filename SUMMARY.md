@@ -12,7 +12,7 @@
 
 ## 🦀 Rust Orchestration
 * [Rust Orchestration Overview](rust-orchestration/README.md)
-* [Core Rust Primitives](rust-orchestration/rust_orchestration.md#step-1-setting-up-the-cargo-workspace)
+* [Core Rust Primitives](rust-orchestration/overview.md)
   * [Shared Types](rust-orchestration/rust_orchestration.md#step-3-defining-shared-types)
   * [Container Runtime Interface](rust-orchestration/rust_orchestration.md#a-container_runtime_interface)
   * [Cluster Manager Interface](rust-orchestration/rust_orchestration.md#b-cluster_manager_interface)
