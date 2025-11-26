@@ -30,7 +30,7 @@
   * [Connect](https://book.univrs.io/os/)
   * [Discussions](https://book.univrs.io/os)
 
-## Oxide Computer
+## 🦀 Oxide Computer
 * [Oxide Software & Computer Hardware](oxide/hardware_software.md)
   * [Oxide Philosophy](oxide/philosophy.md)
   * [Oxide Rack with Talos Linux](oxide/talos_linux_lab.md)
@@ -39,7 +39,7 @@
   * [virtio Interface Standard](oxide/harware-software_interface_challenges.md)
   * [VM CPU Architecture](oxide/innovation.md)
 
-## ☁️ Azure & Cloud DevOps
+## ☁️  Azure & Cloud DevOps
 * [Azure Functions](azure-and-cloud-devlops/functions/README.md)
   * [Isolated vs Worker Process](azure-and-cloud-devlops/azure_functions_isolated.md)
   * [Docker Deployment](azure-and-cloud-devlops/azure_function_app_docker_deployment.md)
