@@ -19,7 +19,7 @@
   * [Scheduler Interface](rust-orchestration/rust_orchestration.md#c-scheduler_interface)
 * [Rust Deep Dives](rust-orchestration/rust-deep-dives)
   * [Rust Derive Explained](rust-orchestration/rust-derive-explained.md)
-  * [The Rustonomicon](rust-orchestration/rustnomicon.md)
+  * [The Rustonomicon](rust/rustnomicon.md)
   * [Rust Static File Server with Warp & Docker](rust-orchestration/rust_static_file_server.md)
 
 ## 🖥️ Freedom Infrastructure
