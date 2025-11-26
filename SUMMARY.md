@@ -29,7 +29,9 @@
   * [Device Drivers](https://book.univrs.io/os/)
   * [Connect](https://book.univrs.io/os/)
   * [Discussions](https://book.univrs.io/os)
-* [Oxide Computer Hardware](oxide/hardware.md)
+
+## Oxide Computer
+* [Oxide Software & Computer Hardware](oxide/hardware_software.md)
   * [Oxide Philosophy](oxide/philosophy.md)
   * [Oxide Rack with Talos Linux](oxide/talos_linux_lab.md)
   * [Benchmark Electronics & Oxide](oxide/oxide_benchmark.md)
