@@ -12,7 +12,7 @@
 
 ## 🦀 Rust Orchestration
 * [Orchestration Overview](rust-orchestration/README.md)
-* [Core Orchestration Primitives](rust-orchestration/premitives.md)
+* [Core Orchestration Primitives](rust-orchestration/primitives.md)
   * [Shared Types](rust-orchestration/rust_orchestration.md#step-3-defining-shared-types)
   * [Container Runtime Interface](rust-orchestration/rust_orchestration.md#a-container_runtime_interface)
   * [Cluster Manager Interface](rust-orchestration/rust_orchestration.md#b-cluster_manager_interface)
