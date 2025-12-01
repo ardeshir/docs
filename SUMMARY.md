@@ -13,10 +13,9 @@
 ## 🦀 Rust Orchestration
 * [Overview](rust-orchestration/README.md)
 * [Core Primitives](rust-orchestration/primitives.md)
-* [Rust Deep Dives](rust-orchestration/README.md)
-  * [Rust Derive Explained](rust/Rust_Derive_Explained.md)
-  * [The Rustonomicon](rust/rustonomicon.md)
-  * [Static File Server with Warp & Docker](rust/Rust_StaticFiles_Server_Docker.md)
+* [Rust Derive Explained](rust/Rust_Derive_Explained.md)
+* [The Rustonomicon](rust/rustonomicon.md)
+* [Static File Server with Warp & Docker](rust/Rust_StaticFiles_Server_Docker.md)
 
 ## 🦀 Rust Language
 * [Rust Azure Function](rust/Rust_Azure_Function.md)
