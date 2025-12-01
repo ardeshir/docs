@@ -1,8 +1,6 @@
 # Rust Peer to Peer node
 
-Let's build the foundation of a peer-to-peer network in Rust. We will take an iterative, step-by-step approach, starting with a single peer and gradually expanding its capabilities to form a network, just as the document recommends.
-
-We will follow the primary recommendation of using **Rust** and the **`libp2p`** library, as it is the most flexible and comprehensive choice mentioned in Section 3 of your design document.
+We will follow the  **Rust** and the **`libp2p`** library, as it is the most flexible and comprehensive choice.
 
 ***
 
@@ -12,7 +10,7 @@ Before we begin, ensure you have the Rust toolchain installed. If not, you can g
 
 ### **Step 1: The First Peer – Identity and Basic Structure**
 
-The design document emphasizes in Section 4 that every node must have a unique identity. In `libp2p`, this is achieved through a cryptographic keypair, from which a unique `PeerId` is derived. Let's create our first peer.
+The design is for every node to have a unique identity. In `libp2p`, this is achieved through a cryptographic keypair, from which a unique `PeerId` is derived. Let's create our first peer:
 
 **1. Create a New Rust Project**
 
@@ -25,7 +23,7 @@ cd rust-p2p-node
 
 **2. Add `libp2p` Dependencies**
 
-As recommended, we'll use `libp2p`. We also need `tokio` for asynchronous runtime and `futures` for stream handling. Open your `Cargo.toml` file and add the following dependencies:
+We'll use `libp2p`. We also need `tokio` for asynchronous runtime and `futures` for stream handling. Open your `Cargo.toml` file and add the following dependencies:
 
 ```toml
 [dependencies]
@@ -365,7 +363,7 @@ You will now see `KademliaEvent` logs in both terminals. The new peer has connec
 
 ### Next Steps
 
-Following this foundation, the next logical steps based on your design document would be:
+Following this foundation, the next logical steps based on our design would be:
 
 1.  **Implement Chat with Gossipsub:** Add the `libp2p-gossipsub` behaviour to your `MyBehaviour` struct to enable scalable, topic-based messaging, as recommended for the chat module.
 2.  **Handle NAT Traversal:** Integrate `libp2p-relay` to allow peers behind restrictive NATs to communicate, implementing the concepts from Section 6 of your document.
