@@ -13,8 +13,10 @@
 ## 🦀 Rust Orchestration
 * [Overview](rust-orchestration/README.md)
 * [Core Primitives](rust-orchestration/primitives.md)
+* [Rust Orchestration](rust/Rust_Orchestration.md)
+* [Rust P2P Plan](rust/Rust_Peer-to_Peer_plan.md)
 * [Rust Derive Explained](rust/Rust_Derive_Explained.md)
-* [The Rustonomicon](rust/rustonomicon.md)
+* [The Rustonomicon](rust/rustnomicon.md)
 * [Static File Server with Warp & Docker](rust/Rust_StaticFiles_Server_Docker.md)
 
 ## 🦀 Rust Language
@@ -27,13 +29,9 @@
 * [Rust Dockerfile v2](rust/Rust_Dockerfile2.md)
 * [Rust Dockerfile v2 Smaller](rust/Rust_Dockerfile2_smaller.md)
 * [Rust File Appender](rust/Rust_File_Appender.md)
-* [Rust Orchestration](rust/Rust_Orchestration.md)
-* [Rust Peer-to-Peer Plan](rust/Rust_Peer-to_Peer_plan.md)
-* [Rust Static Files Server Docker](rust/Rust_StaticFiles_Server_Docker.md)
 * [Rust Create Links PDFs](rust/Rust_create_links_PDFs.md)
 * [Rust Replace Blanks](rust/Rust_replace_blanks_with_underscores.md)
 * [Rust vs Zig](rust/Rust_vs_Zig.md)
-* [Rustnomicon](rust/rustnomicon.md)
 
 ## 🔧 Oxide Computer
 * [Overview](oxide/README.md)
