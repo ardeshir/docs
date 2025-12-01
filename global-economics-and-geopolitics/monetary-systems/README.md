@@ -1,5 +1,3 @@
-# Monetary Systems
-
 # New Development Bank (NDB), IMF & BRICS
 ## Analysis and Summary
 
