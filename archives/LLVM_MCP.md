@@ -317,3 +317,79 @@ impl MCPServer for LLVMMCPServer {
 
 The Path was seeing the same pattern AWS saw but applying it to an even more fundamental layer of computing! 
 The LLVM toolchain is arguably more complex than Kubernetes, so making it conversational would be transformative.​​​​​​​​​​​​​​​​
+
+## Julia to Zig MCP Demo
+
+ **The perfect path forward**. Claude Code is ideal for this:
+
+## Why Claude Code 
+
+1. **Local Repository Access**: Claude Code can read your private git repo directly
+1. **Context Preservation**: Can see the full module structure and dependencies
+1. **Iterative Development**: We can modify the MCP server to handle your specific Julia patterns
+1. **Real Testing**: Can actually test translations with your real code
+
+## Workflows
+
+### Option 1: Start Fresh with Claude Code (Recommended)
+
+```bash
+# In your terminal
+cd /path/to/your/julia/repo
+claude-code
+
+# Then in Claude Code:
+"I have a Julia module here. I want to use the LLVM 
+Translation MCP server to translate it to Zig. Can you help me 
+integrate this with the MCP server we built?"
+```
+
+### Option 2: Copy MCP Server to Your Repo
+
+```bash
+# Copy the MCP server into your Julia repo
+cp -r llvm-translation-mcp /path/to/your/julia/repo/
+
+# Then work there with Claude Code
+cd /path/to/your/julia/repo
+claude-code
+```
+
+### Option 3: Link Both Projects
+
+Keep them separate but reference:
+
+```bash
+cd /path/to/your/julia/repo
+claude-code
+
+# Reference the MCP server location in conversation
+"I have Julia code here, and the LLVM MCP server at 
+~/llvm-translation-mcp. Let's translate my code."
+```
+
+## Start Claude Code
+
+When you open Claude Code in your Julia repo, share:
+
+1. **Main optimizer file(s)** - The core Julia code you want translated
+1. **Module structure** - How it’s organized
+1. **Dependencies** - Any Julia packages used
+1. **Target use case** - What you’re building this for (embedded? cloud? [Univrs.io](http://Univrs.io)?)
+
+## What We’ll Do Together
+
+
+1. ✅ **Analyze** your specific julia patterns
+1. ✅ **Customize** the Zig generator for your code structure
+1. ✅ **Translate** to idiomatic Zig
+1. ✅ **Test** the translation with your actual algorithms
+1. ✅ **Optimize** for your target platform (embedded, cloud, etc.)
+
+## Next Step
+
+**Open Claude Code in your repository to continue!**
+
+The foundation MCP server we built gives us the infrastructure - now we’ll adapt it to real-world code. This is where it gets exciting because we’ll see how the LLVM translation handles production code, not just examples.
+
+Ready when you are! 🚀​​​​​​​​​​​​​​​​
