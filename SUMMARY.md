@@ -179,7 +179,7 @@
 ## 📦 Archives
 * [2nd Law of Thermodynamics](archives/2nd_Law_of_Thermodynamics.md)
 * [9/11 1973](archives/9_11_1973.md)
-* [AMD ARM Risc V ](archived/AMD_ARM_RISC-V.md)
+* [AMD ARM Risc V ](archives/AMD_ARM_RISC-V.md)
 * [BRICS](archives/brics.md)
 * [BRICS Path](archives/brics_path.md)
 * [BRICS Univrs](archives/brics_univrs.md)
