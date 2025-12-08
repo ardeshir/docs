@@ -29,8 +29,10 @@
 * [Rust File Appender](rust/Rust_File_Appender.md)
 * [Rust Create Links PDFs](rust/Rust_create_links_PDFs.md)
 * [Rust Replace Blanks](rust/Rust_replace_blanks_with_underscores.md)
-* [Static File Server with Warp & Docker](rust/Rust_StaticFiles_Server_Docker.md)
+* [Rust Static File Server with Warp & Docker](rust/Rust_StaticFiles_Server_Docker.md)
 * [Rust vs Zig](rust/Rust_vs_Zig.md)
+* [Rust Core : GraphBit Orchestration](rust/GraphBit.md)
+
 
 ## 🔧 Oxide Computer
 * [Overview](oxide/README.md)
