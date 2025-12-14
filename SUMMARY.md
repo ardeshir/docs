@@ -10,6 +10,13 @@
 * [Go-to-Market Strategy](vision-and-strategy/univrs_gtm.md)
 * [UTCP vs MCP Analysis](vision-and-strategy/utcp_vs_mcp.md)
 
+## 🌐 PlanetServe Integration
+* [PlanetServe Technical Specifications](planetserve-integration.md)
+* [6-Week Implementation Roadmap](roadmap-6week.md)
+* [Mycelial Economics Technologies](mycelial-economics-tech.md)
+* [CryptoSaint Anonymous Routing](cryptosaint-anonymous-routing.md)
+* [PlanetServe Research Paper (PDF)](2504.20101v4.pdf)
+
 ## 🦀 Rust Orchestration
 * [Overview](rust-orchestration/README.md)
 * [Orchestration Vision](rust/orchestration_idea.md)

@@ -1,75 +1,221 @@
-# Univrs Infrastructure
+# Univrs.io — Sovereign Infrastructure for the Mycelial Economy
 
-> **Building the future of Rust-native orchestration and sovereign computing infrastructure**
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Rust](https://img.shields.io/badge/rust-1.75+-orange.svg)](https://www.rust-lang.org/)
 
-Welcome to the Univrs.io documentation — your comprehensive guide to Univrs infrastructure, Rust orchestration, and the technologies powering decentralized compute sovereignty.
+> *Building decentralized infrastructure where contribution creates credit, reputation influences resource allocation, and communities self-govern through transparent mathematical algorithms.*
 
-## What is Univrs?
+## 🌐 Vision
 
-Univrs.io is building the next generation of infrastructure tools focused on:
+Univrs.io is building a comprehensive ecosystem of sovereign infrastructure platforms that embody **mycelial economics** — a regenerative economic model inspired by fungal networks where resources flow organically based on contribution and mutual benefit rather than extraction.
 
-- **🦀 Rust-Native Orchestration** — High-performance container orchestration built entirely in Rust, leveraging traits and async patterns for maximum efficiency
-- **🖥️ Univrs Infrastructure** — illumos-based operating systems, Oxide hardware, and sovereign compute platforms
-- **🌐 Protocol Innovation** — Universal Tool Calling Protocol (UTCP) vs Model Context Protocol (MCP) analysis and implementation
-- **☁️ Cloud-Agnostic DevOps** — Azure, AWS, Kubernetes, and multi-cloud deployment strategies
+The project aims to replace centralized cloud oligopolies and debt-based financial systems with decentralized alternatives that promote:
+- 🌍 **Ecological regeneration**
+- 🔐 **Data sovereignty**  
+- ⚖️ **Equitable resource distribution**
 
-## Quick Navigation
-
-| Section | Description |
-|---------|-------------|
-| [**Univrs.io Vision**](vision-and-strategy/univrs_argument.md) | Our thesis, roadmap, and go-to-market strategy |
-| [**Rust Orchestration**](rust-orchestration/README.md) | Core orchestration primitives, interfaces, and implementation |
-| [**Univrs Infrastructure**](https://book.univrs.io/os/) | illumos, Oxide, and sovereign hardware |
-| [**Oxide Computer**](oxide/README.md) | Deep dive into Oxide hardware and philosophy |
-| [**Azure & Cloud DevOps**](azure-and-cloud-devops/azure-functions/README.md) | Cloud deployment guides and DevOps patterns |
-| [**Global Economics**](global-economics-and-geopolitics/monetary-systems/README.md) | Analysis of monetary systems and economic models |
-
-## Getting Started
-
-### For Developers
-Start with the [Rust Orchestration](rust-orchestration/README.md) section to understand the core architecture, including:
-- Cargo workspace setup
-- Shared type definitions
-- Container runtime interfaces
-- Scheduler implementations
-
-### For Infrastructure Engineers
-Explore the [Univrs Infrastructure](oxide/README.md) section covering:
-- illumos DTrace and MDB debugging
-- Oxide rack deployment with Talos Linux
-- Virtualization with virtio
-
-### For Strategists
-Review our [Vision & Strategy](vision-and-strategy/univrs_argument.md) documents:
-- Univrs.io core thesis
-- UTCP vs MCP protocol comparison
-- Market positioning
-
-## Technology Stack
+## 🏗️ Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Univrs.io Platform                       │
-├─────────────────────────────────────────────────────────────┤
-│  Applications   │  MCP Server  │  Cloud APIs  │  CLI Tools  │
-├─────────────────────────────────────────────────────────────┤
-│            Rust Orchestrator Core (orchestrator_core)       │
-├─────────────────────────────────────────────────────────────┤
-│  Container     │  Cluster      │  Scheduler   │   Shared    │
-│  Runtime       │  Manager      │  Interface   │   Types     │
-│  Interface     │  Interface    │              │             │
-├─────────────────────────────────────────────────────────────┤
-│        Youki Runtime   │   memberlist-rs   │   TiKV/etcd    │
-├─────────────────────────────────────────────────────────────┤
-│         illumos  /  Oxide Hardware  /  Linux (Talos)        │
-└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                         Univrs.io Ecosystem                         │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     │
+│  │ RustOrchestration│  │   CryptoSaint   │  │ MyceliaNetwork  │     │
+│  │   Container      │  │   Regenerative  │  │   P2P Social    │     │
+│  │   Orchestration  │  │   Credit System │  │   Coordination  │     │
+│  └────────┬────────┘  └────────┬────────┘  └────────┬────────┘     │
+│           │                    │                    │               │
+│           └────────────────────┼────────────────────┘               │
+│                                │                                    │
+│  ┌─────────────────────────────▼─────────────────────────────────┐ │
+│  │                     PlanetServe Layer                          │ │
+│  │   Decentralized LLM Serving | Anonymous Routing | Verification │ │
+│  └───────────────────────────────────────────────────────────────┘ │
+│                                │                                    │
+│  ┌─────────────────────────────▼─────────────────────────────────┐ │
+│  │                       dynamic-math                             │ │
+│  │          Client-side WASM for Transparent Algorithms           │ │
+│  └───────────────────────────────────────────────────────────────┘ │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
-## Connect
+## 🧬 Core Platforms
 
-- **Discord**: [Join Univrs.io Community](https://discord.gg/pXwH6rQcsS)
-- **Documentation**: You're here! 📖
+### 1. RustOrchestration
+AI-native container orchestration built in Rust with mycelial scheduling principles.
+
+**Key Features:**
+- Persistent state management with credit tracking
+- Trait-based abstractions for pluggable components
+- Kubernetes-style reconciliation loops
+- MutualCreditScheduler for reputation-based resource allocation
+
+**Status:** Core architecture implemented, mycelial economics integration in progress.
+
+→ [View RustOrchestration Documentation](./docs/rust-orchestration.md)
+
+### 2. CryptoSaint
+Regenerative credit system implementing mycelial economics for community-governed finance.
+
+**Key Features:**
+- Community-governed mutual credit networks
+- Tokenized ecological credit systems  
+- Reputation-based lending in decentralized networks
+- Context-aware credit assessment engine
+
+**Status:** Theoretical framework complete, technical implementation roadmap defined.
+
+→ [View CryptoSaint Documentation](./docs/cryptosaint.md)
+
+### 3. MyceliaNetwork
+Peer-to-peer social coordination platform enabling bioregional economic integration.
+
+**Key Features:**
+- Decentralized identity and reputation
+- Resource sharing protocols
+- Collective governance mechanisms
+- Cross-community coordination
+
+→ [View MyceliaNetwork Documentation](./docs/mycelia-network.md)
+
+### 4. PlanetServe Integration (NEW)
+Decentralized infrastructure for scalable, privacy-preserving distributed computing, based on [PlanetServe research](https://arxiv.org/abs/2504.20101).
+
+**Key Features:**
+- **Anonymous Communication** via S-IDA (Secure Information Dispersal Algorithm)
+- **Reputation-Based Verification** using perplexity scoring
+- **Hash-Radix Trees** for decentralized workload distribution
+- **BFT Consensus** for verification committee governance
+
+→ [View PlanetServe Integration Specifications](./docs/planetserve-integration.md)
+
+## 🔬 Research Foundation
+
+### Mycelial Economics Principles
+
+| Principle | Traditional Economics | Mycelial Economics |
+|-----------|----------------------|-------------------|
+| Organization | Hierarchical | Distributed networks |
+| Resource Flow | Competitive extraction | Collaborative regeneration |
+| Decision Making | Top-down | Emergent coordination |
+| Value Creation | Individual accumulation | Collective benefit |
+| Success Metrics | GDP, profit | Ecosystem health, life capacity |
+
+### Validated by Real-World Systems
+
+- **Sardex (Italy)**: 4,000+ businesses, €50M+ annual transactions via mutual credit
+- **WIR Bank (Switzerland)**: 90+ years, 45,000 members, 1.5B CHF annual turnover
+- **Mondragon Cooperative**: 70,000+ worker-owners, billions in annual revenue
+
+## 📊 Technical Stack
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| Systems Programming | **Rust** | Memory safety, performance, async/await |
+| Blockchain | **Substrate** | Credit creation, reputation, ecological accounting |
+| P2P Networking | **libp2p** | Peer discovery, message routing |
+| Algorithms | **WebAssembly** | Cross-platform transparent computation |
+| Consensus | **Raft/BFT** | Distributed state consistency |
+| Verification | **Tendermint** | Committee-based governance |
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Rust 1.75+ 
+- Node.js 18+
+- Docker (optional)
+
+### Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/univrs/univrs.io.git
+cd univrs.io
+
+# Build the Rust components
+cargo build --release
+
+# Run the test suite
+cargo test
+
+# Start the development server
+cargo run --bin orchestrator
+```
+
+## 📅 Roadmap
+
+### Phase 1: Foundation (Current)
+- [x] Core trait architecture
+- [x] Persistent state management
+- [x] Error handling framework
+- [ ] Credit tracking in StateStore
+
+### Phase 2: PlanetServe Integration (Q1 2025)
+- [ ] Reputation scoring system
+- [ ] Hash-Radix tree for workload distribution
+- [ ] S-IDA anonymous communication
+- [ ] BFT verification committee
+
+### Phase 3: Mycelial Economics (Q2 2025)
+- [ ] MutualCreditScheduler
+- [ ] Ecological impact valuation
+- [ ] Cross-platform WASM algorithms
+- [ ] Community governance tools
+
+→ [View Detailed 6-Week Implementation Roadmap](./docs/roadmap-6week.md)
+
+## 📖 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [PlanetServe Integration](./docs/planetserve-integration.md) | Technical specifications for decentralized infrastructure |
+| [Anonymous Routing for CryptoSaint](./docs/cryptosaint-anonymous-routing.md) | Securing credit transactions with S-IDA |
+| [6-Week Implementation Roadmap](./docs/roadmap-6week.md) | Sprint-by-sprint development plan |
+| [Mycelial Economics Technologies](./docs/mycelial-economics-tech.md) | Complete technology ecosystem overview |
+| [API Reference](./docs/api-reference.md) | Developer API documentation |
+
+## 🤝 Contributing
+
+We welcome contributions from developers, economists, ecologists, and anyone passionate about regenerative systems.
+
+### Ways to Contribute
+1. **Code**: Submit PRs for features, bug fixes, or optimizations
+2. **Documentation**: Improve guides, tutorials, or API docs
+3. **Research**: Share relevant papers, case studies, or data
+4. **Community**: Participate in discussions, help others
+
+### Development Workflow
+```bash
+# Create a feature branch
+git checkout -b feature/your-feature-name
+
+# Make your changes and test
+cargo test
+cargo clippy
+
+# Submit a pull request
+git push origin feature/your-feature-name
+```
+
+## 📞 Contact
+
+- **Website**: [https://univrs.io](https://univrs.io)
+- **Email**: ardeshir.org@gmail.com
+- **Documentation**: [book.univrs.io](https://book.univrs.io)
+
+## 📄 License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ---
 
-*Univrs.io — Orchestrating Freedom*
+<div align="center">
+
+*"In mycelial networks, each node both gives and receives. The health of the whole emerges from the cooperation of the parts."*
+
+**Building the future of sovereign infrastructure, one contribution at a time.**
+
+</div>
