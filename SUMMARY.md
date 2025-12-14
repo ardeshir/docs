@@ -15,7 +15,7 @@
 * [6-Week Implementation Roadmap](roadmap-6week.md)
 * [Mycelial Economics Technologies](mycelial-economics-tech.md)
 * [CryptoSaint Anonymous Routing](cryptosaint-anonymous-routing.md)
-* [PlanetServe Research Paper (PDF)](2504.20101v4.pdf)
+* [PlanetServe Research Paper (PDF)](https://arxiv.org/html/2504.20101v4)
 
 ## 🦀 Rust Orchestration
 * [Overview](rust-orchestration/README.md)
