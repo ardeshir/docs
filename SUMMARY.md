@@ -442,8 +442,7 @@
 * [Hunger: A Modern Novel](archives/hunger_a_modern_novel.md)
 * [Modern Healing](archives/modern_healing.md)
 * [The Imaginarium](archives/The_Imaginarium.md)
-* [Mythic Rebellion: Biology Transcended](archives/Mythic_Rebellion_ Biology_Transcended.md)
-* [Pulse of Transgression](archives/pulse_of_transgression.md)
+* [Pulse of Transgression](https://medium.com/@sepahsalar)
 
 ### Miscellaneous
 * [Grey Box Engineering](archives/Grey_Box_Engineering.md)
