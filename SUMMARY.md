@@ -261,6 +261,7 @@
 ### Science & Technology
 * [2nd Law of Thermodynamics](archives/2nd_Law_of_Thermodynamics.md)
 * [Thermodynamics](archives/Thermodynamics.md)
+* [Entropy](archives/entropy_vitalization.md)
 * [AMD ARM RISC-V](archives/AMD_ARM_RISC-V.md)
 * [seL4 Rust RISC-V](archives/seL4_Rust_RISC-V.md)
 * [Computational Biology](archives/Computational_Biology.md)
