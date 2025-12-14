@@ -456,4 +456,3 @@
 * [HTML to PDF](archives/HTML_TO_PDF.md)
 * [Zip](archives/Zip.md)
 * [Manifest](archives/Manifest.md)
-* [Quick Start](archives/quick_start.md)
