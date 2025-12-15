@@ -121,29 +121,6 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 | Consensus | **Raft/BFT** | Distributed state consistency |
 | Verification | **Tendermint** | Committee-based governance |
 
-## 🚀 Quick Start
-
-### Prerequisites
-- Rust 1.75+ 
-- Node.js 18+
-- Docker (optional)
-
-### Development Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/univrs/univrs.io.git
-cd univrs.io
-
-# Build the Rust components
-cargo build --release
-
-# Run the test suite
-cargo test
-
-# Start the development server
-cargo run --bin orchestrator
-```
 
 ## 📅 Roadmap
 
