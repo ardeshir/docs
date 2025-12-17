@@ -2,14 +2,14 @@
 
 ## Welcome
 * [Introduction](README.md)
-* [Connect with Univrs.io](welcome/connect-with-univrs.io.md)
+* [Connect with Univrs](welcome/connect-with-univrs.io.md)
 
-## 🎯 Univrs.io Vision & Strategy
-* [Univrs.io Argument](vision-and-strategy/univrs_argument.md)
-* [Univrs.io Roadmap](vision-and-strategy/univrs_roadmap.md)
+## 🎯 Univrs Vision & Strategy
+* [Univrs Argument](vision-and-strategy/univrs_argument.md)
+* [Univrs Roadmap](vision-and-strategy/univrs_roadmap.md)
 * [Go-to-Market Strategy](vision-and-strategy/univrs_gtm.md)
 * [UTCP vs MCP Analysis](vision-and-strategy/utcp_vs_mcp.md)
-* [Univrs.io Multi-Cloud](archives/Multi-Cloud_Strategy.md)
+* [Univrs Multi-Cloud](archives/Multi-Cloud_Strategy.md)
 
 ## 🌐 PlanetServe Integration
 * [PlanetServe Technical Specifications](planetserve-integration.md)
@@ -99,7 +99,9 @@
 * [Kubernetes Guides](kubernetes-and-containers/kubernetes-guides/README.md)
   * [Sidecar Monitoring & Debugging](kubernetes-and-containers/kubernetes-guides/sidecar-monitoring-and-debugging.md)
 * [Multi-Cloud Strategy](archives/Multi-Cloud_Strategy.md) 
-* [uiContainer Guide](archives/Univrs_ContainerGuide.md)
+* [Univrs Container Guide](archives/Univrs_ContainerGuide.md)
+* [Univrs DevTools ](archives/Univrs_DevTools.md)
+
 ## 🐧 Linux
 * [Talos](linux/Talos.md)
 * [Talos Linux Lab](linux/Talos_Linux_Lab.md)
@@ -182,6 +184,7 @@
 ## 🛠️ Utilities
 * [File Operations](utilities/file-operations/README.md)
   * [How to Zip Folders](utilities/file-operations/how-to-zip-folders.md)
+* [Univrs ui, sdk, dev tools](archives/Univrs_DevTools.md)
 
 ## Unix Heritage
 * [Unix & BSD](https://freebsd.edsonbrandi.com/)
@@ -204,9 +207,8 @@
 * [Univrs Arguments](archives/Univrs_Arguments.md)
 * [Univrs GTM](archives/Univrs_GTM.md)
 * [Univrs Roadmap](archives/Univrs_Roadmap.md)
-* [UTCP vs MCP](archives/UTCP_vs_MCP.md)
-* [Plan 150](archives/plan_150.md)
-* [Univrs.io Tasks](archives/univrsio_tasks.md)
+* [Univrs Tasks](archives/univrsio_tasks.md)
+* [Univrs DevTools](archives/Univrs_DevTools.md)
 
 ### Global Economics & Geopolitics
 * [BRICS](archives/brics.md)
@@ -272,6 +274,7 @@
 * [Telecom Frequency](archives/How_Telecom_Frequency_Worls.md)
 * [Unlicensed Spectrum Use Cases](archives/Unlicensed_Specturm_UseCases.md)
 * [IonQ Quantum Computing](archives/ionq.md)
+* [UTCP vs MCP](archives/UTCP_vs_MCP.md)
 
 ### Rust Programming
 * [Rust Orchestration](archives/Rust_Orchestration.md)
@@ -325,6 +328,7 @@
 * [MCP Server CSharp12 net9](archives/MCP_Server_CSharp12_net9.md)
 * [MCP v1](archives/mcp_v1.md)
 * [LLVM MCP](archives/LLVM_MCP.md)
+* [UTCP vs MCP](archives/UTCP_vs_MCP.md)
 
 ### Azure & Cloud
 * [AKS Azure Functions](archives/Aks_Azure_Functions.md)
