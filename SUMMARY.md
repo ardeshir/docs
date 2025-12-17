@@ -9,7 +9,7 @@
 * [Univrs.io Roadmap](vision-and-strategy/univrs_roadmap.md)
 * [Go-to-Market Strategy](vision-and-strategy/univrs_gtm.md)
 * [UTCP vs MCP Analysis](vision-and-strategy/utcp_vs_mcp.md)
-* [Univrs.io Multi-Cloud](archives/Multi-Cloud_Strategy.md")
+* [Univrs.io Multi-Cloud](archives/Multi-Cloud_Strategy.md)
 
 ## 🌐 PlanetServe Integration
 * [PlanetServe Technical Specifications](planetserve-integration.md)
