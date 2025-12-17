@@ -1,8 +1,8 @@
 # Univrs.io: Dogfooding & Multi-Cloud Strategy
 
-## Executive Summary
+## Roadmap to vision
 
-The most pragmatic path to production is **multi-cloud free tier** deployment, progressively evolving into a true mycelial network. This approach:
+The most pragmatic path to production is **multi-cloud free tier** deployment, progressively evolving into a true mycelial network:
 
 - Proves cloud-agnostic architecture from day one
 - Zero infrastructure cost for MVP/POC
@@ -17,12 +17,12 @@ You have two complementary systems that should converge:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         UNIVRS.IO UNIFIED PLATFORM                       │
+│                         UNIVRS.IO UNIFIED PLATFORM                      │
 ├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
+│                                                                         │
 │  ┌─────────────────────┐          ┌─────────────────────┐               │
 │  │  MYCELIAL DASHBOARD │          │  RUST ORCHESTRATOR  │               │
-│  │  (mycelial-dashboard)│         │  (RustOrchestration) │               │
+│  │  (mycelial-dashboard)│         │  (RustOrchestration)│               │
 │  ├─────────────────────┤          ├─────────────────────┤               │
 │  │ • P2P Discovery     │◄────────►│ • Container Runtime │               │
 │  │ • Gossipsub Mesh    │  Gossip  │ • Workload Scheduling│              │
@@ -30,20 +30,20 @@ You have two complementary systems that should converge:
 │  │ • Credit Relations  │          │ • MCP AI Interface  │               │
 │  │ • React Dashboard   │          │ • Reconciliation    │               │
 │  └─────────┬───────────┘          └──────────┬──────────┘               │
-│            │                                  │                          │
-│            └──────────────┬───────────────────┘                          │
-│                           │                                              │
-│                           ▼                                              │
+│            │                                  │                         │
+│            └──────────────┬───────────────────┘                         │
+│                           │                                             │
+│                           ▼                                             │
 │            ┌─────────────────────────────┐                              │
-│            │     UNIFIED CONTROL PLANE    │                              │
+│            │     UNIFIED CONTROL PLANE   │                              │
 │            │  ┌─────────────────────────┐│                              │
-│            │  │ • Single React Dashboard ││                              │
-│            │  │ • MCP for AI Control     ││                              │
-│            │  │ • Chitchat Cluster Mgmt  ││                              │
-│            │  │ • Mycelial Credit System ││                              │
+│            │  │ • Single React Dashboard │                              │
+│            │  │ • MCP for AI Control     │                              │
+│            │  │ • Chitchat Cluster Mgmt  │                              │
+│            │  │ • Mycelial Credit System │                              │
 │            │  └─────────────────────────┘│                              │
 │            └─────────────────────────────┘                              │
-│                                                                          │
+│                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -51,15 +51,15 @@ You have two complementary systems that should converge:
 
 ## UI Strategy: Unified Dashboard
 
-### Option A: Extend Mycelial Dashboard (Recommended)
+### Option A: Extend Mycelial Dashboard
 
-The mycelial-dashboard already has:
+The mycelial-dashboard stack:
 - React + TypeScript frontend
 - WebSocket real-time updates
 - P2P network visualization
 - Rust backend with WASM bridge
 
-**Extend it to include orchestrator views:**
+** (NEW) Extend it to include orchestrator views:**
 
 ```
 mycelial-dashboard/
@@ -86,13 +86,13 @@ mycelial-dashboard/
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        REACT DASHBOARD                           │
+│                       REACT DASHBOARD                           │
 ├─────────────────────────────────────────────────────────────────┤
-│                              │                                   │
-│         WebSocket #1         │         WebSocket #2              │
-│     (P2P Network Events)     │    (Orchestrator Events)          │
-│              │               │              │                    │
-└──────────────┼───────────────┼──────────────┼────────────────────┘
+│                              │                                  │
+│         WebSocket #1         │         WebSocket #2             │
+│     (P2P Network Events)     │    (Orchestrator Events)         │
+│              │               │              │                   │
+└──────────────┼───────────────┼──────────────┼───────────────────┘
                │               │              │
                ▼               │              ▼
 ┌──────────────────────┐       │    ┌──────────────────────┐
@@ -112,8 +112,8 @@ mycelial-dashboard/
 
 ### Why Free Tier First?
 
-| Approach | Cost | Access | Cloud-Agnostic Proof |
-|----------|------|--------|---------------------|
+| Approach | Cost | Access | Cloud-Agnostic Proof      |
+|----------|------|--------|---------------------------|
 | OpenNebula/Oxide | $$$$ | Limited | ❌ Single vendor |
 | AWS/GCP/Azure only | $$ | Easy | ❌ Single vendor |
 | **Multi-cloud Free Tier** | **$0** | **Easy** | **✅ Proven** |
@@ -253,27 +253,27 @@ export const seedNodes = [
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    SELF-DEPLOYMENT PIPELINE                      │
+│                    SELF-DEPLOYMENT PIPELINE                     │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  1. GitHub Push                                                  │
-│       │                                                          │
-│       ▼                                                          │
-│  2. GitHub Actions builds container image                        │
-│       │                                                          │
-│       ▼                                                          │
+│                                                                 │
+│  1. GitHub Push                                                 │
+│       │                                                         │
+│       ▼                                                         │
+│  2. GitHub Actions builds container image                       │
+│       │                                                         │
+│       ▼                                                         │
 │  3. Push to registry (ghcr.io/univrs/orchestrator:sha-xxx)      │
-│       │                                                          │
-│       ▼                                                          │
+│       │                                                         │
+│       ▼                                                         │
 │  4. MCP tool call to running orchestrator:                      │
 │     "workload_update orchestrator-prod image=sha-xxx"           │
-│       │                                                          │
-│       ▼                                                          │
+│       │                                                         │
+│       ▼                                                         │
 │  5. Orchestrator performs rolling update ON ITSELF              │
-│       │                                                          │
-│       ▼                                                          │
+│       │                                                         │
+│       ▼                                                         │
 │  6. Gossip propagates new version across mycelial network       │
-│                                                                  │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -357,7 +357,7 @@ impl Scheduler for MycelialScheduler {
 
 ---
 
-## Recommended Tech Stack
+##  Tech Stack
 
 | Layer | Technology | Rationale |
 |-------|------------|-----------|
@@ -375,14 +375,14 @@ impl Scheduler for MycelialScheduler {
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                      GROWTH TRAJECTORY                           │
+│                      GROWTH TRAJECTORY                          │
 ├──────────┬──────────────────────────────────────────────────────┤
-│  Stage   │  Infrastructure                                       │
+│  Stage   │  Infrastructure                                      │
 ├──────────┼──────────────────────────────────────────────────────┤
 │  MVP     │  Multi-cloud free tier (4-5 nodes)                   │
-│          │  $0/month                                             │
+│          │  $0/month                                            │
 ├──────────┼──────────────────────────────────────────────────────┤
-│  Early   │  Free tier + Hetzner/OVH VPS (10-20 nodes)          │
+│  Early   │  Free tier + Hetzner/OVH VPS (10-20 nodes)           │
 │  Adopters│  ~$30-50/month                                       │
 ├──────────┼──────────────────────────────────────────────────────┤
 │  Growth  │  Community nodes join (reputation incentive)         │
