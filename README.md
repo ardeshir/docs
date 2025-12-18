@@ -79,7 +79,7 @@ Peer-to-peer social coordination platform enabling bioregional economic integrat
 - Collective governance mechanisms
 - Cross-community coordination
 
-→ [View MyceliaNetwork Documentation](archives/Mycelia_Network.md)
+→ [View MyceliaNetwork Documentation](https://github.com/univrs/mycelial-dashboard)
 
 ### 4. PlanetServe Integration (NEW)
 Decentralized infrastructure for scalable, privacy-preserving distributed computing, based on [PlanetServe research](https://arxiv.org/abs/2504.20101).
@@ -142,7 +142,7 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 - [ ] Cross-platform WASM algorithms
 - [ ] Community governance tools
 
-→ [View Detailed 6-Week Implementation Roadmap](archives/roadmap-6week.md)
+→ [View Univrs Roadmap](archives/Univrs_Roadmap.md)
 
 ## 📖 Documentation
 
@@ -150,9 +150,8 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 |----------|-------------|
 | [PlanetServe Integration](archives/planetserve-integration.md) | Technical specifications for decentralized infrastructure |
 | [Anonymous Routing for CryptoSaint](https://cryptosaint.io) | Securing credit transactions with S-IDA |
-| [6-Week Implementation Roadmap](archives/roadmap-6week.md) | Sprint-by-sprint development plan |
 | [Mycelial Economics Technologies](archives/Mycelial_Economics_Orch.md) | Complete technology ecosystem overview |
-| [API Reference](archives/api-reference.md) | Developer API documentation |
+| [API Reference](archives/Univrs_DevTools.md) | Developer API documentation |
 
 ## 🤝 Contributing
 
@@ -181,7 +180,7 @@ git push origin feature/your-feature-name
 
 - **Website**: [https://univrs.io](https://univrs.io)
 - **Email**: ardeshir.org@gmail.com
-- **Documentation**: [book.univrs.io](https://book.univrs.io)
+- **Documentation**: [book.univrs.io](https://book.univrs.io/docs) you're here :P
 
 ## 📄 License
 
