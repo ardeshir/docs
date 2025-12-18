@@ -55,7 +55,7 @@ AI-native container orchestration built in Rust with mycelial scheduling princip
 
 **Status:** Core architecture implemented, mycelial economics integration in progress.
 
-→ [View RustOrchestration Documentation](./docs/rust-orchestration.md)
+→ [View RustOrchestration Documentation](https://github.com/univrs/RustOrchestration)
 
 ### 2. CryptoSaint
 Regenerative credit system implementing mycelial economics for community-governed finance.
@@ -68,7 +68,7 @@ Regenerative credit system implementing mycelial economics for community-governe
 
 **Status:** Theoretical framework complete, technical implementation roadmap defined.
 
-→ [View CryptoSaint Documentation](./docs/cryptosaint.md)
+→ [View CryptoSaint Documentation](https://cryptosaint.io)
 
 ### 3. MyceliaNetwork
 Peer-to-peer social coordination platform enabling bioregional economic integration.
@@ -79,7 +79,7 @@ Peer-to-peer social coordination platform enabling bioregional economic integrat
 - Collective governance mechanisms
 - Cross-community coordination
 
-→ [View MyceliaNetwork Documentation](./docs/mycelia-network.md)
+→ [View MyceliaNetwork Documentation](archives/Mycelia_Network.md)
 
 ### 4. PlanetServe Integration (NEW)
 Decentralized infrastructure for scalable, privacy-preserving distributed computing, based on [PlanetServe research](https://arxiv.org/abs/2504.20101).
@@ -90,7 +90,7 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 - **Hash-Radix Trees** for decentralized workload distribution
 - **BFT Consensus** for verification committee governance
 
-→ [View PlanetServe Integration Specifications](./docs/planetserve-integration.md)
+→ [View PlanetServe Integration Specifications](archives/planetserve-integration.md)
 
 ## 🔬 Research Foundation
 
@@ -142,17 +142,17 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 - [ ] Cross-platform WASM algorithms
 - [ ] Community governance tools
 
-→ [View Detailed 6-Week Implementation Roadmap](./docs/roadmap-6week.md)
+→ [View Detailed 6-Week Implementation Roadmap](archives/roadmap-6week.md)
 
 ## 📖 Documentation
 
 | Document | Description |
 |----------|-------------|
-| [PlanetServe Integration](./docs/planetserve-integration.md) | Technical specifications for decentralized infrastructure |
-| [Anonymous Routing for CryptoSaint](./docs/cryptosaint-anonymous-routing.md) | Securing credit transactions with S-IDA |
-| [6-Week Implementation Roadmap](./docs/roadmap-6week.md) | Sprint-by-sprint development plan |
-| [Mycelial Economics Technologies](./docs/mycelial-economics-tech.md) | Complete technology ecosystem overview |
-| [API Reference](./docs/api-reference.md) | Developer API documentation |
+| [PlanetServe Integration](archives/planetserve-integration.md) | Technical specifications for decentralized infrastructure |
+| [Anonymous Routing for CryptoSaint](https://cryptosaint.io) | Securing credit transactions with S-IDA |
+| [6-Week Implementation Roadmap](archives/roadmap-6week.md) | Sprint-by-sprint development plan |
+| [Mycelial Economics Technologies](archives/Mycelial_Economics_Orch.md) | Complete technology ecosystem overview |
+| [API Reference](archives/api-reference.md) | Developer API documentation |
 
 ## 🤝 Contributing
 
