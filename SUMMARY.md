@@ -5,11 +5,11 @@
 * [Connect with Univrs](welcome/connect-with-univrs.io.md)
 
 ## 🎯 Univrs Vision & Strategy
-* [Univrs Argument](vision-and-strategy/univrs_argument.md)
-* [Univrs Roadmap](vision-and-strategy/univrs_roadmap.md)
-* [Go-to-Market Strategy](vision-and-strategy/univrs_gtm.md)
-* [UTCP vs MCP Analysis](vision-and-strategy/utcp_vs_mcp.md)
-* [Univrs Multi-Cloud](archives/Multi-Cloud_Strategy.md)
+* [Argument](vision-and-strategy/univrs_argument.md)
+* [Roadmap](vision-and-strategy/univrs_roadmap.md)
+* [Strategy](vision-and-strategy/univrs_gtm.md)
+* [Multi-Cloud](archives/Multi-Cloud_Strategy.md)
+* [Design Ontology Lang](archives/dol.md)
 
 ## 🌐 PlanetServe Integration
 * [PlanetServe Technical Specifications](planetserve-integration.md)
@@ -210,7 +210,7 @@
 * [Univrs Tasks](archives/univrsio_tasks.md)
 * [Univrs DevTools](archives/Univrs_DevTools.md)
 * [Univrs DOL](https://github.com/univrs/metadol)
-  * [Design Ontology Language](archives/dol.md)
+* [Design Ontology Language](archives/dol.md)
 
 ### Global Economics & Geopolitics
 * [BRICS](archives/brics.md)
