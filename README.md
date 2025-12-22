@@ -55,7 +55,7 @@ AI-native container orchestration built in Rust with mycelial scheduling princip
 
 **Status:** Core architecture implemented, mycelial economics integration in progress.
 
-→ [View RustOrchestration Documentation](https://github.com/univrs/RustOrchestration)
+→ [View RustOrchestration Documentation](https://github.com/univrs/univrs-orchestration)
 
 ### 2. CryptoSaint
 Regenerative credit system implementing mycelial economics for community-governed finance.
@@ -79,7 +79,7 @@ Peer-to-peer social coordination platform enabling bioregional economic integrat
 - Collective governance mechanisms
 - Cross-community coordination
 
-→ [View MyceliaNetwork Documentation](https://github.com/univrs/mycelial-dashboard)
+→ [View MyceliaNetwork Documentation](https://github.com/univrs/univrs-network)
 
 ### 4. PlanetServe Integration (NEW)
 Decentralized infrastructure for scalable, privacy-preserving distributed computing, based on [PlanetServe research](https://arxiv.org/abs/2504.20101).

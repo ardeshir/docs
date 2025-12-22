@@ -10,6 +10,8 @@
 * [Strategy](vision-and-strategy/univrs_gtm.md)
 * [Multi-Cloud](archives/Multi-Cloud_Strategy.md)
 * [Design Ontology Lang](archives/dol.md)
+* [Univrs Network](https://github.com/univrs/univrs-network)
+* [Univrs Orchestration](https://github.com/univrs/univrs-orchestration)
 
 ## 🌐 PlanetServe Integration
 * [PlanetServe Technical Specifications](planetserve-integration.md)
