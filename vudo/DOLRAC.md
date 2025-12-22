@@ -1,4 +1,4 @@
-# DOL 2.0 Runtime Architecture & Composition
+## DOL 2.0 Runtime Architecture & Composition
 
 > **Design Document v1.0**  
 > **Status:** RFC (Request for Comments)  

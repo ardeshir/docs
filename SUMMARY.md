@@ -12,7 +12,7 @@
 * [Univrs Network](https://github.com/univrs/univrs-network)
 * [Univrs Orchestration](https://github.com/univrs/univrs-orchestration)
 * [VUDO DOL 2.0](vudo/dol2.0_roadmap_checkpoint.md) 
-* [DOL 2.0 RAC](vudo/DOLRAC.md)
+* [Runtime Architecture & Composition](vudo/DOLRAC.md)
 
 ## 🌐 PlanetServe Integration
 * [PlanetServe Technical Specifications](planetserve-integration.md)
