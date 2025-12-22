@@ -7,11 +7,12 @@
 ## 🎯 Univrs Vision & Strategy
 * [Argument](vision-and-strategy/univrs_argument.md)
 * [Roadmap](vision-and-strategy/univrs_roadmap.md)
-* [Strategy](vision-and-strategy/univrs_gtm.md)
 * [Multi-Cloud](archives/Multi-Cloud_Strategy.md)
 * [Design Ontology Lang](archives/dol.md)
 * [Univrs Network](https://github.com/univrs/univrs-network)
 * [Univrs Orchestration](https://github.com/univrs/univrs-orchestration)
+* [VUDO DOL 2.0](vudo/dol2.0_roadmap_checkpoint.md)
+
 
 ## 🌐 PlanetServe Integration
 * [PlanetServe Technical Specifications](planetserve-integration.md)
