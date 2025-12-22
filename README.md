@@ -128,7 +128,8 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 - [x] Core trait architecture
 - [x] Persistent state management
 - [x] Error handling framework
-- [ ] Credit tracking in StateStore
+- [ ] Credit tracking in StateStore 
+- [ ] Design Ontology Language 2.0 
 
 ### Phase 2: PlanetServe Integration (Q1 2025)
 - [ ] Reputation scoring system
@@ -140,7 +141,8 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 - [ ] MutualCreditScheduler
 - [ ] Ecological impact valuation
 - [ ] Cross-platform WASM algorithms
-- [ ] Community governance tools
+- [ ] Community governance tools 
+- [ ] VUDO OS and DOL Runtime 
 
 → [View Univrs Roadmap](archives/Univrs_Roadmap.md)
 
