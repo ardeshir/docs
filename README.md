@@ -21,23 +21,23 @@ The project aims to replace centralized cloud oligopolies and debt-based financi
 │                         Univrs.io Ecosystem                         │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     │
-│  │ RustOrchestration│  │   CryptoSaint   │  │ MyceliaNetwork  │     │
-│  │   Container      │  │   Regenerative  │  │   P2P Social    │     │
-│  │   Orchestration  │  │   Credit System │  │   Coordination  │     │
-│  └────────┬────────┘  └────────┬────────┘  └────────┬────────┘     │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐      │
+│  │ RustOrchestration│ │   CryptoSaint   │  │ MyceliaNetwork  │      │
+│  │   Container      │ │   Regenerative  │  │   P2P Social    │      │
+│  │   Orchestration  │ │   Credit System │  │   Coordination  │      │
+│  └────────┬────────┘  └────────┬────────┘  └────────┬────────┘      │
 │           │                    │                    │               │
 │           └────────────────────┼────────────────────┘               │
 │                                │                                    │
-│  ┌─────────────────────────────▼─────────────────────────────────┐ │
+│  ┌─────────────────────────────▼─────────────────────────────────┐  │
 │  │                     PlanetServe Layer                          │ │
-│  │   Decentralized LLM Serving | Anonymous Routing | Verification │ │
-│  └───────────────────────────────────────────────────────────────┘ │
+│  │   Decentralized LLM Serving | Anonymous Routing | Verification │
+│  └───────────────────────────────────────────────────────────────┘  │
 │                                │                                    │
-│  ┌─────────────────────────────▼─────────────────────────────────┐ │
-│  │                       dynamic-math                             │ │
-│  │          Client-side WASM for Transparent Algorithms           │ │
-│  └───────────────────────────────────────────────────────────────┘ │
+│  ┌─────────────────────────────▼─────────────────────────────────┐  │
+│  │                       dynamic-math                            │  │
+│  │          Client-side WASM for Transparent Algorithms          │  │
+│  └───────────────────────────────────────────────────────────────┘  │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
