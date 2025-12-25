@@ -1,9 +1,9 @@
 # DOL 2.0 Roadmap Checkpoint
 
-> **Document Version:** 1.0.0  
-> **Last Updated:** December 22, 2025  
-> **Status:** Active Development  
-> **Repository:** [github.com/univrs/metadol](https://github.com/univrs/metadol)
+> **Document Version:** 2.0.0
+> **Last Updated:** December 25, 2024
+> **Status:** v0.2.0 "Meta-Programming" Released
+> **Repository:** [github.com/univrs/univrs-dol](https://github.com/univrs/univrs-dol)
 
 ---
 
@@ -13,13 +13,12 @@ Design Ontology Language (DOL) 2.0 represents a major evolution from the specifi
 
 ### Key Milestones Achieved
 
-| Milestone | Status | Commit | Tests |
-|-----------|--------|--------|-------|
+| Milestone | Status | Release | Tests |
+|-----------|--------|---------|-------|
 | DOL 2.0 Specification | ✅ Complete | — | 130 .dol files validated |
-| Phase 1: Lexer + Parser | ✅ Complete | `91f4b4d` | 272 passing |
-| Phase 2: Type Checker | ✅ Complete | `ae0e688` | 87 passing |
-| Phase 3.2: Rust Codegen | ✅ Complete | `7c61b46` | 8 passing |
-| **Total Tests** | | | **367 passing** |
+| Q1: Lexer + Parser + TypeChecker + Codegen | ✅ Complete | v0.1.0 "Genesis" | 631 passing |
+| Q2: Meta-Programming | ✅ Complete | v0.2.0 "Meta-Programming" | 590 passing |
+| **Current Release** | **v0.2.0** | **Dec 25, 2024** | **590 passing** |
 
 ---
 
@@ -639,15 +638,16 @@ DOL 2.0 maintains the **dual vocabulary** system for developer and creator audie
 
 | Quarter | Milestone | Status |
 |---------|-----------|--------|
-| Q1 | DOL Turing Extensions | ✅ Complete |
-| | - Lexer + Parser | ✅ `91f4b4d` |
-| | - Type Checker | ✅ `ae0e688` |
-| | - Rust Codegen | ✅ `7c61b46` |
-| Q2 | Meta-Programming | 🚧 Next |
-| | - Quote/Eval (`'`, `!`) | ⏳ |
-| | - Macro System (`#`) | ⏳ |
-| | - Reflection (`?`) | ⏳ |
-| Q3 | LLVM MCP Server | ⏳ Planned |
+| Q1 | DOL Turing Extensions | ✅ Complete (v0.1.0) |
+| | - Lexer + Parser | ✅ Complete |
+| | - Type Checker | ✅ Complete |
+| | - Rust Codegen | ✅ Complete |
+| Q2 | Meta-Programming | ✅ Complete (v0.2.0) |
+| | - Quote/Eval (`'`, `!`) | ✅ 34 tests |
+| | - Idiom Brackets (`[| |]`) | ✅ 27 tests |
+| | - Reflection (`?`) | ✅ 17 tests |
+| | - 18 Built-in Macros (`#`) | ✅ 25+ tests |
+| Q3 | LLVM MCP Server | 🚧 Next |
 | | - MLIR Codegen | ⏳ |
 | | - WASM Backend | ⏳ |
 | | - MCP Integration | ⏳ |

@@ -8,11 +8,16 @@
 * [Argument](vision-and-strategy/univrs_argument.md)
 * [Roadmap](vision-and-strategy/univrs_roadmap.md)
 * [Multi-Cloud](archives/Multi-Cloud_Strategy.md)
-* [Design Ontology Lang](archives/dol.md)
+* [DOL 1.x Specification](archives/dol.md)
 * [Univrs Network](https://github.com/univrs/univrs-network)
 * [Univrs Orchestration](https://github.com/univrs/univrs-orchestration)
-* [VUDO DOL 2.0](vudo/dol2.0_roadmap_checkpoint.md) 
+
+## 🧬 DOL 2.0 (Design Ontology Language)
+* [DOL 2.0 Roadmap](vudo/dol2.0_roadmap_checkpoint.md)
 * [Runtime Architecture & Composition](vudo/DOLRAC.md)
+* [Meta-Programming Architecture](architecture/metaprogramming.md)
+* [v0.2.0 Release Notes](releases/v0.2.0.md)
+* [Changelog](CHANGELOG.md)
 
 ## 🌐 PlanetServe Integration
 * [PlanetServe Technical Specifications](planetserve-integration.md)
