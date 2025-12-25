@@ -3,6 +3,7 @@
 ## Welcome
 * [Introduction](README.md)
 * [Connect with Univrs](welcome/connect-with-univrs.io.md)
+* [The Univrs is your ...](vudo/Bondieu.md)
 
 ## 🎯 Univrs Vision & Strategy
 * [Argument](vision-and-strategy/univrs_argument.md)
