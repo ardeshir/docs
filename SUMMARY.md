@@ -19,6 +19,8 @@
 * [Meta-Programming Architecture](architecture/metaprogramming.md)
 * [v0.2.0 Release Notes](releases/v0.2.0.md)
 * [Changelog](CHANGELOG.md)
+* [Understanding HIR DOL](dol/Understanding_DOL_HIR.md)
+* [HIR Architecture](dol/HIR_ARCHITECTURE.md)
 
 ## 🌐 PlanetServe Integration
 * [PlanetServe Technical Specifications](planetserve-integration.md)
