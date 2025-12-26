@@ -383,9 +383,13 @@ You don't usually interact with HIR directly—it works behind the scenes. But u
 ## Further Reading
 
 - [HIR Architecture Rationale](dol/HIR_ARCHITECTURE.md) — Deep technical dive
-- [Spirit Composition Guide](vudo/spirits_composition.md) — Practical composition patterns
-- [Mycelium Trust Model](mycelium/trust.md) — How HIR enables distributed trust
-- [MCP Integration](dol/mcp.md) — AI tooling with HIR
+
+### Coming Soon
+
+These guides are planned for future releases:
+- **Spirit Composition Guide** — Practical composition patterns (Year 2)
+- **Mycelium Trust Model** — How HIR enables distributed trust (Year 2-3)
+- **MCP Integration** — AI tooling with HIR (Q3-Q4)
 
 ---
 
