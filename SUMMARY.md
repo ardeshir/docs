@@ -222,7 +222,7 @@
 * [Univrs Roadmap](archives/Univrs_Roadmap.md)
 * [Univrs Tasks](archives/univrsio_tasks.md)
 * [Univrs DevTools](archives/Univrs_DevTools.md)
-* [Univrs DOL](https://github.com/univrs/metadol)
+* [Univrs DOL](https://github.com/univrs/dol)
 * [Design Ontology Language](archives/dol.md)
 
 ### Global Economics & Geopolitics

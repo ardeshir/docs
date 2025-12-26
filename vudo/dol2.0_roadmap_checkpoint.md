@@ -254,7 +254,7 @@ result = 10 |> double >> increment
 ### Crate Structure
 
 ```
-metadol/
+dol/
 ├── src/
 │   ├── lib.rs              # Library root, re-exports
 │   ├── lexer.rs            # Tokenization (logos)
@@ -748,8 +748,8 @@ items.filter((x) -> x > 0)
 
 ```bash
 # Clone repository
-git clone https://github.com/univrs/metadol.git
-cd metadol
+git clone https://github.com/univrs/dol.git
+cd dol
 
 # Build
 cargo build
@@ -795,10 +795,10 @@ cargo clippy
 
 ## References
 
-- [DOL 2.0 Specification](https://github.com/univrs/metadol/tree/main/spec)
+- [DOL 2.0 Specification](https://github.com/univrs/dol/tree/main/spec)
 - [VUDO Landing](https://vudo.univrs.io)
 - [Univrs Documentation](https://learn.univrs.io)
-- [GitHub Repository](https://github.com/univrs/metadol)
+- [GitHub Repository](https://github.com/univrs/dol)
 
 ---
 
