@@ -19,8 +19,10 @@
 * [Meta-Programming Architecture](architecture/metaprogramming.md)
 * [v0.2.0 Release Notes](releases/v0.2.0.md)
 * [Changelog](CHANGELOG.md)
+* [DOL 2.0 Bootstrapping](dol/BOOTSTRAP.md)
 * [Understanding HIR DOL](dol/Understanding_DOL_HIR.md)
 * [HIR Architecture](dol/HIR_ARCHITECTURE.md)
+* [MODULAR CODEGEN Design](dol/MODULAR-CODEGEN-ARCHITECTURE.md)
 
 ## 🌐 PlanetServe Integration
 * [PlanetServe Technical Specifications](planetserve-integration.md)
