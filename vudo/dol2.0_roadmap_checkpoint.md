@@ -1,8 +1,8 @@
 # DOL 2.0 Roadmap Checkpoint
 
-> **Document Version:** 2.0.0
-> **Last Updated:** December 25, 2024
-> **Status:** v0.2.0 "Meta-Programming" Released
+> **Document Version:** 2.2.0
+> **Last Updated:** December 2025
+> **Status:** v0.2.2 "Bootstrap" Released - Year 1 Complete!
 > **Repository:** [github.com/univrs/univrs-dol](https://github.com/univrs/univrs-dol)
 
 ---
@@ -18,7 +18,10 @@ Design Ontology Language (DOL) 2.0 represents a major evolution from the specifi
 | DOL 2.0 Specification | ✅ Complete | — | 130 .dol files validated |
 | Q1: Lexer + Parser + TypeChecker + Codegen | ✅ Complete | v0.1.0 "Genesis" | 631 passing |
 | Q2: Meta-Programming | ✅ Complete | v0.2.0 "Meta-Programming" | 590 passing |
-| **Current Release** | **v0.2.0** | **Dec 25, 2024** | **590 passing** |
+| Q3: MLIR/MCP Server | ✅ Complete | v0.2.1 | 700+ passing |
+| Q4: Self-Hosting Bootstrap | ✅ Complete | v0.2.2 "Bootstrap" | 741+ passing |
+| **Current Release** | **v0.2.2** | **December 2025** | **741+ passing** |
+| **Year 1 Status** | **✅ COMPLETE** | **Genesis Achieved** | **Self-hosting works!** |
 
 ---
 
@@ -647,13 +650,13 @@ DOL 2.0 maintains the **dual vocabulary** system for developer and creator audie
 | | - Idiom Brackets (`[| |]`) | ✅ 27 tests |
 | | - Reflection (`?`) | ✅ 17 tests |
 | | - 18 Built-in Macros (`#`) | ✅ 25+ tests |
-| Q3 | LLVM MCP Server | 🚧 Next |
-| | - MLIR Codegen | ⏳ |
-| | - WASM Backend | ⏳ |
-| | - MCP Integration | ⏳ |
-| Q4 | Self-Hosting | ⏳ Planned |
-| | - DOL compiles DOL | ⏳ |
-| | - Bootstrap compiler | ⏳ |
+| Q3 | LLVM MCP Server | ✅ Complete (v0.2.1) |
+| | - MLIR Codegen | ✅ Complete |
+| | - WASM Backend | ✅ Complete |
+| | - MCP Integration | ✅ Complete |
+| Q4 | Self-Hosting | ✅ Complete (v0.2.2) |
+| | - DOL compiles DOL | ✅ 2544 lines generated |
+| | - Bootstrap compiler | ✅ 0 compilation errors |
 
 ### Year 2: Manifestation — "The machine that runs Spirits"
 
