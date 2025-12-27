@@ -17,6 +17,7 @@
 * [DOL 2.0 Roadmap](vudo/dol2.0_roadmap_checkpoint.md)
 * [Runtime Architecture & Composition](vudo/DOLRAC.md)
 * [Meta-Programming Architecture](architecture/metaprogramming.md)
+* [v0.3.0 Release Notes](releases/v0.3.0.md)
 * [v0.2.3 Release Notes](releases/v0.2.3.md)
 * [v0.2.2 Release Notes](releases/v0.2.2.md)
 * [v0.2.0 Release Notes](releases/v0.2.0.md)
@@ -25,6 +26,12 @@
 * [Understanding HIR DOL](dol/Understanding_DOL_HIR.md)
 * [HIR Architecture](dol/HIR_ARCHITECTURE.md)
 * [MODULAR CODEGEN Design](dol/MODULAR-CODEGEN-ARCHITECTURE.md)
+
+## 🌀 VUDO Platform (Spirits & VM)
+* [Developer Guide](vudo/developer-guide.md)
+* [CLI Reference](vudo/CLI.md)
+* [Phase 2 Complete](vudo/PHASE2_COMPLETE.md)
+* [SEX Design](vudo/SEX_DESIGN.md)
 
 ## 🌐 PlanetServe Integration
 * [PlanetServe Technical Specifications](planetserve-integration.md)
