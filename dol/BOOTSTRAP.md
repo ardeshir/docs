@@ -1,8 +1,8 @@
 # DOL Bootstrap Process
 
-> **Version:** v0.2.2 "Bootstrap"
-> **Date:** December 2025
-> **Status:** Complete
+> **Version:** v0.2.3 "Stage2"
+> **Date:** December 27, 2024
+> **Status:** Complete - Full Self-Hosting Achieved!
 
 ---
 
@@ -12,8 +12,11 @@ Self-hosting means the DOL compiler can compile its own source code.
 This is a key milestone proving the language is complete enough to
 express its own implementation.
 
-DOL v0.2.2 "Bootstrap" marks the completion of Year 1 "Genesis" with a fully working
-self-hosting compiler. The DOL compiler can now compile its own source code to valid Rust.
+DOL v0.2.3 "Stage2" marks full self-hosting success! The compiler compiled from DOL sources can:
+- ✅ Parse DOL files
+- ✅ Generate Rust code from DOL
+- ✅ 1532 tests passing (target was 1300+)
+- ✅ Stage2 compiles with 0 errors
 
 ---
 
@@ -101,8 +104,8 @@ With the bootstrap complete, Year 2 focuses on:
 
 ## Links
 
-- [GitHub Release](https://github.com/univrs/dol/releases/tag/v0.2.2)
-- [Crates.io](https://crates.io/crates/dol/0.2.2)
+- [GitHub Release](https://github.com/univrs/dol/releases/tag/v0.2.3)
+- [Crates.io](https://crates.io/crates/dol/0.2.3)
 - [DOL Documentation](https://learn.univrs.io/dol)
 - [VUDO Landing](https://vudo.univrs.io)
 

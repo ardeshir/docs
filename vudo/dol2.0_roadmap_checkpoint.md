@@ -1,9 +1,9 @@
 # DOL 2.0 Roadmap Checkpoint
 
-> **Document Version:** 2.2.0
-> **Last Updated:** December 2025
-> **Status:** v0.2.2 "Bootstrap" Released - Year 1 Complete!
-> **Repository:** [github.com/univrs/univrs-dol](https://github.com/univrs/univrs-dol)
+> **Document Version:** 2.3.0
+> **Last Updated:** December 27, 2024
+> **Status:** v0.2.3 "Stage2" Released - Full Self-Hosting Achieved!
+> **Repository:** [github.com/univrs/dol](https://github.com/univrs/dol)
 
 ---
 
@@ -20,8 +20,9 @@ Design Ontology Language (DOL) 2.0 represents a major evolution from the specifi
 | Q2: Meta-Programming | ✅ Complete | v0.2.0 "Meta-Programming" | 590 passing |
 | Q3: MLIR/MCP Server | ✅ Complete | v0.2.1 | 700+ passing |
 | Q4: Self-Hosting Bootstrap | ✅ Complete | v0.2.2 "Bootstrap" | 741+ passing |
-| **Current Release** | **v0.2.2** | **December 2025** | **741+ passing** |
-| **Year 1 Status** | **✅ COMPLETE** | **Genesis Achieved** | **Self-hosting works!** |
+| Q4: Stage2 Self-Hosting | ✅ Complete | v0.2.3 "Stage2" | 1532 passing |
+| **Current Release** | **v0.2.3** | **December 27, 2024** | **1532 passing** |
+| **Year 1 Status** | **✅ COMPLETE** | **Genesis Achieved** | **Full self-hosting!** |
 
 ---
 
@@ -654,9 +655,9 @@ DOL 2.0 maintains the **dual vocabulary** system for developer and creator audie
 | | - MLIR Codegen | ✅ Complete |
 | | - WASM Backend | ✅ Complete |
 | | - MCP Integration | ✅ Complete |
-| Q4 | Self-Hosting | ✅ Complete (v0.2.2) |
-| | - DOL compiles DOL | ✅ 2544 lines generated |
-| | - Bootstrap compiler | ✅ 0 compilation errors |
+| Q4 | Self-Hosting | ✅ Complete (v0.2.3) |
+| | - DOL compiles DOL | ✅ Stage2 functional |
+| | - Bootstrap compiler | ✅ 1532 tests, 0 errors |
 
 ### Year 2: Manifestation — "The machine that runs Spirits"
 
