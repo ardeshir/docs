@@ -17,6 +17,7 @@
 * [DOL 2.0 Roadmap](vudo/dol2.0_roadmap_checkpoint.md)
 * [Runtime Architecture & Composition](vudo/DOLRAC.md)
 * [Meta-Programming Architecture](architecture/metaprogramming.md)
+* [v0.4.0 Release Notes](releases/v0.4.0.md)
 * [v0.3.0 Release Notes](releases/v0.3.0.md)
 * [v0.2.3 Release Notes](releases/v0.2.3.md)
 * [v0.2.2 Release Notes](releases/v0.2.2.md)

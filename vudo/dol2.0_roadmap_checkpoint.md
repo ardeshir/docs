@@ -1,9 +1,9 @@
 # DOL 2.0 Roadmap Checkpoint
 
-> **Document Version:** 2.3.0
-> **Last Updated:** December 27, 2024
-> **Status:** v0.2.3 "Stage2" Released - Full Self-Hosting Achieved!
-> **Repository:** [github.com/univrs/dol](https://github.com/univrs/dol)
+> **Document Version:** 4.0.0
+> **Last Updated:** December 29, 2025
+> **Status:** v0.4.0 "HIR Complete" Released - Full Compilation Pipeline Working!
+> **Repository:** [github.com/univrs/univrs-dol](https://github.com/univrs/univrs-dol)
 
 ---
 
@@ -21,8 +21,10 @@ Design Ontology Language (DOL) 2.0 represents a major evolution from the specifi
 | Q3: MLIR/MCP Server | ✅ Complete | v0.2.1 | 700+ passing |
 | Q4: Self-Hosting Bootstrap | ✅ Complete | v0.2.2 "Bootstrap" | 741+ passing |
 | Q4: Stage2 Self-Hosting | ✅ Complete | v0.2.3 "Stage2" | 1532 passing |
-| **Current Release** | **v0.2.3** | **December 27, 2024** | **1532 passing** |
-| **Year 1 Status** | **✅ COMPLETE** | **Genesis Achieved** | **Full self-hosting!** |
+| HIR Architecture | ✅ Complete | v0.3.0 "Pragmatic Evolution" | 466 passing |
+| **HIR + MLIR + WASM Pipeline** | **✅ Complete** | **v0.4.0 "HIR Complete"** | **1,156 passing** |
+| **Current Release** | **v0.4.0** | **December 29, 2025** | **1,156 passing** |
+| **Year 1 Status** | **✅ COMPLETE** | **Full Pipeline Working** | **DOL → WASM validated!** |
 
 ---
 
