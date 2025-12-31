@@ -307,38 +307,5 @@ If I stop being able to write these critiques, that's when I've become the Winge
 
 --- 
 
-Technical Update: 
-
-Phase 1 ENR Bridge Wiring Complete!
-
-  PR #8 created: https://github.com/univrs/network/pull/8
-
-  Summary
-
-  Added wiring for ENR Bridge economics system to the dashboard WebSocket:
-
-  New WsMessage Types (messages.rs)
-
-  - GradientUpdate - resource availability from nodes
-  - EnrCreditTransfer / EnrBalanceUpdate - ENR credit system
-  - ElectionAnnouncement / ElectionCandidacy / ElectionVote / ElectionResult - nexus elections
-  - SeptalStateChange / SeptalHealthStatus - circuit breaker events
-
-  ENR Topic Routing (main.rs)
-
-  | Topic                    | Handler                             |
-  |--------------------------|-------------------------------------|
-  | /vudo/enr/gradient/1.0.0 | GradientUpdate                      |
-  | /vudo/enr/credits/1.0.0  | EnrCreditTransfer, EnrBalanceUpdate |
-  | /vudo/enr/election/1.0.0 | Election messages                   |
-  | /vudo/enr/septal/1.0.0   | Septal messages                     |
-
-  Test Results
-
-  - Build: ✅ passes
-  - Tests: ✅ 40+ tests passing
-
-  This completes Phase 1. The ENR Bridge events now flow through gossipsub to the dashboard. Phase 2 would add per-peer state tracking for credit lines, proposals, and vouches.
-
 
 
