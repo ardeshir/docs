@@ -193,6 +193,8 @@
   * [Constellation Software Inc.](global-economics-and-geopolitics/corporate-analysis/constellation-software-inc..md)
 * [Alternative Economic Models](global-economics-and-geopolitics/alternative-economic-models/README.md)
   * [Mycelial Economics](global-economics-and-geopolitics/alternative-economic-models/mycelial-economics.md)
+  * [Thermodynamic Economics](global-economics-and-geopolitics/alternative-economic-models/thermodynamic.md)
+  * [Building Decentralized Alternatives to Debt-Based Capitalism](global-economics-and-geopolitics/alternative-economic-models/Building_Decentralized_Alternatives_to_Debt-Based_Capitalism.md)
 * [Historical Analysis](global-economics-and-geopolitics/historical-analysis/README.md)
   * [Mohammad Mossadegh Analysis](global-economics-and-geopolitics/historical-analysis/mohammad-mossadegh-analysis.md)
 

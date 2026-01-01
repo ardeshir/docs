@@ -1,9 +1,9 @@
 
 ## Critique of Arnoux’s Thermodynamic Arguments
 
-Based on my research into Arnoux’s work and your summary, his core thesis is that **economic systems fundamentally violate thermodynamic laws**, creating an inevitable collapse scenario. His key claims:
+Arnoux’s core thesis is that **economic systems fundamentally violate thermodynamic laws**, creating an inevitable collapse scenario. His key claims:
 
-1. **Energy cannot be meaningfully priced** because it represents dynamic thermodynamic relationships, not discrete commodities
+1. **Energy cannot be meaningfully priced** because it repr sents dynamic thermodynamic relationships, not discrete commodities
 1. **Only 62% of oil’s energy content converts to useful work** due to the Second Law of Thermodynamics—the rest is lost to entropy
 1. **Economic pricing erases essential system relationships** by reducing complex energy networks to monetary abstractions
 1. **COPs fail because they operate within economic frameworks** that are thermodynamically incompatible with physical reality
