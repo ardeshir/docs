@@ -8,12 +8,16 @@
 ## 🎯 Univrs Vision & Strategy
 * [Argument](vision-and-strategy/univrs_argument.md)
 * [Roadmap](vision-and-strategy/univrs_roadmap.md)
+* [Go-to-Market](vision-and-strategy/univrs_gtm.md)
+* [UTCP vs MCP](vision-and-strategy/utcp_vs_mcp.md)
 * [Multi-Cloud](archives/Multi-Cloud_Strategy.md)
-* [DOL 1.x Specification](archives/dol.md)
+* [DOL 1.x Specification](dol.md)
 * [Univrs Network](https://github.com/univrs/univrs-network)
 * [Univrs Orchestration](https://github.com/univrs/univrs-orchestration)
 
 ## 🧬 DOL 2.0 (Design Ontology Language)
+* [DOL Specification](dol.md)
+* [DOL CLI Reference](dol/CLI.md)
 * [DOL 2.0 Roadmap](vudo/dol2.0_roadmap_checkpoint.md)
 * [Runtime Architecture & Composition](vudo/DOLRAC.md)
 * [Meta-Programming Architecture](architecture/metaprogramming.md)
@@ -35,12 +39,13 @@
 * [Phase 2 Complete](vudo/PHASE2_COMPLETE.md)
 * [SEX Design](vudo/SEX_DESIGN.md)
 * [Mycelial Network Testing](vudo/mycelial-network-testing.md)
+* [Milestone Summary 2025-12-29](vudo/MILESTONE-SUMMARY-2025-12-29.md)
 
 ## 🌐 PlanetServe Integration
-* [PlanetServe Technical Specifications](planetserve-integration.md)
-* [6-Week Implementation Roadmap](roadmap-6week.md)
-* [Mycelial Economics Technologies](mycelial-economics-tech.md)
-* [CryptoSaint Anonymous Routing](cryptosaint-anonymous-routing.md)
+* [PlanetServe Technical Specifications](archives/planetserve-integration.md)
+* [6-Week Implementation Roadmap](archives/roadmap-6week.md)
+* [Mycelial Economics Technologies](archives/mycelial-economics-tech.md)
+* [CryptoSaint Anonymous Routing](archives/cryptosaint-anonymous-routing.md)
 * [PlanetServe Research Paper (PDF)](https://arxiv.org/html/2504.20101v4)
 
 ## 🦀 Rust Orchestration
@@ -49,6 +54,11 @@
 * [Core Primitives](rust-orchestration/primitives.md)
 * [Rust P2P Plan](rust/Rust_Peer-to_Peer_plan.md)
 * [The Rustonomicon](rust/rustnomicon.md)
+* [Rust Orchestration](rust/Rust_Orchestration.md)
+* [Rust Deep Dives](rust-orchestration/rust-deep-dives/rust-derive-explained.md)
+  * [Rust Derive Explained](rust-orchestration/rust-deep-dives/rust-derive-explained.md)
+  * [Rust Static File Server with Warp and Docker](rust-orchestration/rust-deep-dives/rust-static-file-server-with-warp-and-docker.md)
+  * [The Rustonomicon Deep Dive](rust-orchestration/rust-deep-dives/the-rustonomicon.md)
 
 ## 🦀 Rust Language
 * [Rust Azure Function](rust/Rust_Azure_Function.md)
@@ -84,6 +94,18 @@
 * [Single AMD EPYC 7713P Sled](oxide/single_AMD_EPYC_7713P_sled.md)
 
 ## ☁️ Azure & Cloud DevOps
+* [Azure DevOps](azure-and-cloud-devops/azure-devops/README.md)
+  * [ADO Feed Tokens Security](azure-and-cloud-devops/azure-devops/ado-feed-tokens-security.md)
+  * [SSH Key Setup](azure-and-cloud-devops/azure-devops/ssh-key-setup.md)
+  * [Universal Artifacts Download](azure-and-cloud-devops/azure-devops/universal-artifacts-download.md)
+* [Azure Functions](azure-and-cloud-devops/azure-functions/README.md)
+  * [Docker Deployment](azure-and-cloud-devops/azure-functions/docker-deployment.md)
+  * [Isolated vs Worker Process](azure-and-cloud-devops/azure-functions/isolated-vs-worker-process.md)
+  * [Search Function Trigger](azure-and-cloud-devops/azure-functions/search-function-trigger.md)
+* [Azure SDK and Identity](azure-and-cloud-devops/azure-sdk-and-identity/README.md)
+  * [Application Insights Node.js](azure-and-cloud-devops/azure-sdk-and-identity/application-insights-node.js.md)
+  * [Azure Monitor API](azure-and-cloud-devops/azure-sdk-and-identity/azure-monitor-api.md)
+  * [Azure Identity Integration](azure-and-cloud-devops/azure-sdk-and-identity/azure.identity-integration.md)
 * [Azure AD DSL Parser](azure/AzureAD_DSL_Parser.md)
 * [Azure Front Door KQL](azure/AzureFrontDoor_KQL.md)
 * [Azure Func AI Hub](azure/AzureFunc_AIHub.md)
@@ -216,6 +238,19 @@
 ## Unix Heritage
 * [Unix & BSD](https://freebsd.edsonbrandi.com/)
 * [Unix History](https://book.univrs.io/os/unix-bsd/unix)
+* [Unix and BSD](unix-heritage/unix-and-bsd.md)
+* [Unix History (Local)](unix-heritage/unix-history.md)
+
+## 🖥️ Infrastructure
+* [Illumos Operating System](infrastructure/illumos-operating-system/README.md)
+  * [Connect](infrastructure/illumos-operating-system/connect.md)
+  * [Discussions](infrastructure/illumos-operating-system/discussions.md)
+* [Oxide Computer Hardware](infrastructure/oxide-computer-hardware/README.md)
+  * [Benchmark Electronics and Oxide](infrastructure/oxide-computer-hardware/benchmark-electronics-and-oxide.md)
+  * [Oxide Rack with Talos Linux](infrastructure/oxide-computer-hardware/oxide-rack-with-talos-linux.md)
+* [Virtualization](infrastructure/virtualization/README.md)
+  * [VirtIO Interface Standard](infrastructure/virtualization/virtio-interface-standard.md)
+  * [VM CPU Architecture](infrastructure/virtualization/vm-cpu-architecture.md)
 
 ## 📦 Archives
 
@@ -237,14 +272,14 @@
 * [Univrs Tasks](archives/univrsio_tasks.md)
 * [Univrs DevTools](archives/Univrs_DevTools.md)
 * [Univrs DOL](https://github.com/univrs/dol)
-* [Design Ontology Language](archives/dol.md)
+* [Design Ontology Language](dol.md)
 
 ### Global Economics & Geopolitics
 * [BRICS](archives/brics.md)
 * [BRICS Path](archives/brics_path.md)
 * [BRICS Univrs](archives/brics_univrs.md)
 * [BRICS Woods](archives/bricks_woods.md)
-* [NDB BRICS](NDB_BRICS.md)
+* [NDB BRICS](archives/NDB_BRICS.md)
 * [Central Banks and War](archives/Central_Banks_and_War.md)
 * [Federal Reserve](archives/Federal_Reserve.md)
 * [Fed Beige Books](archives/Fed_Beige_Books.md)
@@ -306,26 +341,13 @@
 * [UTCP vs MCP](archives/UTCP_vs_MCP.md)
 
 ### Rust Programming
-* [Rust Orchestration](archives/Rust_Orchestration.md)
 * [Rust P2P Network](archives/Peer-to-Peer_Network_in_Rust.md)
-* [Rust P2P Plan](archives/Rust_Peer-to_Peer_plan.md)
 * [Impl P2P v1](archives/Impl_P2P_v1.md)
-* [Rust vs Zig](archives/Rust_vs_Zig.md)
 * [Why Rust Won](archives/why_rust_won.md)
 * [Rustnomicon](archives/Rustnomicon.md)
-* [Rust Credit System v1](archives/Rust_Credit_System_v1.md)
-* [Rust Credit System v2](archives/Rust_Credit_System_v2.md)
-* [Rust Azure Function](archives/Rust_Azure_Function.md)
-* [Rust C JSON Parsing](archives/Rust_C_JSON_Parsing.md)
-* [Rust Derive Explained](archives/Rust_Derive_Explained.md)
-* [Rust File Appender](archives/Rust_File_Appender.md)
-* [Rust Static Files Server Docker](archives/Rust_StaticFiles_Server_Docker.md)
 * [Warp Rust Static File Server](archives/Warp_Rust_StaticFile_Server_Docker.md)
-* [Rust Dockerfile](archives/Rust_Dockerfile.md)
-* [Rust Dockerfile v2](archives/Rust_Dockerfile2.md)
 
 ### Oxide Computer
-* [Oxide Benchmark](archives/oxide_benchmark.md)
 * [Oxide CDS Usage Breakdown](archives/Oxide_CDS_Usage_Breakdown.md)
 * [Oxide CDS v2](archives/Oxide_CDS_v2.md)
 * [Oxide Hardware-Software Interface](archives/Oxide_Hardware-Software_Interface_Challenges.md)
@@ -361,40 +383,13 @@
 
 ### Azure & Cloud
 * [AKS Azure Functions](archives/Aks_Azure_Functions.md)
-* [Azure Functions Configs](archives/Azure_Functions_Configs.md)
-* [Azure Function KEDA K8S](archives/Azure_Function_KEDA_K8S.md)
-* [Azure Function JSON Appender](archives/Azure_Function_JSON_Appender.md)
-* [Azure Function SA-JSON](archives/Azure_Function_SA-JSON.md)
-* [Azure PostgreSQL Function](archives/Azure_PostgreSQL_Function.md)
-* [Azure Search Function](archives/Azure_Search_Function.md)
-* [Azure Search Engine](archives/Azure_Search_engine.md)
-* [Azure dotnet Func Copy CosmosDB](archives/Azure_dotnet_Func_Copy_Cosmosdb.md)
-* [Azure Function App Docker Deployment](archives/Azure_Function_App_Docker_Deployment.md)
-* [Azure Container Apps Replica Rules](archives/Azure_Container_Apps_Replica_rules.md)
-* [Azure Front Door KQL](archives/AzureFrontDoor_KQL.md)
 * [AFD Module PE](archives/AFD_Module_PE.md)
 * [AFD Private Endpoint](archives/AFD_PrivateEndpoint.md)
-* [Azure AD DSL Parser](archives/AzureAD_DSL_Parser.md)
-* [Azure Active Directory EntraID](archives/Azure_Active_Directory_EntraID.md)
-* [Azure Sub Peering](archives/Azure_Sub_Peering.md)
-* [Azure Storage Connection](archives/Azure_Storage_Connection.md)
 * [App Insight Assessment](archives/ApplicationInsight_Assessment.md)
 * [FedRAMP CMMC](archives/FedRAMP_CMMC.md)
 
 ### AWS
-* [AWS China EKS Backup](archives/AWS_China_EKS_Backup.md)
-* [AWS China S3 Backup](archives/AWS_China_S3_Backup.md)
-* [AWS China Log Backup Strategy v1](archives/AWS_China_Log_Backup_Strategy_v1.md)
-* [AWS China Log Backup Strategy v2](archives/AWS_China_Log_Backup_Strategy_v2.md)
-* [AWS CDK Deployment Lambda](archives/AWS_CDK_Deployment_Lambda.md)
 * [CDK Lambda Edge Authentication](archives/CDK_Lambda_Edge_Authentication.md)
-* [AWS DirectConnect Overview](archives/AWS_DirectConnect_overview.md)
-* [AWS DirectConnect Overview v2](archives/AWS_DirectConnect_overview_v2.md)
-* [AWS Step Functions Redshift](archives/AWS_Step_Functions_Redshift_Data_API_CloudWatch.md)
-* [AWS RedShift Azure Storage Blob](archives/AWS_RedShift_Azure_Storage_Blob.md)
-* [AWS IAM Login Lockout](archives/AWS_IAM_Login_Lockout.md)
-* [AWS Org Policy Exception](archives/AWS_Org_Policy_Exception.md)
-* [AWS Policy Roles MFA](archives/AWS_PolicyRolesMFA.md)
 
 ### Kubernetes & Containers
 * [Kubernetes Deployment CPU-Mem](archives/Kubernetes_Deployment_CPU-Mem.md)
@@ -402,9 +397,6 @@
 * [ARM64 vs AMD64 Kubernetes Strategy](archives/ARM64_vs_AMD64_Kubernetes_Strategy_Guide.md)
 * [K8s Ingress Loadbalancer Cert](archives/k8s_ingress_loadbalancer_cert.md)
 * [EKS Admin Policy](archives/eks_admin_policy.md)
-* [Talos](archives/Talos.md)
-* [Talos Linux Lab](archives/Talos_Linux_Lab.md)
-* [Docker Commands](archives/DockerCmd.md)
 * [React Docker Compose](archives/React_Docker_Compose.md)
 
 ### Linux & Unix
@@ -417,23 +409,11 @@
 * [SSH Keys](archives/create_ssh_keys.md)
 
 ### C/C++ Programming
-* [C vs Cpp](archives/C_vs_Cpp.md)
-* [C Appender](archives/C_Appender.md)
-* [CPP API Server JSON Request](archives/CPP_API_Server_JSON_Request.md)
-* [CPP Program Dockerfile](archives/CPP_Program_Dockerfile.md)
-* [CPP Fetch Service DB](archives/Cpp_fetch_service_db.md)
-* [CPP Fetch Service DB v2](archives/Cpp_fetch_service_db_v2.md)
-* [CPP Modules Package System](archives/Cpp_Modules_Package_System_Architecture.md)
 * [Modern Cpp Patterns](archives/Modern_Cpp_patterns.md)
 * [Void Pointer](archives/void_pointer.md)
 
 ### C# / .NET Programming
-* [CSharp ASP.NET AKS ARC](archives/CSharp_ASP.NET_AKS_ARC.md)
-* [CSharp Microservices](archives/CSharp_Microservices.md)
-* [CSharp Queue State Machine](archives/CSharp_Queue_State_Machine.md)
-* [CSharp Service Bus Migration](archives/CSharp_Service_Bus_Migration.md)
 * [CSharp vs Golang](archives/Csharp_vs_Golang.md)
-* [CSharp Project Parsing Appending](archives/CSharp_Project_ParsingAppending.md)
 * [Durable Functions](archives/Durable_Functions.md)
 
 ### Python & Other Languages
@@ -480,6 +460,79 @@
 * [The Imaginarium](archives/The_Imaginarium.md)
 * [Pulse of Transgression](https://medium.com/@sepahsalar)
 
+### DevOps & Monitoring
+* [ADO Artifacts](archives/ADO_Artifacts.md)
+* [Add JSON IP to SG](archives/Add_JSON_IP_to_SG.md)
+* [AppInsight Bicep Update](archives/AppInsight_Bicep_update.md)
+* [AppInsight NodeJS Update](archives/AppInsight_NodeJS_update.md)
+* [Create Az AppPlan WebApp](archives/Create_Az_AppPlan_WebApp.md)
+* [Func Install](archives/Func_install.md)
+* [Azure Metrics Advisor (Retired)](archives/__Azure_Metrics_Advisor_retired.md)
+* [Invalid Template Deployment](archives/InvalidTemplateDeployment.md)
+* [Monitor Query](archives/Monitor_Query.md)
+* [Worker Process Isolated Process](archives/WorkerProcess_IsolatedProcess.md)
+* [Collect Telemetry Data from VM](archives/Collect_TelemetryData_from_VM.md)
+
+### Bash & Shell Scripts
+* [Bash Grep](archives/Bash_Grep.md)
+* [Bash JSON Parse](archives/Bash_JSON_Parse.md)
+* [Bash Replace Space with Underscores](archives/Bash_replace_space_with_underscores.md)
+* [Curl Example](archives/Curl_example.md)
+* [Git Standard Gitignore](archives/Git_Standard_gitignore_file.md)
+* [Golang Replace Blank with Underscores](archives/Golang_repalce_blank_with_underscores.md)
+* [Perl Replace Blank with Underscores](archives/Perl_replace_blank_with_underscores.md)
+
+### Julia Programming
+* [Julia CPU Target](archives/Julia_CPU_Target.md)
+* [Julia HTTP POST](archives/Julia_HTTP_POST.md)
+* [Julia Modules](archives/Julia_Modules.md)
+* [Julia Params](archives/Julia_Params.md)
+* [Julia to AzureFunc Solver v1](archives/Julia_to_AzureFunc_solver_v1.md)
+* [Julia to CSharp Solver v1](archives/Julia_to_Csharp_solver_v1.md)
+* [Log Analytics Julia API](archives/LogAnalystics_Julia_API.md)
+* [Metrics Julia](archives/Metrics_Julia.md)
+
+### Python Utilities
+* [Pip Module Creation](archives/Pip_Module_Creation.md)
+* [Python 3.11 Create Links PDFs](archives/Python311_create_links_PDFs.md)
+* [Python Function Append to File](archives/Python_Function_AppendToFile.md)
+* [Python Function Write to File](archives/Python_Function_WriteToFile.md)
+* [Python If File Exists Check](archives/Python_IF_File_Exists_Check.md)
+* [Python If File Exists](archives/Python_if_file_exists.md)
+
+### Web & HTML Parsing
+* [CSV Parser Web](archives/CsvParserWeb.md)
+* [HTML to PDS](archives/HTML_to_PDS.md)
+* [HTML Greater/Less Than](archives/Html_gthLth.md)
+* [JavaScript Parser Libs](archives/JavaScript_Parser_Libs.md)
+
+### C# Additional
+* [CSharp Features Append-Replace](archives/Charp_Features_Append-Replace.md)
+* [Interfaces CSharp](archives/Interfaces_CSharp.md)
+* [MVC plus Razor Pages](archives/MVC_plus_RazorPages.md)
+
+### Univrs Platform Design
+* [Compiler Research](archives/Compiler_Research.md)
+* [Connect](archives/Connect.md)
+* [Consensus Design](archives/Consensus_Design.md)
+* [Mycelial Economics Orchestration](archives/Mycelial_Economics_Orch.md)
+* [Youki Integration Design](archives/Youki_Integration_Design.md)
+* [MVP Plan](archives/_mvp_plan.md)
+* [Quick Start](archives/quick_start.md)
+* [Somacosf Design](archives/somacosf_design.md)
+* [Plan 150](archives/plan_150.md)
+* [Data](archives/data.md)
+* [Preface](archives/Preface.md)
+
+### Literature & Creative
+* [Hunger: A Modern Novel](archives/hunger_a_modern_novel.md)
+* [Modern Healing](archives/modern_healing.md)
+* [The Imaginarium](archives/The_Imaginarium.md)
+* [Pulse of Transgression](https://medium.com/@sepahsalar)
+* [Pulse of Transgression (Local)](archives/pulse_of_transgression.md)
+* [Mythic Rebellion](archives/Mythic_Rebellion.md)
+* [Critique July Essay](archives/critique_july_essay.md)
+
 ### Miscellaneous
 * [Grey Box Engineering](archives/Grey_Box_Engineering.md)
 * [Product Engineering](archives/Product_Engineering.md)
@@ -491,3 +544,12 @@
 * [HTML to PDF](archives/HTML_TO_PDF.md)
 * [Zip](archives/Zip.md)
 * [Manifest](archives/Manifest.md)
+* [Active-x Rust Static Files Server Docker](archives/Active-x_Rust_StaticFiles_Server_Docker.md)
+* [Affiliate Marketing Model](archives/Affiliate_Marketing_Model.md)
+* [Direct File](archives/Direct_file.md)
+* [How to Start Greatplains MIS Silent](archives/How_to_start_greatplains.mis_with_silent.md)
+* [List Questions](archives/List_Questions.md)
+* [SubTask Solve Run Parallel](archives/SubTask_solve_run_parallel.md)
+* [Summer Research Project on AI](archives/Summer_Research_Project_on_AI.md)
+* [VM CPU1 Mem1.5](archives/VM_CPU1_Meme1.5.md)
+* [SUPPORT](SUPPORT.md)
