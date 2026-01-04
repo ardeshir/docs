@@ -222,3 +222,117 @@ For VMM developers facing the OVMF ACPI table requirement, three practical paths
 **Custom OVMF builds** work for controlled environments where VM configuration is fixed. Maintaining a firmware fork adds ongoing maintenance burden and limits access to upstream security fixes and features.
 
 For Propolis specifically, implementing fw_cfg with table-loader support represents the most sustainable path, aligning with the FreeBSD bhyve changes already synced to illumos  and enabling full compatibility with current and future OVMF versions. The rust-vmm `acpi_tables` crate can provide the table generation foundation,  while the fw_cfg device implementation follows well-documented specifications available in QEMU’s `docs/specs/fw_cfg.rst`.
+
+
+# RFC: Propolis PR #999: Enabling ACPI table generation for OVMF support
+
+**Propolis PR #999 introduces fw_cfg device emulation and ACPI table generation to Oxide Computer’s VMM**, enabling support for modern OVMF firmware versions beyond the previously-constrained edk2-stable202105. This change implements the QEMU-compatible table-loader protocol that allows the hypervisor to dynamically provide ACPI tables to guest virtual machines—a foundational requirement for UEFI guest boot on newer firmware builds.
+
+The PR addresses a critical compatibility gap: **OVMF versions after edk2-stable202105 removed their embedded fallback ACPI tables**, requiring VMMs to implement the fw_cfg interface to deliver properly-structured ACPI data. Without this capability, Propolis could not upgrade its bundled OVMF image, limiting access to security fixes, feature improvements, and better Windows guest support.
+
+## The fw_cfg device and why it matters
+
+The fw_cfg (firmware configuration) device provides a standardized interface for VMMs to pass configuration data, ACPI tables, SMBIOS structures, and other system information to guest firmware. Originally developed for QEMU, it has become the de facto standard that OVMF expects from all hypervisors.
+
+On x86, the device occupies three I/O ports: **port 0x510** serves as the 16-bit selector register for choosing which configuration item to access, **port 0x511** provides an 8-bit data register for byte-by-byte reading, and **port 0x514** enables the 64-bit DMA interface for high-performance bulk transfers. The device identifies itself with ACPI ID `QEMU0002`, allowing guest operating systems to discover its presence after boot. 
+
+For ACPI table delivery, the VMM exposes three critical fw_cfg files: `etc/table-loader` contains the linker-loader command array instructing firmware how to process tables, `etc/acpi/tables` holds the concatenated ACPI table blob, and `etc/acpi/rsdp` contains the Root System Description Pointer. The table-loader protocol represents the key innovation—rather than simply dumping tables into guest memory at fixed addresses, it defines a relocation-based scheme where firmware allocates memory and patches pointers dynamically.
+
+## Table-loader protocol implementation
+
+The table-loader protocol uses **128-byte command entries** packed into the `etc/table-loader` fw_cfg file. Each command instructs the firmware to perform specific memory operations that transform the raw table blob into properly-linked ACPI structures.
+
+The **ALLOCATE command** (0x01) requests firmware to allocate aligned memory for a named fw_cfg blob, download its contents, and record the allocation address. This command specifies an alignment requirement (must be a power of 2) and a zone indicator—HIGH for general memory above 1MB or FSEG for the F-segment region (0xE0000-0xFFFFF) where legacy RSDP discovery expects to find the root pointer.
+
+The **ADD_POINTER command** (0x02) patches physical addresses between allocated blobs. It specifies a destination file, source file, offset within the destination, and pointer size (1, 2, 4, or 8 bytes). The firmware reads the existing value at the offset, adds the physical address where the source blob was allocated, and writes back the result. This mechanism links XSDT entries to individual tables, connects FADT to DSDT, and establishes the entire ACPI table hierarchy.
+
+The **ADD_CHECKSUM command** (0x03) calculates and inserts ACPI-compliant checksums after pointer patching is complete. ACPI requires that each table’s bytes sum to zero (modulo 256), so this command specifies the file, checksum byte location, and the range to checksum.
+
+The **WRITE_POINTER command** (0x04) enables bidirectional communication—firmware writes an allocated address back to the VMM via a writable fw_cfg entry. This supports features like VM Generation ID (vmgenid) where the hypervisor needs to know the guest physical address of dynamically-allocated structures.
+
+## How Propolis structures its implementation
+
+Based on the broader Propolis architecture and similar Rust VMM implementations, the PR likely introduces several key components within the `lib/propolis` crate.
+
+The **fw_cfg device model** would implement the standard I/O port handlers at 0x510, 0x511, and 0x514. The selector register maintains state tracking the currently-selected item and data offset. Reading from the data port returns successive bytes from the selected item, advancing the offset automatically. The DMA interface parses `FWCfgDmaAccess` structures from guest physical memory, performing bulk transfers that dramatically improve ACPI table download performance compared to byte-by-byte I/O.
+
+```rust
+// Expected fw_cfg constants and structures
+const FW_CFG_SIGNATURE: u16 = 0x0000; // Returns "QEMU" 
+const FW_CFG_ID: u16 = 0x0001; // Feature bitmap
+const FW_CFG_FILE_DIR: u16 = 0x0019; // File directory
+const FW_CFG_FILE_FIRST: u16 = 0x0020; // First file selector
+
+// Command identifiers for table-loader
+const COMMAND_ALLOCATE: u32 = 0x01;
+const COMMAND_ADD_POINTER: u32 = 0x02;
+const COMMAND_ADD_CHECKSUM: u32 = 0x03;
+const COMMAND_WRITE_POINTER: u32 = 0x04;
+```
+
+The **ACPI table generation subsystem** would leverage the **rust-vmm/acpi_tables** crate or similar libraries to construct tables programmatically. This crate provides the `Aml` trait for generating ACPI Machine Language bytecode and `Sdt` structures for building standard System Description Tables with proper headers, checksums, and OEM fields. Propolis would generate at minimum RSDP, XSDT, FADT, FACS, DSDT, and MADT—with the DSDT containing AML device definitions for the virtual platform’s PCI bus, serial ports, and other emulated hardware.
+
+The **linker script generator** would track table offsets within the concatenated blob, emitting ALLOCATE commands for each memory region, ADD_POINTER commands linking all inter-table references, and ADD_CHECKSUM commands for final validation. The generator must handle pointer size variations (32-bit vs 64-bit fields) and ensure proper ordering of commands.
+
+## Comparison with other VMM implementations
+
+**QEMU** represents the reference implementation that all others follow. Its `hw/acpi/bios-linker-loader.c` implements the protocol that Propolis targets, while `hw/i386/acpi-build.c` generates x86 ACPI tables. QEMU concatenates all tables (except RSDP) into a single `etc/acpi/tables` blob, uses ROM blob mechanisms for migration compatibility, and generates AML from pre-compiled ASL using the iasl compiler during build time.
+
+**FreeBSD bhyve** has been transitioning from legacy direct-memory ACPI placement to QEMU-compatible fw_cfg support. FreeBSD Phabricator review D38439 introduces `qemu_fwcfg.c` and `qemu_loader.c` implementing the full table-loader protocol. Bhyve’s approach maintains backward compatibility—it still copies tables to legacy locations while also exposing them via fw_cfg. The implementation supports configurable modes via `lpc.fwcfg=qemu` or `lpc.fwcfg=bhyve` settings.
+
+**Cloud Hypervisor** takes a different approach, initially placing ACPI tables directly at fixed guest memory addresses (RSDP at 0x000f_0000) without full table-loader support. Their custom OVMF patches (`CloudHvAcpi.c`) scan for tables at these known locations. Version 48.0 added experimental fw_cfg device support, but the legacy direct-placement path remains available as fallback. Cloud Hypervisor uses the rust-vmm/acpi_tables crate for programmatic table generation.
+
+|Aspect |QEMU |bhyve |Cloud Hypervisor|Propolis |
+|-----------------|-----------|-----------|----------------|-----------|
+|I/O Ports |0x510-0x514|0x510-0x514|Experimental |0x510-0x514|
+|DMA Support |Yes |Planned |Yes |Required |
+|Table Generation |C + iasl |C (basl) |Rust crate |Rust crate |
+|Full table-loader|Yes |In progress|Partial |Yes |
+
+## Connection to Issue #695 and OVMF upgrade path
+
+**Issue #695 tracks the requirement to upgrade Propolis from edk2-stable202105** to a newer OVMF version. The edk2-stable202105 release from May 2021 represents the last version with embedded fallback ACPI tables—a “safety net” for hypervisors without fw_cfg support. Subsequent OVMF builds removed this fallback entirely, documented in TianoCore Bugzilla #2122, making fw_cfg mandatory.
+
+The removal occurred because OVMF’s maintainers determined that modern hypervisors should provide complete, accurate ACPI tables describing the virtual platform rather than relying on generic embedded templates. The change simplifies OVMF, reduces binary size, and ensures guests receive correct hardware descriptions.
+
+PR #999 **directly addresses the blockers identified in Issue #695** by implementing the required fw_cfg infrastructure. After this PR merges, Propolis can upgrade to any contemporary OVMF release (edk2-stable202211, 202305, 202405, or later), gaining access to security patches, improved Windows guest support, NVMe driver fixes, and other enhancements accumulated over multiple years.
+
+However, **the PR may not fully resolve Issue #695**—additional integration work might remain, such as updating the bootrom build process, testing with specific OVMF versions, validating guest OS compatibility (Linux, Windows, FreeBSD), and potentially implementing additional fw_cfg items that newer OVMF features expect.
+
+## Architectural decisions and trade-offs
+
+Several architectural choices deserve analysis.
+
+**Programmatic AML generation versus pre-compiled ASL**: Unlike QEMU which compiles ASL source files during build, Rust VMMs typically generate AML bytecode programmatically at runtime using crates like acpi_tables. This approach eliminates the iasl toolchain dependency, enables dynamic table content based on VM configuration, but requires careful implementation to ensure generated bytecode matches ACPI specification requirements.
+
+**Single-blob versus multi-blob table layout**: Following QEMU’s pattern, Propolis likely concatenates all tables into `etc/acpi/tables` with a separate `etc/acpi/rsdp` file. This simplifies the table-loader command generation (only two ALLOCATE commands needed) and eases migration state tracking compared to separate blobs per table.
+
+**DMA interface requirement**: While the basic fw_cfg selector/data interface suffices for small transfers, ACPI tables often span **20-64KB**. Byte-by-byte I/O at this scale introduces noticeable boot latency. The DMA interface, where firmware specifies a guest physical address for bulk transfer, reduces boot time significantly and is effectively required for production use.
+
+**Memory allocation strategy**: The table-loader protocol delegates memory allocation to firmware, with the VMM only specifying alignment requirements and zone preferences. This design allows firmware to place tables in appropriate memory regions based on EFI memory map constraints, but means the VMM cannot predict exact table locations until WRITE_POINTER reports them back.
+
+## Testing and validation considerations
+
+ACPI table generation requires comprehensive testing across multiple dimensions.
+
+**Table structure validation**: Tools like `acpidump` and `iasl -d` can extract and disassemble tables from running guests to verify correct structure, checksums, and AML bytecode. Propolis’s PHD (Propolis Hardware Driver) test framework likely includes integration tests that boot guest images and verify ACPI table presence.
+
+**Guest OS compatibility**: Different operating systems interpret ACPI tables with varying strictness. Linux’s ACPI implementation tolerates minor irregularities, while Windows often fails to boot if tables contain unexpected values or missing required entries. Testing must cover Windows Server, various Linux distributions, and FreeBSD guests.
+
+**OVMF version matrix**: The implementation should be validated against multiple OVMF releases to ensure forward compatibility as new edk2 stable tags are released. Edge cases around optional fw_cfg items, DMA interface requirements, and ACPI table expectations may vary between versions.
+
+**Live migration**: ACPI tables themselves don’t migrate (they’re regenerated at destination), but fw_cfg device state—the current selector, data offset, and DMA state—must be properly serialized and restored. Any WRITE_POINTER addresses recorded by the VMM also require careful handling during migration.
+
+## Technical debt and future work
+
+The PR introduces foundational infrastructure that enables several follow-on improvements.
+
+**NUMA topology support**: Multi-socket guests require SRAT (System Resource Affinity Table) and SLIT (System Locality Information Table) describing memory-to-processor relationships. The table generation infrastructure created by PR #999 provides the foundation for adding NUMA-aware ACPI tables.
+
+**CPU hotplug**: Modern ACPI supports processor hotplug notifications. While not currently implemented, the DSDT can include hotpluggable processor device objects that reference fw_cfg items for runtime configuration changes.
+
+**Device hotplug via ACPI**: PCI Express hotplug, memory hotplug, and other dynamic hardware changes can be signaled through ACPI methods. The AML generation infrastructure enables implementing these features in future PRs.
+
+**SMBIOS integration**: Propolis already exposes initial SMBIOS tables via fw_cfg (PR #628). The ACPI work complements this by providing complete system description, and future work might coordinate SMBIOS and ACPI table content for consistency.
+
+The implementation establishes Propolis as a fully OVMF-compatible hypervisor, removing a significant barrier to firmware upgrades and enabling Oxide’s rack platform to benefit from ongoing edk2 development. The architecture follows proven patterns from QEMU and other mature VMMs while leveraging Rust’s type safety and the rust-vmm ecosystem’s shared infrastructure.
