@@ -18,6 +18,7 @@
 ## 🧬 DOL 2.0 (Design Ontology Language)
 * [DOL Specification](dol.md)
 * [DOL CLI Reference](dol/CLI.md)
+* [DOL REPL Tutorial](dol/REPL-Tutorial.md)
 * [DOL 2.0 Roadmap](vudo/dol2.0_roadmap_checkpoint.md)
 * [Runtime Architecture & Composition](vudo/DOLRAC.md)
 * [Meta-Programming Architecture](architecture/metaprogramming.md)
