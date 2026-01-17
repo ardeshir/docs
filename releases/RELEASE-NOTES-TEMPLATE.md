@@ -5,6 +5,7 @@
 This template encodes commitments from critique exegesis:
 - Commitment #17: Be explicit about what "compatible" means
 - Commitment #18: Name trade-offs explicitly (e.g., "Rust-aligned" not just "clearer")
+- Commitment #22: Critique BEFORE deployment, not after
 
 ---
 
@@ -192,14 +193,52 @@ cargo install metadol --version X.Y.Z --features cli
 
 ---
 
+## Pre-Release Critique Process
+
+**Critique BEFORE deployment, not after.**
+
+The release process is:
+
+1. **Write release notes** using this template
+2. **Run `/critique DOL vX.Y.Z`** on the draft release notes
+3. **Run `/respond`** to add exegesis to the critique
+4. **Review the critique** - sit with the discomfort
+5. **Decide whether to ship** - the critique may reveal issues worth fixing first
+6. **If shipping**: publish release notes, then publish critique + exegesis together
+7. **If not shipping**: fix issues, return to step 1
+
+### Why Critique Before?
+
+From the-clarity-doctrine exegesis:
+
+> "Post-deployment critique is accountability theater. By the time users read the critique, they've already upgraded. The discomfort arrives too late to change anything."
+
+Pre-deployment critique creates a decision point. You might discover:
+- Trade-offs you hadn't fully considered
+- User groups who will be harmed
+- Deprecation timelines that are too aggressive
+- Features that need more testing
+
+**The critique is not punishment. It's a final review gate.**
+
+---
+
 ## Checklist Before Publishing
 
+### Content Checklist
 - [ ] Trade-offs section names who benefits AND who pays
 - [ ] Deprecation timeline has specific version numbers
 - [ ] "Compatible" is explained (migration path, not permanent)
 - [ ] Migration deadline is explicit
 - [ ] Honest assessment included
 - [ ] Design choices use specific language (e.g., "Rust-aligned" not "clearer")
+
+### Critique Gate Checklist
+- [ ] `/critique DOL vX.Y.Z` has been run on these release notes
+- [ ] `/respond` exegesis has been written
+- [ ] Builder has read critique and sat with discomfort
+- [ ] Decision to ship is conscious, not rushed
+- [ ] Critique + exegesis ready to publish alongside release
 
 ---
 
