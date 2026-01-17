@@ -21,7 +21,7 @@ The DOL REPL (Read-Eval-Print Loop) provides an interactive environment for expl
 Before using the DOL REPL, ensure you have:
 
 - Rust 1.70+ installed
-- The `metadol` crate with the `wasm` feature enabled
+- The `dol` crate with the `wasm` feature enabled
 
 ### Installation
 
@@ -29,7 +29,7 @@ Add DOL to your project's `Cargo.toml`:
 
 ```toml
 [dependencies]
-metadol = { version = "0.8", features = ["wasm"] }
+dol = { version = "0.8", features = ["wasm"] }
 ```
 
 ### Creating a REPL Instance
