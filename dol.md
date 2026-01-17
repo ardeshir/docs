@@ -1,6 +1,6 @@
-# Metal DOL: Design Ontology Language
+# DOL: Design Ontology Language
 
-**Version 0.0.1 — The Foundation**
+**Version 0.8.0 — Clarity**
 
 > "Simplicity is prerequisite for reliability." — Edsger W. Dijkstra
 
@@ -8,7 +8,9 @@
 
 ## Introduction
 
-Metal DOL (Design Ontology Language) is a declarative specification language that serves as the source of truth for the Univrs platform. In the DOL-first paradigm, design contracts are written before tests, and tests are written before code. Nothing changes without first being declared in the ontology.
+DOL (Design Ontology Language) is a declarative specification language that serves as the source of truth for the Univrs platform. In the DOL-first paradigm, design contracts are written before tests, and tests are written before code. Nothing changes without first being declared in the ontology.
+
+> **Note:** As of v0.8.0 "Clarity", DOL uses modernized Rust-aligned syntax. Old syntax (`gene`, `constraint`, `exegesis`) is deprecated but still supported with warnings. See [v0.8.0 Release Notes](releases/v0.8.0.md) for migration details.
 
 DOL inverts the traditional software development flow:
 
@@ -60,18 +62,18 @@ This accumulative model means:
 
 ## Core Concepts
 
-### Gene
+### Gen (Gene)
 
-The atomic unit of DOL. A gene declares fundamental truths that cannot be decomposed further.
+The atomic unit of DOL. A gen declares fundamental truths that cannot be decomposed further.
 
 ```dol
-gene container.exists {
+gen container.exists {
   container has identity
   container has state
   container has boundaries
 }
 
-exegesis {
+docs {
   A container is the fundamental unit of workload isolation in Univrs.
   Every container possesses three essential properties: a cryptographic
   identity that uniquely identifies it across the network, a finite state
@@ -80,11 +82,11 @@ exegesis {
 }
 ```
 
-Genes are named with dot notation: `domain.property`. They contain only declarative statements using simple predicates: `has`, `is`, `derives from`, `requires`.
+Gens are named with dot notation: `domain.property`. They contain only declarative statements using simple predicates: `has`, `is`, `derives from`, `requires`.
 
 ### Trait
 
-Composable behaviors built from genes. Traits declare what a component does.
+Composable behaviors built from gens. Traits declare what a component does.
 
 ```dol
 trait container.lifecycle {
@@ -101,7 +103,7 @@ trait container.lifecycle {
   each transition is authenticated
 }
 
-exegesis {
+docs {
   The container lifecycle defines the state machine governing container
   existence. Containers move through discrete states via authenticated
   transitions. Every state change produces an event for observability
@@ -110,20 +112,20 @@ exegesis {
 }
 ```
 
-Traits compose genes with `uses` and declare behaviors with `is` statements.
+Traits compose gens with `uses` and declare behaviors with `is` statements.
 
-### Constraint
+### Rule (Constraint)
 
-Invariants that must always hold. Constraints define the laws of the system.
+Invariants that must always hold. Rules define the laws of the system.
 
 ```dol
-constraint container.integrity {
+rule container.integrity {
   container state matches declared state
   container identity never changes
   container boundaries are enforced
 }
 
-exegesis {
+docs {
   Container integrity ensures the runtime matches the declared ontology.
   Once a container receives its cryptographic identity, that identity is
   immutable for the container's lifetime. State drift—where actual state
@@ -132,19 +134,19 @@ exegesis {
 }
 ```
 
-### Evolution
+### Evo (Evolution)
 
 The lineage record. Evolution blocks declare how the ontology changes over time.
 
 ```dol
-evolves container.lifecycle @ 0.0.2 > 0.0.1 {
+evo container.lifecycle @ 0.0.2 > 0.0.1 {
   adds container is paused
   adds container is resumed
-  
+
   because "workload migration requires state preservation"
 }
 
-exegesis {
+docs {
   Version 0.0.2 extends the lifecycle to support pause and resume
   operations. This enables live migration of containers between nodes
   without losing runtime state. The original four-state model (created,
@@ -168,12 +170,12 @@ system univrs.orchestrator @ 0.1.0 {
   nodes discover peers via gossip
   containers schedule across nodes
   consensus validates state transitions
-  
+
   all operations are authenticated
   all state is replicated
 }
 
-exegesis {
+docs {
   The Univrs orchestrator is the primary system composition. It combines
   container lifecycle management, peer-to-peer node discovery, and
   distributed consensus into a unified platform. The orchestrator ensures
@@ -189,14 +191,14 @@ exegesis {
 
 ### File Structure
 
-Every DOL file contains one primary declaration (gene, trait, constraint, or system) followed by an exegesis section.
+Every DOL file contains one primary declaration (gen, trait, rule, or system) followed by a docs section.
 
 ```dol
 <declaration-type> <name> {
   <statements>
 }
 
-exegesis {
+docs {
   <plain english description>
 }
 ```
@@ -226,9 +228,9 @@ exegesis {
 
 ### Naming Conventions
 
-- Genes: `domain.property` — `container.exists`, `identity.cryptographic`
+- Gens: `domain.property` — `container.exists`, `identity.cryptographic`
 - Traits: `domain.behavior` — `container.lifecycle`, `node.discovery`
-- Constraints: `domain.invariant` — `container.integrity`, `cluster.consistency`
+- Rules: `domain.invariant` — `container.integrity`, `cluster.consistency`
 - Systems: `product.component` — `univrs.orchestrator`, `univrs.scheduler`
 
 ---
@@ -280,7 +282,7 @@ Tests are generated into executable code by the DOL toolchain. The `always` keyw
 
 ```
 dol/
-├── genes/
+├── gens/
 │   ├── container.exists.dol
 │   ├── identity.cryptographic.dol
 │   ├── state.finite.dol
@@ -290,7 +292,7 @@ dol/
 │   ├── container.lifecycle.dol.test
 │   ├── node.discovery.dol
 │   └── node.discovery.dol.test
-├── constraints/
+├── rules/
 │   ├── container.integrity.dol
 │   ├── container.integrity.dol.test
 │   └── cluster.consistency.dol
@@ -303,31 +305,31 @@ Every node in the Univrs network holds the complete DOL repository. Like git, th
 
 ---
 
-## The Exegesis Section
+## The Docs Section
 
-Every DOL file concludes with an `exegesis` block. This is plain English prose that:
+Every DOL file concludes with a `docs` block (formerly `exegesis`). This is plain English prose that:
 
 1. **Explains intent** — Why does this ontology element exist?
 2. **Provides context** — How does it relate to the larger system?
 3. **Guides implementation** — What should engineers understand?
 4. **Enables AI comprehension** — Context for autonomous agents
 
-The exegesis is not optional commentary. It is part of the specification. A DOL file without exegesis is incomplete.
+The docs block is not optional commentary. It is part of the specification. A DOL file without docs is incomplete.
 
 ```dol
-gene identity.cryptographic {
+gen identity.cryptographic {
   identity derives from ed25519 keypair
   identity is self-sovereign
   identity requires no authority
 }
 
-exegesis {
+docs {
   Cryptographic identity is the foundation of trust in Univrs. Every
   entity—container, node, user, agent—possesses an Ed25519 keypair that
   serves as its identity. This identity is self-sovereign: no central
   authority issues or validates it. The entity generates its own keypair
   and proves ownership through cryptographic signatures.
-  
+
   This design eliminates certificate authorities, identity providers, and
   other centralized trust anchors. Trust emerges from cryptographic proof,
   not institutional endorsement. The choice of Ed25519 provides fast
@@ -383,14 +385,14 @@ Before any code change, update or create the relevant DOL specification.
 ```dol
 // New feature: container pause capability
 
-evolves container.lifecycle @ 0.0.2 > 0.0.1 {
+evo container.lifecycle @ 0.0.2 > 0.0.1 {
   adds container is paused
   adds container is resumed
-  
+
   because "live migration requires state preservation"
 }
 
-exegesis {
+docs {
   This evolution adds pause and resume capabilities to support live
   migration between nodes without losing container state.
 }
@@ -452,12 +454,12 @@ DOL embodies several core principles:
 
 ## Next Steps
 
-Metal DOL v0.0.1 establishes the foundation. Future versions will address:
+DOL v0.8.0 "Clarity" represents a major milestone. Future work includes:
 
-- **v0.0.2** — Formal verification integration
-- **v0.0.3** — Cross-ontology references and imports
-- **v0.0.4** — Runtime constraint evaluation
-- **v0.1.0** — Stable API for external tooling
+- **v0.9.0** — Strict mode (deprecated syntax becomes errors)
+- **v1.0.0** — Stable API, old syntax removed
+- **Spirit Package Manager** — Mycelium registry for DOL packages
+- **LSP Server** — IDE integration with syntax highlighting
 
 ---
 
@@ -465,9 +467,9 @@ Metal DOL v0.0.1 establishes the foundation. Future versions will address:
 
 ```dol
 // genes/container.exists.dol
-// DOL v0.0.1
+// DOL v0.8.0
 
-gene container.exists {
+gen container.exists {
   container has identity
   container has state
   container has boundaries
@@ -475,24 +477,24 @@ gene container.exists {
   container has image
 }
 
-exegesis {
-  The container gene defines the essential properties of a container in
+docs {
+  The container gen defines the essential properties of a container in
   the Univrs platform. A container is an isolated execution environment
   that encapsulates a workload.
-  
+
   Identity: Every container has a unique cryptographic identity derived
   from an Ed25519 keypair. This identity is immutable for the container's
   lifetime and serves as the basis for all authentication.
-  
+
   State: Containers exist in discrete states (created, running, paused,
   stopped, archived). State transitions are atomic and authenticated.
-  
+
   Boundaries: Resource isolation is enforced through Linux namespaces and
   cgroups. A container cannot escape its boundaries.
-  
+
   Resources: CPU, memory, network, and storage allocations are declared
   and enforced. Resource limits are constraints, not suggestions.
-  
+
   Image: The container's filesystem derives from an OCI-compliant image.
   The image is immutable; runtime changes use copy-on-write layers.
 }
@@ -500,4 +502,4 @@ exegesis {
 
 ---
 
-*Metal DOL is part of the Univrs platform. For more information, visit [univrs.io](https://univrs.io).*
+*DOL is part of the Univrs platform. For more information, visit [univrs.io](https://univrs.io).*

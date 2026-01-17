@@ -21,6 +21,11 @@
 * [DOL 2.0 Roadmap](vudo/dol2.0_roadmap_checkpoint.md)
 * [Runtime Architecture & Composition](vudo/DOLRAC.md)
 * [Meta-Programming Architecture](architecture/metaprogramming.md)
+* [v0.8.0 Release Notes](releases/v0.8.0.md) - "Clarity" - Modernized Syntax
+* [v0.7.2 Release Notes](releases/v0.7.2.md) - Visibility & GDL
+* [v0.7.1 Release Notes](releases/v0.7.1.md) - Polish
+* [v0.7.0 Release Notes](releases/v0.7.0.md) - VUDO Integration
+* [v0.6.0 Release Notes](releases/v0.6.0.md) - Gene Inheritance
 * [v0.5.0-phase0 Release Notes](releases/v0.5.0-phase0.md)
 * [v0.4.0 Release Notes](releases/v0.4.0.md)
 * [v0.3.0 Release Notes](releases/v0.3.0.md)
