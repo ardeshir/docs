@@ -52,10 +52,10 @@ DOL 1.x was a **declarative specification language** for defining ontological co
 
 ```dol
 // DOL 1.x - Declaration only
-gene ProcessId {
-  type: UInt64
+gen ProcessId {
+  type: u64
   constraint positive { this.value > 0 }
-  exegesis { A process knows its identity. }
+  docs { A process knows its identity. }
 }
 ```
 
@@ -71,10 +71,10 @@ DOL 2.0 is a **Turing-complete functional language** that compiles to multiple t
 
 ```dol
 // DOL 2.0 - Full programming language
-gene Calculator {
+gen Calculator {
   type: Module
   
-  fun fibonacci(n: Int64) -> Int64 {
+  fun fibonacci(n: i64) -> i64 {
     match n {
       0 { return 0 }
       1 { return 1 }
@@ -82,7 +82,7 @@ gene Calculator {
     }
   }
   
-  fun pipeline(x: Int64) -> Int64 {
+  fun pipeline(x: i64) -> i64 {
     return x |> double >> increment |> square
   }
   
@@ -90,7 +90,7 @@ gene Calculator {
     this.n >= 0
   }
   
-  exegesis {
+  docs {
     Mathematical operations with full type safety.
   }
 }
@@ -191,7 +191,7 @@ gene Calculator {
 | Type | Rust Equivalent | Example |
 |------|-----------------|---------|
 | `List<T>` | `Vec<T>` | `List<Int32>` |
-| `Map<K, V>` | `HashMap<K, V>` | `Map<String, Int64>` |
+| `Map<K, V>` | `HashMap<K, V>` | `Map<String, i64>` |
 | `Option<T>` | `Option<T>` | `Option<String>` |
 | `Result<T, E>` | `Result<T, E>` | `Result<Int32, String>` |
 | `Function<A, B>` | `fn(A) -> B` | `Function<Int32, Bool>` |
@@ -203,8 +203,8 @@ The type checker performs **bidirectional type inference**:
 
 ```dol
 // Literals infer their types
-x = 42          // x: Int64 (inferred)
-y = 3.14        // y: Float64 (inferred)
+x = 42          // x: i64 (inferred)
+y = 3.14        // y: f64 (inferred)
 z = "hello"     // z: String (inferred)
 
 // Functions infer return types
@@ -214,7 +214,7 @@ fun double(n: Int32) -> Int32 {
 
 // Pipes propagate types
 result = 10 |> double >> increment
-// 10: Int64 → double: Int32 → increment: Int32
+// 10: i64 → double: Int32 → increment: Int32
 ```
 
 ---
@@ -386,7 +386,7 @@ enum Stmt {
 enum Type {
     // Primitives
     Void, Bool,
-    Int8, Int16, Int32, Int64,
+    Int8, Int16, Int32, i64,
     UInt8, UInt16, UInt32, UInt64,
     Float32, Float64,
     String,
@@ -467,7 +467,7 @@ enum TypeError {
 
 | DOL Declaration | Generated Rust |
 |-----------------|----------------|
-| `gene Name { has field: Type }` | `struct Name { field: Type }` |
+| `gen Name { has field: Type }` | `struct Name { field: Type }` |
 | `trait Name { is method() -> T }` | `trait Name { fn method(&self) -> T; }` |
 | `constraint name { expr }` | `fn validate_name(value: &T) -> bool { expr }` |
 | `system Name { requires ... }` | `mod name { /* docs */ }` |
@@ -499,8 +499,8 @@ enum TypeError {
 
 **Input (container.dol):**
 ```dol
-gene Container {
-  has id: UInt64
+gen Container {
+  has id: u64
   has name: String
   has running: Bool
   
@@ -508,7 +508,7 @@ gene Container {
     this.id > 0
   }
   
-  exegesis {
+  docs {
     A container is an isolated execution environment.
   }
 }
@@ -697,12 +697,12 @@ When migrating, you can optionally adopt:
 
 ```dol
 // DOL 1.x
-gene Math {
+gen Math {
   is add(a: Int32, b: Int32) -> Int32
 }
 
 // DOL 2.0 - Add implementation
-gene Math {
+gen Math {
   fun add(a: Int32, b: Int32) -> Int32 {
     return a + b
   }

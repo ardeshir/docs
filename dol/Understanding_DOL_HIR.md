@@ -189,14 +189,14 @@ pipeline = ImageLoader >> ColorTransformer >> Exporter
 HIR enables proving constraints hold statically:
 
 ```dol
-gene Account {
-    has balance: Int64
+gen Account {
+    has balance: i64
     
     constraint never_negative {
         this.balance >= 0
     }
     
-    fun withdraw(amount: Int64) {
+    fun withdraw(amount: i64) {
         if amount <= this.balance {
             this.balance = this.balance - amount
         }

@@ -67,21 +67,21 @@ In DOL, **sex** represents code that:
 ### Sex Blocks
 
 ```dol
-gene StatefulService {
+gen StatefulService {
     // Pure function — no sex allowed
-    fun pure_compute(x: Int64) -> Int64 {
+    fun pure_compute(x: i64) -> i64 {
         return x * 2
     }
     
     // Sex block — side effects permitted
-    sex fun log_and_compute(x: Int64) -> Int64 {
+    sex fun log_and_compute(x: i64) -> i64 {
         println("Computing: " + x)  // I/O side effect
         GLOBAL_COUNTER += 1         // Mutation
         return x * 2
     }
     
     // Inline sex block within pure function
-    fun mostly_pure(x: Int64) -> Int64 {
+    fun mostly_pure(x: i64) -> i64 {
         result = x * 2
         
         sex {
@@ -100,13 +100,13 @@ gene StatefulService {
 // globals.sex.dol — Sex file for global state
 
 // Mutable global — only allowed in sex context
-sex var GLOBAL_COUNTER: Int64 = 0
+sex var GLOBAL_COUNTER: i64 = 0
 
 // Global constant — allowed anywhere (immutable)
-const MAX_CONNECTIONS: Int64 = 100
+const MAX_CONNECTIONS: i64 = 100
 
 // Sex function to modify global
-sex fun increment_counter() -> Int64 {
+sex fun increment_counter() -> i64 {
     GLOBAL_COUNTER += 1
     return GLOBAL_COUNTER
 }
@@ -123,11 +123,11 @@ sex fun reset_counter() {
 // ffi.sex.dol — External system calls
 
 // Declare external function (FFI)
-sex extern fun libc_malloc(size: UInt64) -> Ptr<Void>
+sex extern fun libc_malloc(size: u64) -> Ptr<Void>
 sex extern fun libc_free(ptr: Ptr<Void>)
 
 // Wrap unsafe FFI in sex function
-sex fun allocate<T>(count: UInt64) -> Ptr<T> {
+sex fun allocate<T>(count: u64) -> Ptr<T> {
     size = count * size_of<T>()
     ptr = libc_malloc(size)
     
@@ -139,7 +139,7 @@ sex fun allocate<T>(count: UInt64) -> Ptr<T> {
 }
 
 // Raw pointer operations
-sex fun unsafe_read<T>(ptr: Ptr<T>, offset: Int64) -> T {
+sex fun unsafe_read<T>(ptr: Ptr<T>, offset: i64) -> T {
     return ptr.offset(offset).deref()
 }
 ```
@@ -166,7 +166,7 @@ sex fun http_get(url: String) -> Result<Response, NetError> {
 }
 
 // Random is sex (non-deterministic)
-sex fun random_int(min: Int64, max: Int64) -> Int64 {
+sex fun random_int(min: i64, max: i64) -> i64 {
     return Random.range(min, max)
 }
 
@@ -186,14 +186,14 @@ Functions with side effects have a **sex type annotation**:
 
 ```dol
 // Pure function type
-fun add(a: Int64, b: Int64) -> Int64
+fun add(a: i64, b: i64) -> i64
 
 // Sex function type — effect is part of the signature
 sex fun log(msg: String) -> Void
 
 // In type annotations
-type PureCompute = Fun<Int64, Int64>
-type SexCompute = Sex<Fun<Int64, Int64>>
+type PureCompute = Fun<i64, i64>
+type SexCompute = Sex<Fun<i64, i64>>
 ```
 
 ### Effect Propagation
@@ -202,19 +202,19 @@ The compiler tracks sex propagation:
 
 ```dol
 // ❌ ERROR: Cannot call sex function from pure context
-fun pure_caller() -> Int64 {
+fun pure_caller() -> i64 {
     log("hello")  // Compile error: sex in pure context
     return 42
 }
 
 // ✅ OK: Sex propagates up
-sex fun sex_caller() -> Int64 {
+sex fun sex_caller() -> i64 {
     log("hello")  // OK: we're in sex context
     return 42
 }
 
 // ✅ OK: Explicit sex block
-fun mixed_caller() -> Int64 {
+fun mixed_caller() -> i64 {
     result = 42
     sex {
         log("hello")  // OK: inside sex block
@@ -232,7 +232,7 @@ pub sex fun dangerous_operation() -> Result<Void, Error> {
 }
 
 // Pure public function
-pub fun safe_operation(x: Int64) -> Int64 {
+pub fun safe_operation(x: i64) -> i64 {
     // Callers know this is pure
     return x * 2
 }
@@ -249,7 +249,7 @@ my-spirit/
 │   ├── lib.dol           # Pure library root
 │   ├── main.dol          # Entry point (can use sex)
 │   ├── genes/
-│   │   └── container.dol # Pure gene definitions
+│   │   └── container.dol # Pure gen definitions
 │   ├── spells/
 │   │   └── math.dol      # Pure functions
 │   └── sex/              # ⚠️ Sex directory
@@ -424,7 +424,7 @@ sex fun get_process_id() -> Int32 {
 
 // Trust me, I know what I'm doing
 #[allow(sex_in_pure)]
-fun technically_pure_but_logs() -> Int64 {
+fun technically_pure_but_logs() -> i64 {
     sex { debug("shhh") }
     return 42
 }
@@ -450,9 +450,9 @@ fun technically_pure_but_logs() -> Int64 {
 
 **DOL:**
 ```dol
-sex var COUNTER: Int64 = 0
+sex var COUNTER: i64 = 0
 
-sex fun increment() -> Int64 {
+sex fun increment() -> i64 {
     COUNTER += 1
     return COUNTER
 }
@@ -521,7 +521,7 @@ The sex system ensures:
 2. **Sex regions?** — Different kinds of effects?
    ```dol
    sex[IO] fun read_file() -> String
-   sex[State] fun increment() -> Int64
+   sex[State] fun increment() -> i64
    sex[IO, State] fun log_and_count() -> Void
    ```
 

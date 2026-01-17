@@ -165,15 +165,15 @@ use sex.io.{ read_file, write_file }
 // ═══════════════════════════════════════════════════════════════
 
 // Private by default (module-internal only)
-gene InternalHelper { ... }
+gen InternalHelper { ... }
 fun helper() { ... }
 
 // Public — accessible everywhere
-pub gene Container { ... }
-pub fun process(x: Int64) -> Int64 { ... }
+pub gen Container { ... }
+pub fun process(x: i64) -> i64 { ... }
 
 // Public within Spirit only
-pub(spirit) gene PackageInternal { ... }
+pub(spirit) gen PackageInternal { ... }
 
 // Public to parent module
 pub(parent) fun utility() { ... }
@@ -249,7 +249,7 @@ spirit MySpirit {
     authors: ["Your Name <you@example.com>"]
     license: "MIT"
     
-    exegesis {
+    docs {
         A Spirit for container orchestration.
         Provides genes for container lifecycle management.
     }
@@ -345,7 +345,7 @@ pub use spells.lifecycle.{ start, stop, restart }
 // DO NOT re-export sex by default — consumers must opt-in
 // pub use sex.io.{ read_file, write_file }  // Explicit
 
-exegesis {
+docs {
     Container orchestration library.
     
     Quick start:
@@ -363,11 +363,11 @@ exegesis {
 ```dol
 // src/spells/math.dol — Pure function library
 
-pub fun add(a: Int64, b: Int64) -> Int64 {
+pub fun add(a: i64, b: i64) -> i64 {
     return a + b
 }
 
-pub fun fibonacci(n: Int64) -> Int64 {
+pub fun fibonacci(n: i64) -> i64 {
     match n {
         0 { return 0 }
         1 { return 1 }
@@ -376,13 +376,13 @@ pub fun fibonacci(n: Int64) -> Int64 {
 }
 
 // Higher-order spell
-pub fun twice(f: Fun<Int64, Int64>, x: Int64) -> Int64 {
+pub fun twice(f: Fun<i64, i64>, x: i64) -> i64 {
     return f(f(x))
 }
 
 // Pipeline-friendly
-pub fun double(x: Int64) -> Int64 { x * 2 }
-pub fun increment(x: Int64) -> Int64 { x + 1 }
+pub fun double(x: i64) -> i64 { x * 2 }
+pub fun increment(x: i64) -> i64 { x + 1 }
 
 // Usage: 5 |> double >> increment |> twice
 ```
@@ -438,14 +438,14 @@ In DOL, **sex** represents code that:
 #### Sex Functions
 
 ```dol
-gene StatefulService {
+gen StatefulService {
     // Pure function — no sex allowed
-    fun pure_compute(x: Int64) -> Int64 {
+    fun pure_compute(x: i64) -> i64 {
         return x * 2
     }
     
     // Sex function — side effects permitted
-    sex fun log_and_compute(x: Int64) -> Int64 {
+    sex fun log_and_compute(x: i64) -> i64 {
         println("Computing: " + x)  // I/O side effect
         GLOBAL_COUNTER += 1         // Mutation
         return x * 2
@@ -457,7 +457,7 @@ gene StatefulService {
 
 ```dol
 // Inline sex block within mostly-pure function
-fun mostly_pure(x: Int64) -> Int64 {
+fun mostly_pure(x: i64) -> i64 {
     result = x * 2
     
     sex {
@@ -475,13 +475,13 @@ fun mostly_pure(x: Int64) -> Int64 {
 // sex/globals.dol — Sex file for global state
 
 // Mutable global — only allowed in sex context
-sex var GLOBAL_COUNTER: Int64 = 0
+sex var GLOBAL_COUNTER: i64 = 0
 
 // Immutable constant — allowed anywhere
-const MAX_CONNECTIONS: Int64 = 100
+const MAX_CONNECTIONS: i64 = 100
 
 // Sex functions to modify global
-sex fun increment_counter() -> Int64 {
+sex fun increment_counter() -> i64 {
     GLOBAL_COUNTER += 1
     return GLOBAL_COUNTER
 }
@@ -497,7 +497,7 @@ sex fun reset_counter() {
 // sex/ffi.dol — External system calls
 
 // Declare external function (FFI)
-sex extern fun libc_malloc(size: UInt64) -> Ptr<Void>
+sex extern fun libc_malloc(size: u64) -> Ptr<Void>
 sex extern fun libc_free(ptr: Ptr<Void>)
 
 // Platform-specific FFI
@@ -513,7 +513,7 @@ sex extern "wasi" {
 }
 
 // Safe wrapper
-sex fun allocate<T>(count: UInt64) -> Ptr<T> {
+sex fun allocate<T>(count: u64) -> Ptr<T> {
     size = count * size_of<T>()
     ptr = libc_malloc(size)
     
@@ -546,7 +546,7 @@ sex fun http_get(url: String) -> Result<Response, NetError> {
 }
 
 // Random is sex (non-deterministic)
-sex fun random_int(min: Int64, max: Int64) -> Int64 {
+sex fun random_int(min: i64, max: i64) -> i64 {
     return Random.range(min, max)
 }
 
@@ -562,33 +562,33 @@ sex fun now() -> Timestamp {
 
 ```dol
 // Pure function type
-fun add(a: Int64, b: Int64) -> Int64
+fun add(a: i64, b: i64) -> i64
 
 // Sex function type — effect is part of signature
 sex fun log(msg: String) -> Void
 
 // In type annotations
-type PureCompute = Fun<Int64, Int64>
-type SexCompute = Sex<Fun<Int64, Int64>>
+type PureCompute = Fun<i64, i64>
+type SexCompute = Sex<Fun<i64, i64>>
 ```
 
 #### Effect Propagation
 
 ```dol
 // ❌ ERROR: Cannot call sex function from pure context
-fun pure_caller() -> Int64 {
+fun pure_caller() -> i64 {
     log("hello")  // Compile error: sex in pure context
     return 42
 }
 
 // ✅ OK: Sex propagates up
-sex fun sex_caller() -> Int64 {
+sex fun sex_caller() -> i64 {
     log("hello")  // OK: we're in sex context
     return 42
 }
 
 // ✅ OK: Explicit sex block
-fun mixed_caller() -> Int64 {
+fun mixed_caller() -> i64 {
     result = 42
     sex { log("hello") }  // OK: inside sex block
     return result
@@ -698,9 +698,9 @@ fun mixed_caller() -> Int64 {
 
 **DOL:**
 ```dol
-sex var COUNTER: Int64 = 0
+sex var COUNTER: i64 = 0
 
-sex fun increment() -> Int64 {
+sex fun increment() -> i64 {
     COUNTER += 1
     return COUNTER
 }
@@ -804,7 +804,7 @@ Type :help for commands
 DOL> x = 42
 42
 
-DOL> fun double(n: Int64) -> Int64 { n * 2 }
+DOL> fun double(n: i64) -> i64 { n * 2 }
 <function double>
 
 DOL> double(x)
@@ -815,7 +815,7 @@ Side effect!
 ()
 
 DOL> :type double
-Fun<Int64, Int64>
+Fun<i64, i64>
 
 DOL> :quit
 Goodbye! 🍄
@@ -954,9 +954,9 @@ pub use genes.complex.Complex
 
 ```dol
 // src/genes/complex.dol
-pub gene Complex {
-    has real: Float64
-    has imag: Float64
+pub gen Complex {
+    has real: f64
+    has imag: f64
     
     constraint valid {
         !this.real.is_nan && !this.imag.is_nan
@@ -966,10 +966,10 @@ pub gene Complex {
 
 ```dol
 // src/spells/arithmetic.dol
-pub fun add(a: Int64, b: Int64) -> Int64 { a + b }
-pub fun subtract(a: Int64, b: Int64) -> Int64 { a - b }
-pub fun multiply(a: Int64, b: Int64) -> Int64 { a * b }
-pub fun divide(a: Int64, b: Int64) -> Option<Int64> {
+pub fun add(a: i64, b: i64) -> i64 { a + b }
+pub fun subtract(a: i64, b: i64) -> i64 { a - b }
+pub fun multiply(a: i64, b: i64) -> i64 { a * b }
+pub fun divide(a: i64, b: i64) -> Option<i64> {
     if b == 0 { None } else { Some(a / b) }
 }
 ```
@@ -1005,9 +1005,9 @@ pub fun main(args: List<String>) -> Int32 {
 
 ```dol
 // src/sex/state.dol
-sex var RUN_COUNT: Int64 = 0
+sex var RUN_COUNT: i64 = 0
 
-pub sex fun increment_runs() -> Int64 {
+pub sex fun increment_runs() -> i64 {
     RUN_COUNT += 1
     return RUN_COUNT
 }
@@ -1042,8 +1042,8 @@ my-app/
 
 ```dol
 // src/genes/user.dol
-pub gene User {
-    has id: UInt64
+pub gen User {
+    has id: u64
     has email: String
     has name: String
     has created_at: Timestamp
@@ -1065,7 +1065,7 @@ pub sex fun connect(url: String) -> Result<Void, DbError> {
     return Ok(())
 }
 
-pub sex fun find_user(id: UInt64) -> Result<User, DbError> {
+pub sex fun find_user(id: u64) -> Result<User, DbError> {
     conn = DB.expect("Not connected")
     row = conn.query_one("SELECT * FROM users WHERE id = ?", [id])?
     return Ok(User.from_row(row))
@@ -1104,7 +1104,7 @@ Different kinds of effects?
 
 ```dol
 sex[IO] fun read_file() -> String
-sex[State] fun increment() -> Int64
+sex[State] fun increment() -> i64
 sex[IO, State] fun log_and_count() -> Void
 ```
 

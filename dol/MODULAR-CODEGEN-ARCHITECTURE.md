@@ -175,7 +175,7 @@ use dol.ast.DolFile
 use dol.codegen.RustCodegen
 
 /// Generate a complete Rust crate from multiple DOL files
-pub gene CrateCodegen {
+pub gen CrateCodegen {
     has files: List<DolFile>
     has output_dir: String
     has crate_name: String = "dol_generated"
@@ -208,7 +208,7 @@ pub gene CrateCodegen {
 ### Module Analysis
 
 ```dol
-gene ModuleInfo {
+gen ModuleInfo {
     has name: String           // "ast"
     has full_path: String      // "dol.ast"
     has version: Option<String>
@@ -217,7 +217,7 @@ gene ModuleInfo {
     has dependencies: List<String>  // Other modules this depends on
 }
 
-gene ImportInfo {
+gen ImportInfo {
     has source_module: String  // "dol.token"
     has items: ImportItems     // All, or specific names
     has is_external: Bool      // From @external/pkg
@@ -467,7 +467,7 @@ Define each type in exactly one module, re-export elsewhere:
 
 ```dol
 // In types.dol - canonical definition
-pub gene ModuleDecl { ... }
+pub gen ModuleDecl { ... }
 
 // In ast.dol - re-export if needed
 pub use dol.types.ModuleDecl

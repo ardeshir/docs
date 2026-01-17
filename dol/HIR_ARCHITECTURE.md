@@ -176,7 +176,7 @@ Node B: source → HIR → hash(HIR) = X  ✓ Deterministic
 Top-level compilation unit:
 
 ```dol
-gene HirModule {
+gen HirModule {
     has id: ContentHash          // SHA-256 of normalized content
     has name: String             // Module path (e.g., "dol.parser")
     has version: Version         // Semantic version
@@ -194,7 +194,7 @@ gene HirModule {
 Normalized expression forms (exhaustive list):
 
 ```dol
-gene HirExpr {
+gen HirExpr {
     type: enum {
         // Atoms
         Literal { value: HirLiteral, ty: HirType }
@@ -263,7 +263,7 @@ gene HirExpr {
 Every function carries effect annotations:
 
 ```dol
-gene HirEffects {
+gen HirEffects {
     type: enum {
         Pure           // No side effects
         IO             // File, network, console
@@ -274,7 +274,7 @@ gene HirEffects {
     }
 }
 
-gene HirFunction {
+gen HirFunction {
     has name: String
     has params: List<HirParam>
     has return_type: HirType

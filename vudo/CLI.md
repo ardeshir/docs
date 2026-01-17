@@ -1,8 +1,9 @@
 # VUDO & Univrs CLI Specification
 
-> **Version:** 1.0.0  
-> **Status:** Design Specification  
-> **Date:** December 25, 2025
+> **Version:** 1.1.0
+> **Status:** Design Specification
+> **Date:** January 2026
+> **DOL Syntax:** v0.8.0 "Clarity"
 
 -----
 
@@ -340,39 +341,39 @@ Options:
 
 ```
 DOL> 2 + 2
-4 : Int64
+4 : i64
 
-DOL> fun square(x: Int64) -> Int64 { x * x }
-square : Fun<Int64, Int64>
+DOL> fun square(x: i64) -> i64 { x * x }
+square : Fun<i64, i64>
 
 DOL> square(5)
-25 : Int64
+25 : i64
 
 DOL> :type square
-square : Fun<Int64, Int64>
+square : Fun<i64, i64>
 
-DOL> gene Point { has x: Float64, has y: Float64 }
-Point : Gene
+DOL> gen Point { has x: f64, has y: f64 }
+Point : Gen
 
 DOL> let p = Point { x: 3.0, y: 4.0 }
 p : Point
 
-DOL> fun distance(p: Point) -> Float64 {
+DOL> fun distance(p: Point) -> f64 {
 ...>     (p.x ** 2 + p.y ** 2) ** 0.5
 ...> }
-distance : Fun<Point, Float64>
+distance : Fun<Point, f64>
 
 DOL> distance(p)
-5.0 : Float64
+5.0 : f64
 
 DOL> :ast 2 + 2
 BinaryOp {
-  left: Literal(Int64(2)),
+  left: Literal(i64(2)),
   op: Plus,
-  right: Literal(Int64(2))
+  right: Literal(i64(2))
 }
 
-DOL> :mlir fun add(a: Int64, b: Int64) -> Int64 { a + b }
+DOL> :mlir fun add(a: i64, b: i64) -> i64 { a + b }
 module {
   func.func @add(%arg0: i64, %arg1: i64) -> i64 {
     %0 = arith.addi %arg0, %arg1 : i64
@@ -384,19 +385,19 @@ DOL> :load examples/biology/hyphal.dol
 Loaded: Hyphal, HyphalTip, HyphalSegment
 
 DOL> :env
-square    : Fun<Int64, Int64>
-distance  : Fun<Point, Float64>
+square    : Fun<i64, i64>
+distance  : Fun<Point, f64>
 p         : Point
-Point     : Gene
-Hyphal    : Trait
-HyphalTip : Gene
+Point     : gen
+Hyphal    : trait
+HyphalTip : gen
 ...
 
 DOL> :set show_timing true
 show_timing = true
 
 DOL> square(1000000)
-1000000000000 : Int64    [0.003ms]
+1000000000000 : i64    [0.003ms]
 
 DOL> :quit
 Goodbye! May your Spirits thrive in Bondieu. 🍄
@@ -405,35 +406,35 @@ Goodbye! May your Spirits thrive in Bondieu. 🍄
 #### Multi-line Input
 
 ```
-DOL> gene Container {
-...>     has id: UInt64
-...>     has name: String
-...>     has image: String
-...>     
-...>     constraint valid_name {
+DOL> gen Container {
+...>     has id: u64
+...>     has name: string
+...>     has image: string
+...>
+...>     rule valid_name {
 ...>         name.len() > 0
 ...>     }
 ...> }
-Container : Gene
+Container : Gen
 
 DOL> :doc Container
-Gene Container
+Gen Container
   Fields:
-    id    : UInt64
-    name  : String
-    image : String
-  Constraints:
+    id    : u64
+    name  : string
+    image : string
+  Rules:
     valid_name: name.len() > 0
 ```
 
 #### Testing in REPL
 
 ```
-DOL> fun fib(n: Int64) -> Int64 {
+DOL> fun fib(n: i64) -> i64 {
 ...>     if n <= 1 { n }
 ...>     else { fib(n - 1) + fib(n - 2) }
 ...> }
-fib : Fun<Int64, Int64>
+fib : Fun<i64, i64>
 
 DOL> #assert(fib(0) == 0)
 ✓ assertion passed
@@ -790,9 +791,9 @@ univrs credits balance
 │  ├── doc       Generate docs                                                │
 │  └── dol       Enter REPL ←────── Interactive DOL environment              │
 │                                                                             │
-│        DOL> fun square(x: Int64) -> Int64 { x * x }                        │
+│        DOL> fun square(x: i64) -> i64 { x * x }                        │
 │        DOL> square(5)                                                       │
-│        25 : Int64                                                           │
+│        25 : i64                                                           │
 │        DOL> :wasm square                                                    │
 │        DOL> :quit                                                           │
 │                                                                             │
