@@ -329,6 +329,7 @@
 * [Sola Scriptura](archives/sola_scriptura.md)
 * [The Grumbling Hive](archives/The_Grumbling_Hive.md)
 * [Lion and Swan](archives/Lion_and_swan.md)
+* [Ontos → Deon → Lion & Swan](archives/Ontos_Deon_Lion_Swan.md)
 * [Biblia](archives/Biblia.md)
 * [Syzygy](archives/Syzygy.md)
 
