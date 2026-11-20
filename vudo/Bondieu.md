@@ -185,7 +185,7 @@ And together, we are Bondieu.
 │   "The Network               "Le réseau                             │
 │    is the Computer"    →      est Bondieu"                          │
 │                                                                     │
-│   Sun Microsystems            VUDO OS                               │
+│   Sun Microsystems            DOLOS                                 │
 │                                                                     │
 │   ─────────────────────────────────────────────────────────────     │
 │                                                                     │

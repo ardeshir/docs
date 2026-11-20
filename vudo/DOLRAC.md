@@ -17,7 +17,7 @@ This document defines how DOL 2.0 code is organized, composed, and executed. It 
 - **Entry Points** — `main` vs library vs spells
 - **SEX System** — Side Effect eXecution for unsafe/effectful code
 - **Compilation Targets** — WASM, Rust, TypeScript, Python
-- **Runtime Models** — VUDO OS, standalone, embedded, JIT
+- **Runtime Models** — DOLOS, standalone, embedded, JIT
 - **Séance Sessions** — Collaborative editing and execution
 
 ---
@@ -670,7 +670,7 @@ fun mixed_caller() -> i64 {
          ▼                      ▼                      ▼
    ┌───────────┐          ┌───────────┐          ┌───────────┐
    │  Native   │          │  Browser  │          │   Node    │
-   │  Binary   │          │  VUDO OS  │          │   Deno    │
+   │  Binary   │          │   DOLOS   │          │   Deno    │
    │   CLI     │          │ Wasmtime  │          │  Browser  │
    └───────────┘          └───────────┘          └───────────┘
 ```
@@ -732,13 +732,13 @@ export function increment(): number {
 
 ## Runtime Models
 
-### 1. VUDO OS (Full Platform)
+### 1. DOLOS (Full Platform)
 
 The complete VUDO ecosystem with Spirit orchestration:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                          VUDO OS                                │
+│                           DOLOS                                 │
 ├─────────────────────────────────────────────────────────────────┤
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐             │
 │  │   Spirit    │  │   Spirit    │  │   Spirit    │             │
@@ -1157,7 +1157,7 @@ How does `@org/spirit` resolve?
 │    └────┬────┘       └────┬────┘       └────┬────┘             │
 │         ▼                 ▼                 ▼                   │
 │    ┌─────────┐       ┌─────────┐       ┌─────────┐             │
-│    │ Native  │       │ VUDO OS │       │  Node   │             │
+│    │ Native  │       │  DOLOS  │       │  Node   │             │
 │    │  CLI    │       │ Browser │       │  Deno   │             │
 │    └─────────┘       └─────────┘       └─────────┘             │
 │                                                                 │

@@ -45,7 +45,7 @@ Three recommendations follow, now stated against what exists:
 
 ## 2. Layer 1 — Ontos: what Univrs is made of
 
-### 2.1 The seven kinds, corrected against the repos
+### 2.1 The kinds of things, corrected against the repos (seven + DOLOS)
 
 | Kind | In Univrs | Where it lives | State today |
 | --- | --- | --- | --- |
@@ -54,6 +54,7 @@ Three recommendations follow, now stated against what exists:
 | | LLVM Translation MCP (Julia→Zig/Rust via LLVM IR) | `llvm-translation-mcp` | Real, but **not connected to DOL**. It is a sibling meta-tool. |
 | | Skills framework (cross-repo Claude Code skills: build, test-all, dol-release, ecosystem-health…) | `univrs-skills` | Real. Developer tooling, not a language feature. |
 | Runtime | **VUDO VM** ("Virtual Universal Distributed Operations"): wasmtime 27, fuel metering, 15 `host_*` syscalls, capability grants | `univrs-vudo/vudo` (`vudo_vm`, `spirit_runtime`, `vudo_cli`, `vudo_repl`) | VM library real (367 tests per the Spirit Hosting Plan). CLI partly simulated. Host backends in-memory only. |
+| Operating system | **DOLOS — the DOL Operating System** (L6; formerly "VUDO OS"). It hosts, places, moves and retires Spirits across nodes: lifecycle (Seed→…→Decompose), scheduler, migration, Loa services, Spells, Medium (MCP). It is named for Dolos, the Greek trickster whose forged Truth had no feet; its rule is never to report success without doing the work. | Planned in `mycelial-node` (`SpiritHost`, Spirit Hosting Plan H1/S/M) on top of `univrs-vudo` | **Design only.** No lifecycle, scheduler or migration code exists. *VUDO* remains the platform brand; *VUDO VM* is L5. |
 | Package | **Spirit**: WASM module + manifest + Ed25519 signature | `spirit_runtime/src/manifest.rs`, `univrs-vudo/spirits/` | Signing and local registry real. Publish and summon simulated. No network registry. |
 | Agent | Creators/Developers/Researchers (vudo landing page); peers/nodes (network); roles Leaf/Nexus/PoteauMitan (ENR); AI agents (tarot: Lumen, Morrow, Orpheus, Vesper) | various | **No code defines "Saint", and the documents treat it as a currency, not a role.** `univrs-docs/direct-saints.md` (Jan 2026) defines **Saints as closed-loop ecosystem credits**. They are earned by contribution (corporate cloud donations first) and paid to artists and developers for Spirits. They are **not pegged 1:1 to USD and not redeemable for USD**, "by design", to stay outside the GENIUS Act. `nexus/nexus-rebels-strategy.md` still says "SAINT tokens … 1-to-1 USFed". |
 | Substrate | **Mycelial network**: libp2p 0.54 (gossipsub, Kademlia, mDNS) + ENR bridge; 4 live nodes (GCP, Hetzner, AWS, Azure) behind nexus.univrs.io | `univrs-network`, `univrs-enr` | Real P2P plus credits/gradients/election/septal gossip. Nodes cannot run Spirits. |
@@ -316,7 +317,7 @@ Build one thread through all three layers before widening any of them. The first
 | **4. Spirits v0: Lion & Swan** | Myth | Promote the learn capstone into published Spirits: Lion, Swan (with `evo` side-change), the five templates as `system`s, moral-ambiguity markers via the emergent-rule convention. Presentation follows WC/DK. Add a Lion & Swan room to imagine.univrs.io. | Someone outside the core summons both symbols and runs The Interrogation without help. ✗ never: a template that ranks participants (caution 1). |
 | **5. The first production** | all | "The Narrative: The Lion & The Swan", made in VUDO by its creators and paid in Saints through step 3's flow. | Released; its makers were paid through the network, not around it. |
 | **6. The first Interrogation, on Univrs itself** | Myth → Ontos | Run the ritual on the ecosystem (e.g. "Is the septal gate a cage?" "Is the fiat bridge a closed book?"). Publish the verdict. | At least one rule in `univrs.ecosystem` changed by an `evo` whose `because` cites the Interrogation. |
-| **7. Open the playground** (= Scheduler S, Migration M as needed) | all | Imaginarium builders fork the ontology and run their own worlds on the mesh. | **A world that disagrees with Univrs's own rules runs on Univrs.** ✗ never: a rival ontology rejected for disagreeing rather than for violating an encoded invariant. |
+| **7. Open the playground** (= DOLOS Scheduler S, Migration M as needed) | all | Imaginarium builders fork the ontology and run their own worlds on the mesh. | **A world that disagrees with Univrs's own rules runs on Univrs.** ✗ never: a rival ontology rejected for disagreeing rather than for violating an encoded invariant. |
 
 Step 7 is the real proof of the thesis. A playground that can only host its founder's ontology is a product. One that hosts a rival ontology is an experimental medium.
 

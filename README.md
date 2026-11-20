@@ -142,7 +142,7 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 - [ ] Ecological impact valuation
 - [ ] Cross-platform WASM algorithms
 - [ ] Community governance tools 
-- [ ] VUDO OS and DOL Runtime 
+- [ ] DOLOS (DOL Operating System) and DOL Runtime 
 
 → [View Univrs Roadmap](archives/Univrs_Roadmap.md)
 

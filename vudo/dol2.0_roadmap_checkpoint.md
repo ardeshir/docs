@@ -666,7 +666,7 @@ DOL 2.0 maintains the **dual vocabulary** system for developer and creator audie
 | Quarter | Milestone |
 |---------|-----------|
 | Q1 | VUDO VM (WASM runtime) |
-| Q2 | VUDO OS (Spirit orchestration) |
+| Q2 | DOLOS (Spirit orchestration) |
 | Q3 | Tauri IDE (Visual editor) |
 | Q4 | Mycelium Network (P2P) |
 
