@@ -1,6 +1,8 @@
 # DOL: Design Ontology Language
 
-**Version 0.8.0 — Clarity**
+**Syntax: v0.8 "Clarity" · Latest toolchain release: 0.8.2 (2026-11-20)**
+
+> **Status.** This page is a language guide, not a formal specification: no formal spec exists for the current language (`docs/grammar.ebnf` in the DOL repo is frozen at v0.0.1). The de facto reference is the lexer and parser of the `dol` crate (0.8.2) plus its CHANGELOG. "DOL 2.0" is a historical label for the language generation with expressions and functions; it is not a version number.
 
 > "Simplicity is prerequisite for reliability." — Edsger W. Dijkstra
 
@@ -10,7 +12,7 @@
 
 DOL (Design Ontology Language) is a declarative specification language that serves as the source of truth for the Univrs platform. In the DOL-first paradigm, design contracts are written before tests, and tests are written before code. Nothing changes without first being declared in the ontology.
 
-> **Note:** As of v0.8.0 "Clarity", DOL uses modernized Rust-aligned syntax. Old syntax (`gene`, `constraint`, `exegesis`) is deprecated but still supported with warnings. See [v0.8.0 Release Notes](releases/v0.8.0.md) for migration details.
+> **Note:** As of v0.8.0 "Clarity", DOL uses modernized Rust-aligned syntax. Old syntax (`gene`, `constraint`, `exegesis`, `evolves`, PascalCase types) is deprecated but still supported with warnings; it is planned to become an error in v0.9. See [v0.8.0 Release Notes](releases/v0.8.0.md) for migration details.
 
 DOL inverts the traditional software development flow:
 
@@ -34,7 +36,7 @@ DOL solves this by establishing a single authoritative layer:
 - **AI agents** parse DOL to understand what should exist
 - **CI/CD pipelines** validate changes against DOL before acceptance
 - **Developers** read DOL as natural language intent
-- **Self-healing systems** reference DOL to restore desired state
+- **Self-healing systems** reference DOL to restore desired state (*Planned — not implemented*)
 
 When the ontology is the source of truth, the system knows what it should be.
 
@@ -120,9 +122,9 @@ Invariants that must always hold. Rules define the laws of the system.
 
 ```dol
 rule container.integrity {
-  container state matches declared state
-  container identity never changes
-  container boundaries are enforced
+  container.state matches declared state
+  container.identity never changes
+  container.boundaries is enforced
 }
 
 docs {
@@ -167,12 +169,12 @@ system univrs.orchestrator @ 0.1.0 {
   requires node.discovery >= 0.0.1
   requires cluster.consistency >= 0.0.1
 
-  nodes discover peers via gossip
-  containers schedule across nodes
-  consensus validates state transitions
+  nodes requires gossip discovery
+  containers is scheduled
+  transitions requires consensus validation
 
-  all operations are authenticated
-  all state is replicated
+  all operations is authenticated
+  all transitions is replicated
 }
 
 docs {
@@ -191,9 +193,9 @@ docs {
 
 ### File Structure
 
-Every DOL file contains one primary declaration (gen, trait, rule, or system) followed by a docs section.
+A DOL file contains one or more declarations (gen, trait, rule, system, evo, fun, ...), each followed by a docs section. The template below is schematic, not parseable DOL:
 
-```dol
+```text
 <declaration-type> <name> {
   <statements>
 }
@@ -237,48 +239,49 @@ docs {
 
 ## Test Files
 
-Tests live in paired `.dol.test` files. They verify that implementations satisfy the ontology.
+Tests live in paired `.dol.test` files. They verify that implementations satisfy the ontology. `.dol.test` is a separate line-oriented format read by `dol-test`, not by the DOL parser: a `test <subject> {` header, then one quoted `test "<name>" { ... }` block per case with `given:`, `when:` and `then:` sections (and an optional `always` line).
 
-```dol
+```text
 // container.lifecycle.dol.test
 
-test container.creation {
-  given no container
-  when container is created
-  then container has identity
-  then container state is created
-}
+test container.lifecycle {
 
-test container.authentication {
-  given container exists
-  when transition is requested
-  when request lacks valid signature
-  then transition is rejected
-}
+    test "container can be created" {
+        given:
+            container does not exist
+        when:
+            create container with identity
+        then:
+            container has identity
+            container is created
+    }
 
-test container.state.integrity {
-  given container state is running
-  then container state matches declared state
-  always
+    test "unsigned transitions are rejected" {
+        given:
+            container exists
+        when:
+            transition is requested without a valid signature
+        then:
+            transition is rejected
+    }
+
+    test "container state matches declared state" {
+        given:
+            container is running
+        then:
+            container state matches declared state
+        always
+    }
 }
 ```
 
-### Test Structure
-
-```dol
-test <name> {
-  given <precondition>
-  when <action>
-  then <postcondition>
-  [always]  // for invariant tests
-}
-```
-
-Tests are generated into executable code by the DOL toolchain. The `always` keyword marks tests that run continuously as runtime assertions.
+`dol-test` turns each case into a Rust `#[test]` function that records the given/when/then lines as comments with placeholder `assert!(true, "TODO: ...")` assertions (or an `unimplemented!()` stub with `--stubs`); you write the real assertions. The `always` line marks an invariant test. Running invariant tests continuously as runtime assertions is *Planned — not implemented*.
 
 ---
 
 ## Repository Structure
+
+A suggested layout:
 
 ```
 dol/
@@ -301,7 +304,7 @@ dol/
     └── univrs.orchestrator.dol.test
 ```
 
-Every node in the Univrs network holds the complete DOL repository. Like git, the full history travels with the source. Like mycelial networks, every node contains the complete genetic code of the system.
+*Planned — not implemented:* every node in the Univrs network holds the complete DOL repository. Like git, the full history travels with the source. Like mycelial networks, every node contains the complete genetic code of the system.
 
 ---
 
@@ -319,7 +322,7 @@ The docs block is not optional commentary. It is part of the specification. A DO
 ```dol
 gen identity.cryptographic {
   identity derives from ed25519 keypair
-  identity is self-sovereign
+  identity is self_sovereign
   identity requires no authority
 }
 
@@ -340,6 +343,16 @@ docs {
 ---
 
 ## Toolchain
+
+The tools ship as binaries of the `dol` crate and need the `cli` feature:
+
+```bash
+cargo install dol --features cli
+```
+
+This installs `dol-parse`, `dol-check`, `dol-test`, `dol-codegen`, `dol-migrate`, `dol-mcp`, `dol-build` and `dol-build-crate`. There is no single `dol` binary.
+
+> **Known limitation (0.8.2):** `dol-parse` and `dol-check` only parse the **first** declaration in each file; anything after it is silently ignored. The library function `metadol::parse_file_all` parses whole files. The validator does not enforce types yet.
 
 ### DOL Parser (`dol-parse`)
 
@@ -363,16 +376,12 @@ dol-test traits/container.lifecycle.dol.test --output src/tests/
 CI gate ensuring code changes have corresponding DOL coverage.
 
 ```bash
-dol-check --against src/ --require-exegesis
+dol-check dol/ --require-exegesis --coverage-source src/
 ```
 
 ### Drift Detector (`dol-drift`)
 
-Runtime daemon comparing actual system state against DOL constraints.
-
-```bash
-dol-drift --watch --remediate
-```
+*Planned — not implemented.* A runtime daemon comparing actual system state against DOL constraints. No `dol-drift` binary exists.
 
 ---
 
@@ -402,12 +411,17 @@ docs {
 
 Create or update the corresponding `.dol.test` file.
 
-```dol
-test container.pause {
-  given container state is running
-  when container is paused
-  then container state is paused
-  then container memory is preserved
+```text
+test container.lifecycle {
+    test "container can be paused" {
+        given:
+            container is running
+        when:
+            pause container
+        then:
+            container is paused
+            container memory is preserved
+    }
 }
 ```
 
@@ -424,13 +438,13 @@ Write the Rust implementation to satisfy the generated tests.
 ### 5. Validate
 
 ```bash
-dol-check --require-coverage 100
+dol-check dol/ --require-exegesis --coverage-source src/
 cargo test
 ```
 
 ### 6. Deploy
 
-The platform accepts the change only after DOL validation passes.
+Gate the change on DOL validation in your CI (for example `dol-check dol/ --ci --strict`). Platform-side enforcement is *Planned — not implemented*.
 
 ---
 
@@ -446,20 +460,33 @@ DOL embodies several core principles:
 
 **Contracts Before Code** — No implementation without declaration.
 
-**Self-Description** — The exegesis ensures every element explains itself.
+**Self-Description** — The `docs` block ensures every element explains itself.
 
-**Distributed Truth** — Every node holds the complete ontology. No central authority.
+**Distributed Truth** — Every node holds the complete ontology. No central authority. (Design goal.)
 
 ---
 
 ## Next Steps
 
-DOL v0.8.0 "Clarity" represents a major milestone. Future work includes:
+The latest release is **0.8.2** (2026-11-20), "Spirit Hosting H0": DOL-compiled Spirits now link and run in the VUDO VM. Bodiless `sex fun host_*` declarations import from WASM module `vudo` with the VM linker's exact signatures (15 host functions); an unknown or mis-typed host function is a compile error, and `string` arguments lower to `(ptr, len)`:
 
-- **v0.9.0** — Strict mode (deprecated syntax becomes errors)
-- **v1.0.0** — Stable API, old syntax removed
+```dol
+sex fun host_log(level: i64, msg: string) -> i64
+
+sex fun hello() -> i64 {
+    return host_log(2, "hello from DOL")
+}
+```
+
+The univrs/vudo VM and CLI (`dol = "0.8.2"`) are currently the only production consumer of the DOL compiler. See the [Changelog](CHANGELOG.md).
+
+Future work (*Planned — not implemented*):
+
+- **v0.9** — Deprecated syntax becomes an error
 - **Spirit Package Manager** — Mycelium registry for DOL packages
-- **LSP Server** — IDE integration with syntax highlighting
+- **LSP Server** — IDE integration (only a completion-provider library exists today)
+- **Self-hosting** — the DOL-in-DOL bootstrap sources parse, but the generated crate does not compile
+- **v1.0** — exit criteria have not been defined
 
 ---
 
@@ -467,7 +494,7 @@ DOL v0.8.0 "Clarity" represents a major milestone. Future work includes:
 
 ```dol
 // genes/container.exists.dol
-// DOL v0.8.0
+// DOL v0.8 syntax
 
 gen container.exists {
   container has identity

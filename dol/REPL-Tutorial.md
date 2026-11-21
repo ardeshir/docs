@@ -2,6 +2,13 @@
 
 The DOL REPL (Read-Eval-Print Loop) provides an interactive environment for exploring and testing DOL code. This tutorial covers everything from basic usage to advanced features.
 
+> **Status (verified against DOL v0.8.2, 2026-11-20):** The REPL is a **library API**
+> (`metadol::repl::SpiritRepl`). There is no working REPL command-line program at 0.8.2: the
+> interactive REPL lives in the `vudo` binary of the `dol` crate, which does not compile. Every
+> session below was re-run through `SpiritRepl::eval` with the `wasm` feature; the `>>>` lines are
+> inputs passed to `eval`, and the lines after them are the returned value or message.
+> Evaluation compiles to WASM, so the WASM backend's gaps apply (see *Limitations*).
+
 ## Table of Contents
 
 1. [Getting Started](#getting-started)
@@ -20,8 +27,8 @@ The DOL REPL (Read-Eval-Print Loop) provides an interactive environment for expl
 
 Before using the DOL REPL, ensure you have:
 
-- Rust 1.70+ installed
-- The `metadol` crate with the `wasm` feature enabled
+- Rust 1.84+ installed (the crate's minimum supported Rust version)
+- The `dol` crate (library name `metadol`) with the `wasm` feature enabled
 
 ### Installation
 
@@ -29,7 +36,7 @@ Add DOL to your project's `Cargo.toml`:
 
 ```toml
 [dependencies]
-metadol = { version = "0.8", features = ["wasm"] }
+metadol = { package = "dol", version = "0.8.2", features = ["wasm"] }
 ```
 
 ### Creating a REPL Instance
@@ -59,7 +66,7 @@ The REPL can evaluate expressions and return their computed values.
 
 ### Integer Literals
 
-```dol
+```text
 >>> 42
 => 42
 
@@ -72,12 +79,11 @@ The REPL can evaluate expressions and return their computed values.
 
 ### Floating-Point Literals
 
-```dol
+Note: negative float literals such as `-273.15` fail to compile at 0.8.2 (`WebAssembly translation error`); write `0.0 - 273.15` instead.
+
+```text
 >>> 3.14159
 => 3.14159
-
->>> -273.15
-=> -273.15
 
 >>> 1.0
 => 1
@@ -87,7 +93,7 @@ The REPL can evaluate expressions and return their computed values.
 
 DOL supports standard arithmetic operations with proper precedence:
 
-```dol
+```text
 >>> 10 + 20
 => 30
 
@@ -109,7 +115,7 @@ DOL supports standard arithmetic operations with proper precedence:
 
 ### Float Arithmetic
 
-```dol
+```text
 >>> 1.5 + 2.5
 => 4
 
@@ -117,7 +123,7 @@ DOL supports standard arithmetic operations with proper precedence:
 => 6.28318
 
 >>> 10.0 / 3.0
-=> 3.333333333333333
+=> 3.3333333333333335
 ```
 
 ---
@@ -130,9 +136,9 @@ The REPL maintains state across evaluations, allowing you to define and use func
 
 Use the `pub fun` keyword to define functions:
 
-```dol
+```text
 >>> pub fun square(x: i64) -> i64 { x * x }
-Defined function 'square'
+Defined function square
 
 >>> square(7)
 => 49
@@ -143,15 +149,15 @@ Defined function 'square'
 
 ### Functions with Multiple Parameters
 
-```dol
+```text
 >>> pub fun add(a: i64, b: i64) -> i64 { a + b }
-Defined function 'add'
+Defined function add
 
 >>> add(10, 20)
 => 30
 
 >>> pub fun multiply(x: i64, y: i64) -> i64 { x * y }
-Defined function 'multiply'
+Defined function multiply
 
 >>> multiply(6, 7)
 => 42
@@ -159,15 +165,15 @@ Defined function 'multiply'
 
 ### Float Functions
 
-```dol
+```text
 >>> pub fun area(radius: f64) -> f64 { 3.14159 * radius * radius }
-Defined function 'area'
+Defined function area
 
 >>> area(10.0)
 => 314.159
 
 >>> pub fun circumference(radius: f64) -> f64 { 2.0 * 3.14159 * radius }
-Defined function 'circumference'
+Defined function circumference
 
 >>> circumference(5.0)
 => 31.4159
@@ -175,9 +181,9 @@ Defined function 'circumference'
 
 ### Functions Using Other Functions
 
-```dol
+```text
 >>> pub fun cube(x: i64) -> i64 { x * square(x) }
-Defined function 'cube'
+Defined function cube
 
 >>> cube(3)
 => 27
@@ -194,55 +200,44 @@ Genes are DOL's primary data structure, similar to structs in other languages.
 
 ### Defining Genes
 
-```dol
+```text
 >>> gen Point { has x: i64   has y: i64 }
-Defined gene 'Point'
+Defined gene Point
 ```
 
 ### Using Genes in Functions
 
-```dol
+```text
 >>> pub fun getX() -> i64 {
-...     let p = Point { x: 42, y: 100 }
+...     val p = Point { x: 42, y: 100 }
 ...     p.x
 ... }
-Defined function 'getX'
+Defined function getX
 
 >>> getX()
 => 42
 ```
 
-### Complex Gene Examples
+### Genes with Float Fields
 
-```dol
->>> gen Vector2D { has dx: f64   has dy: f64 }
-Defined gene 'Vector2D'
-
->>> pub fun magnitude() -> f64 {
-...     let v = Vector2D { dx: 3.0, dy: 4.0 }
-...     // Would be sqrt(dx*dx + dy*dy), simplified here
-...     v.dx + v.dy
-... }
-Defined function 'magnitude'
-
->>> magnitude()
-=> 7
-```
+> **Known issue (0.8.2):** a gene with `f64` fields (for example `gen Vector2D { has dx: f64   has dy: f64 }`)
+> can be defined, but evaluating a function that builds one fails with
+> `WASM error: Runtime: Failed to load WASM: WebAssembly translation error`. Use integer fields for now.
 
 ### Nested Gene Access
 
-```dol
+```text
 >>> gen Rectangle {
 ...     has width: i64
 ...     has height: i64
 ... }
-Defined gene 'Rectangle'
+Defined gene Rectangle
 
 >>> pub fun calculateArea() -> i64 {
-...     let rect = Rectangle { width: 10, height: 5 }
+...     val rect = Rectangle { width: 10, height: 5 }
 ...     rect.width * rect.height
 ... }
-Defined function 'calculateArea'
+Defined function calculateArea
 
 >>> calculateArea()
 => 50
@@ -260,7 +255,7 @@ The REPL performs automatic type inference for expressions.
 |------|-------------|---------|
 | `i64` | 64-bit signed integer | `42`, `-17` |
 | `f64` | 64-bit floating point | `3.14`, `-273.15` |
-| `bool` | Boolean value | `true`, `false` |
+| `bool` | Boolean value | `true`, `false` (at 0.8.2 `true` prints as `1`; comparisons such as `1 < 2` fail to compile) |
 
 ### Type Inference Rules
 
@@ -271,7 +266,7 @@ The REPL performs automatic type inference for expressions.
 
 ### Examples
 
-```dol
+```text
 >>> 42          // Inferred as i64
 => 42
 
@@ -310,29 +305,24 @@ repl.eval("quadruple(3)"); // => 12
 
 ### EvalResult Types
 
-The REPL returns different result types:
+The REPL returns different result types (abridged from `src/repl/evaluator.rs`):
 
 ```rust
 pub enum EvalResult {
-    /// An expression that was evaluated
-    Expression {
-        value: String,
-        expr_type: String,
-    },
-
-    /// A definition (function, gene, trait, etc.)
-    Defined {
-        name: String,
-        kind: String,
-    },
-
-    /// An import statement
-    Imported {
-        module: String,
-    },
-
-    /// Empty input or comment-only
+    /// Empty input (no-op)
     Empty,
+    /// A declaration was defined
+    Defined { name: String, kind: String, message: String },
+    /// An expression was evaluated
+    Expression { input: String, value: String },
+    /// Output of REPL commands
+    Help(String),
+    Quit,
+    Message(String),
+    TypeInfo(String),
+    RustCode(String),
+    WasmInfo { size_bytes: usize, functions: usize, has_memory: bool },
+    SpiritLoaded { name: String, declarations: usize },
 }
 ```
 
@@ -340,18 +330,16 @@ pub enum EvalResult {
 
 ```rust
 match repl.eval(input) {
-    Ok(EvalResult::Expression { value, expr_type }) => {
-        println!("=> {} : {}", value, expr_type);
+    Ok(EvalResult::Expression { value, .. }) => {
+        println!("=> {}", value);
     }
-    Ok(EvalResult::Defined { name, kind }) => {
-        println!("Defined {} '{}'", kind, name);
-    }
-    Ok(EvalResult::Imported { module }) => {
-        println!("Imported module '{}'", module);
+    Ok(EvalResult::Defined { message, .. }) => {
+        println!("{}", message);
     }
     Ok(EvalResult::Empty) => {
         // No output needed
     }
+    Ok(other) => println!("{:?}", other),
     Err(e) => {
         eprintln!("Error: {}", e);
     }
@@ -426,6 +414,10 @@ Current REPL limitations:
 2. **Expression-only evaluation** - Statements require function wrapping
 3. **WASM feature required** - Expression evaluation needs `--features wasm`
 4. **No top-level bindings** - Variables must be defined within functions
+5. **WASM backend gaps (0.8.2)** - negative float literals, functions whose body is only a float literal (e.g. `pub fun pi() -> f64 { 3.14159 }`), genes with `f64` fields and comparison expressions fail with `WebAssembly translation error`
+6. **One bad definition poisons the session** - all definitions are recompiled on every evaluation, so after a definition that fails to compile, later evaluations fail too; use `:clear` to reset
+7. **Comment-only input is not ignored** - `>>> // comment` is evaluated as an expression and fails
+8. **No type enforcement** - DOL 0.8.2 does not reject ill-typed function bodies before compilation
 
 ### Future Improvements
 
@@ -433,61 +425,52 @@ Planned enhancements:
 
 - [ ] Top-level `let` bindings
 - [ ] Interactive debugging
-- [ ] Command history
 - [ ] Tab completion
 - [ ] Multi-line editing
-- [ ] REPL commands (`:help`, `:clear`, `:type`)
+- [ ] A working REPL command-line program (the `vudo` binary does not compile at 0.8.2)
+
+Already in the library: REPL commands passed to `eval` — `:help`, `:clear`, `:list`, `:type <name>`, `:emit`, `:wasm`, `:shake`, `:history`, `:load <file>`, `:load-spirit <path>`, `:spirits`, `:reload`.
 
 ---
 
 ## Complete Example Session
 
-Here's a complete REPL session demonstrating various features:
+Here's a complete REPL session demonstrating various features (verified with DOL 0.8.2):
 
-```dol
->>> // Basic arithmetic
+```text
 >>> 10 + 20
 => 30
 
 >>> 3.14159 * 2.0
 => 6.28318
 
->>> // Define a gene
->>> gen Circle { has radius: f64 }
-Defined gene 'Circle'
+>>> gen Rect { has width: i64   has height: i64 }
+Defined gene Rect
 
->>> // Define helper functions
 >>> pub fun square_f(x: f64) -> f64 { x * x }
-Defined function 'square_f'
+Defined function square_f
 
->>> pub fun pi() -> f64 { 3.14159 }
-Defined function 'pi'
-
->>> // Calculate circle area
 >>> pub fun circleArea(r: f64) -> f64 {
-...     pi() * square_f(r)
+...     3.14159 * square_f(r)
 ... }
-Defined function 'circleArea'
+Defined function circleArea
 
 >>> circleArea(5.0)
 => 78.53975
 
->>> // Use gene in a function
->>> pub fun getCircleArea() -> f64 {
-...     let c = Circle { radius: 10.0 }
-...     circleArea(c.radius)
+>>> pub fun rectArea() -> i64 {
+...     val r = Rect { width: 10, height: 5 }
+...     r.width * r.height
 ... }
-Defined function 'getCircleArea'
+Defined function rectArea
 
->>> getCircleArea()
-=> 314.159
+>>> rectArea()
+=> 50
 
->>> // Integer operations
 >>> pub fun factorial(n: i64) -> i64 {
-...     // Simplified - just multiply for demo
 ...     n * (n - 1) * (n - 2)
 ... }
-Defined function 'factorial'
+Defined function factorial
 
 >>> factorial(5)
 => 60
@@ -504,36 +487,37 @@ impl SpiritRepl {
     /// Create a new REPL instance
     pub fn new() -> Self;
 
-    /// Evaluate DOL code
-    pub fn eval(&mut self, input: &str) -> Result<EvalResult, EvalError>;
+    /// Create a REPL with a custom session configuration
+    pub fn with_config(config: SessionConfig) -> Self;
 
-    /// Get all defined functions
-    pub fn functions(&self) -> Vec<&str>;
+    /// Evaluate DOL code or a `:command`
+    pub fn eval(&mut self, input: &str) -> Result<EvalResult, ReplError>;
 
-    /// Get all defined genes
-    pub fn genes(&self) -> Vec<&str>;
+    /// Declarations accumulated in this session
+    pub fn declarations(&self) -> &[Declaration];
 
-    /// Clear all definitions
-    pub fn clear(&mut self);
+    /// Input history
+    pub fn history(&self) -> &[String];
+
+    /// Session configuration
+    pub fn config(&self) -> &SessionConfig;
 }
 ```
+
+To clear all definitions, evaluate the `:clear` command.
 
 ### Error Handling
 
 ```rust
-#[derive(Debug)]
-pub enum EvalError {
-    /// Parse error with location
-    ParseError(String),
-
-    /// Compilation error
-    CompileError(String),
-
-    /// Runtime execution error
-    RuntimeError(String),
-
-    /// Type inference error
-    TypeError(String),
+#[derive(Debug, Clone)]
+pub enum ReplError {
+    Parse(String),
+    Command(String),
+    NotFound(String),
+    Codegen(String),
+    Wasm(String),
+    Io(String),
+    Feature(String),
 }
 ```
 
@@ -541,12 +525,12 @@ pub enum EvalError {
 
 ## See Also
 
-- [DOL Language Reference](/dol/Language.md)
+- [DOL Language Reference](/dol.md)
 - [DOL CLI Reference](/dol/CLI.md)
 - [DOL-to-WASM Compilation](/dol/DOL-to-WASM.md)
 - [v0.8.0 Release Notes](/releases/v0.8.0.md) - "Clarity" syntax
 
 ---
 
-*Tutorial last updated: January 2026*
-*DOL Version: 0.8.x*
+*Tutorial last updated: November 2026 (sessions re-verified against DOL 0.8.2)*
+*DOL Version: 0.8.2*

@@ -180,7 +180,7 @@ And together, we are Bondieu.
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                                                                     │
-│   1984                          2024                                │
+│   1984                          Today                               │
 │                                                                     │
 │   "The Network               "Le réseau                             │
 │    is the Computer"    →      est Bondieu"                          │

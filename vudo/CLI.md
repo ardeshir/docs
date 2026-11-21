@@ -1,9 +1,68 @@
 # VUDO & Univrs CLI Specification
 
 > **Version:** 1.1.0
-> **Status:** Design Specification
-> **Date:** January 2026
-> **DOL Syntax:** v0.8.0 "Clarity"
+> **Status:** Design specification — **mostly Planned, not implemented**. See *Implementation Status* below.
+> **Date:** January 2026 (status section verified 2026-11-20)
+> **DOL Syntax:** v0.8 "Clarity" (toolchain: DOL 0.8.2)
+
+-----
+
+## Implementation Status (verified 2026-11-20)
+
+This page began as a design for two future CLIs. What actually exists today:
+
+### 1. DOL toolchain CLIs (crate `dol` 0.8.2) — real
+
+The DOL compiler ships as separate `dol-*` programs. There is **no single `dol` binary** and no
+`dol build` command. All binaries require the `cli` feature:
+
+```bash
+cargo install dol --features cli
+```
+
+|Binary           |Purpose                                                        |Notes (0.8.2)|
+|-----------------|---------------------------------------------------------------|-------------|
+|`dol-parse`      |Parse and validate `.dol` files; `--format pretty\|json\|compact\|debug`, `--tree-shake`, `--roots`, `--shake-analyze`, `--ci`|Only the **first declaration** in each file is parsed; the rest is silently ignored|
+|`dol-check`      |CI gate: `--require-exegesis`, `--min-exegesis-length`, `--coverage-source`, `--strict`, `--typecheck`, `--ci`|Same first-declaration limitation; type errors are **not** enforced|
+|`dol-test`       |Generate Rust tests from `.dol.test` files (`generate`, `validate`, `plan`)| |
+|`dol-codegen`    |Generate code: `--target rust\|typescript\|jsonschema`        |Generated Rust does not always compile|
+|`dol-migrate`    |Syntax migration: `0.7-to-0.8`, `0.2-to-0.3`                    | |
+|`dol-mcp`        |MCP server: `serve` (stdio), `manifest`, `tool <name>`          | |
+|`dol-build`      |Spirit project (`Spirit.dol`) → Rust → wasm32                   |Fails on all nine example Spirits in the dol repository|
+|`dol-build-crate`|Generate a Rust crate from several DOL files                    | |
+
+The crate also declares a `vudo` binary, but it **does not compile** at 0.8.2.
+
+### 2. `vudo` CLI (univrs/vudo, `vudo/vudo_cli`) — partially implemented
+
+A `vudo` CLI exists in the [univrs/vudo](https://github.com/univrs/vudo) repository. It is **not on
+crates.io** (`cargo install vudo` does not work), and `https://vudo.univrs.io/install.sh` serves the
+website HTML, not an install script. Build it from source. It depends on `dol = "0.8.2"`
+(`wasm-compile` feature only).
+
+|Command                     |Status (verified in source, 2026-11-20)|
+|----------------------------|---------------------------------------|
+|`new`                       |Works. Templates: `basic` (default), `web-service`, `cli-tool`, `library`. Writes `manifest.toml`, `src/main.dol`, `tests/main_test.dol`|
+|`build`                     |Works: compiles the DOL entry point to WASM with dol 0.8.2. `--emit` supports only `ast` and `wasm`|
+|`run`                       |Works: runs the `.spirit` in the VUDO VM sandbox with `--fuel`, `--memory`, `--capabilities`, `--entry`, `--sandbox`, `--trace`. Storage and credits are in-memory; networking is a mock backend|
+|`pack`, `sign`, `info`      |Work locally (packages are stored uncompressed; Ed25519 signing)|
+|`install`, `uninstall`, `list`|Exist (local registry); not described in this spec|
+|`test`                      |**Simulated**: finds test functions and reports them as passed without running them; `--coverage` prints a fixed number|
+|`check`, `fmt`, `doc`       |**Stubs**: `check` only verifies files are readable and non-empty; all three print "Full DOL … integration coming soon"|
+|`publish`, `summon`         |**Not implemented**: fail with "not implemented: network registry arrives in Spirit Hosting Plan H2"|
+|`search`                    |**Simulated**: prints hard-coded sample results; `--interactive` not implemented|
+|`dol` (REPL)                |**Shell only**: accepts commands, but evaluation, `:type`, `:ast`, `:mlir` and `:wasm` print "not yet implemented"|
+|`upgrade`                   |Prints manual upgrade instructions; automatic upgrade not implemented|
+
+DOL source compiled by `vudo build` runs in the VUDO VM: as of DOL 0.8.2, bodiless
+`sex fun host_*` declarations import the VM's 15 host functions from module `vudo`, and the
+univrs/vudo CI compiles a DOL program to WASM and runs it with `vudo run`.
+
+### 3. `univrs` CLI — Planned, not implemented
+
+No `univrs` operator CLI exists. The `univrs` crate on crates.io is an **unrelated third-party
+crate**, so `cargo install univrs` does not install anything described here. Everything in the
+`univrs` sections below is **Planned — not implemented**.
 
 -----
 
@@ -13,8 +72,8 @@ Two CLIs serving two audiences, unified by the Mycelium:
 
 |CLI     |Audience |Purpose           |Install                                    |
 |--------|---------|------------------|-------------------------------------------|
-|`vudo`  |Creators |Make Spirits      |`curl -fsSL vudo.univrs.io/install.sh | sh`|
-|`univrs`|Operators|Run Infrastructure|`cargo install univrs`                     |
+|`vudo`  |Creators |Make Spirits      |From source: [univrs/vudo](https://github.com/univrs/vudo) (partially implemented)|
+|`univrs`|Operators|Run Infrastructure|Planned — not implemented (no installer)|
 
 -----
 
@@ -88,12 +147,8 @@ vudo build
 
 # Power user
 vudo build --emit=ast          # Show AST
-vudo build --emit=hir          # Show HIR  
-vudo build --emit=mlir         # Show MLIR
-vudo build --emit=wasm         # Show WASM (default output)
-vudo build --target=wasm32     # 32-bit WASM
-vudo build --target=wasm64     # 64-bit WASM
-vudo build --target=native     # Native binary
+vudo build --emit=wasm         # Show WASM size
+# Planned — not implemented: --emit=hir, --emit=mlir, --target=wasm64, --target=native
 vudo build --release           # Optimized build
 vudo build --features=network  # Enable features
 vudo build -o custom.spirit    # Custom output name
@@ -110,7 +165,7 @@ vudo run
 # Run specific Spirit
 vudo run ./my-spirit.spirit
 
-# Run from Imaginarium (auto-summon)
+# Run from Imaginarium (auto-summon) — Planned, not implemented
 vudo run @creator/hello-spirit
 
 # With arguments
@@ -127,6 +182,8 @@ vudo run --trace               # Execution trace
 #### `vudo test`
 
 Run Spirit tests.
+
+> **Status:** simulated — tests are listed and reported as passed without being executed; `--coverage` prints a fixed number.
 
 ```bash
 # Run all tests
@@ -155,6 +212,7 @@ vudo pack
 # Power user
 vudo pack --include=assets/    # Include extra files
 vudo pack --exclude=*.log      # Exclude patterns
+# Planned — not implemented: --compress (packages are stored uncompressed)
 vudo pack --compress=zstd      # Compression algorithm
 ```
 
@@ -177,6 +235,8 @@ vudo sign --verify hello-spirit-1.0.0.spirit
 
 Publish to the Imaginarium.
 
+> **Planned — not implemented:** fails with "network registry arrives in Spirit Hosting Plan H2".
+
 ```bash
 # Publish current project
 vudo publish
@@ -198,6 +258,8 @@ vudo publish --credits=10      # 10 credits per summon
 
 Download Spirit from Imaginarium.
 
+> **Planned — not implemented:** fails with "network registry arrives in Spirit Hosting Plan H2".
+
 ```bash
 # Summon by name
 vudo summon hello-spirit
@@ -216,6 +278,8 @@ vudo summon --run @alice/hello-spirit
 
 Search the Imaginarium.
 
+> **Status:** simulated — prints hard-coded sample results; `--interactive` is not implemented.
+
 ```bash
 # Search by keyword
 vudo search image processing
@@ -233,6 +297,8 @@ vudo search --interactive
 #### `vudo check`
 
 Validate DOL syntax and types.
+
+> **Status:** stub — only checks that `.dol` files are readable and non-empty; it does not parse DOL. Use `dol-check` from the DOL toolchain instead.
 
 ```bash
 # Check current project
@@ -253,6 +319,8 @@ vudo check --format=pretty     # For humans (default)
 
 Format DOL source files.
 
+> **Planned — not implemented:** the command exists but prints "Full DOL formatter integration coming soon".
+
 ```bash
 # Format current project
 vudo fmt
@@ -267,6 +335,8 @@ vudo fmt src/main.dol
 #### `vudo doc`
 
 Generate documentation.
+
+> **Planned — not implemented:** the command exists but prints "Full DOL documentation generator coming soon".
 
 ```bash
 # Generate docs
@@ -286,6 +356,11 @@ vudo doc --format=json         # JSON schema
 ### `vudo dol` — The DOL REPL
 
 Interactive environment for DOL development.
+
+> **Planned — not implemented:** at 2026-11-20 `vudo dol` starts a REPL shell, but it does not
+> evaluate DOL; evaluation, `:type`, `:ast`, `:mlir` and `:wasm` print "not yet implemented".
+> The banner, commands and sessions below are the design. For DOL evaluation that works today, see
+> the library REPL in the [DOL REPL Tutorial](REPL-Tutorial.md).
 
 ```bash
 $ vudo dol
@@ -452,6 +527,8 @@ fib(20) = 6765
 -----
 
 ## `univrs` — The Operator’s CLI
+
+> **Planned — not implemented.** No `univrs` binary exists. Everything in this section is design.
 
 ### Command Structure
 
@@ -668,24 +745,33 @@ output = "~/.univrs/logs/node.log"
 ### `vudo` (Creators)
 
 ```bash
-# macOS / Linux
-curl -fsSL https://vudo.univrs.io/install.sh | sh
-
-# Windows
-irm https://vudo.univrs.io/install.ps1 | iex
-
-# Cargo (for Rust developers)
-cargo install vudo
+# From source (the only working method as of 2026-11-20)
+git clone https://github.com/univrs/vudo
+cd vudo && cargo install --path vudo/vudo_cli
 
 # Verify
 vudo --version
+
+# Planned — not implemented: install scripts and crates.io
+#   curl -fsSL https://vudo.univrs.io/install.sh | sh     (serves HTML, not a script)
+#   irm https://vudo.univrs.io/install.ps1 | iex
+#   cargo install vudo                                    (no such crate)
+```
+
+### DOL toolchain
+
+```bash
+cargo install dol --features cli
+dol-parse --help
 ```
 
 ### `univrs` (Operators)
 
+> **Planned — not implemented.** None of these commands work; `cargo install univrs` installs an unrelated third-party crate.
+
 ```bash
-# Cargo (primary method)
-cargo install univrs
+# Cargo: no `univrs` CLI crate is published
+# (crates.io `univrs` is an unrelated third-party crate)
 
 # From source
 git clone https://github.com/univrs/univrs
@@ -705,8 +791,10 @@ univrs --version
 
 ### Creator Journey (Complete)
 
+> Steps 1, 3, 5, 8 and 9 do not work as of 2026-11-20 (no install script, REPL does not evaluate, `vudo test` is simulated, publish/summon not implemented). Steps 2, 4, 6 and 7 work.
+
 ```bash
-# 1. Install
+# 1. Install (planned script; today build from source, see Installation)
 curl -fsSL https://vudo.univrs.io/install.sh | sh
 
 # 2. Create
@@ -739,11 +827,10 @@ vudo publish
 echo "Try it: vudo summon @me/my-spirit"
 ```
 
-### Operator Journey (Complete)
+### Operator Journey (Planned — not implemented)
 
 ```bash
-# 1. Install
-cargo install univrs
+# 1. Install (no published crate yet)
 
 # 2. Initialize
 univrs identity new

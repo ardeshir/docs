@@ -169,6 +169,8 @@ So when I claim that DOL specifications or WASM runtimes are somehow aligned wit
 
 Let me inventory what actually exists, as of December 2024:
 
+> **Update (2026-11-21):** This inventory is a historical snapshot and its numbers are not current. As of `dol` 0.8.2 (2026-11-20), DOL source compiles to WASM and runs in the VUDO VM for a subset of the language (`univrs/vudo` CI runs a DOL program that calls `host_log`). Lambdas, tuples, lists and `sex {}` blocks are not yet supported by the WASM backend.
+
 **Code that runs:**
 - A DOL lexer and parser (93 keywords, 454 tests)
 - A VUDO VM that can execute WASM in a sandbox

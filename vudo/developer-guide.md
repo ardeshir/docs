@@ -315,6 +315,12 @@ capabilities = ["sensor_time", "actuator_log"]
 
 Build your WASM module and save as `spirit.wasm`.
 
+To write the Spirit in DOL: since DOL 0.8.2, the DOL WASM backend (`dol` crate, `wasm-compile` feature) emits
+modules that link against the VUDO VM. Bodiless `sex fun host_*` declarations become imports from module `vudo` with
+the VM linker's exact signatures (15 host functions, listed in `src/wasm/host_abi.rs` in the dol repo), and a
+mismatch is a compile error. The backend covers a subset of the language (see the
+[DOL changelog](https://github.com/univrs/dol/blob/main/CHANGELOG.md)).
+
 ### 5. Sign Package
 
 ```rust

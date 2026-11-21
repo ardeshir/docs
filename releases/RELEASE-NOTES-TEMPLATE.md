@@ -175,11 +175,8 @@ dol-check src/
 ## Installation
 
 ```bash
-# From crates.io
-cargo install metadol --version X.Y.Z
-
-# With CLI tools
-cargo install metadol --version X.Y.Z --features cli
+# From crates.io (CLI tools need the `cli` feature)
+cargo install dol --version X.Y.Z --features cli
 ```
 
 ---

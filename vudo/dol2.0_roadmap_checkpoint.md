@@ -1,30 +1,37 @@
 # DOL 2.0 Roadmap Checkpoint
 
 > **Document Version:** 4.0.0
-> **Last Updated:** December 29, 2025
-> **Status:** v0.4.0 "HIR Complete" Released - Full Compilation Pipeline Working!
-> **Repository:** [github.com/univrs/univrs-dol](https://github.com/univrs/univrs-dol)
+> **Last Updated:** December 29, 2025 (corrected November 2026)
+> **Status:** Historical snapshot of v0.4.0 "HIR Complete". See *Current status* below.
+> **Repository:** [github.com/univrs/dol](https://github.com/univrs/dol)
+
+> **Current status (November 2026).** This page is a historical checkpoint written at v0.4.0. The latest release is
+> **DOL 0.8.2** (crates.io, 2026-11-20). "DOL 2.0" is a historical *language-generation label* (DOL + functions,
+> pattern matching, control flow, meta-programming), **not a version number**. No DOL 2.0 specification document
+> exists; the de facto spec is `src/lexer.rs` + `src/parser.rs` at v0.8.2 plus `CHANGELOG.md`. Current syntax is
+> the v0.8 "Clarity" set (`gen`/`rule`/`evo`/`docs`, lowercase Rust-style types); old forms still parse with
+> warnings and become errors at v0.9. Test counts at 0.8.2: **2,183** (default features) / **2,405**
+> (`cli,serde,wasm`). Claims below that turned out to be false have been corrected inline.
 
 ---
 
 ## Executive Summary
 
-Design Ontology Language (DOL) 2.0 represents a major evolution from the specification-only DOL 1.x to a **Turing-complete programming language** with full type inference, functional composition, and multi-target code generation. This checkpoint documents our progress from concept to working compiler.
+Design Ontology Language (DOL) 2.0 represents a major evolution from the specification-only DOL 1.x to a **Turing-complete programming language** with functional composition and multi-target code generation. A type checker exists, but as of 0.8.2 type errors are **not enforced** by `dol-check` or the validator. This checkpoint documents our progress from concept to working compiler.
 
-### Key Milestones Achieved
+### Key Milestones (as recorded at v0.4.0, corrected)
 
-| Milestone | Status | Release | Tests |
+| Milestone | Status | Release | Tests (at the time) |
 |-----------|--------|---------|-------|
-| DOL 2.0 Specification | ✅ Complete | — | 130 .dol files validated |
+| DOL 2.0 Specification | ❌ No specification document exists | — | — |
 | Q1: Lexer + Parser + TypeChecker + Codegen | ✅ Complete | v0.1.0 "Genesis" | 631 passing |
 | Q2: Meta-Programming | ✅ Complete | v0.2.0 "Meta-Programming" | 590 passing |
-| Q3: MLIR/MCP Server | ✅ Complete | v0.2.1 | 700+ passing |
-| Q4: Self-Hosting Bootstrap | ✅ Complete | v0.2.2 "Bootstrap" | 741+ passing |
-| Q4: Stage2 Self-Hosting | ✅ Complete | v0.2.3 "Stage2" | 1532 passing |
+| Q3: MCP Server | ✅ MCP server (`dol-mcp`). MLIR codegen is a feature-gated stub, not in CI | v0.2.1 | 700+ passing |
+| Q4: Self-Hosting Bootstrap | ❌ Not reproducible: the crate generated from the `dol/*.dol` bootstrap sources fails with 850 compile errors | v0.2.2 "Bootstrap" | 741+ passing |
+| Q4: Stage2 Self-Hosting | ❌ Not real: `stage1/` contains only a `Cargo.toml`, `stage2/` does not exist | v0.2.3 "Stage2" | — |
 | HIR Architecture | ✅ Complete | v0.3.0 "Pragmatic Evolution" | 466 passing |
-| **HIR + MLIR + WASM Pipeline** | **✅ Complete** | **v0.4.0 "HIR Complete"** | **1,156 passing** |
-| **Current Release** | **v0.4.0** | **December 29, 2025** | **1,156 passing** |
-| **Year 1 Status** | **✅ COMPLETE** | **Full Pipeline Working** | **DOL → WASM validated!** |
+| HIR + WASM pipeline | ✅ HIR and a direct WASM backend exist. MLIR is not in the pipeline; the WASM backend does not use HIR | v0.4.0 "HIR Complete" | 1,156 passing |
+| **Latest release (Nov 2026)** | **0.8.2** — Spirit Hosting H0: DOL-compiled Spirits link and run in the VUDO VM | **2026-11-20** | **2,183 / 2,405** |
 
 ---
 
@@ -54,7 +61,7 @@ DOL 1.x was a **declarative specification language** for defining ontological co
 // DOL 1.x - Declaration only
 gen ProcessId {
   type: u64
-  constraint positive { this.value > 0 }
+  rule positive { this.value > 0 }
   docs { A process knows its identity. }
 }
 ```
@@ -86,7 +93,7 @@ gen Calculator {
     return x |> double >> increment |> square
   }
   
-  constraint valid_input {
+  rule valid_input {
     this.n >= 0
   }
   
@@ -102,18 +109,18 @@ gen Calculator {
 |---------|---------|---------|
 | Gene definitions | ✅ | ✅ |
 | Trait definitions | ✅ | ✅ |
-| Constraints | ✅ | ✅ Enhanced |
-| Exegesis | ✅ | ✅ |
+| Constraints (`rule`) | ✅ | ✅ Enhanced |
+| Exegesis (`docs`) | ✅ | ✅ |
 | Control flow | ❌ | ✅ `if/else/match/for/while/loop` |
 | Functions with bodies | ❌ | ✅ |
-| Lambda expressions | ❌ | ✅ `(x) -> x * 2` |
+| Lambda expressions | ❌ | ✅ `\|x: i64\| x * 2` |
 | Pipe operators | ❌ | ✅ `\|>` `>>` `<\|` |
 | Pattern matching | ❌ | ✅ With guards |
-| Type inference | ❌ | ✅ Bidirectional |
+| Type inference | ❌ | ⚠️ Type checker exists; type errors are not enforced by `dol-check`/validator (0.8.2) |
 | Meta-programming | ❌ | ✅ `'` `!` `#` `?` |
 | Compiles to Rust | ❌ | ✅ |
-| Compiles to WASM | ❌ | 🚧 In progress |
-| Self-hosting | ❌ | 🎯 Year 1 Q4 goal |
+| Compiles to WASM | ❌ | ✅ Beta, language subset (direct WASM backend; VUDO host ABI since 0.8.2) |
+| Self-hosting | ❌ | ❌ Planned — not implemented |
 
 ---
 
@@ -155,13 +162,13 @@ gen Calculator {
 | `break` | Exit loop | `break` |
 | `continue` | Next iteration | `continue` |
 | `return` | Return value | `return x` |
-| `where` | Pattern guard | `n where n > 0` |
+| `if` (in match arm) | Pattern guard | `x if x > 0 { ... }` |
 
 #### Type & Lambda Operators
 
 | Operator | Name | Description | Example |
 |----------|------|-------------|---------|
-| `->` | Arrow | Function type / lambda | `Int32 -> Int32` |
+| `->` | Arrow | Function return / function type | `(i64) -> bool` |
 | `=>` | Fat Arrow | Constraint implication | `A => B` |
 | `\|` | Bar | Union types / match arms | `A \| B` |
 | `_` | Wildcard | Match anything | `match x { _ { } }` |
@@ -170,51 +177,53 @@ gen Calculator {
 
 #### Primitive Types
 
-| Type | Rust Equivalent | Description |
+Since v0.8.0 "Clarity", DOL uses Rust-aligned lowercase type names. The legacy names (`Int32`, `String`, `Void`, …) still parse with deprecation warnings and become errors at v0.9.
+
+| Type | Rust Equivalent | Legacy name (deprecated) |
 |------|-----------------|-------------|
-| `Void` | `()` | No value |
-| `Bool` | `bool` | Boolean |
-| `Int8` | `i8` | 8-bit signed |
-| `Int16` | `i16` | 16-bit signed |
-| `Int32` | `i32` | 32-bit signed |
-| `Int64` | `i64` | 64-bit signed (default) |
-| `UInt8` | `u8` | 8-bit unsigned |
-| `UInt16` | `u16` | 16-bit unsigned |
-| `UInt32` | `u32` | 32-bit unsigned |
-| `UInt64` | `u64` | 64-bit unsigned |
-| `Float32` | `f32` | 32-bit float |
-| `Float64` | `f64` | 64-bit float (default) |
-| `String` | `String` | UTF-8 string |
+| `()` | `()` | `Void` |
+| `bool` | `bool` | `Bool` |
+| `i8` / `i16` / `i32` / `i64` / `i128` | same | `Int8` / `Int16` / `Int32` / `Int64` |
+| `u8` / `u16` / `u32` / `u64` / `u128` | same | `UInt8` / `UInt16` / `UInt32` / `UInt64` |
+| `f32` / `f64` | same | `Float32` / `Float64` |
+| `string` | `String` | `String` |
 
 #### Compound Types
 
 | Type | Rust Equivalent | Example |
 |------|-----------------|---------|
-| `List<T>` | `Vec<T>` | `List<Int32>` |
-| `Map<K, V>` | `HashMap<K, V>` | `Map<String, i64>` |
-| `Option<T>` | `Option<T>` | `Option<String>` |
-| `Result<T, E>` | `Result<T, E>` | `Result<Int32, String>` |
-| `Function<A, B>` | `fn(A) -> B` | `Function<Int32, Bool>` |
-| `Tuple<...>` | `(A, B, ...)` | `Tuple<Int32, String>` |
+| `Vec<T>` | `Vec<T>` | `Vec<i32>` (legacy: `List<T>`) |
+| `Map<K, V>` | `HashMap<K, V>` | `Map<string, i64>` |
+| `Option<T>` | `Option<T>` | `Option<string>` |
+| `Result<T, E>` | `Result<T, E>` | `Result<i32, string>` |
+| `(A) -> B` | `fn(A) -> B` | `(i32) -> bool` |
+| `(A, B, ...)` | `(A, B, ...)` | `(i32, string)` |
 
 #### Type Inference
 
-The type checker performs **bidirectional type inference**:
+The type checker (`src/typechecker.rs`) implements **bidirectional type inference**. Note: as of 0.8.2 its results are **not enforced** — `validate_statement_types` is an empty placeholder, so a function such as `fun f() -> i64 { return "hello" + true }` passes `dol-check --typecheck`, HIR lowering and WASM compilation.
 
 ```dol
 // Literals infer their types
-x = 42          // x: i64 (inferred)
-y = 3.14        // y: f64 (inferred)
-z = "hello"     // z: String (inferred)
+fun literals() -> i64 {
+  val x = 42          // x: i64 (inferred)
+  val y = 3.14        // y: f64 (inferred)
+  val z = "hello"     // z: string (inferred)
+  return x
+}
 
-// Functions infer return types
-fun double(n: Int32) -> Int32 {
-  return n * 2  // Verified: Int32 * Int32 → Int32
+fun double(n: i32) -> i32 {
+  return n * 2
+}
+
+fun increment(n: i32) -> i32 {
+  return n + 1
 }
 
 // Pipes propagate types
-result = 10 |> double >> increment
-// 10: i64 → double: Int32 → increment: Int32
+fun piped() -> i32 {
+  return 10 |> double >> increment
+}
 ```
 
 ---
@@ -241,7 +250,7 @@ result = 10 |> double >> increment
 │                     │                               │    │     │
 │                     ▼                               ▼    ▼     │
 │              ┌───────────┐                   ┌─────────────┐   │
-│              │   Rust    │                   │    MLIR     │   │
+│              │   Rust    │                   │    WASM     │   │
 │              │  Codegen  │                   │   Codegen   │   │
 │              └─────┬─────┘                   └──────┬──────┘   │
 │                    │                                │          │
@@ -253,6 +262,8 @@ result = 10 |> double >> increment
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+> **Correction (0.8.2):** WASM is produced by a direct WASM backend (`src/wasm`), not via MLIR. `src/mlir` is a feature-gated stub that does not build without MLIR headers and is not in CI. The WASM backend works from the AST; HIR is kept for diagnostics only. Rust and TypeScript / JSON Schema codegen exist (`dol-codegen`); only 14 of 41 example files produce Rust that compiles standalone.
 
 ### Crate Structure
 
@@ -300,8 +311,8 @@ Built with [logos](https://github.com/maciejhirsz/logos) for high-performance to
 
 | Category | Tokens |
 |----------|--------|
-| Keywords | `gene`, `trait`, `system`, `constraint`, `evolves`, `exegesis`, `fun`, `return`, `match`, `if`, `else`, `for`, `while`, `loop`, `break`, `continue`, `where`, `in`, `requires`, `law`, `type`, `has`, `is` |
-| Types | `Int8`, `Int16`, `Int32`, `Int64`, `UInt8`, `UInt16`, `UInt32`, `UInt64`, `Float32`, `Float64`, `Bool`, `String`, `Void`, `Self` |
+| Keywords | `gen`, `trait`, `system`, `rule`, `evo`, `docs`, `fun`, `return`, `match`, `if`, `else`, `for`, `while`, `loop`, `break`, `continue`, `where`, `in`, `requires`, `law`, `type`, `has`, `is` (v0.8 preferred forms; legacy `gene`, `constraint`, `evolves`, `exegesis` are deprecated) |
+| Types | `i8`…`i128`, `u8`…`u128`, `f32`, `f64`, `bool`, `string`, `()`, `Self` (v0.8; legacy `Int32`, `String`, `Void`, … are deprecated) |
 | Operators | `\|>`, `>>`, `<\|`, `@`, `:=`, `->`, `=>`, `==`, `!=`, `>=`, `<=`, `>`, `<`, `+`, `-`, `*`, `/`, `%`, `&&`, `\|\|`, `!`, `'`, `#`, `?`, `[\|`, `\|]` |
 | Delimiters | `{`, `}`, `(`, `)`, `[`, `]`, `:`, `,`, `.`, `_` |
 | Literals | Integers, Floats, Strings, Booleans |
@@ -378,7 +389,7 @@ enum Stmt {
 **Commit:** `ae0e688`  
 **File:** `src/typechecker.rs` (1,193 lines)  
 **Tests:** 87 passing  
-**Status:** ✅ Complete
+**Status:** ⚠️ Implemented, but not enforced: as of 0.8.2 `validate_statement_types` (`src/validator.rs`) is an empty placeholder, so type errors do not fail validation, `dol-check --typecheck`, or compilation.
 
 ### Type Representation
 
@@ -425,17 +436,17 @@ impl TypeEnv {
 
 | Expression | Inferred Type |
 |------------|---------------|
-| `42` | `Int64` |
-| `3.14` | `Float64` |
-| `true` / `false` | `Bool` |
-| `"hello"` | `String` |
+| `42` | `i64` |
+| `3.14` | `f64` |
+| `true` / `false` | `bool` |
+| `"hello"` | `string` |
 | `a + b` | Unify numeric types |
-| `a && b` | `Bool` (requires Bool operands) |
-| `a == b` | `Bool` (requires same type operands) |
+| `a && b` | `bool` (requires bool operands) |
+| `a == b` | `bool` (requires same type operands) |
 | `f(x)` | Return type of `f` |
 | `x \|> f` | Return type of `f` |
-| `f >> g` | `Function<A, C>` where `f: A→B`, `g: B→C` |
-| `(x: T) -> e` | `Function<T, typeof(e)>` |
+| `f >> g` | `(A) -> C` where `f: A→B`, `g: B→C` |
+| `\|x: T\| e` | `(T) -> typeof(e)` |
 | `if c { a } else { b }` | Unify types of `a` and `b` |
 | `match x { ... }` | Unify all arm types |
 
@@ -465,35 +476,31 @@ enum TypeError {
 
 #### DOL → Rust Mapping
 
+Verified against `dol-codegen` 0.8.2:
+
 | DOL Declaration | Generated Rust |
 |-----------------|----------------|
-| `gen Name { has field: Type }` | `struct Name { field: Type }` |
-| `trait Name { is method() -> T }` | `trait Name { fn method(&self) -> T; }` |
-| `constraint name { expr }` | `fn validate_name(value: &T) -> bool { expr }` |
-| `system Name { requires ... }` | `mod name { /* docs */ }` |
-| `evolution From -> To { }` | `/* Changelog comment */` |
+| `gen Name { has field: type }` | `struct Name { field: Type }` plus `new()` |
+| `trait name { has … / is … }` | `trait Name {}` (predicate statements produce no methods) |
+| `rule name { … }` | `fn validate_name<T>(value: &T) -> bool { true }` — a stub; the rule body is not translated |
+| `system name @ v { requires … }` | `mod name { /* requirements as doc comments */ }` |
+| `evo name @ v2 > v1 { … }` | `/* Changelog comment */` |
 
 #### Type Mapping
 
 | DOL Type | Rust Type |
 |----------|-----------|
-| `Int8` | `i8` |
-| `Int16` | `i16` |
-| `Int32` | `i32` |
-| `Int64` | `i64` |
-| `UInt8` | `u8` |
-| `UInt16` | `u16` |
-| `UInt32` | `u32` |
-| `UInt64` | `u64` |
-| `Float32` | `f32` |
-| `Float64` | `f64` |
-| `Bool` | `bool` |
-| `String` | `String` |
-| `Void` | `()` |
-| `List<T>` | `Vec<T>` |
+| `i8` … `i128`, `u8` … `u128` | same |
+| `f32`, `f64` | same |
+| `bool` | `bool` |
+| `string` | `String` |
+| `()` | `()` |
+| `Vec<T>` | `Vec<T>` |
 | `Map<K, V>` | `std::collections::HashMap<K, V>` |
 | `Option<T>` | `Option<T>` |
 | `Result<T, E>` | `Result<T, E>` |
+
+Legacy names (`Int32`, `String`, `Void`, `List<T>`, …) are still accepted with deprecation warnings.
 
 #### Example: DOL → Rust
 
@@ -501,23 +508,23 @@ enum TypeError {
 ```dol
 gen Container {
   has id: u64
-  has name: String
-  has running: Bool
-  
-  constraint valid_id {
+  has name: string
+  has running: bool
+
+  rule valid_id {
     this.id > 0
   }
-  
-  docs {
-    A container is an isolated execution environment.
-  }
+}
+
+docs {
+  A container is an isolated execution environment.
 }
 ```
 
-**Output (container.rs):**
+**Output (container.rs)** — actual `dol-codegen` 0.8.2 output, header comments omitted:
 ```rust
 /// A container is an isolated execution environment.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Container {
     pub id: u64,
     pub name: String,
@@ -525,21 +532,28 @@ pub struct Container {
 }
 
 impl Container {
-    /// Validates the valid_id constraint
-    pub fn validate_valid_id(&self) -> bool {
-        self.id > 0
-    }
-    
-    /// Validates all constraints
-    pub fn validate(&self) -> bool {
-        self.validate_valid_id()
+    pub fn new(id: u64, name: String, running: bool) -> Self {
+        Self {
+            id,
+            name,
+            running,
+        }
     }
 }
 ```
 
+> **Correction:** an earlier version of this page showed a generated `validate_valid_id()` method. That is not what
+> the compiler does: a `rule` nested inside a `gen` is parsed but its body is dropped, so no validation code is emitted.
+
 ---
 
 ## CLI Tools
+
+All CLI binaries require the `cli` feature: `cargo install dol --features cli`. At 0.8.2 the binaries are
+`dol-parse`, `dol-check`, `dol-test`, `dol-codegen`, `dol-migrate`, `dol-mcp`, `dol-build` and `dol-build-crate`.
+
+> **Known limitation (0.8.2):** `dol-parse` and `dol-check` only parse the **first declaration** in each file;
+> everything after it is silently ignored. A green result does not mean the whole file parses.
 
 ### dol-parse
 
@@ -547,43 +561,43 @@ Parse DOL files and output AST:
 
 ```bash
 # Parse single file
-dol-parse examples/genes/container.dol
+dol-parse examples/genes/container.exists.dol
 
-# Output JSON AST
-dol-parse --format json examples/genes/container.dol
+# Output JSON AST (formats: pretty, json, compact, debug)
+dol-parse --format json examples/genes/container.exists.dol
 
-# Verbose with spans
-dol-parse -v examples/genes/container.dol
+# Recurse into a directory and run validation
+dol-parse --recursive --validate examples/
 ```
 
 ### dol-check
 
-Type check DOL files:
+Validate DOL files (CI gate):
 
 ```bash
 # Check single file
-dol-check examples/genes/container.dol
+dol-check examples/genes/container.exists.dol
 
 # Check directory
 dol-check examples/
 
 # Strict mode (warnings as errors)
 dol-check --strict examples/
+
+# Run the type checker (type errors are reported but not enforced at 0.8.2)
+dol-check --typecheck examples/
 ```
 
 ### dol-test
 
-Run DOL test suites:
+Generate Rust tests from `.dol.test` specification files:
 
 ```bash
-# Run all tests
-dol-test
+# Generate tests from a single file (default output: tests/generated)
+dol-test examples/container.lifecycle.dol.test
 
-# Run specific test file
-dol-test tests/parser_tests.rs
-
-# Verbose output
-dol-test -v
+# Generate stubs only (unimplemented!() bodies)
+dol-test --stubs examples/container.lifecycle.dol.test
 ```
 
 ### dol-codegen
@@ -592,18 +606,19 @@ Generate code from DOL:
 
 ```bash
 # Generate Rust (default)
-dol-codegen examples/genes/container.dol
+dol-codegen examples/genes/container.exists.dol
 
 # Output to file
-dol-codegen -o generated.rs examples/genes/container.dol
+dol-codegen -o generated.rs examples/genes/container.exists.dol
 
 # Recursive directory processing
 dol-codegen --recursive examples/
 
-# Future: other targets
-dol-codegen --target wasm examples/genes/container.dol
-dol-codegen --target typescript examples/genes/container.dol
+# Other targets: rust (default), typescript, jsonschema
+dol-codegen --target typescript examples/genes/container.exists.dol
 ```
+
+WASM is not a `dol-codegen` target. DOL → WASM is done by the library's direct WASM backend (`wasm-compile` feature), which is what the VUDO toolchain uses. `dol-build` (Spirit → Rust → wasm32) exists but fails on all 9 example Spirits at 0.8.2.
 
 ---
 
@@ -640,37 +655,42 @@ DOL 2.0 maintains the **dual vocabulary** system for developer and creator audie
 
 ## Roadmap: What's Next
 
+> **Note:** "Year 1 / Year 2 / Year 3" and their quarters are relative planning labels, not calendar dates.
+> Statuses below were corrected in November 2026 against the 0.8.2 code.
+
 ### Year 1: Genesis — "The language that writes itself"
 
 | Quarter | Milestone | Status |
 |---------|-----------|--------|
 | Q1 | DOL Turing Extensions | ✅ Complete (v0.1.0) |
 | | - Lexer + Parser | ✅ Complete |
-| | - Type Checker | ✅ Complete |
-| | - Rust Codegen | ✅ Complete |
+| | - Type Checker | ⚠️ Exists; type errors not enforced (0.8.2) |
+| | - Rust Codegen | ✅ Exists; only 14/41 example files produce Rust that compiles standalone |
 | Q2 | Meta-Programming | ✅ Complete (v0.2.0) |
 | | - Quote/Eval (`'`, `!`) | ✅ 34 tests |
 | | - Idiom Brackets (`[| |]`) | ✅ 27 tests |
 | | - Reflection (`?`) | ✅ 17 tests |
 | | - 18 Built-in Macros (`#`) | ✅ 25+ tests |
-| Q3 | LLVM MCP Server | ✅ Complete (v0.2.1) |
-| | - MLIR Codegen | ✅ Complete |
-| | - WASM Backend | ✅ Complete |
+| Q3 | MCP Server | ✅ `dol-mcp` (v0.2.1) |
+| | - MLIR Codegen | ❌ Stub: feature-gated, does not build without MLIR headers, not in CI |
+| | - WASM Backend | ✅ Beta: direct WASM backend covering a language subset |
 | | - MCP Integration | ✅ Complete |
-| Q4 | Self-Hosting | ✅ Complete (v0.2.3) |
-| | - DOL compiles DOL | ✅ Stage2 functional |
-| | - Bootstrap compiler | ✅ 1532 tests, 0 errors |
+| Q4 | Self-Hosting | ❌ Planned — not implemented |
+| | - DOL compiles DOL | ❌ Not real: the crate generated from the bootstrap sources fails with 850 compile errors |
+| | - Bootstrap compiler | ❌ `stage1/` contains only a `Cargo.toml`; `stage2/` does not exist |
 
 ### Year 2: Manifestation — "The machine that runs Spirits"
 
-| Quarter | Milestone |
-|---------|-----------|
-| Q1 | VUDO VM (WASM runtime) |
-| Q2 | DOLOS (Spirit orchestration) |
-| Q3 | Tauri IDE (Visual editor) |
-| Q4 | Mycelium Network (P2P) |
+| Quarter | Milestone | Status (Nov 2026) |
+|---------|-----------|-------------------|
+| Q1 | VUDO VM (WASM runtime) | ✅ Exists in `univrs/vudo`. Since DOL 0.8.2 (H0), DOL-compiled Spirits link and run in the VM; `univrs/vudo` CI compiles DOL → WASM and runs it |
+| Q2 | DOLOS (Spirit orchestration) | ⏳ In progress: the `univrs-network` Spirit host runs `vudo_vm` but does not compile DOL |
+| Q3 | Tauri IDE (Visual editor) | Planned — not implemented |
+| Q4 | Mycelium Network (P2P) | ⏳ `mycelial-network` exists in `univrs-network`; Spirit exchange over it is planned — not implemented |
 
 ### Year 3: Emergence — "The garden that grows itself"
+
+All Planned — not implemented.
 
 | Quarter | Milestone |
 |---------|-----------|
@@ -679,15 +699,26 @@ DOL 2.0 maintains the **dual vocabulary** system for developer and creator audie
 | Q3 | Browser IDE |
 | Q4 | Imaginarium Launch |
 
+### Current milestones (Nov 2026)
+
+1. ✅ **H0 "toolchain truth"** (DOL 0.8.2): bodiless `sex fun host_*` declarations import from WASM module `vudo` with the VUDO VM linker's exact signatures (15 host functions, `src/wasm/host_abi.rs`).
+2. ⏳ **H1+**: Spirit lifecycle and fuel limits, in progress in `univrs-vudo` / `univrs-network` (not yet documented in the dol repo).
+3. ⏳ **v0.9**: legacy keywords and PascalCase types become errors (planned).
+4. Self-hosting, package registry, LSP server: Planned — not implemented.
+5. 1.0: exit criteria not yet defined.
+
 ---
 
 ## Migration Guide: DOL 1.x → 2.0
 
 ### Backward Compatibility
 
-DOL 2.0 is **fully backward compatible** with DOL 1.x. All existing `.dol` files will parse and type-check correctly.
+The DOL 1.x declaration forms (`gene`, `trait`, `constraint`, `system`, `evolves`, `exegesis`) still parse, but since
+v0.8.0 the old keywords and PascalCase type names emit **deprecation warnings** and are planned to become **errors in
+v0.9**. Use `dol-migrate 0.7-to-0.8 <path>` to convert files to the v0.8 syntax.
 
-**Verified:** 10/10 stdlib files pass with DOL 2.0 compiler.
+> **Correction:** an earlier version claimed "10/10 stdlib files pass". Parsed as whole files at 0.8.2, only 1 of 8
+> stdlib files parses (the CLI only checks the first declaration in a file, which inflated earlier pass rates).
 
 ### New Features Available
 
@@ -696,27 +727,24 @@ When migrating, you can optionally adopt:
 #### 1. Function Bodies
 
 ```dol
-// DOL 1.x
-gen Math {
-  is add(a: Int32, b: Int32) -> Int32
+// DOL 1.x style: declaration only
+gen math.ops {
+  math has add
 }
 
-// DOL 2.0 - Add implementation
-gen Math {
-  fun add(a: Int32, b: Int32) -> Int32 {
-    return a + b
-  }
+// Functions with bodies
+fun add(a: i32, b: i32) -> i32 {
+  return a + b
 }
 ```
 
 #### 2. Pattern Matching
 
 ```dol
-// DOL 2.0
-fun describe(n: Int32) -> String {
+fun describe(n: i32) -> string {
   match n {
     0 { return "zero" }
-    n where n > 0 { return "positive" }
+    x if x > 0 { return "positive" }
     _ { return "negative" }
   }
 }
@@ -725,8 +753,7 @@ fun describe(n: Int32) -> String {
 #### 3. Pipe Operators
 
 ```dol
-// DOL 2.0
-fun process(x: Int32) -> Int32 {
+fun process(x: i32) -> i32 {
   return x |> validate >> transform |> finalize
 }
 ```
@@ -734,14 +761,16 @@ fun process(x: Int32) -> Int32 {
 #### 4. Lambda Expressions
 
 ```dol
-// DOL 2.0
-items.map((x) -> x * 2)
-items.filter((x) -> x > 0)
+fun lambdas(items: Vec<i64>) -> Vec<i64> {
+  val doubled = items.map(|x: i64| x * 2)
+  return doubled.filter(|x: i64| x > 0)
+}
 ```
 
 ### Breaking Changes
 
-**None.** DOL 2.0 is a strict superset of DOL 1.x.
+None between DOL 1.x and the first DOL 2.0 releases. Since v0.8.0, the old keywords and type names are deprecated
+(warnings) and are planned to become errors in v0.9.
 
 ---
 
@@ -780,6 +809,8 @@ cargo clippy
 | Rust Codegen | 8 | ✅ |
 | **Total** | **367** | ✅ |
 
+The table above is the count at the time of the original checkpoint. At 0.8.2 the root crate has **2,183** passing tests with default features and **2,405** with `--features cli,serde,wasm` (0 failures). The `crates/*`, `apps/*` and `llvm-backend` sub-projects are not built in CI.
+
 ### Adding New Features
 
 1. Write failing test in `tests/`
@@ -792,13 +823,13 @@ cargo clippy
 
 - **API Docs:** `cargo doc --open`
 - **Book:** [book.univrs.io](https://book.univrs.io)
-- **Learn:** [learn.univrs.io/dol](https://learn.univrs.io/dol)
+- **Learn:** [learn.univrs.io](https://learn.univrs.io)
 
 ---
 
 ## References
 
-- [DOL 2.0 Specification](https://github.com/univrs/dol/tree/main/spec)
+- [DOL CHANGELOG](https://github.com/univrs/dol/blob/main/CHANGELOG.md) (no DOL 2.0 specification document exists; the parser source is the de facto spec)
 - [VUDO Landing](https://vudo.univrs.io)
 - [Univrs Documentation](https://learn.univrs.io)
 - [GitHub Repository](https://github.com/univrs/dol)

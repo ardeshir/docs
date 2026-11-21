@@ -6,6 +6,8 @@ Nov 14, 2026 · @Sepahsalar · supersedes *"Univrs Ecosystem Strategy — Ontos,
 
 Aligned with: [`univrs/network` › `docs/SPIRIT-HOSTING-PLAN.md`](https://github.com/univrs/network/blob/docs/spirit-hosting-plan/docs/SPIRIT-HOSTING-PLAN.md) (Proposed, 2026-11-08)
 
+> **Update (2026-11-21):** This document predates DOL 0.8.2. Hosting step H0 ("toolchain truth") shipped in `dol` 0.8.2 on 2026-11-20. Bodiless `sex fun host_*` declarations now import from module `vudo` with the VUDO VM linker's exact signatures (15 host functions). `dol-abi` gained `vm_host_functions()`, and the 22-name `standard_host_functions()` is deprecated. `univrs/vudo` CI compiles a DOL program to WASM and runs it in the VM. The host-ABI mismatch described in §0 and §2.4 is therefore resolved. DOLOS (the `univrs-network` Spirit host) runs `vudo_vm` but does not compile DOL. The rest of this document is unchanged.
+
 ---
 
 ## 0. What changed from the previous version
@@ -21,7 +23,7 @@ All four are answered in the repos under `~/repos/*`. This version swaps the pro
 
 1. **Univrs is already partly written in DOL.** `metalearn.org/ontology/index.dol` declares `system univrs.ecosystem @ 0.1.0`. Step 1 is therefore "finish and promote" rather than "start", and it is incomplete in a measurable way.
 2. **There is no single mycelium economy. There are three, and they contradict each other.** The running code (`univrs-enr`) has transferable, non-decaying credits with a fiat bridge. The older ontology (`univrs-network/ontology/economics.dol`) has decaying, non-transferable credits that can never be exchanged for fiat. The narrative (nexus, imagine) promises creator payouts, and nothing implements them. Reconciling the three is the Deon layer's first job.
-3. **The thin thread is blocked at the Ontos layer before it reaches economy or myth.** No node can run a Spirit. `vudo publish` and `vudo summon` are simulated. The DOL compiler, `dol-abi` and the VM disagree on the host ABI. The Spirit Hosting Plan (H0 → H1 → H2 → S → M) is the critical path for every recommendation below.
+3. **The thin thread is blocked at the Ontos layer before it reaches economy or myth.** No node can run a Spirit. `vudo publish` and `vudo summon` are simulated. The DOL compiler, `dol-abi` and the VM disagree on the host ABI (resolved in dol 0.8.2; see the update note above). The Spirit Hosting Plan (H0 → H1 → H2 → S → M) is the critical path for every recommendation below.
 
 ---
 
@@ -49,8 +51,8 @@ Three recommendations follow, now stated against what exists:
 
 | Kind | In Univrs | Where it lives | State today |
 | --- | --- | --- | --- |
-| Language | **DOL — Design Ontology Language** v0.8.1 (crate `dol`, lib `metadol`) | `univrs-dol` | Real. Parser, checker, codegen and a WASM backend (beta, 161 tests). |
-| Toolchain | DOL binaries: `dol-parse`, `dol-check`, `dol-test`, `dol-codegen` (rust/typescript/jsonschema), `dol-build`, `dol-migrate`, `dol-mcp`, `vudo`. Native LLVM (beta), MLIR behind a feature flag, WIT codegen | `univrs-dol/Cargo.toml`, `COMPILER-TARGETS.md` | Real, mostly beta |
+| Language | **DOL — Design Ontology Language** v0.8.1 at writing; 0.8.2 since 2026-11-20 (crate `dol`, lib `metadol`) | `univrs-dol` | Real. Parser, checker, codegen and a WASM backend (beta, 161 tests). |
+| Toolchain | DOL binaries: `dol-parse`, `dol-check`, `dol-test`, `dol-codegen` (rust/typescript/jsonschema), `dol-build`, `dol-build-crate`, `dol-migrate`, `dol-mcp` (all need `--features cli`; a `vudo` bin target exists but does not compile at 0.8.2). Native LLVM (beta), MLIR behind a feature flag, WIT codegen | `univrs-dol/Cargo.toml`, `COMPILER-TARGETS.md` | Real, mostly beta |
 | | LLVM Translation MCP (Julia→Zig/Rust via LLVM IR) | `llvm-translation-mcp` | Real, but **not connected to DOL**. It is a sibling meta-tool. |
 | | Skills framework (cross-repo Claude Code skills: build, test-all, dol-release, ecosystem-health…) | `univrs-skills` | Real. Developer tooling, not a language feature. |
 | Runtime | **VUDO VM** ("Virtual Universal Distributed Operations"): wasmtime 27, fuel metering, 15 `host_*` syscalls, capability grants | `univrs-vudo/vudo` (`vudo_vm`, `spirit_runtime`, `vudo_cli`, `vudo_repl`) | VM library real (367 tests per the Spirit Hosting Plan). CLI partly simulated. Host backends in-memory only. |
@@ -107,7 +109,7 @@ gen Graph<N, E> {
 
 What this means for the thesis:
 
-- **"Record becoming, not only being" is already a language primitive.** `evo name @ new > parent { adds … deprecates … removes … because "…" }` stores version, parent version and rationale as "an accumulative history" (`ast.rs:733-781`). The missing piece is runtime. Spirits have no lineage in code. Fork attribution (`registry.dol`: "each fork transfers attribution_credits", content-addressed by `wasm_hash`) exists only in spec. Note also that `migrate {}` blocks are parsed and then discarded (`parser.rs:1139`).
+- **"Record becoming, not only being" is already a language primitive.** `evo name @ new > parent { adds … deprecates … removes … because "…" }` stores version, parent version and rationale as "an accumulative history" (`ast.rs:733-781`). The missing piece is runtime. Spirits have no lineage in code. Fork attribution (`registry.dol`: "each fork transfers attribution_credits", content-addressed by `wasm_hash`) exists only in spec. Note also that `migrate {}` blocks are parsed and then discarded (`parser.rs:1139`). The same is true at 0.8.2 for the generic parameters `<N, E>` on a `gen` and for the body of a `rule` nested inside a `gen`, as in the example above.
 - **The Deon layer has no deontic grammar.** There are no `must`/`may`/`forbidden`/`obligation` keywords. `never` expresses impossibility, which is the encoded case. Nothing in DOL can express "possible, visible, and judged", which is the emergent case. This is the first concrete *thinness test failure*. Recommendation: before adding keywords, prototype the emergent case as a convention, for example a `rule` paired with an `emits violation_observed` event that the host logs instead of blocking. Promote it to syntax only if it recurs.
 - **Encoded rules are not executed.** The WASM backend ignores `trait`/`rule`/`system` declarations (`COMPILER-TARGETS.md`). A DOL `rule` today is documentation plus a `dol-check` target, not runtime enforcement. Enforcement has to live in host code until codegen catches up.
 
@@ -120,7 +122,7 @@ system univrs.ecosystem @ 0.1.0 {
   requires core.primitives >= 0.1.0     requires economics.credit >= 0.1.0
   requires core.identity >= 0.1.0       requires economics.reputation >= 0.1.0
   requires network.peer >= 0.1.0        requires assembly.assembly_index >= 0.1.0
-  requires orchestration.node >= 0.1.0  requires assembly.evolution_chain >= 0.1.0   ← file does not exist
+  requires orchestration.node >= 0.1.0  requires assembly.evolution_chain >= 0.1.0   // file does not exist
   requires orchestration.workload >= 0.1.0  requires assembly.selection >= 0.1.0
   all entities is identifiable
   all operations is authenticated
@@ -143,7 +145,7 @@ There are 419 `.dol` files across the repos. Ontology fragments are scattered ac
 | Real | Simulated or missing |
 | --- | --- |
 | DOL→WASM compiler (beta) | No `mycelial-node` dependency on wasmtime or `vudo_vm`: **nodes cannot run Spirits** |
-| VUDO sandbox, fuel, 15 host functions, capabilities | **Host ABI mismatch:** the compiler imports module `loa`; `dol-abi` declares `vudo_*` (22); the VM provides `host_*` (15). No name matches across all three. |
+| VUDO sandbox, fuel, 15 host functions, capabilities | **Host ABI mismatch** (*resolved in dol 0.8.2:* the compiler now imports `host_*` from module `vudo` with VM signatures): the compiler imports module `loa`; `dol-abi` declares `vudo_*` (22); the VM provides `host_*` (15). No name matches across all three. |
 | Ed25519 signing; local registry `~/.vudo/registry/` | `vudo build` writes a placeholder; `vudo run` only checks magic bytes; `publish` sleeps 1 s and prints a URL; `summon` writes `"Summoned Spirit placeholder"`; `imaginarium.vudo.univrs.io` does not resolve |
 | libp2p mesh; ENR gradient plumbing | Gradients are hand-entered from the dashboard; nodes don't measure themselves |
 | Browser `/editor` on vudo.univrs.io: Monaco + `dol-wasm`; real WASM for `fun` declarations | Manifest has no resource needs; no Spirit lifecycle (Seed→…→Decompose); no state snapshot; no Spirit distribution topic; `vudo-p2p` (iroh) fails to compile |
@@ -340,7 +342,7 @@ The largest risk is still that the three layers stay three projects. The repos s
 - **The language carries hidden assumptions.** Found so far: there is no way to express "permitted but judged", and declared rules are not executed in WASM. Step 7 is the only honest test.
 - **The myth outruns the product.** It already has. Public pages claim host functions and summon payouts that do not exist. Step 0 corrects this before the narrative launches.
 - **Emergence is mistaken for justification.** A norm that stabilises in a world is a fact about that world. Exploitation can be stable too, so the Interrogation has to stay a human judgment.
-- **Unverified numbers.** The univrs-dol README claims 1914 tests, but its own breakdown sums to 631. The univrs-network ROADMAP says 40 tests. `dol-reflect` had 5 failing tests (2026-02-07 report). Re-run `/test-all` and publish real counts before quoting any of them.
+- **Unverified numbers.** The univrs-dol README claims 1914 tests, but its own breakdown sums to 631. (Measured at dol v0.8.2: 2,183 tests with default features and 2,405 with `cli,serde,wasm`, for the root crate only.) The univrs-network ROADMAP says 40 tests. `dol-reflect` had 5 failing tests (2026-02-07 report). Re-run `/test-all` and publish real counts before quoting any of them.
 
 ---
 

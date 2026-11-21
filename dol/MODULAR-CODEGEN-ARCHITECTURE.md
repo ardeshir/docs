@@ -3,7 +3,9 @@
 > **Document Version:** 1.0.0  
 > **Status:** RFC (Request for Comments)  
 > **Last Updated:** December 2025  
-> **Problem:** 538 errors when combining 10 DOL files into single lib.rs
+> **Problem:** 538 errors when combining 10 DOL files into single lib.rs (at time of writing)
+
+> **Status note (DOL 0.8.2, November 2026):** the modular crate generator was implemented **in Rust** — `src/codegen/crate_gen.rs` and the `dol-build-crate` binary — not as the `crate_codegen.dol` sketched below. Running it on the 10 bootstrap files (`dol/*.dol`) still produces a crate that **fails with 850 compile errors**. `stage1/` contains only a `Cargo.toml`, `stage2/` does not exist, and `dol-build-crate` is not run in CI. **Self-hosting is not achieved**; the Stage 2 → Stage 3 verification in this RFC is planned — not implemented. The DOL snippets containing `impl` blocks are design pseudocode: `impl` does not parse in DOL 0.8.2.
 
 ---
 
@@ -123,17 +125,18 @@ dol/                            stage2/
 ├── token.dol                   └── src/
 ├── lexer.dol                       ├── lib.rs
 ├── parser.dol                      ├── ast.rs
-├── pratt.dol                       ├── token.rs
-├── types.dol                       ├── lexer.rs
+├── types.dol                       ├── token.rs
+├── typechecker.dol                 ├── lexer.rs
 ├── codegen.dol                     ├── parser.rs
-├── hir.dol                         ├── pratt.rs
-├── main.dol                        ├── types.rs
+├── mod.dol                         ├── types.rs
+├── main.dol                        ├── typechecker.rs
 └── bootstrap.dol                   ├── codegen.rs
-                                    ├── hir.rs
                                     ├── main.rs
                                     ├── bootstrap.rs
                                     └── prelude.rs
 ```
+
+(The bootstrap sources at v0.8.2 are these 10 files; the `pratt.dol` and `hir.dol` named in the original draft were never created.)
 
 ### Import Resolution
 
@@ -166,8 +169,10 @@ use crate::token::{Token, TokenKind};
 
 ### New Codegen Entry Point
 
+Design sketch (never written in DOL; the real implementation is `src/codegen/crate_gen.rs`):
+
 ```dol
-// crate_codegen.dol (new file)
+// crate_codegen.dol (design sketch)
 
 module dol.crate_codegen @ 0.4.0
 
@@ -176,15 +181,15 @@ use dol.codegen.RustCodegen
 
 /// Generate a complete Rust crate from multiple DOL files
 pub gen CrateCodegen {
-    has files: List<DolFile>
-    has output_dir: String
-    has crate_name: String = "dol_generated"
-    has crate_version: String = "0.1.0"
+    has files: Vec<DolFile>
+    has output_dir: string
+    has crate_name: string = "dol_generated"
+    has crate_version: string = "0.1.0"
     
     /// Main entry point
-    pub fun generate() -> Result<(), String> {
+    pub fun generate() -> Result<(), string> {
         // 1. Analyze module dependencies
-        let modules = this.analyze_modules()
+        val modules = this.analyze_modules()
         
         // 2. Generate each module file
         for file in this.files {
@@ -207,24 +212,26 @@ pub gen CrateCodegen {
 
 ### Module Analysis
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 gen ModuleInfo {
-    has name: String           // "ast"
-    has full_path: String      // "dol.ast"
-    has version: Option<String>
-    has imports: List<ImportInfo>
-    has exports: List<String>  // Public items
-    has dependencies: List<String>  // Other modules this depends on
+    has name: string           // "ast"
+    has full_path: string      // "dol.ast"
+    has version: Option<string>
+    has imports: Vec<ImportInfo>
+    has exports: Vec<string>  // Public items
+    has dependencies: Vec<string>  // Other modules this depends on
 }
 
 gen ImportInfo {
-    has source_module: String  // "dol.token"
+    has source_module: string  // "dol.token"
     has items: ImportItems     // All, or specific names
-    has is_external: Bool      // From @external/pkg
+    has is_external: bool      // From @external/pkg
 }
 
 impl CrateCodegen {
-    fun analyze_modules() -> List<ModuleInfo> {
+    fun analyze_modules() -> Vec<ModuleInfo> {
         let modules = []
         
         for file in this.files {
@@ -250,7 +257,7 @@ impl CrateCodegen {
         return modules
     }
     
-    fun module_name(file: DolFile) -> String {
+    fun module_name(file: DolFile) -> string {
         // Extract last component of module path
         // "dol.ast" → "ast"
         match file.module {
@@ -266,9 +273,11 @@ impl CrateCodegen {
 
 ### Module File Generation
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 impl CrateCodegen {
-    fun gen_module_file(file: DolFile) -> Result<(), String> {
+    fun gen_module_file(file: DolFile) -> Result<(), string> {
         let module_name = this.module_name(file)
         let output_path = this.output_dir + "/src/" + module_name + ".rs"
         
@@ -290,7 +299,7 @@ impl CrateCodegen {
         return Ok(())
     }
     
-    fun gen_resolved_imports(file: DolFile) -> String {
+    fun gen_resolved_imports(file: DolFile) -> string {
         let output = ""
         let seen_imports = Set::new()  // Deduplicate
         
@@ -306,7 +315,7 @@ impl CrateCodegen {
         return output
     }
     
-    fun resolve_import(use_decl: UseDecl) -> String {
+    fun resolve_import(use_decl: UseDecl) -> string {
         let path = use_decl.path.join("::")
         
         // Check if internal module
@@ -327,7 +336,7 @@ impl CrateCodegen {
         return this.format_use(external_path, use_decl.items)
     }
     
-    fun format_use(path: String, items: UseItems) -> String {
+    fun format_use(path: string, items: UseItems) -> string {
         match items {
             UseItems.All { 
                 return "use " + path + "::*;" 
@@ -345,9 +354,11 @@ impl CrateCodegen {
 
 ### lib.rs Generation
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 impl CrateCodegen {
-    fun gen_lib_rs(modules: List<ModuleInfo>) -> Result<(), String> {
+    fun gen_lib_rs(modules: Vec<ModuleInfo>) -> Result<(), string> {
         let content = "//! DOL Generated Crate\n"
         content = content + "//! Generated from DOL source files\n\n"
         
@@ -372,7 +383,7 @@ impl CrateCodegen {
         return Ok(())
     }
     
-    fun topological_sort(modules: List<ModuleInfo>) -> List<ModuleInfo> {
+    fun topological_sort(modules: Vec<ModuleInfo>) -> Vec<ModuleInfo> {
         // Sort modules so dependencies come before dependents
         // This ensures Rust compiles in correct order
         
@@ -406,9 +417,11 @@ impl CrateCodegen {
 
 ### prelude.rs Generation
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 impl CrateCodegen {
-    fun gen_prelude_rs(modules: List<ModuleInfo>) -> Result<(), String> {
+    fun gen_prelude_rs(modules: Vec<ModuleInfo>) -> Result<(), string> {
         let content = "//! Prelude - commonly used types re-exported\n\n"
         
         // Re-export public types from each module
@@ -436,9 +449,11 @@ impl CrateCodegen {
 
 ### Cargo.toml Generation
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 impl CrateCodegen {
-    fun gen_cargo_toml() -> Result<(), String> {
+    fun gen_cargo_toml() -> Result<(), string> {
         let content = "[package]\n"
         content = content + "name = \"" + this.crate_name + "\"\n"
         content = content + "version = \"" + this.crate_version + "\"\n"
@@ -465,7 +480,9 @@ impl CrateCodegen {
 
 Define each type in exactly one module, re-export elsewhere:
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 // In types.dol - canonical definition
 pub gen ModuleDecl { ... }
 
@@ -503,9 +520,9 @@ use crate::types::ModuleDecl as TypesModuleDecl;
 Codegen detects duplicate definitions and warns:
 
 ```dol
-fun check_duplicates(modules: List<ModuleInfo>) -> List<Warning> {
-    let defined = Map::new()  // name → defining module
-    let warnings = []
+fun check_duplicates(modules: Vec<ModuleInfo>) -> Vec<Warning> {
+    var defined = Map::new()  // name → defining module
+    var warnings = []
     
     for module in modules {
         for export in module.exports {
@@ -528,27 +545,31 @@ fun check_duplicates(modules: List<ModuleInfo>) -> List<Warning> {
 
 ## CLI Integration
 
-### New Command: `dol build-crate`
+### Command: `dol-build-crate`
+
+Shipped as a separate binary (there is no `dol` binary). Install with `cargo install dol --features cli`.
 
 ```bash
 # Generate Rust crate from DOL files
-dol build-crate dol/*.dol -o stage2/
+dol-build-crate dol/*.dol -o stage2/
 
 # With options
-dol build-crate dol/*.dol \
+dol-build-crate dol/*.dol \
     --output stage2/ \
-    --crate-name dol_compiler \
+    --name dol_compiler \
     --crate-version 0.4.0
 
-# Verify output compiles
+# Verify output compiles (at v0.8.2 this fails: 850 errors for dol/*.dol)
 cd stage2 && cargo check
 ```
 
 ### Updated Workflow
 
+> **Planned — not implemented:** only the first step runs today. The generated Stage 2 crate does not compile, so Stage 2 → Stage 3 has never been executed.
+
 ```bash
 # Stage 1: Bootstrap compiler (Rust) generates Stage 2
-cargo run --bin dol -- build-crate dol/*.dol -o stage2/
+cargo run --features cli --bin dol-build-crate -- dol/*.dol -o stage2/
 
 # Verify Stage 2 compiles
 cd stage2 && cargo build
@@ -566,7 +587,7 @@ diff -r stage2/src stage3/src  # Should be identical
 
 ### Phase 1: Implement CrateCodegen (1-2 weeks)
 
-1. Create `crate_codegen.dol` with module analysis
+1. Create `crate_codegen.dol` with module analysis (done instead in Rust: `src/codegen/crate_gen.rs`)
 2. Generate multi-file output structure
 3. Implement import resolution
 4. Generate lib.rs and Cargo.toml
@@ -589,12 +610,12 @@ diff -r stage2/src stage3/src  # Should be identical
 
 ## Success Criteria
 
-| Metric | Target |
-|--------|--------|
-| Compilation errors | 0 |
-| Generated modules | 10 (one per .dol file) |
-| Stage 2 = Stage 3 | Identical output |
-| CI integration | `dol build-crate` in CI |
+| Metric | Target | Status (0.8.2) |
+|--------|--------|----------------|
+| Compilation errors | 0 | Not met — 850 errors |
+| Generated modules | 10 (one per .dol file) | — |
+| Stage 2 = Stage 3 | Identical output | Not met — Stage 2 does not build |
+| CI integration | `dol-build-crate` in CI | Not met — not in CI |
 
 ---
 
@@ -605,11 +626,11 @@ diff -r stage2/src stage3/src  # Should be identical
 | ast.dol | ast.rs | Expr, Stmt, Decl, DolFile |
 | token.dol | token.rs | Token, TokenKind, Span |
 | lexer.dol | lexer.rs | Lexer, lex() |
-| parser.dol | parser.rs | Parser, parse() |
-| pratt.dol | pratt.rs | PrattParser, Precedence |
+| parser.dol | parser.rs | Parser, parse(), Precedence |
 | types.dol | types.rs | Type, TypeExpr, TypeEnv |
+| typechecker.dol | typechecker.rs | TypeChecker, typecheck() |
 | codegen.dol | codegen.rs | RustCodegen, codegen() |
-| hir.dol | hir.rs | HirExpr, HirModule |
+| mod.dol | (module root) | Re-exports of the other modules |
 | bootstrap.dol | bootstrap.rs | Bootstrap utilities |
 | main.dol | main.rs | main(), CLI handling |
 

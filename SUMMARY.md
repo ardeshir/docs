@@ -11,17 +11,18 @@
 * [Go-to-Market](vision-and-strategy/univrs_gtm.md)
 * [UTCP vs MCP](vision-and-strategy/utcp_vs_mcp.md)
 * [Multi-Cloud](archives/Multi-Cloud_Strategy.md)
-* [DOL 1.x Specification](dol.md)
+* [DOL Language Guide (v0.8)](dol.md)
 * [Univrs Network](https://github.com/univrs/univrs-network)
 * [Univrs Orchestration](https://github.com/univrs/univrs-orchestration)
 
-## 🧬 DOL 2.0 (Design Ontology Language)
-* [DOL Specification](dol.md)
+## 🧬 DOL (Design Ontology Language)
+* [DOL Language Guide (v0.8)](dol.md)
 * [DOL CLI Reference](dol/CLI.md)
 * [DOL REPL Tutorial](dol/REPL-Tutorial.md)
-* [DOL 2.0 Roadmap](vudo/dol2.0_roadmap_checkpoint.md)
+* [DOL Roadmap Checkpoint ("DOL 2.0", historical)](vudo/dol2.0_roadmap_checkpoint.md)
 * [Runtime Architecture & Composition](vudo/DOLRAC.md)
 * [Meta-Programming Architecture](architecture/metaprogramming.md)
+* [v0.8.2 Release Notes](releases/v0.8.2.md) - Spirit Hosting H0 - VUDO host ABI
 * [v0.8.0 Release Notes](releases/v0.8.0.md) - "Clarity" - Modernized Syntax
 * [v0.7.2 Release Notes](releases/v0.7.2.md) - Visibility & GDL
 * [v0.7.1 Release Notes](releases/v0.7.1.md) - Polish
@@ -34,7 +35,7 @@
 * [v0.2.2 Release Notes](releases/v0.2.2.md)
 * [v0.2.0 Release Notes](releases/v0.2.0.md)
 * [Changelog](CHANGELOG.md)
-* [DOL 2.0 Bootstrapping](dol/BOOTSTRAP.md)
+* [DOL Bootstrapping (not self-hosting)](dol/BOOTSTRAP.md)
 * [Understanding HIR DOL](dol/Understanding_DOL_HIR.md)
 * [HIR Architecture](dol/HIR_ARCHITECTURE.md)
 * [MODULAR CODEGEN Design](dol/MODULAR-CODEGEN-ARCHITECTURE.md)
