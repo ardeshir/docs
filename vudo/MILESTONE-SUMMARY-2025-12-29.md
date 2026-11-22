@@ -1,6 +1,16 @@
 # 🍄 UNIVRS.IO MILESTONE SUMMARY
 ## December 29, 2025 - v0.4.0 Release
 
+> **Historical snapshot (2025-12-29), corrected November 2026.** This summary records what was reported on a feature
+> branch at the time. What actually ships differs:
+> - **No MLIR in the shipped pipeline.** At DOL 0.8.2, `src/mlir` is a feature-gated stub that does not build without
+>   MLIR headers and is not in CI. WASM is produced by a direct WASM backend that works from the AST (HIR is kept for
+>   diagnostics only) and covers a subset of the language.
+> - **Current state:** the latest release is DOL **0.8.2** (2026-11-20). In 0.8.2 ("Spirit Hosting H0") DOL-compiled
+>   Spirits link and run in the VUDO VM: bodiless `sex fun host_*` declarations import from module `vudo` with the
+>   VM linker's exact signatures (15 host functions), and `univrs/vudo` CI compiles DOL → WASM and runs it in the VM.
+> - Nothing here is production-ready; the "production-ready" message below has been removed.
+
 ---
 
 ## 🎉 CELEBRATION: Phase 3 Complete!
@@ -109,6 +119,9 @@ Week 3-4:  Imaginarium → Chaos Testing → Final Integration
 
 **Location:** `~/repos/univrs-enr/dol/`
 
+> **Note (Nov 2026):** these ENR ontology files use pre-v0.8 DOL syntax, and none of the six parses as a whole file
+> with the DOL 0.8.2 parser (`metadol::parse_file_all`). They are design specifications, not compiled artifacts.
+
 | File | Lines | Purpose |
 |------|-------|---------|
 | `core.dol` | 529 | Credits, NodeId, CreditTransfer, invariants |
@@ -204,7 +217,7 @@ Where:
 
 3. **"Phase 4 builds the network."** - ENR transforms individual nodes into a living market.
 
-4. **"Biology-inspired, production-ready."** - Not metaphors—actual implementations of fungal network patterns.
+4. **"Biology-inspired."** - Not metaphors—actual implementations of fungal network patterns. (The original "production-ready" claim was not accurate and has been removed.)
 
 ### Suggested Content Updates
 

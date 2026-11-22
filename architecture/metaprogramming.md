@@ -6,7 +6,7 @@ This document describes the architecture of DOL's meta-programming system introd
 
 DOL's meta-programming provides:
 - **Quote/Eval**: First-class AST manipulation
-- **Quasi-Quote/Unquote**: Template-based code generation
+- **Quasi-Quote/Unquote**: Template-based code generation (AST nodes and evaluator support exist, but there is no surface syntax: the backtick/`~` forms do not parse in DOL 0.8.2 — planned, not implemented)
 - **Reflect**: Runtime type introspection
 - **Idiom Brackets**: Applicative functor syntax sugar
 - **Macros**: Compile-time code transformation
@@ -21,8 +21,8 @@ DOL's meta-programming provides:
                         │
                         ▼
 ┌─────────────────────────────────────────────────────────┐
-│                   Lexer (logos)                        │
-│         Quote, Bang, Question, Hash tokens             │
+│              Lexer (hand-written)                      │
+│         Quote, Bang, Reflect, Macro tokens             │
 └───────────────────────┬─────────────────────────────────┘
                         │
                         ▼
@@ -60,23 +60,23 @@ DOL's meta-programming provides:
 
 ### 1. Lexer Extensions
 
-New tokens added to `src/lexer.rs`:
+New tokens added to `src/lexer.rs` (a hand-written lexer; the `logos` dependency in `Cargo.toml` is not used by it):
 
 ```rust
-pub enum Token {
+pub enum TokenKind {
     // ... existing tokens ...
 
     // Meta-programming tokens
     Quote,           // '
     Bang,            // ! (also used for Eval)
-    Question,        // ?
-    Hash,            // #
+    Macro,           // #
+    Reflect,         // ?
     IdiomOpen,       // [|
     IdiomClose,      // |]
-    Backtick,        // ` (quasi-quote)
-    Tilde,           // ~ (unquote)
 }
 ```
+
+There are no backtick or `~` tokens, so quasi-quote/unquote cannot be written in source yet (planned — not implemented).
 
 ### 2. AST Nodes
 
@@ -160,7 +160,7 @@ Located in `src/macros/`:
 ```
 src/macros/
 ├── mod.rs          # MacroError, MacroInput, MacroOutput, MacroContext
-├── builtin.rs      # 18 built-in macro implementations
+├── builtin.rs      # 20 built-in macro implementations
 └── expand.rs       # MacroExpander pass
 ```
 
@@ -170,7 +170,8 @@ src/macros/
 pub trait Macro: Send + Sync {
     fn name(&self) -> &str;
     fn expand(&self, input: MacroInput, ctx: &MacroContext) -> Result<MacroOutput, MacroError>;
-    fn is_attribute(&self) -> bool { false }
+    fn description(&self) -> &str { ... }
+    fn is_attribute_macro(&self) -> bool { ... }
 }
 ```
 
@@ -190,30 +191,37 @@ pub trait Macro: Send + Sync {
 
 ### 6. Reflection System
 
-Located in `src/reflect.rs`:
+Located in `src/reflect.rs` (fields are private; accessed via methods):
 
 ```rust
 pub struct TypeInfo {
-    pub name: String,
-    pub kind: TypeKind,
-    pub fields: Vec<FieldInfo>,
-    pub methods: Vec<MethodInfo>,
-    pub supertype: Option<String>,
-    pub is_public: bool,
+    name: String,
+    kind: TypeKind,
+    fields: Vec<FieldInfo>,
+    methods: Vec<MethodInfo>,
+    type_params: Vec<String>,
+    parent: Option<String>,
+    traits: Vec<String>,
+    doc: Option<String>,
+    is_public: bool,
 }
 
 pub struct FieldInfo {
-    pub name: String,
-    pub type_name: String,
-    pub is_public: bool,
-    pub is_mutable: bool,
+    name: String,
+    type_name: String,
+    optional: bool,
+    mutable: bool,
+    doc: Option<String>,
+    default: Option<String>,
 }
 
 pub struct MethodInfo {
-    pub name: String,
-    pub params: Vec<(String, String)>,
-    pub return_type: String,
-    pub is_static: bool,
+    name: String,
+    params: Vec<(String, String)>,
+    return_type: String,
+    is_static: bool,
+    is_pure: bool,
+    doc: Option<String>,
 }
 
 pub struct TypeRegistry {
@@ -293,12 +301,15 @@ Idiom brackets (from Haskell's idiom brackets extension) provide clean syntax fo
 | Quote/Eval | `tests/quote_tests.rs` | 34 |
 | Reflect | `tests/reflect_tests.rs` | 17 |
 | Idiom Brackets | `tests/idiom_tests.rs` | 27 |
-| Macros | `src/macros/builtin.rs` | 25+ |
+| Macros | `src/macros/` (unit tests) | 36 |
 
-Total: 590 tests passing
+At v0.8.2 the `dol` crate as a whole runs 2,512 tests with `cli,serde,wasm`, including doctests.
 
 ## Future Work
 
-- **Q3**: Code generation for meta-operators (LLVM/WASM)
-- **Q4**: Self-hosting - DOL compiler written in DOL
-- **Future**: Hygenic macro system, staged computation
+Planned — not implemented (no dates committed):
+
+- Code generation for meta-operators (the WASM backend in 0.8.2 rejects quote/meta and idiom expressions)
+- Surface syntax for quasi-quote/unquote
+- Self-hosting — DOL compiler written in DOL (bootstrap sources in `dol/*.dol` parse, but the generated crate fails with 850 compile errors)
+- Hygienic macro system, staged computation

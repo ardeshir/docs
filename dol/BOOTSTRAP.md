@@ -1,61 +1,52 @@
 # DOL Bootstrap Process
 
-> **Version:** v0.2.3 "Stage2"
-> **Date:** December 27, 2024
-> **Status:** Complete - Full Self-Hosting Achieved!
+> **Status (verified against DOL v0.8.2, 2026-11-20): Self-hosting is NOT working.**
+> This page originally announced "Full Self-Hosting Achieved" for v0.2.3 "Stage2".
+> That claim does not hold. See the DOL ground-truth audit
+> (`docs/DOL-STATUS-2026-11.md` in the [dol repository](https://github.com/univrs/dol)).
 
 ---
 
 ## Overview
 
 Self-hosting means the DOL compiler can compile its own source code.
-This is a key milestone proving the language is complete enough to
-express its own implementation.
+It is a long-term goal of the project, not a shipped feature.
 
-DOL v0.2.3 "Stage2" marks full self-hosting success! The compiler compiled from DOL sources can:
-- ✅ Parse DOL files
-- ✅ Generate Rust code from DOL
-- ✅ 1532 tests passing (target was 1300+)
-- ✅ Stage2 compiles with 0 errors
+What exists at v0.8.2:
+- The bootstrap sources: `dol/*.dol` — 10 files, ≈9.9k lines of DOL describing the
+  compiler (AST, tokens, lexer, parser, type checker, codegen). All of them parse.
+- `dol-build-crate`, which generates a Rust crate from those files.
+
+What does not work:
+- ❌ The Rust crate generated from `dol/*.dol` fails to compile with **850 errors**.
+- ❌ The v0.2.2 "2,544 lines, 0 errors" result is not reproducible (the same check now gives 19 errors).
+- ❌ `stage1/` contains only a `Cargo.toml`; `stage2/` does not exist.
+- ❌ No stage has compiled the compiler from DOL sources.
 
 ---
 
-## Bootstrap Stages
+## Bootstrap Stages (design)
 
 ```
-Stage 0: Rust Bootstrap Compiler
+Stage 0: Rust Bootstrap Compiler        — exists (src/)
          └─ Hand-written Rust implementation
-         └─ Located in src/
 
-Stage 1: DOL Source Files
-         └─ dol/ast.dol - AST definitions
-         └─ dol/token.dol - Token types
-         └─ dol/bootstrap.dol - Core compiler logic
+Stage 1: DOL Source Files               — exists (dol/*.dol, all parse)
+         └─ dol/ast.dol, dol/token.dol, dol/lexer.dol, dol/parser.dol,
+            dol/typechecker.dol, dol/codegen.dol, ...
 
-Stage 2: Generated Rust
-         └─ Stage 0 compiles Stage 1 → Rust
-         └─ 2544 lines, 0 errors
+Stage 2: Generated Rust                 — Planned — not implemented
+         └─ Stage 0 compiles Stage 1 → Rust (currently 850 compile errors)
 
-Stage 3: (Future) Full Self-Hosting
+Stage 3: Full Self-Hosting              — Planned — not implemented
          └─ Stage 2 compiles Stage 1 → identical output
 ```
 
 ---
 
-## Key Statistics
+## Codegen Fixes Made During the v0.2.x Bootstrap Attempt
 
-| Metric | Value |
-|--------|-------|
-| Generated Rust Lines | 2,544 |
-| Compilation Errors | 0 |
-| Tests Passing | 741+ |
-| DOL Source Files | 3 core files |
-
----
-
-## Key Fixes Required
-
-The bootstrap process required fixing several codegen issues:
+These codegen issues were fixed while attempting the bootstrap (they did not make the generated crate compile):
 
 1. **Recursive types** - `Box<T>` for self-referential types
 2. **String matching** - `.as_str()` for pattern matching
@@ -69,55 +60,28 @@ The bootstrap process required fixing several codegen issues:
 ## Verification
 
 ```bash
-# Generate Rust from DOL
-cargo run --bin dol-compile -- dol/ast.dol dol/token.dol dol/bootstrap.dol -o /tmp/
+# Generate a Rust crate from the bootstrap sources (requires --features cli)
+cargo run --features cli --bin dol-build-crate -- dol/*.dol -o /tmp/stage2
 
-# Verify it compiles
-rustc --edition 2021 --crate-type lib /tmp/dol_generated.rs
+# Try to build it (the 2026-11 audit measured 850 compile errors at v0.8.2)
+cd /tmp/stage2 && cargo build
 ```
 
 ---
 
-## What This Enables
+## Related
 
-With self-hosting complete, DOL can now:
-
-1. **Compile itself** - The compiler is written in DOL
-2. **Generate Rust** - Multi-target compilation works
-3. **Validate ontologies** - Full type checking and constraint validation
-4. **Support meta-programming** - Quote, Eval, Macros, Reflection
-
----
-
-## Phase 2: VUDO VM & Spirits - COMPLETE
-
-With the bootstrap complete, Phase 2 delivered:
-
-| Component | Tests | Status |
-|-----------|-------|--------|
-| VUDO VM Sandbox | 158 | Complete |
-| Spirit Runtime | 50 | Complete |
-| Spirit Registry | - | QueryBuilder API |
-| vudo CLI | 15 commands | + REPL |
-| **TOTAL** | **260** | **Complete** |
-
-See [PHASE2_COMPLETE.md](../vudo/PHASE2_COMPLETE.md) for full details.
-
-## Next: Phase 3 - Hyphal Network
-
-| Component | Description |
-|-----------|-------------|
-| Physarum Routing | Bio-inspired network topology |
-| OpenRaft Consensus | Distributed state agreement |
-| WASM 3D Visualization | Network visualization |
+The VUDO VM is developed separately in univrs/vudo; see
+[PHASE2_COMPLETE.md](../vudo/PHASE2_COMPLETE.md). As of DOL 0.8.2, DOL-compiled
+Spirits link and run in the VUDO VM (the Spirit Hosting H0 milestone) — that
+path uses the Rust compiler in `src/`, not a self-hosted compiler.
 
 ---
 
 ## Links
 
-- [GitHub Release](https://github.com/univrs/dol/releases/tag/v0.2.3)
-- [Crates.io](https://crates.io/crates/dol/0.2.3)
-- [DOL Documentation](https://learn.univrs.io/dol)
+- [DOL repository](https://github.com/univrs/dol)
+- [Crates.io](https://crates.io/crates/dol)
 - [VUDO Landing](https://vudo.univrs.io)
 
 ---

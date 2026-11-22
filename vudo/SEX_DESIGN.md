@@ -1,8 +1,19 @@
 # SEX in DOL: Side Effect eXecution
 
 > **Design Document v0.1**  
-> **Status:** RFC  
+> **Status:** RFC, partially implemented (status corrected November 2026 against DOL 0.8.2)  
 > **Vocabulary:** `sex` = Side Effect eXecution (or: Shared External eXchange)
+
+> **Implementation status at DOL 0.8.2**
+>
+> | Feature | Status |
+> |---------|--------|
+> | `sex fun`, `sex var`, `sex { }` blocks, `const` | ✅ Parse. The WASM backend does not support `sex { }` blocks. |
+> | Bodiless `sex fun host_*` → VUDO VM host functions | ✅ Shipped in 0.8.2 (see "VUDO host ABI" under Runtime Behavior below) |
+> | `.sex.dol` files and `sex/` directories as sex context | ✅ `metadol::sex::file_sex_context` |
+> | Lint rules E001–E004, W001–W002 | ⚠️ Implemented as a library (`metadol::SexLinter`), but not run by `dol-check` or the compiler: effects are **not enforced** |
+> | `sex extern`, generic functions (`fun f<T>`), `#cfg`, `#![allow]`, `Sex<…>` effect types, effect regions | ❌ Planned — not implemented |
+> | `+=` compound assignment | ❌ Does not parse; write `x = x + 1` |
 
 ---
 
@@ -76,13 +87,13 @@ gen StatefulService {
     // Sex block — side effects permitted
     sex fun log_and_compute(x: i64) -> i64 {
         println("Computing: " + x)  // I/O side effect
-        GLOBAL_COUNTER += 1         // Mutation
+        GLOBAL_COUNTER = GLOBAL_COUNTER + 1  // Mutation
         return x * 2
     }
     
     // Inline sex block within pure function
     fun mostly_pure(x: i64) -> i64 {
-        result = x * 2
+        val result = x * 2
         
         sex {
             // This block can have side effects
@@ -107,7 +118,7 @@ const MAX_CONNECTIONS: i64 = 100
 
 // Sex function to modify global
 sex fun increment_counter() -> i64 {
-    GLOBAL_COUNTER += 1
+    GLOBAL_COUNTER = GLOBAL_COUNTER + 1
     return GLOBAL_COUNTER
 }
 
@@ -119,7 +130,9 @@ sex fun reset_counter() {
 
 ### FFI (Foreign Function Interface)
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 // ffi.sex.dol — External system calls
 
 // Declare external function (FFI)
@@ -152,7 +165,7 @@ sex fun unsafe_read<T>(ptr: Ptr<T>, offset: i64) -> T {
 use std.fs.{ File, OpenMode }
 
 // File operations are sex
-sex fun read_file(path: String) -> Result<String, IoError> {
+sex fun read_file(path: string) -> Result<string, IoError> {
     file = File.open(path, OpenMode.Read)?
     content = file.read_all()?
     file.close()
@@ -160,7 +173,7 @@ sex fun read_file(path: String) -> Result<String, IoError> {
 }
 
 // Network is sex
-sex fun http_get(url: String) -> Result<Response, NetError> {
+sex fun http_get(url: string) -> Result<Response, NetError> {
     // Side effect: network request
     return Http.get(url)
 }
@@ -182,26 +195,36 @@ sex fun now() -> Timestamp {
 
 ### The Sex Type
 
-Functions with side effects have a **sex type annotation**:
+Functions with side effects are marked with `sex` in their signature:
 
 ```dol
-// Pure function type
-fun add(a: i64, b: i64) -> i64
+// Pure function
+fun add(a: i64, b: i64) -> i64 {
+    return a + b
+}
 
-// Sex function type — effect is part of the signature
-sex fun log(msg: String) -> Void
+// Sex function — effect is part of the signature
+sex fun log(msg: string) -> ()
+```
 
-// In type annotations
+Effect types in type annotations are planned:
+
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 type PureCompute = Fun<i64, i64>
 type SexCompute = Sex<Fun<i64, i64>>
 ```
 
 ### Effect Propagation
 
-The compiler tracks sex propagation:
+The intended rule is that sex propagates to callers.
+
+> **Not enforced at 0.8.2:** the E001 check below exists in `metadol::SexLinter`, but neither `dol-check` nor the
+> compiler runs it, so `pure_caller` currently compiles without error.
 
 ```dol
-// ❌ ERROR: Cannot call sex function from pure context
+// ❌ Intended ERROR (E001): Cannot call sex function from pure context
 fun pure_caller() -> i64 {
     log("hello")  // Compile error: sex in pure context
     return 42
@@ -215,7 +238,7 @@ sex fun sex_caller() -> i64 {
 
 // ✅ OK: Explicit sex block
 fun mixed_caller() -> i64 {
-    result = 42
+    val result = 42
     sex {
         log("hello")  // OK: inside sex block
     }
@@ -227,7 +250,7 @@ fun mixed_caller() -> i64 {
 
 ```dol
 // At module boundary, sex must be declared
-pub sex fun dangerous_operation() -> Result<Void, Error> {
+pub sex fun dangerous_operation() -> Result<(), Error> {
     // Callers know this has side effects
 }
 
@@ -283,13 +306,13 @@ my-spirit/
 
 sex var DB_CONNECTION: Option<Connection> = None
 
-sex fun connect(url: String) -> Result<Void, DbError> {
+sex fun connect(url: string) -> Result<(), DbError> {
     DB_CONNECTION = Some(Connection.open(url)?)
     return Ok(())
 }
 
-sex fun query(sql: String) -> Result<Rows, DbError> {
-    conn = DB_CONNECTION.expect("Not connected")
+sex fun query(sql: string) -> Result<Rows, DbError> {
+    val conn = DB_CONNECTION.expect("Not connected")
     return conn.execute(sql)
 }
 
@@ -303,7 +326,9 @@ sex fun disconnect() {
 
 ### 2. Caching
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 // cache.sex.dol
 
 sex var CACHE: Map<String, Any> = Map.new()
@@ -344,22 +369,24 @@ sex fun set_log_level(level: LogLevel) {
     LOG_LEVEL = level
 }
 
-sex fun log(level: LogLevel, msg: String) {
+sex fun log(level: LogLevel, msg: string) {
     if level >= LOG_LEVEL {
-        timestamp = now()
+        val timestamp = now()
         println("[" + timestamp + "] " + level.to_string() + ": " + msg)
     }
 }
 
-sex fun debug(msg: String) { log(LogLevel.Debug, msg) }
-sex fun info(msg: String) { log(LogLevel.Info, msg) }
-sex fun warn(msg: String) { log(LogLevel.Warn, msg) }
-sex fun error(msg: String) { log(LogLevel.Error, msg) }
+sex fun debug(msg: string) { log(LogLevel.Debug, msg) }
+sex fun info(msg: string) { log(LogLevel.Info, msg) }
+sex fun warn(msg: string) { log(LogLevel.Warn, msg) }
+sex fun error(msg: string) { log(LogLevel.Error, msg) }
 ```
 
 ### 4. FFI to System Libraries
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 // system.sex.dol
 
 #cfg(target.linux)
@@ -391,6 +418,9 @@ sex fun get_process_id() -> Int32 {
 
 ### Sex Lint Rules
 
+These rules are implemented in `metadol::SexLinter` (`src/sex/lint.rs`), but at 0.8.2 they are not run by `dol-check`
+or by the compiler.
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                     Sex Compiler Checks                         │
@@ -419,7 +449,9 @@ sex fun get_process_id() -> Int32 {
 
 ### Escape Hatches
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 // For when you REALLY need to break the rules
 
 // Trust me, I know what I'm doing
@@ -439,12 +471,38 @@ fun technically_pure_but_logs() -> i64 {
 
 ### Sex in Different Targets
 
-| Target | Sex Implementation |
+| Target | Sex Implementation (0.8.2) |
 |--------|-------------------|
-| **WASM** | WASI imports, linear memory |
-| **Rust** | `unsafe` blocks, `static mut` |
-| **TypeScript** | Side effects allowed (JS is impure) |
-| **Python** | Global variables, I/O |
+| **WASM** | Bodiless `sex fun host_*` declarations become imports from module `vudo` (VUDO VM host ABI, see below). `sex { }` blocks are not supported by the WASM backend. |
+| **Rust** | `sex var` → `thread_local!` `RefCell` (WASM-safe; replaced `static mut` in 0.8.1) |
+| **TypeScript** | `sex var` → `export let`; function bodies are emitted as `// TODO: implement` stubs |
+
+There is no Python target; `dol-codegen` targets are `rust`, `typescript` and `jsonschema`.
+
+### VUDO host ABI (DOL 0.8.2)
+
+DOL 0.8.2 ("Spirit Hosting H0") makes `sex fun` the bridge to the VUDO VM:
+
+- A **bodiless** `sex fun host_*` declaration compiles to a WASM import from module **`vudo`**, with the VUDO VM
+  linker's exact signature (`src/wasm/host_abi.rs`). Previously these imported from `loa` and could not link.
+- The VM provides **15** host functions: `host_time_now`, `host_random_bytes`, `host_log`, `host_storage_read`,
+  `host_storage_write`, `host_storage_delete`, `host_network_connect`, `host_network_listen`,
+  `host_network_broadcast`, `host_credit_balance`, `host_credit_transfer`, `host_credit_reserve`,
+  `host_credit_release`, `host_credit_consume`, `host_credit_available`.
+- Declaring a `sex fun` the VM does not provide (unknown name, wrong arity, a float where the host expects an
+  integer) is a **compile error**.
+- String literals, `string` parameters and typed string locals passed to `host_*` functions lower to `(ptr, len)`.
+  Modules that import pointer-taking host functions export `memory`.
+
+```dol
+sex fun host_log(level: i64, msg: string) -> i64
+
+sex fun hello() -> i64 {
+    return host_log(2, "hello from DOL")
+}
+```
+
+`univrs/vudo` CI compiles a program like this to WASM and runs it in the VM.
 
 ### Generated Code
 
@@ -453,30 +511,31 @@ fun technically_pure_but_logs() -> i64 {
 sex var COUNTER: i64 = 0
 
 sex fun increment() -> i64 {
-    COUNTER += 1
+    COUNTER = COUNTER + 1
     return COUNTER
 }
 ```
 
-**Rust output:**
+**Rust output** (actual `dol-codegen` 0.8.2 output):
 ```rust
-static mut COUNTER: i64 = 0;
+use std::cell::RefCell;
+
+thread_local! {
+    static COUNTER: RefCell<i64> = RefCell::new(0);
+}
 
 pub fn increment() -> i64 {
-    unsafe {
-        COUNTER += 1;
-        COUNTER
-    }
+    COUNTER.with(|__v| *__v.borrow_mut() = (COUNTER.with(|__v| __v.borrow().clone()) + 1));
+    return COUNTER.with(|__v| __v.borrow().clone());
 }
 ```
 
-**TypeScript output:**
+**TypeScript output** (actual `dol-codegen --target typescript` 0.8.2 output; function bodies are not generated):
 ```typescript
-let COUNTER: number = 0;
+export let COUNTER: I64 = 0 /* TODO: sex var expression */;
 
-export function increment(): number {
-    COUNTER += 1;
-    return COUNTER;
+export function increment(): I64 {
+    // TODO: implement
 }
 ```
 
@@ -490,7 +549,7 @@ export function increment(): number {
 | `sex fun` | Function with side effects | `fn` with mutation |
 | `sex var` | Mutable global variable | `static mut` |
 | `sex { }` | Effectful block | `unsafe { }` |
-| `sex extern` | FFI declaration | `extern "C"` |
+| `sex extern` | FFI declaration (Planned — not implemented) | `extern "C"` |
 | `.sex.dol` | File with sex code | — |
 | `sex/` | Directory of sex files | — |
 
@@ -513,20 +572,22 @@ The sex system ensures:
 
 ## Open Questions
 
+The syntax sketched in this section is Planned — not implemented; none of it parses in DOL 0.8.2.
+
 1. **Effect polymorphism?** — Can functions be generic over sex?
-   ```dol
+   ```text
    fun map<F: Fun | Sex>(f: F, list: List<A>) -> List<B>
    ```
 
 2. **Sex regions?** — Different kinds of effects?
-   ```dol
+   ```text
    sex[IO] fun read_file() -> String
    sex[State] fun increment() -> i64
    sex[IO, State] fun log_and_count() -> Void
    ```
 
 3. **Sex isolation?** — Can sex code run in sandbox?
-   ```dol
+   ```text
    sandbox sex {
        // Effects are captured, not executed
    }

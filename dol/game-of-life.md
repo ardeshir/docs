@@ -2,6 +2,13 @@
 
 A perfect fit for DOL Spirits. 
 
+> **Status (verified against DOL v0.8.2, 2026-11-20):** The DOL source in this walkthrough parses
+> with DOL 0.8.2. The DOL → Rust → WASM → browser pipeline in Step 7 is **not working end-to-end**:
+> there is no `dol build` command, and the real `dol-build` tool (Spirit → Rust → wasm32) fails on all
+> nine example Spirits in the dol repository at v0.8.2. Treat Step 7 as **Planned — not implemented**.
+> The generated Rust shown in Step 7c is illustrative, not actual compiler output.
+> A version of this Spirit lives in the dol repository under `examples/spirits/game-of-life/`.
+
 ## Step 1: Understanding the Rules
 
 The four rules are:
@@ -17,22 +24,28 @@ The four rules are:
 
 Let’s start with the core types:
 
-```dol
+`Spirit.dol` manifests are read by a separate manifest parser (`src/manifest.rs`), not the DOL source
+parser. This is the manifest from `examples/spirits/game-of-life/Spirit.dol` in the dol repository:
+
+```text
 // Spirit.dol - Package manifest
-spirit GameOfLife {
-  name: "@univrs/game-of-life"
-  version: "0.1.0"
-  
-  targets {
-    wasm: { optimize: true, target: "wasm32-wasi" }
+spirit game_of_life @ 0.1.0
+
+docs "Conway's Game of Life as a DOL Spirit. Cellular automaton with B3/S23 rules."
+
+requires {
+    @univrs/std: "^0.8"
+}
+
+targets {
     rust: { edition: "2024" }
-  }
-  
-  docs {
-    Conway's Game of Life implemented as a DOL Spirit.
-    A cellular automaton where cells live, die, or multiply
-    based on simple mathematical rules.
-  }
+    wasm: { optimize: true, target: "wasm32-unknown-unknown" }
+}
+
+config {
+    entry: "src/lib.dol"
+    target: wasm32
+    features: []
 }
 ```
 
@@ -82,7 +95,7 @@ use genes.cell.{ Cell, CellState, Position }
 pub gen Grid {
   has width: u32
   has height: u32
-  has cells: List<Cell>
+  has cells: Vec<Cell>
   has generation: u64
   
   rule valid_dimensions {
@@ -115,6 +128,8 @@ pub gen GridConfig {
 }
 ```
 
+> **Note (v0.8.2):** the parser accepts `rule` blocks nested inside a `gen` and `pub` modifiers, but drops them from the AST (nested rule bodies are discarded; visibility is always recorded as private). They are not enforced.
+
 ## Step 3: Implement the Rules as Spells
 
 ```dol
@@ -128,8 +143,8 @@ pub fun next_state(cell: Cell) -> CellState {
   match cell.state {
     CellState.Alive {
       match cell.neighbors {
-        n where n < 2 { CellState.Dead }      // Solitude
-        n where n > 3 { CellState.Dead }      // Overpopulation  
+        n if n < 2 { CellState.Dead }      // Solitude
+        n if n > 3 { CellState.Dead }      // Overpopulation  
         _ { CellState.Alive }                  // Survives (2-3)
       }
     }
@@ -170,7 +185,7 @@ use spells.rules.next_state
 
 // Create empty grid
 pub fun create_grid(config: GridConfig) -> Grid {
-  val cells = List.new()
+  val cells = Vec.new()
   
   for y in 0..config.height {
     for x in 0..config.width {
@@ -211,20 +226,18 @@ pub fun get_cell(grid: Grid, x: i32, y: i32, wrap: bool) -> Option<Cell> {
 
 // Count alive neighbors for a cell
 pub fun count_neighbors(grid: Grid, pos: Position, wrap: bool) -> u8 {
-  val offsets = [
-    (-1, -1), (0, -1), (1, -1),
-    (-1,  0),          (1,  0),
-    (-1,  1), (0,  1), (1,  1)
-  ]
-  
   var count: u8 = 0
   
-  for (dx, dy) in offsets {
-    match get_cell(grid, pos.x + dx, pos.y + dy, wrap) {
-      Some(cell) where cell.state == CellState.Alive {
-        count = count + 1
+  for dy in -1..2 {
+    for dx in -1..2 {
+      if dx != 0 || dy != 0 {
+        match get_cell(grid, pos.x + dx, pos.y + dy, wrap) {
+          Some(cell) if cell.state == CellState.Alive {
+            count = count + 1
+          }
+          _ { }
+        }
       }
-      _ { }
     }
   }
   
@@ -235,7 +248,7 @@ pub fun count_neighbors(grid: Grid, pos: Position, wrap: bool) -> u8 {
 pub fun tick(grid: Grid, wrap: bool) -> Grid {
   // First pass: count all neighbors
   val cells_with_neighbors = grid.cells 
-    |> map((cell) -> Cell {
+    |> map(|cell: Cell| Cell {
       pos: cell.pos,
       state: cell.state,
       neighbors: count_neighbors(grid, cell.pos, wrap)
@@ -243,7 +256,7 @@ pub fun tick(grid: Grid, wrap: bool) -> Grid {
   
   // Second pass: apply rules
   val next_cells = cells_with_neighbors
-    |> map((cell) -> Cell {
+    |> map(|cell: Cell| Cell {
       pos: cell.pos,
       state: next_state(cell),
       neighbors: 0  // Will be recalculated next tick
@@ -275,7 +288,7 @@ use spells.grid_ops.{ create_grid, set_cell }
 
 pub gen Pattern {
   has name: string
-  has cells: List<Position>
+  has cells: Vec<Position>
   has width: u32
   has height: u32
   
@@ -443,10 +456,10 @@ pub sex fun load_pattern(name: string, x: i32, y: i32) {
 }
 
 // Get grid state as flat array for rendering
-pub sex fun get_cells() -> List<u8> {
+pub sex fun get_cells() -> Vec<u8> {
   match GRID {
     Some(grid) {
-      grid.cells |> map((cell) -> 
+      grid.cells |> map(|cell: Cell| 
         if cell.state == CellState.Alive { 1 } else { 0 }
       )
     }
@@ -470,7 +483,9 @@ docs {
 
 ## Step 7: Compilation Pipeline
 
-Now let’s show the full pipeline from DOL → Rust → WASM → Browser:
+Now let’s show the intended pipeline from DOL → Rust → WASM → Browser.
+
+> **Planned — not implemented:** at DOL v0.8.2 this pipeline does not complete. `dol build` does not exist; the real tool is `dol-build` (installed with `cargo install dol --features cli`), and it fails on all nine example Spirits in the dol repository.
 
 ### 7a. Project Structure
 
@@ -502,9 +517,9 @@ game-of-life/
 ```bash
 # Step 1: Compile DOL to Rust
 cd game-of-life
-dol build --target rust src/ -o target/rust/
+dol-build .   # Planned — not working at v0.8.2 (there is no `dol build` command)
 
-# This generates:
+# Intended output:
 # target/rust/
 # ├── Cargo.toml
 # ├── src/
@@ -521,11 +536,13 @@ dol build --target rust src/ -o target/rust/
 # │   └── browser.rs        # WASM exports
 ```
 
-### 7c. Generated Rust Code (Example)
+### 7c. Generated Rust Code (Illustrative)
+
+> Hand-written illustration of the intended output; not actual `dol-codegen` / `dol-build` output.
 
 ```rust
 // target/rust/src/genes/cell.rs
-// Auto-generated by DOL compiler v0.8.0
+// Illustrative only (not actual compiler output)
 
 use serde::{Deserialize, Serialize};
 
@@ -563,7 +580,7 @@ impl Cell {
 
 ```rust
 // target/rust/src/spells/rules.rs
-// Auto-generated by DOL compiler v0.8.0
+// Illustrative only (not actual compiler output)
 
 use crate::genes::cell::{Cell, CellState};
 
@@ -585,7 +602,7 @@ pub fn next_state(cell: &Cell) -> CellState {
 
 ```rust
 // target/rust/src/browser.rs
-// Auto-generated by DOL compiler v0.8.0
+// Illustrative only (not actual compiler output)
 
 use wasm_bindgen::prelude::*;
 use crate::genes::grid::{Grid, GridConfig};
@@ -646,7 +663,6 @@ pub fn get_generation() -> u64 {
 # Step 2: Build WASM from generated Rust
 cd target/rust
 
-# Add wasm-bindgen dependency (auto-added by DOL)
 cargo build --target wasm32-unknown-unknown --release
 
 # Step 3: Generate JS bindings
@@ -832,6 +848,7 @@ echo "🔮 Building Game of Life Spirit..."
 
 # Step 1: DOL → Rust
 echo "📝 Compiling DOL to Rust..."
+# Planned — not working at v0.8.2: there is no `dol build` command
 dol build --target rust src/ -o target/rust/
 
 # Step 2: Rust → WASM  
@@ -872,7 +889,7 @@ echo "✅ Build complete! Open web/index.html in a browser."
 │                     exports         types                       │
 │                                                                 │
 │   Commands:                                                     │
-│   1. dol build --target rust src/ -o target/rust/              │
+│   1. (planned) DOL → Rust: no working command at v0.8.2        │
 │   2. cargo build --target wasm32-unknown-unknown --release     │
 │   3. wasm-bindgen ... --target web                             │
 │   4. Open index.html                                           │

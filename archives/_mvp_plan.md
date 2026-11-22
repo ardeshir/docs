@@ -99,7 +99,7 @@ The full mythological framework is in: `Mythic_Rebellion.md`
 
 - VUDO = Runtime environment for “Spirits” (creative apps)
 - DOL = Design Ontology Language for structuring what can be generated
-- DOL 2.0 features: Reputation scoring, Hash-Radix tree, MutualCreditScheduler
+- "DOL 2.0" is a historical language-generation label (functions, expressions, effects), not a version. Reputation scoring, Hash-Radix tree and MutualCreditScheduler are PlanetServe/mycelial-economics roadmap items, not DOL features.
 - Status: Needs verification
 
 **CryptoSaint / Saint Token**

@@ -1,8 +1,13 @@
 # Phase 2: VUDO VM & Spirits - COMPLETE
 
 > **Status:** Complete
-> **Date:** December 2024
+> **Date:** December 2025
 > **Milestone:** Spirit Registry Implementation
+
+> **Historical snapshot (late December 2025).** Test counts and statuses below are as reported at the time and are
+> not current. For the DOL toolchain today: the latest release is DOL **0.8.2** (2026-11-20), with 2,512 tests (`cli,serde,wasm`, including doctests). In 0.8.2 ("Spirit Hosting H0") DOL-compiled Spirits link and run in
+> the VUDO VM: bodiless `sex fun host_*` declarations import from module `vudo` with the linker's exact signatures for
+> the VM's 15 host functions, and `univrs/vudo` CI compiles DOL → WASM and runs it in the VM.
 
 ---
 
@@ -173,7 +178,7 @@ vudo publish
 ## Links
 
 - [VUDO Landing](https://vudo.univrs.io)
-- [DOL Documentation](https://learn.univrs.io/dol)
+- [DOL Documentation](https://learn.univrs.io)
 - [GitHub - univrs-vudo](https://github.com/univrs/univrs-vudo)
 
 ---

@@ -124,25 +124,25 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 
 ## 📅 Roadmap
 
-### Phase 1: Foundation (Current)
+### Phase 1: Foundation
 - [x] Core trait architecture
 - [x] Persistent state management
 - [x] Error handling framework
 - [ ] Credit tracking in StateStore
-- [x] Design Ontology Language 2.0 (v0.2.3 "Stage2" released Dec 27, 2024 - Full self-hosting: 1532 tests, Stage2 compiles!) 
+- [x] Design Ontology Language (DOL) toolchain — latest release v0.8.2 (2026-11-20): DOL-compiled Spirits link and run in the VUDO VM. Self-hosting is not implemented (see [DOL Bootstrapping](dol/BOOTSTRAP.md)).
 
-### Phase 2: PlanetServe Integration (Q1 2025)
+### Phase 2: PlanetServe Integration
 - [ ] Reputation scoring system
 - [ ] Hash-Radix tree for workload distribution
 - [ ] S-IDA anonymous communication
 - [ ] BFT verification committee
 
-### Phase 3: Mycelial Economics (Q2 2025)
+### Phase 3: Mycelial Economics
 - [ ] MutualCreditScheduler
 - [ ] Ecological impact valuation
 - [ ] Cross-platform WASM algorithms
 - [ ] Community governance tools 
-- [ ] DOLOS (DOL Operating System) and DOL Runtime 
+- [ ] DOLOS (DOL Operating System) and DOL Runtime — the VUDO VM runs DOL-compiled Spirits as of DOL 0.8.2; the DOLOS Spirit host (univrs-network) runs `vudo_vm` but does not yet compile DOL
 
 → [View Univrs Roadmap](archives/Univrs_Roadmap.md)
 
@@ -155,28 +155,9 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 | [Mycelial Economics Technologies](archives/Mycelial_Economics_Orch.md) | Complete technology ecosystem overview |
 | [API Reference](archives/Univrs_DevTools.md) | Developer API documentation |
 
-## 🤝 Contributing
+## Contributing
 
-We welcome contributions from developers, economists, ecologists, and anyone passionate about regenerative systems.
-
-### Ways to Contribute
-1. **Code**: Submit PRs for features, bug fixes, or optimizations
-2. **Documentation**: Improve guides, tutorials, or API docs
-3. **Research**: Share relevant papers, case studies, or data
-4. **Community**: Participate in discussions, help others
-
-### Development Workflow
-```bash
-# Create a feature branch
-git checkout -b feature/your-feature-name
-
-# Make your changes and test
-cargo test
-cargo clippy
-
-# Submit a pull request
-git push origin feature/your-feature-name
-```
+This project is not accepting external contributions or pull requests.
 
 ## 📞 Contact
 

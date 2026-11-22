@@ -20,6 +20,10 @@ The Mycelial Network is the P2P gossip layer that connects VUDO nodes. It integr
 | `gate_election.rs` | 3 | All passing |
 | **Total** | **9** | **All passing** |
 
+> **Note (Nov 2026):** statuses are as reported when this page was written. `gate_gradient.rs` now also contains
+> `test_cluster_20_nodes`, a 20-node scale test that is too resource-intensive for CI and is run locally only.
+> The Mycelial Network does not compile DOL; it carries Spirits that run in `vudo_vm`.
+
 ## Test Architecture
 
 ```

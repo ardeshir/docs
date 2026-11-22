@@ -2,8 +2,20 @@
 
 > **Design Document v1.0**  
 > **Status:** RFC (Request for Comments)  
-> **Last Updated:** December 22, 2025  
-> **Repository:** github.com/univrs/metadol
+> **Last Updated:** December 22, 2025 (status corrected November 2026)  
+> **Repository:** github.com/univrs/dol
+
+> **Implementation status (DOL 0.8.2, November 2026).** This is a design RFC; much of it is not implemented.
+> - **Implemented:** `.dol` / `.sex.dol` files, `use` imports, `sex fun` / `sex var` / `sex { }` / `const`, `pub` /
+>   `pub(spirit)` / `pub(parent)` modifiers (parsed, but **discarded**: the AST always records private visibility),
+>   Rust / TypeScript / JSON Schema codegen (`dol-codegen`), and a direct WASM backend for a language subset.
+>   Since 0.8.2, bodiless `sex fun host_*` declarations import from WASM module `vudo` with the VUDO VM linker's
+>   exact signatures (15 host functions), and DOL-compiled Spirits run in the VUDO VM (`univrs/vudo` CI).
+> - **Not implemented:** a `dol` binary (`dol build`, `dol repl`), a Python target, `module x { … }` blocks,
+>   `sex extern` / FFI, generic functions, `#cfg`, effect types and regions, effect-tracking enforcement (the E001–E004
+>   lint rules exist as a library but are not run by `dol-check` or the compiler), the `spirit X { … }` manifest
+>   form shown below, remote package resolution, an embeddable `dol_runtime` / `@dol/runtime`, and Séance APIs.
+> - **DOLOS** is an architecture layer: the `univrs-network` Spirit host runs `vudo_vm` but does not compile DOL.
 
 ---
 
@@ -16,7 +28,7 @@ This document defines how DOL 2.0 code is organized, composed, and executed. It 
 - **Spirit Packages** — Package format and manifest
 - **Entry Points** — `main` vs library vs spells
 - **SEX System** — Side Effect eXecution for unsafe/effectful code
-- **Compilation Targets** — WASM, Rust, TypeScript, Python
+- **Compilation Targets** — WASM, Rust, TypeScript, JSON Schema (Python: planned — not implemented)
 - **Runtime Models** — DOLOS, standalone, embedded, JIT
 - **Séance Sessions** — Collaborative editing and execution
 
@@ -95,7 +107,7 @@ This document defines how DOL 2.0 code is organized, composed, and executed. It 
 
 ### Naming Conventions
 
-```dol
+```text
 // Ontology: noun-based, describes "what it is"
 genes/container.dol       // Container gene
 traits/runnable.dol       // Runnable trait
@@ -118,9 +130,12 @@ network.sex.dol           // Network (inline sex file)
 
 ### Module Declaration
 
-Every `.dol` file implicitly declares a module based on its path:
+Every `.dol` file implicitly declares a module based on its path. At 0.8.2 the form that parses is a header line,
+`module container.lifecycle @ 0.1.0`; the block form below does not.
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 // File: src/container/lifecycle.dol
 // Implicit module: container.lifecycle
 
@@ -165,18 +180,24 @@ use sex.io.{ read_file, write_file }
 // ═══════════════════════════════════════════════════════════════
 
 // Private by default (module-internal only)
-gen InternalHelper { ... }
-fun helper() { ... }
+gen InternalHelper {
+    has value: i64
+}
+fun helper() -> i64 { return 0 }
 
 // Public — accessible everywhere
-pub gen Container { ... }
-pub fun process(x: i64) -> i64 { ... }
+pub gen Container {
+    has id: u64
+}
+pub fun process(x: i64) -> i64 { return x }
 
 // Public within Spirit only
-pub(spirit) gen PackageInternal { ... }
+pub(spirit) gen PackageInternal {
+    has value: i64
+}
 
 // Public to parent module
-pub(parent) fun utility() { ... }
+pub(parent) fun utility() -> i64 { return 0 }
 
 // Re-export from another module
 pub use container.Container
@@ -190,6 +211,8 @@ pub use container.Container
 | `pub` | Public, accessible everywhere |
 | `pub(spirit)` | Public within Spirit only |
 | `pub(parent)` | Public to parent module |
+
+> **Not enforced at 0.8.2:** visibility modifiers are parsed but discarded; the AST always records `Private`.
 
 ---
 
@@ -238,7 +261,11 @@ my-spirit/
 
 ### Spirit Manifest (Spirit.dol)
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+ The manifest parser that exists (`metadol::manifest::parse_spirit_manifest`, used by `dol-build`) reads a
+different header form, `spirit name @ version`; see `examples/spirits/*/Spirit.dol` in the dol repo.
+
+```text
 spirit MySpirit {
     // ═══════════════════════════════════════════════════════════
     // METADATA
@@ -320,7 +347,7 @@ use std.env.args
 
 // Entry point for binary execution
 // Note: main can use sex implicitly (I/O is allowed)
-pub fun main(args: List<String>) -> Int32 {
+pub fun main(args: Vec<string>) -> i32 {
     println("Hello from DOL!")
     
     for arg in args {
@@ -376,7 +403,7 @@ pub fun fibonacci(n: i64) -> i64 {
 }
 
 // Higher-order spell
-pub fun twice(f: Fun<i64, i64>, x: i64) -> i64 {
+pub fun twice(f: (i64) -> i64, x: i64) -> i64 {
     return f(f(x))
 }
 
@@ -447,7 +474,7 @@ gen StatefulService {
     // Sex function — side effects permitted
     sex fun log_and_compute(x: i64) -> i64 {
         println("Computing: " + x)  // I/O side effect
-        GLOBAL_COUNTER += 1         // Mutation
+        GLOBAL_COUNTER = GLOBAL_COUNTER + 1  // Mutation
         return x * 2
     }
 }
@@ -458,7 +485,7 @@ gen StatefulService {
 ```dol
 // Inline sex block within mostly-pure function
 fun mostly_pure(x: i64) -> i64 {
-    result = x * 2
+    val result = x * 2
     
     sex {
         // This block can have side effects
@@ -482,7 +509,7 @@ const MAX_CONNECTIONS: i64 = 100
 
 // Sex functions to modify global
 sex fun increment_counter() -> i64 {
-    GLOBAL_COUNTER += 1
+    GLOBAL_COUNTER = GLOBAL_COUNTER + 1
     return GLOBAL_COUNTER
 }
 
@@ -493,7 +520,9 @@ sex fun reset_counter() {
 
 #### FFI (Foreign Function Interface)
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 // sex/ffi.dol — External system calls
 
 // Declare external function (FFI)
@@ -533,7 +562,7 @@ sex fun allocate<T>(count: u64) -> Ptr<T> {
 use std.fs.{ File, OpenMode }
 
 // File operations are sex
-sex fun read_file(path: String) -> Result<String, IoError> {
+sex fun read_file(path: string) -> Result<string, IoError> {
     file = File.open(path, OpenMode.Read)?
     content = file.read_all()?
     file.close()
@@ -541,7 +570,7 @@ sex fun read_file(path: String) -> Result<String, IoError> {
 }
 
 // Network is sex
-sex fun http_get(url: String) -> Result<Response, NetError> {
+sex fun http_get(url: string) -> Result<Response, NetError> {
     return Http.get(url)
 }
 
@@ -561,21 +590,31 @@ sex fun now() -> Timestamp {
 #### The Sex Type
 
 ```dol
-// Pure function type
-fun add(a: i64, b: i64) -> i64
+// Pure function
+fun add(a: i64, b: i64) -> i64 {
+    return a + b
+}
 
-// Sex function type — effect is part of signature
-sex fun log(msg: String) -> Void
+// Sex function — effect is part of signature
+sex fun log(msg: string) -> ()
+```
 
-// In type annotations
+Effect types in type annotations are planned:
+
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 type PureCompute = Fun<i64, i64>
 type SexCompute = Sex<Fun<i64, i64>>
 ```
 
 #### Effect Propagation
 
+> **Not enforced at 0.8.2:** the E001 check exists in `metadol::SexLinter`, but neither `dol-check` nor the compiler
+> runs it, so `pure_caller` below currently compiles without error.
+
 ```dol
-// ❌ ERROR: Cannot call sex function from pure context
+// ❌ Intended ERROR (E001): Cannot call sex function from pure context
 fun pure_caller() -> i64 {
     log("hello")  // Compile error: sex in pure context
     return 42
@@ -589,7 +628,7 @@ sex fun sex_caller() -> i64 {
 
 // ✅ OK: Explicit sex block
 fun mixed_caller() -> i64 {
-    result = 42
+    val result = 42
     sex { log("hello") }  // OK: inside sex block
     return result
 }
@@ -603,11 +642,14 @@ fun mixed_caller() -> i64 {
 | `sex fun` | Function with side effects | `fn` with mutation |
 | `sex var` | Mutable global variable | `static mut` |
 | `sex { }` | Effectful block | `unsafe { }` |
-| `sex extern` | FFI declaration | `extern "C"` |
+| `sex extern` | FFI declaration (Planned — not implemented) | `extern "C"` |
 | `*.sex.dol` | File with sex code | — |
 | `sex/` | Directory of sex files | — |
 
 ### Compiler Enforcement
+
+These rules are implemented in `metadol::SexLinter` (`src/sex/lint.rs`), but at 0.8.2 they are not run by `dol-check`
+or by the compiler.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -675,24 +717,29 @@ fun mixed_caller() -> i64 {
    └───────────┘          └───────────┘          └───────────┘
 ```
 
+> **Status (0.8.2):** the type checker and sex tracking exist but are not enforced. The WASM backend works directly
+> from the AST and covers a language subset. DOL-compiled WASM runs in the VUDO VM; DOLOS (the `univrs-network` Spirit
+> host) runs `vudo_vm` but does not compile DOL itself.
+
 ### Target Matrix
+
+There is no `dol` binary. The commands that exist at 0.8.2 (install with `cargo install dol --features cli`):
 
 | Target | Command | Output | Runtime |
 |--------|---------|--------|---------|
-| **Rust** | `dol build --target rust` | `.rs` files | Native via `cargo` |
-| **WASM** | `dol build --target wasm` | `.wasm` binary | Browser, Wasmtime, VUDO |
-| **TypeScript** | `dol build --target typescript` | `.ts` files | Node, Deno, Browser |
-| **Python** | `dol build --target python` | `.py` files | Python 3.x |
-| **JSON Schema** | `dol build --target jsonschema` | `.json` schemas | Validation |
+| **Rust** | `dol-codegen --target rust` | `.rs` source | Native via `cargo` (only 14/41 example files produce Rust that compiles standalone) |
+| **WASM** | library `wasm-compile` feature; the `vudo` CLI (`univrs/vudo`) builds and runs it | `.wasm` binary | VUDO VM |
+| **TypeScript** | `dol-codegen --target typescript` | `.ts` source | Node, Deno, Browser |
+| **Python** | — | — | Planned — not implemented |
+| **JSON Schema** | `dol-codegen --target jsonschema` | JSON Schema | Validation |
 
 ### Sex in Different Targets
 
-| Target | Sex Implementation |
+| Target | Sex Implementation (0.8.2) |
 |--------|-------------------|
-| **WASM** | WASI imports, linear memory |
-| **Rust** | `unsafe` blocks, `static mut` |
-| **TypeScript** | Side effects (JS is impure anyway) |
-| **Python** | Global variables, I/O |
+| **WASM** | Bodiless `sex fun host_*` declarations become imports from module `vudo` with the VUDO VM linker's exact signatures (15 host functions, `src/wasm/host_abi.rs`). An unknown host function, wrong arity, or a float where the host expects an integer is a compile error. Strings passed to `host_*` functions lower to `(ptr, len)`, and such modules export `memory`. `sex { }` blocks are not supported by the WASM backend. |
+| **Rust** | `sex var` → `thread_local!` `RefCell` |
+| **TypeScript** | `sex var` → `export let`; function bodies are emitted as `// TODO: implement` stubs |
 
 ### Generated Code Example
 
@@ -701,30 +748,31 @@ fun mixed_caller() -> i64 {
 sex var COUNTER: i64 = 0
 
 sex fun increment() -> i64 {
-    COUNTER += 1
+    COUNTER = COUNTER + 1
     return COUNTER
 }
 ```
 
-**Rust output:**
+**Rust output** (actual `dol-codegen` 0.8.2 output):
 ```rust
-static mut COUNTER: i64 = 0;
+use std::cell::RefCell;
+
+thread_local! {
+    static COUNTER: RefCell<i64> = RefCell::new(0);
+}
 
 pub fn increment() -> i64 {
-    unsafe {
-        COUNTER += 1;
-        COUNTER
-    }
+    COUNTER.with(|__v| *__v.borrow_mut() = (COUNTER.with(|__v| __v.borrow().clone()) + 1));
+    return COUNTER.with(|__v| __v.borrow().clone());
 }
 ```
 
-**TypeScript output:**
+**TypeScript output** (actual `dol-codegen --target typescript` 0.8.2 output; function bodies are not generated):
 ```typescript
-let COUNTER: number = 0;
+export let COUNTER: I64 = 0 /* TODO: sex var expression */;
 
-export function increment(): number {
-    COUNTER += 1;
-    return COUNTER;
+export function increment(): I64 {
+    // TODO: implement
 }
 ```
 
@@ -734,7 +782,9 @@ export function increment(): number {
 
 ### 1. DOLOS (Full Platform)
 
-The complete VUDO ecosystem with Spirit orchestration:
+The complete VUDO ecosystem with Spirit orchestration. **Status:** the VUDO VM exists (`univrs/vudo`) and runs
+DOL-compiled Spirits; the `univrs-network` Spirit host runs `vudo_vm` but has no DOL compile step. Spirit exchange
+over the Mycelium network is planned — not implemented.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -764,6 +814,9 @@ The complete VUDO ecosystem with Spirit orchestration:
 
 ### 2. Standalone WASM
 
+> **Planned — not implemented:** there is no `dol build` command. Note also that modules calling `host_*` functions
+> import from module `vudo` and need a host that provides those imports (the VUDO VM).
+
 ```bash
 # Compile to WASM
 dol build --target wasm src/main.dol -o app.wasm
@@ -782,6 +835,10 @@ wasmtime app.wasm
 
 ### 3. Native via Rust
 
+> **Planned — not implemented:** there is no `dol build` command. Today, `dol-codegen --target rust` emits Rust
+> source. A separate LLVM native backend (`llvm-backend/`, beta) builds native binaries but needs a manual LLVM 18
+> setup and is not in CI.
+
 ```bash
 # Generate Rust
 dol build --target rust src/main.dol -o generated/
@@ -794,6 +851,10 @@ cd generated && cargo build --release
 ```
 
 ### 4. JIT / REPL
+
+> **Planned — not implemented as shown:** there is no `dol repl` command, and the transcript below is illustrative,
+> not captured output. A REPL library exists (`src/repl`), and the `vudo` CLI in `univrs/vudo` has a `vudo dol`
+> subcommand that starts a REPL shell but does not evaluate DOL yet.
 
 ```bash
 $ dol repl
@@ -822,6 +883,9 @@ Goodbye! 🍄
 ```
 
 ### 5. Embedded in Host Language
+
+> **Planned — not implemented:** no `dol_runtime` crate or `@dol/runtime` package exists. The dol repo contains a
+> TypeScript `@vudo/runtime` package.
 
 ```rust
 // Rust host
@@ -895,7 +959,9 @@ A **Séance** is a collaborative editing/execution session where multiple partic
 
 ### Séance API
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 use std.seance.{ Seance, Participant, Role }
 
 // Create a new séance
@@ -936,7 +1002,9 @@ sex fun checkpoint(seance: Seance) {
 
 ### Example 1: Pure Library Spirit
 
-```dol
+Manifest (Planned form — see the note under "Spirit Manifest" above):
+
+```text
 // Spirit.dol
 spirit MathLib {
     name: "@myorg/math"
@@ -958,7 +1026,7 @@ pub gen Complex {
     has real: f64
     has imag: f64
     
-    constraint valid {
+    rule valid {
         !this.real.is_nan && !this.imag.is_nan
     }
 }
@@ -976,7 +1044,9 @@ pub fun divide(a: i64, b: i64) -> Option<i64> {
 
 ### Example 2: CLI Tool with Sex
 
-```dol
+Manifest (Planned form — see the note under "Spirit Manifest" above):
+
+```text
 // Spirit.dol
 spirit Greeter {
     name: "greeter"
@@ -991,11 +1061,11 @@ use std.io.println
 use std.env.args
 use sex.state.increment_runs
 
-pub fun main(args: List<String>) -> Int32 {
-    name = if args.length > 1 { args[1] } else { "World" }
+pub fun main(args: Vec<string>) -> i32 {
+    val name = if args.length > 1 { args[1] } else { "World" }
     
     sex {
-        count = increment_runs()
+        val count = increment_runs()
         println("Hello, " + name + "! (Run #" + count + ")")
     }
     
@@ -1008,7 +1078,7 @@ pub fun main(args: List<String>) -> Int32 {
 sex var RUN_COUNT: i64 = 0
 
 pub sex fun increment_runs() -> i64 {
-    RUN_COUNT += 1
+    RUN_COUNT = RUN_COUNT + 1
     return RUN_COUNT
 }
 ```
@@ -1044,11 +1114,11 @@ my-app/
 // src/genes/user.dol
 pub gen User {
     has id: u64
-    has email: String
-    has name: String
+    has email: string
+    has name: string
     has created_at: Timestamp
     
-    constraint valid_email {
+    rule valid_email {
         this.email.contains("@")
     }
 }
@@ -1060,19 +1130,19 @@ use std.db.{ Connection, Query }
 
 sex var DB: Option<Connection> = None
 
-pub sex fun connect(url: String) -> Result<Void, DbError> {
+pub sex fun connect(url: string) -> Result<(), DbError> {
     DB = Some(Connection.open(url)?)
     return Ok(())
 }
 
 pub sex fun find_user(id: u64) -> Result<User, DbError> {
-    conn = DB.expect("Not connected")
-    row = conn.query_one("SELECT * FROM users WHERE id = ?", [id])?
+    val conn = DB.expect("Not connected")
+    val row = conn.query_one("SELECT * FROM users WHERE id = ?", [id])?
     return Ok(User.from_row(row))
 }
 
-pub sex fun save_user(user: User) -> Result<Void, DbError> {
-    conn = DB.expect("Not connected")
+pub sex fun save_user(user: User) -> Result<(), DbError> {
+    val conn = DB.expect("Not connected")
     conn.execute(
         "INSERT INTO users (email, name) VALUES (?, ?)",
         [user.email, user.name]
@@ -1085,11 +1155,13 @@ pub sex fun save_user(user: User) -> Result<Void, DbError> {
 
 ## Open Questions
 
+The syntax sketched in this section is Planned — not implemented; none of it parses in DOL 0.8.2.
+
 ### 1. Effect Polymorphism
 
 Can functions be generic over sex?
 
-```dol
+```text
 // Option A: Effect parameter
 fun map<F: Fun | Sex>(f: F, list: List<A>) -> List<B>
 
@@ -1102,7 +1174,7 @@ sex fun map_sex(f: Sex<Fun<A, B>>, list: List<A>) -> List<B>
 
 Different kinds of effects?
 
-```dol
+```text
 sex[IO] fun read_file() -> String
 sex[State] fun increment() -> i64
 sex[IO, State] fun log_and_count() -> Void
@@ -1112,7 +1184,7 @@ sex[IO, State] fun log_and_count() -> Void
 
 Can sex code run in a sandbox?
 
-```dol
+```text
 sandbox sex {
     // Effects are captured, not executed
     // Returns a description of what would happen
@@ -1125,7 +1197,7 @@ How does `@org/spirit` resolve?
 
 | Option | Status |
 |--------|--------|
-| GitHub/HTTP | Supported (fallback) |
+| GitHub/HTTP | Planned — not implemented |
 | Content-addressed (IPFS/DHT) | TBD |
 | Mycelium Network | TBD |
 | Blockchain registry | TBD |

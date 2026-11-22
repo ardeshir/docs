@@ -1,18 +1,27 @@
 # DOL HIR Architecture Rationale
 
 > **Document Version:** 1.0.0  
-> **Status:** Approved  
-> **Last Updated:** December 2025  
+> **Status:** Design rationale (December 2025) — partly implemented; see [Implementation Status (DOL 0.8.2)](#implementation-status-dol-082)  
+> **Last Updated:** December 2025 (status note: November 2026)  
 > **Authors:** Univrs Core Team  
-> **Location:** univrs-docs/dol/HIR-ARCHITECTURE.md
+> **Location:** univrs-docs/dol/HIR_ARCHITECTURE.md
 
 ---
 
 ## Executive Summary
 
-This document defines the architectural rationale for DOL's High-level Intermediate Representation (HIR). HIR is not merely a compiler implementation detail—it is the **canonical semantic representation** that unifies the entire DOL/VUDO/Univrs ecosystem.
+This document defines the architectural rationale for DOL's High-level Intermediate Representation (HIR). The design goal is for HIR to be not merely a compiler implementation detail but the **canonical semantic representation** that unifies the entire DOL/VUDO/Univrs ecosystem.
 
-Every tool that needs to understand DOL code speaks HIR: compilers, analyzers, search engines, verifiers, diff tools, and AI agents. This shared foundation enables ecosystem-wide interoperability, deterministic compilation, and semantic operations that would be impossible with source text alone.
+The vision is that every tool that needs to understand DOL code speaks HIR: compilers, analyzers, search engines, verifiers, diff tools, and AI agents. That shared foundation would enable ecosystem-wide interoperability, deterministic compilation, and semantic operations that would be impossible with source text alone. Most of that vision is **not implemented yet** — see the status section below.
+
+### Implementation Status (DOL 0.8.2)
+
+What exists in the `dol` crate (`src/hir/`, `src/lower/`):
+
+- **AST → HIR lowering is real.** `metadol::lower::lower_file(source)` returns `(HirModule, LoweringContext)`; everything that parses can be lowered.
+- **Actual HIR shape** (`src/hir/types.rs`): 4 declaration forms (`Type`, `Trait`, `Function`, `Module`), 12 expression forms (`Literal`, `Var`, `Binary`, `Unary`, `Call`, `MethodCall`, `Field`, `Index`, `Block`, `If`, `Match`, `Lambda`), 6 statement forms (`Val`, `Var`, `Assign`, `Expr`, `Return`, `Break`), 8 type forms and 6 pattern forms. `HirModule` holds an id, a name symbol and its declarations — it differs from the design sketch below.
+- **Consumers:** HIR → Rust code generation (`src/codegen/hir_rust.rs`, used by `compile_to_rust_via_hir` and `dol-build`). The **WASM backend does not use HIR**: the Spirit pipeline lowers to HIR for diagnostics only and compiles the AST directly to WASM (`src/compiler/spirit.rs`). TypeScript / JSON Schema codegen also work from the AST.
+- **Not implemented:** content hashing of HIR, effect annotations in HIR, HIR → source round-trip, optimisation passes, and every ecosystem tool in [Ecosystem Integration](#ecosystem-integration) (Imaginarium search, semantic diff, constraint verification, composition checking, distributed compilation, an HIR MCP tool).
 
 ---
 
@@ -138,7 +147,11 @@ Node B: source → HIR → hash(HIR) = X  ✓ Deterministic
 └─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
 ```
 
+> **As implemented in 0.8.2:** only the Rust backend (`hir_rust`) consumes HIR. WASM, TypeScript and JSON Schema are generated from the AST, and there is no HIR optimisation pass.
+
 ### HIR as Ecosystem Hub
+
+> **Planned — not implemented:** none of the tools around the hub below (Imaginarium, Visual Editor, Séance, Verifier, HIR-aware AI/MCP agents) consume HIR today.
 
 ```
                               ┌─────────────────┐
@@ -169,6 +182,8 @@ Node B: source → HIR → hash(HIR) = X  ✓ Deterministic
 
 ## HIR Specification
 
+> **Design sketch — differs from the implementation.** The types below are the original design. The shipped HIR (`src/hir/types.rs`) has no `ContentHash`, version, imports/exports lists or effect sets, and its expression forms are the 12 listed in [Implementation Status](#implementation-status-dol-082) (no `Loop`, `Seq`, `Struct`, `Tuple`, `Array`, `Return`/`Break`/`Continue` expressions; returns and breaks are statements).
+
 ### Core Types
 
 #### HirModule
@@ -178,14 +193,14 @@ Top-level compilation unit:
 ```dol
 gen HirModule {
     has id: ContentHash          // SHA-256 of normalized content
-    has name: String             // Module path (e.g., "dol.parser")
+    has name: string             // Module path (e.g., "dol.parser")
     has version: Version         // Semantic version
-    has imports: List<HirImport>
-    has exports: List<String>
-    has types: List<HirTypeDecl>
-    has functions: List<HirFunction>
-    has traits: List<HirTrait>
-    has constraints: List<HirConstraint>
+    has imports: Vec<HirImport>
+    has exports: Vec<string>
+    has types: Vec<HirTypeDecl>
+    has functions: Vec<HirFunction>
+    has traits: Vec<HirTrait>
+    has constraints: Vec<HirConstraint>
 }
 ```
 
@@ -201,12 +216,12 @@ gen HirExpr {
         Var { index: LocalIndex, ty: HirType }
         
         // Function application (all calls, pipes, compose normalize here)
-        Call { func: Box<HirExpr>, args: List<HirExpr>, ty: HirType }
+        Call { func: Box<HirExpr>, args: Vec<HirExpr>, ty: HirType }
         
         // Abstraction
         Lambda { 
-            params: List<HirParam>, 
-            captures: List<LocalIndex>,
+            params: Vec<HirParam>, 
+            captures: Vec<LocalIndex>,
             body: Box<HirExpr>, 
             ty: HirType 
         }
@@ -214,7 +229,7 @@ gen HirExpr {
         // Control flow
         Match { 
             scrutinee: Box<HirExpr>, 
-            arms: List<HirMatchArm>,
+            arms: Vec<HirMatchArm>,
             ty: HirType 
         }
         Loop { 
@@ -224,18 +239,18 @@ gen HirExpr {
         
         // Sequencing
         Seq { 
-            stmts: List<HirStmt>,
+            stmts: Vec<HirStmt>,
             result: Box<HirExpr>,
             ty: HirType
         }
         
         // Data construction
-        Struct { name: String, fields: List<(String, HirExpr)>, ty: HirType }
-        Tuple { elements: List<HirExpr>, ty: HirType }
-        Array { elements: List<HirExpr>, ty: HirType }
+        Struct { name: string, fields: Vec<(string, HirExpr)>, ty: HirType }
+        Tuple { elements: Vec<HirExpr>, ty: HirType }
+        Array { elements: Vec<HirExpr>, ty: HirType }
         
         // Data access
-        Field { object: Box<HirExpr>, name: String, ty: HirType }
+        Field { object: Box<HirExpr>, name: string, ty: HirType }
         Index { object: Box<HirExpr>, index: Box<HirExpr>, ty: HirType }
         
         // Special
@@ -248,19 +263,24 @@ gen HirExpr {
 
 #### Desugaring Rules
 
+As implemented in `src/lower/expr.rs` (0.8.2):
+
 | DOL Syntax | HIR Form |
 |------------|----------|
 | `x \|> f` | `Call { func: f, args: [x] }` |
-| `f >> g` | `Lambda { body: Call { func: g, args: [Call { func: f, args: [Var(0)] }] } }` |
-| `f <\| x` | `Call { func: f, args: [x] }` |
-| `[| f x y |]` | `Call { func: "apply", args: [Call { func: "map", args: [x, f] }, y] }` |
-| `if c { a } else { b }` | `Match { scrutinee: c, arms: [true→a, false→b] }` |
-| `for x in iter { body }` | `Call { func: "for_each", args: [iter, Lambda { body }] }` |
-| `while c { body }` | `Loop { body: Match { scrutinee: c, arms: [true→body, false→Break] } }` |
+| `f >> g` | `Lambda { params: [x], body: Call { func: g, args: [Call { func: f, args: [Var(x)] }] } }` |
+| `[\| f a b \|]` | `Call { func: ap, args: [Call { func: fmap, args: [f, a] }, b] }` |
+| `if c { a } else { b }` | `If { cond: c, then: a, else: b }` (HIR keeps `If`) |
+| `for x in xs { body }` | `Block` containing `Match { scrutinee: Call(next, …), arms: [Some(x)→body, None→break] }` (simplified; no real iterator variable yet) |
+| `while c { body }` | `Block` containing `If { cond: c, then: body, else: break }` |
+
+The backward pipe `<|` is tokenized by the lexer but is not parsed or lowered.
 
 ### Effect System
 
-Every function carries effect annotations:
+> **Planned — not implemented:** HIR in 0.8.2 carries no effect annotations (`HirFunctionDecl` has name, visibility, type params, params, return type and body). Effects are tracked only at the AST level via `sex`.
+
+Design sketch — every function would carry effect annotations:
 
 ```dol
 gen HirEffects {
@@ -275,15 +295,15 @@ gen HirEffects {
 }
 
 gen HirFunction {
-    has name: String
-    has params: List<HirParam>
+    has name: string
+    has params: Vec<HirParam>
     has return_type: HirType
     has effects: Set<HirEffects>  // Effect annotation
     has body: HirExpr
 }
 ```
 
-Effects map to DOL's SEX system:
+Effects would map to DOL's SEX system:
 - `sex fun` → effects include State, IO, FFI as appropriate
 - `sex { }` block → effects propagate to enclosing function
 - Pure functions → effects = { Pure }
@@ -292,11 +312,15 @@ Effects map to DOL's SEX system:
 
 ## Ecosystem Integration
 
+> **Planned — not implemented.** None of the six integrations in this section exists in DOL 0.8.2. The snippets are pseudocode, not DOL.
+
 ### 1. Imaginarium Search
 
-HIR enables semantic search across published Spirits:
+HIR would enable semantic search across published Spirits:
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 // Search query as HIR pattern
 query: HirPattern = HirPattern {
     kind: Function,
@@ -309,9 +333,9 @@ query: HirPattern = HirPattern {
 
 // Index structure
 index: SpiritIndex = {
-    by_trait: Map<TraitName, List<SpiritId>>,
-    by_signature: Map<SignatureHash, List<SpiritId>>,
-    by_effect: Map<EffectSet, List<SpiritId>>,
+    by_trait: Map<TraitName, Vec<SpiritId>>,
+    by_signature: Map<SignatureHash, Vec<SpiritId>>,
+    by_effect: Map<EffectSet, Vec<SpiritId>>,
     by_structure: HirPatternTree
 }
 
@@ -323,7 +347,9 @@ results = index.query(query)
 
 Compare Spirit versions semantically:
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 diff: HirDiff = hir_diff(spirit_v1, spirit_v2)
 
 // Returns structured changes
@@ -338,8 +364,10 @@ diff.moved      // Reorganized but equivalent
 
 Prove constraints statically by analyzing HIR:
 
-```dol
-constraint BalanceNonNegative {
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
+rule BalanceNonNegative {
     this.balance >= 0
 }
 
@@ -360,7 +388,9 @@ match result {
 
 Verify Spirits compose correctly before execution:
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 // Check type compatibility at Spirit boundaries
 check: ComposeResult = check_composition([
     ("@alice/image-loader", "load"),
@@ -402,7 +432,7 @@ Node A:
 
 ### 6. AI Agent Integration (MCP)
 
-Expose HIR via Model Context Protocol:
+Expose HIR via Model Context Protocol (the shipped `dol-mcp` server has tools such as `parse`, `typecheck`, `compile_rust`, `compile_wasm`; there is no HIR query tool):
 
 ```json
 {
@@ -423,14 +453,16 @@ Response enables AI to understand code structure, suggest changes, and generate 
 
 ## Content Addressing
 
+> **Planned — not implemented:** HIR content hashing does not exist in DOL 0.8.2 (`HirId` is a plain `u32` node id, not a hash).
+
 ### Hash Computation
 
-Every HIR node has a deterministic hash:
+Every HIR node would have a deterministic hash:
 
 ```dol
 fun compute_hash(module: HirModule) -> ContentHash {
     // Canonical serialization (sorted fields, normalized whitespace)
-    let bytes = canonical_serialize(module)
+    val bytes = canonical_serialize(module)
     return sha256(bytes)
 }
 
@@ -495,29 +527,9 @@ Those are serialization formats. HIR is a semantic representation that happens t
 
 ## Implementation Strategy
 
-### Phase 1: Core Types (2 weeks)
+> **Status (0.8.2):** the original plan was to write HIR in DOL (`dol/hir.dol`, `dol/lower*.dol`, …). Those files were never created. HIR was implemented **in Rust** instead: `src/hir/` (types, symbols, printing, validation), `src/lower/` (AST → HIR lowering) and `src/codegen/hir_rust.rs` (HIR → Rust). Hashing/serialization (Phase 1) and all Phase 4 tools are not implemented, and the WASM codegen was not refactored onto HIR.
 
-Define HIR types in DOL:
-- `dol/hir.dol` - Type definitions
-- `dol/hir_hash.dol` - Hashing
-- `dol/hir_serde.dol` - Serialization
-
-### Phase 2: Lowering (3 weeks)
-
-Transform AST to HIR:
-- `dol/lower_expr.dol` - Expression lowering
-- `dol/lower_stmt.dol` - Statement lowering  
-- `dol/lower_decl.dol` - Declaration lowering
-- `dol/lower.dol` - Entry point
-
-### Phase 3: Codegen Refactor (2 weeks)
-
-Update codegen to consume HIR:
-- Refactor `dol/codegen.dol`
-- Define `dol/backend.dol` trait
-- Verify all tests pass
-
-### Phase 4: Ecosystem Tools (4 weeks)
+### Phase 4: Ecosystem Tools (Planned — not implemented)
 
 Build tools on HIR foundation:
 - `dol/hir_search.dol` - Semantic search
@@ -562,7 +574,7 @@ HIR as the editing substrate:
 
 ## Conclusion
 
-HIR is the semantic backbone of the DOL/VUDO/Univrs ecosystem. By establishing a canonical, content-addressable representation of code meaning, we enable:
+HIR is designed to be the semantic backbone of the DOL/VUDO/Univrs ecosystem. Today (0.8.2) it is a real lowering target used for diagnostics and Rust codegen; the canonical, content-addressable representation described here is the goal. Once complete, it would enable:
 
 1. **Deterministic operations** across distributed nodes
 2. **Semantic tools** that understand code, not just text

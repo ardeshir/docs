@@ -120,7 +120,7 @@ Tech Viaduct has:
 
 - Technical depth they likely lack
 - Independence from political cycles
-- Working code (522 tests, ENR bridge, VUDO VM)
+- Working code (ENR bridge, VUDO VM; since DOL 0.8.2, DOL-compiled Spirits run in the VUDO VM)
 
 **The synthesis:**
 

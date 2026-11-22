@@ -8,25 +8,33 @@ sidebar_position: 6
 
 > The language beneath the language
 
-When you write DOL code, the compiler doesn't go straight from your source to Rust or WASM. It first transforms your code into **HIR (High-level Intermediate Representation)** — a normalized, canonical form that captures *what your code means* without any of the syntax variations.
+When you write DOL code and generate Rust, the compiler doesn't go straight from your source to Rust. It first transforms your code into **HIR (High-level Intermediate Representation)** — a normalized, canonical form that captures *what your code means* without any of the syntax variations.
 
-This guide explains what HIR is, why it matters, and how it enables powerful features across the DOL/VUDO ecosystem.
+This guide explains what HIR is, why it matters, and how it is intended to enable features across the DOL/VUDO ecosystem.
+
+> **Status (DOL 0.8.2):** AST → HIR lowering is real (`metadol::lower::lower_file`), and HIR feeds the Rust code generator (`src/codegen/hir_rust.rs`). The WASM backend compiles directly from the AST and uses HIR only for diagnostics; TypeScript and JSON Schema codegen also work from the AST. HIR content hashing, effect annotations, semantic search/diff, composition checking and constraint proving are **planned — not implemented**. Sections below are marked accordingly.
 
 ## What Problem Does HIR Solve?
 
 Consider these three DOL expressions:
 
 ```dol
-// Version 1: Pipe style
-result = data |> filter(valid) |> map(transform) |> collect
+fun version1(data: Vec<i64>) -> Vec<i64> {
+    // Version 1: Pipe style
+    return data |> filter(valid) |> map(transform) |> collect
+}
 
-// Version 2: Nested calls
-result = collect(map(transform, filter(valid, data)))
+fun version2(data: Vec<i64>) -> Vec<i64> {
+    // Version 2: Nested calls
+    return collect(map(transform, filter(valid, data)))
+}
 
-// Version 3: Intermediate variables
-filtered = filter(valid, data)
-transformed = map(transform, filtered)
-result = collect(transformed)
+fun version3(data: Vec<i64>) -> Vec<i64> {
+    // Version 3: Intermediate variables
+    val filtered = filter(valid, data)
+    val transformed = map(transform, filtered)
+    return collect(transformed)
+}
 ```
 
 All three do exactly the same thing. But as source text, they look completely different. This creates problems:
@@ -36,7 +44,7 @@ All three do exactly the same thing. But as source text, they look completely di
 - **Verification**: Proving equivalence requires understanding all syntax forms
 - **Caching**: Different formatting → different hashes → cache misses
 
-HIR solves this by normalizing all three to the same representation:
+HIR's goal is to normalize all three to the same representation (in 0.8.2 the pipe forms lower to nested `Call`s; version 3 still lowers to separate `val` statements):
 
 ```
 Call(collect, [
@@ -46,7 +54,7 @@ Call(collect, [
 ])
 ```
 
-Same meaning → same HIR → same hash.
+Same meaning → same HIR → same hash (hashing is planned — not implemented).
 
 ## HIR in the Compilation Pipeline
 
@@ -67,75 +75,98 @@ Same meaning → same HIR → same hash.
        │ codegen
        ▼
 ┌─────────────┐
-│   Output    │   Rust, TypeScript, WASM, etc.
+│   Output    │   Rust (via HIR)
 └─────────────┘
 ```
+
+> In 0.8.2 only the Rust backend runs through HIR. WASM, TypeScript and JSON Schema are generated directly from the AST.
 
 The key insight: **HIR is the last representation where DOL concepts (genes, traits, constraints) are visible**. After this, code becomes platform-specific.
 
 ## What HIR Looks Like
 
-HIR has intentionally few forms. Everything else desugars into these:
+HIR has intentionally few forms. Everything else desugars into these (`src/hir/types.rs`, DOL 0.8.2):
 
-### Expressions (10 core forms)
+### Expressions (12 forms)
 
 | HIR Form | What It Represents |
 |----------|-------------------|
-| `Literal` | Numbers, strings, booleans |
-| `Var` | Variable references (by index, not name) |
-| `Call` | Function application (including all pipes!) |
+| `Literal` | Numbers, strings, booleans, unit |
+| `Var` | Variable references (by interned symbol) |
+| `Binary` / `Unary` | Operators |
+| `Call` | Function application (including pipes) |
+| `MethodCall` | Method calls |
+| `Field` / `Index` | Member and index access |
+| `Block` | Statement sequences with optional result |
+| `If` | Conditionals |
+| `Match` | Pattern matching |
 | `Lambda` | Anonymous functions |
-| `Match` | Pattern matching (including if/else) |
-| `Loop` | All loop forms unified |
-| `Seq` | Statement sequences |
-| `Struct` | Record construction |
-| `Field` | Member access |
-| `Array` | Collection construction |
+
+Statements have 6 forms (`Val`, `Var`, `Assign`, `Expr`, `Return`, `Break`); there are also 4 declaration forms, 8 type forms and 6 pattern forms.
 
 ### Desugaring Examples
 
-Your beautiful syntax becomes simple HIR:
+Your syntax becomes simpler HIR:
 
 ```dol
-// DOL: Pipe operator
-x |> double |> increment
+fun pipe_example(x: i64) -> i64 {
+    // DOL: Pipe operator
+    return x |> double |> increment
+}
+```
 
+```text
 // HIR: Nested calls
 Call(increment, [Call(double, [Var(x)])])
 ```
 
 ```dol
-// DOL: Function composition
-transform = double >> increment
+fun compose_example() -> i64 {
+    // DOL: Function composition
+    val transform = double >> increment
+    return transform(1)
+}
+```
 
+```text
 // HIR: Lambda wrapping calls
 Lambda([x], Call(increment, [Call(double, [Var(x)])]))
 ```
 
 ```dol
-// DOL: If expression
-if active { start() } else { stop() }
+fun if_example(active: bool) {
+    // DOL: If expression
+    if active { start() } else { stop() }
+}
+```
 
-// HIR: Match on boolean
-Match(Var(active), [
-    (true, Call(start, [])),
-    (false, Call(stop, []))
-])
+```text
+// HIR: If is kept as its own form
+If(Var(active), Block([Call(start, [])]), Block([Call(stop, [])]))
 ```
 
 ```dol
-// DOL: For loop
-for item in items { process(item) }
+fun for_example(items: Vec<i64>) {
+    // DOL: For loop
+    for item in items { process(item) }
+}
+```
 
-// HIR: Higher-order function
-Call(for_each, [Var(items), Lambda([item], Call(process, [Var(item)]))])
+```text
+// HIR (simplified in 0.8.2): a block containing a match on next()
+Block([Match(Call(next, [...]), [
+    (Some(item), Block([Call(process, [Var(item)])])),
+    (None, Block([Break]))
+])])
 ```
 
 ## Why This Matters for You
 
+> **Planned — not implemented.** Items 1–5 below describe the intended ecosystem. None of them (Imaginarium semantic search, semantic diffs, composition checking, static constraint proving, HIR hashing in the Mycelium network) exists in DOL 0.8.2.
+
 ### 1. Semantic Search in Imaginarium
 
-When you search for Spirits, you're searching HIR, not text:
+When you search for Spirits, you would be searching HIR, not text:
 
 ```
 Query: "functions that transform images"
@@ -149,13 +180,13 @@ Query: "functions that transform images"
 
 ### 2. Smart Diffs When Evolving Spirits
 
-When you update a Spirit, the diff shows semantic changes:
+When you update a Spirit, the diff would show semantic changes:
 
 ```
 Spirit v1.0.0 → v2.0.0
 
 Added:
-  + process_batch(items: List<Item>) -> List<Result>
+  + process_batch(items: Vec<Item>) -> Vec<Result>
   
 Changed:
   ~ process(item: Item) → process(item: Item, timeout: Duration)
@@ -169,9 +200,11 @@ Note: 127 lines changed in source, but only 2 semantic changes
 
 ### 3. Verified Spirit Composition
 
-Before connecting Spirits in VUDO, the system checks compatibility:
+Before connecting Spirits in VUDO, the system would check compatibility:
 
-```dol
+> **Planned — not implemented:** this syntax does not parse in DOL 0.8.2.
+
+```text
 // Composing three Spirits
 pipeline = ImageLoader >> ColorTransformer >> Exporter
 
@@ -186,13 +219,15 @@ pipeline = ImageLoader >> ColorTransformer >> Exporter
 
 ### 4. Constraint Verification Without Running
 
-HIR enables proving constraints hold statically:
+HIR would enable proving constraints hold statically. (In 0.8.2 a `rule` nested inside a `gen` parses but its body is dropped, and the type checker does not enforce statement types.)
+
+> **Planned — not implemented:** static constraint proving does not exist in DOL 0.8.2; the code below parses but nothing verifies it.
 
 ```dol
 gen Account {
     has balance: i64
     
-    constraint never_negative {
+    rule never_negative {
         this.balance >= 0
     }
     
@@ -203,7 +238,7 @@ gen Account {
     }
 }
 
-// HIR analyzer proves:
+// Planned: an HIR analyzer would prove:
 // ✓ withdraw() maintains never_negative
 //   - Only modifies balance when amount <= balance
 //   - Subtraction cannot produce negative result
@@ -212,7 +247,7 @@ gen Account {
 
 ### 5. Deterministic Hashing for Trust
 
-In the Mycelium network, Spirits are identified by HIR hash:
+In the Mycelium network, Spirits would be identified by HIR hash:
 
 ```
 Spirit: @alice/image-tools v1.2.0
@@ -225,17 +260,19 @@ HIR Hash: sha256:7f3a8b2c...
 // 4. If match → trust established
 ```
 
-This works because same source always produces identical HIR, regardless of who compiles it or where.
+This would work because the same source always produces identical HIR, regardless of who compiles it or where.
 
 ## Content Addressing Deep Dive
 
-Every HIR module has a content-derived identifier:
+> **Planned — not implemented:** HIR modules have no content-derived identifier in DOL 0.8.2 (`HirId` is a plain `u32`). The patterns and numbers below are illustrative, not measured.
 
-```dol
+Every HIR module would have a content-derived identifier:
+
+```text
 module_id = hash(canonical_serialize(hir_module))
 ```
 
-This enables powerful patterns:
+This would enable:
 
 ### Deduplication
 
@@ -275,15 +312,19 @@ Compile time: 50ms (vs 2s full rebuild)
 
 ## HIR and Effects (SEX System)
 
-HIR tracks effects explicitly:
+> **Planned — not implemented:** HIR functions in 0.8.2 carry no effect annotations; `sex` is tracked only in the AST.
+
+HIR would track effects explicitly:
 
 ```dol
 // DOL function with side effects
-sex fun save_file(path: String, data: String) {
+sex fun save_file(path: string, data: string) {
     // ... file operations
 }
+```
 
-// HIR representation includes effect annotation
+```text
+// Planned HIR representation with effect annotation
 HirFunction {
     name: "save_file",
     effects: { IO, State },  // Explicit!
@@ -291,7 +332,7 @@ HirFunction {
 }
 ```
 
-This enables:
+This would enable:
 
 - **Effect-based search**: "Find pure functions only"
 - **Composition safety**: "These Spirits have incompatible effects"
@@ -301,20 +342,20 @@ This enables:
 
 ### Inspecting HIR
 
-```bash
-# View HIR for a DOL file
-dol hir src/my-module.dol
+There is no `dol` binary and no HIR command in the CLI (0.8.2 ships `dol-parse`, `dol-check`, `dol-test`, `dol-codegen`, `dol-migrate`, `dol-mcp`, `dol-build`, `dol-build-crate`). HIR is available through the Rust library API of the `dol` crate (library name `metadol`):
 
-# Output HIR as JSON (for tooling)
-dol hir --format json src/my-module.dol
-
-# Compare HIR of two versions
-dol hir-diff v1/module.dol v2/module.dol
+```rust
+let (hir, ctx) = metadol::lower::lower_file(source)?;
+let mut printer = metadol::hir::print::HirPrinter::new(&ctx.symbols);
+printer.print_module(&hir);
+println!("{}", printer.finish());
 ```
 
 ### HIR in MCP (AI Integration)
 
-AI agents can query and manipulate HIR:
+> **Planned — not implemented:** `dol-mcp` has no HIR tool (its tools include `parse`, `typecheck`, `compile_rust`, `compile_wasm`, `list_macros`, `expand_macro`, `recommend_crdt`).
+
+AI agents would be able to query HIR:
 
 ```json
 {
@@ -330,66 +371,40 @@ AI agents can query and manipulate HIR:
 }
 ```
 
-Response gives the AI structured understanding of your code, enabling intelligent suggestions and transformations.
+The response would give the AI structured understanding of your code, enabling intelligent suggestions and transformations.
 
 ### Custom HIR Analysis
 
-Write your own analyzers:
-
-```dol
-use dol.hir.{HirModule, HirExpr, HirFunction}
-
-/// Find all functions that might panic
-fun find_panic_paths(module: HirModule) -> List<PanicPath> {
-    let paths = []
-    
-    for func in module.functions {
-        let panics = analyze_panic_potential(func.body)
-        if panics.length() > 0 {
-            paths.push(PanicPath { 
-                function: func.name, 
-                paths: panics 
-            })
-        }
-    }
-    
-    return paths
-}
-```
+Custom analyzers are written in Rust against the `metadol::hir` API, e.g. by implementing the `metadol::hir::visit::HirVisitor` trait and walking a lowered module with `walk_module`. Writing HIR analyzers in DOL itself is planned — not implemented.
 
 ## Summary
 
-HIR is the semantic foundation of DOL:
+HIR is the intended semantic foundation of DOL:
 
-| Aspect | What HIR Provides |
-|--------|-------------------|
-| **Compilation** | Normalized target for all backends |
-| **Search** | Semantic queries across Spirits |
-| **Diffing** | Meaningful change detection |
-| **Verification** | Static constraint proving |
-| **Caching** | Deterministic, content-addressed |
-| **Trust** | Verifiable compilation |
-| **AI** | Structured code understanding |
+| Aspect | What HIR Provides | Status (0.8.2) |
+|--------|-------------------|----------------|
+| **Compilation** | Normalized target for backends | Rust backend only; WASM/TS/JSON Schema use the AST |
+| **Search** | Semantic queries across Spirits | Planned — not implemented |
+| **Diffing** | Meaningful change detection | Planned — not implemented |
+| **Verification** | Static constraint proving | Planned — not implemented |
+| **Caching** | Deterministic, content-addressed | Planned — not implemented |
+| **Trust** | Verifiable compilation | Planned — not implemented |
+| **AI** | Structured code understanding | Planned — not implemented |
 
-You don't usually interact with HIR directly—it works behind the scenes. But understanding it helps you:
-
-- Write code that composes well with others' Spirits
-- Trust that your Spirits are verified correctly
-- Use ecosystem tools effectively
-- Contribute to DOL tooling
+You don't usually interact with HIR directly—it works behind the scenes. Understanding it helps you contribute to DOL tooling.
 
 ---
 
 ## Further Reading
 
-- [HIR Architecture Rationale](dol/HIR_ARCHITECTURE.md) — Deep technical dive
+- [HIR Architecture Rationale](HIR_ARCHITECTURE.md) — Deep technical dive
 
 ### Coming Soon
 
-These guides are planned for future releases:
-- **Spirit Composition Guide** — Practical composition patterns (Year 2)
-- **Mycelium Trust Model** — How HIR enables distributed trust (Year 2-3)
-- **MCP Integration** — AI tooling with HIR (Q3-Q4)
+Planned — not implemented (no dates committed):
+- **Spirit Composition Guide** — Practical composition patterns
+- **Mycelium Trust Model** — How HIR would enable distributed trust
+- **MCP Integration** — AI tooling with HIR
 
 ---
 
