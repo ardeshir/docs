@@ -32,7 +32,7 @@ Spirit Hosting Plan H0 ("toolchain truth"): DOL-compiled Spirits now link and ru
 
 ### Notes
 - Minimum supported Rust version is 1.84.
-- Tests (root crate): 2,183 with default features; 2,405 with `cli,serde,wasm`.
+- Tests (root crate): 2,512 (`cli,serde,wasm`, including doctests).
 
 ## [0.8.1] - 2026-01-26
 

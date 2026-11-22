@@ -155,28 +155,9 @@ Decentralized infrastructure for scalable, privacy-preserving distributed comput
 | [Mycelial Economics Technologies](archives/Mycelial_Economics_Orch.md) | Complete technology ecosystem overview |
 | [API Reference](archives/Univrs_DevTools.md) | Developer API documentation |
 
-## 🤝 Contributing
+## Contributing
 
-We welcome contributions from developers, economists, ecologists, and anyone passionate about regenerative systems.
-
-### Ways to Contribute
-1. **Code**: Submit PRs for features, bug fixes, or optimizations
-2. **Documentation**: Improve guides, tutorials, or API docs
-3. **Research**: Share relevant papers, case studies, or data
-4. **Community**: Participate in discussions, help others
-
-### Development Workflow
-```bash
-# Create a feature branch
-git checkout -b feature/your-feature-name
-
-# Make your changes and test
-cargo test
-cargo clippy
-
-# Submit a pull request
-git push origin feature/your-feature-name
-```
+This project is not accepting external contributions or pull requests.
 
 ## 📞 Contact
 

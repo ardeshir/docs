@@ -342,7 +342,7 @@ The largest risk is still that the three layers stay three projects. The repos s
 - **The language carries hidden assumptions.** Found so far: there is no way to express "permitted but judged", and declared rules are not executed in WASM. Step 7 is the only honest test.
 - **The myth outruns the product.** It already has. Public pages claim host functions and summon payouts that do not exist. Step 0 corrects this before the narrative launches.
 - **Emergence is mistaken for justification.** A norm that stabilises in a world is a fact about that world. Exploitation can be stable too, so the Interrogation has to stay a human judgment.
-- **Unverified numbers.** The univrs-dol README claims 1914 tests, but its own breakdown sums to 631. (Measured at dol v0.8.2: 2,183 tests with default features and 2,405 with `cli,serde,wasm`, for the root crate only.) The univrs-network ROADMAP says 40 tests. `dol-reflect` had 5 failing tests (2026-02-07 report). Re-run `/test-all` and publish real counts before quoting any of them.
+- **Unverified numbers.** The univrs-dol README claims 1914 tests, but its own breakdown sums to 631. (Measured at dol v0.8.2: 2,512 tests with `cli,serde,wasm`, including doctests, for the root crate only.) The univrs-network ROADMAP says 40 tests. `dol-reflect` had 5 failing tests (2026-02-07 report). Re-run `/test-all` and publish real counts before quoting any of them.
 
 ---
 

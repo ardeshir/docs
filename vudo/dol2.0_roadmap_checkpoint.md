@@ -10,7 +10,7 @@
 > pattern matching, control flow, meta-programming), **not a version number**. No DOL 2.0 specification document
 > exists; the de facto spec is `src/lexer.rs` + `src/parser.rs` at v0.8.2 plus `CHANGELOG.md`. Current syntax is
 > the v0.8 "Clarity" set (`gen`/`rule`/`evo`/`docs`, lowercase Rust-style types); old forms still parse with
-> warnings and become errors at v0.9. Test counts at 0.8.2: **2,183** (default features) / **2,405**
+> warnings and become errors at v0.9. Test counts at 0.8.2: **2,512** (`cli,serde,wasm`, including doctests)
 > (`cli,serde,wasm`). Claims below that turned out to be false have been corrected inline.
 
 ---
@@ -31,7 +31,7 @@ Design Ontology Language (DOL) 2.0 represents a major evolution from the specifi
 | Q4: Stage2 Self-Hosting | ❌ Not real: `stage1/` contains only a `Cargo.toml`, `stage2/` does not exist | v0.2.3 "Stage2" | — |
 | HIR Architecture | ✅ Complete | v0.3.0 "Pragmatic Evolution" | 466 passing |
 | HIR + WASM pipeline | ✅ HIR and a direct WASM backend exist. MLIR is not in the pipeline; the WASM backend does not use HIR | v0.4.0 "HIR Complete" | 1,156 passing |
-| **Latest release (Nov 2026)** | **0.8.2** — Spirit Hosting H0: DOL-compiled Spirits link and run in the VUDO VM | **2026-11-20** | **2,183 / 2,405** |
+| **Latest release (Nov 2026)** | **0.8.2** — Spirit Hosting H0: DOL-compiled Spirits link and run in the VUDO VM | **2026-11-20** | **2,512** |
 
 ---
 
@@ -776,56 +776,7 @@ None between DOL 1.x and the first DOL 2.0 releases. Since v0.8.0, the old keywo
 
 ## Contributing
 
-### Development Setup
-
-```bash
-# Clone repository
-git clone https://github.com/univrs/dol.git
-cd dol
-
-# Build
-cargo build
-
-# Run tests
-cargo test
-
-# Run all tests with output
-cargo test -- --nocapture
-
-# Format code
-cargo fmt
-
-# Lint
-cargo clippy
-```
-
-### Test Coverage
-
-| Module | Tests | Status |
-|--------|-------|--------|
-| Lexer | 80+ | ✅ |
-| Parser | 150+ | ✅ |
-| Type Checker | 87 | ✅ |
-| Rust Codegen | 8 | ✅ |
-| **Total** | **367** | ✅ |
-
-The table above is the count at the time of the original checkpoint. At 0.8.2 the root crate has **2,183** passing tests with default features and **2,405** with `--features cli,serde,wasm` (0 failures). The `crates/*`, `apps/*` and `llvm-backend` sub-projects are not built in CI.
-
-### Adding New Features
-
-1. Write failing test in `tests/`
-2. Implement feature in `src/`
-3. Run `cargo test`
-4. Run `cargo fmt && cargo clippy`
-5. Submit PR
-
-### Documentation
-
-- **API Docs:** `cargo doc --open`
-- **Book:** [book.univrs.io](https://book.univrs.io)
-- **Learn:** [learn.univrs.io](https://learn.univrs.io)
-
----
+This project is not accepting external contributions or pull requests.
 
 ## References
 

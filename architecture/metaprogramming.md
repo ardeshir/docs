@@ -303,7 +303,7 @@ Idiom brackets (from Haskell's idiom brackets extension) provide clean syntax fo
 | Idiom Brackets | `tests/idiom_tests.rs` | 27 |
 | Macros | `src/macros/` (unit tests) | 36 |
 
-At v0.8.2 the `dol` crate as a whole runs 2,183 tests with default features (2,405 with `cli,serde,wasm`).
+At v0.8.2 the `dol` crate as a whole runs 2,512 tests with `cli,serde,wasm`, including doctests.
 
 ## Future Work
 
